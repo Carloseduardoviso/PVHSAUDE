@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\PVHSAUDE.Application.csproj" />
+    <ProjectReference Include="..\Infra.Helper\PVHSAUDE.Infra.Helper.csproj" />
+  </ItemGroup>
+
 </Project>

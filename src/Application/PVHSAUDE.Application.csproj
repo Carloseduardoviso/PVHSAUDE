@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="AppService\" />
+    <Folder Include="AutoMapper\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\PVHSAUDE.Domain.csproj" />
+    <ProjectReference Include="..\Infra\Infra.Helper\PVHSAUDE.Infra.Helper.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\PVHSAUDE.Application.csproj" />
+    <ProjectReference Include="..\Infra\Infra.Auth\PVHSAUDE.Infra.Auth.csproj" />
+    <ProjectReference Include="..\Infra\Infra.Data\PVHSAUDE.Infra.Data.csproj" />
+    <ProjectReference Include="..\Infra\Infra.Helper\PVHSAUDE.Infra.Helper.csproj" />
+    <ProjectReference Include="..\Infra\Infra.Ioc\PVHSAUDE.Infra.Ioc.csproj" />
+  </ItemGroup>
+
+</Project>
