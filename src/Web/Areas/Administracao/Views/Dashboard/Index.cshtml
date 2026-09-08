@@ -1,2 +1,7 @@
-@{ ViewData["Title"] = "Administração"; }
-<div class="p-4 p-md-5 mb-4 bg-light rounded-3"><h1 class="display-6">Administração PVH Saúde</h1><p class="lead">Gerencie os dados que serão exibidos no portal.</p><a asp-controller="Beneficiario" asp-action="Index" class="btn btn-success">Gerenciar beneficiários</a></div>
+@{ ViewData["Title"] = "Home"; }
+<div class="p-4 p-md-5 mb-4 bg-white border rounded-3">
+    <p class="text-success fw-semibold">PVH Saúde</p>
+    <h1 class="display-6">Bem-vindo à área administrativa</h1>
+    <p class="lead text-muted">Acompanhe os cadastros e gerencie os beneficiários pelo menu lateral.</p>
+    <a asp-area="Administracao" asp-controller="Beneficiario" asp-action="Index" class="btn btn-success">Ver beneficiários</a>
+</div>

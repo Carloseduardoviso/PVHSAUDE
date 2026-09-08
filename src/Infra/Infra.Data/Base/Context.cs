@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.SqlClient;
+using Infra.Data.Config;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using PVHSAUDE.Application.ViewModels;
@@ -21,6 +22,12 @@ namespace Infra.Data.Base
             _account = account;
         }
 
+        public DbSet<Especialidade> Especialidades { get; set; } = null!;
+        public DbSet<Procedimento> Procedimentos { get; set; } = null!;
+        public DbSet<CredenciadoEspecialidade> CredenciadoEspecialidades { get; set; } = null!;
+        public DbSet<CredenciadoProcedimento> CredenciadoProcedimentos { get; set; } = null!;
+        public DbSet<Credenciado> Credenciados { get; set; } = null!;
+        public DbSet<Plano> Planos { get; set; } = null!;
         public DbSet<Beneficiario> Beneficiarios { get; set; } = null!;
         public DbSet<Dependente> Dependentes { get; set; } = null!;
 
@@ -28,10 +35,14 @@ namespace Infra.Data.Base
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new CredenciadoConfig());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(Context).Assembly);
+            modelBuilder.ApplyConfiguration(new PlanoConfig());
+            modelBuilder.ApplyConfiguration(new BeneficiarioConfig());
+            modelBuilder.ApplyConfiguration(new DependenteConfig());
+
             RemovePluralizingTableNameConvention(modelBuilder);
             RemoveCascadeDeleteConventions(modelBuilder);
-
-            //modelBuilder.ApplyConfiguration(new UsuarioConfig());
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
@@ -142,3 +153,5 @@ namespace Infra.Data.Base
 
     }
 }
+
+

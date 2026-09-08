@@ -24,15 +24,15 @@ namespace PVHSAUDE.Infra.Data.Migrations
 
             modelBuilder.Entity("PVHSAUDE.Domain.Entities.Beneficiario", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CredenciadoId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DataAdesao")
                         .HasColumnType("datetime2");
@@ -56,8 +56,8 @@ namespace PVHSAUDE.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PlanoId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("PlanoId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -70,21 +70,126 @@ namespace PVHSAUDE.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CredenciadoId");
+
                     b.ToTable("Beneficiario", (string)null);
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.Credenciado", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Cep")
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
+
+                    b.Property<string>("Cidade")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Cnpj")
+                        .IsRequired()
+                        .HasMaxLength(14)
+                        .HasColumnType("nvarchar(14)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
+
+                    b.Property<string>("Endereco")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("ImagemUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("NomeFantasia")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Observacoes")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("RazaoSocial")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("StatusCredenciamento")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Telefone")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("Tipo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Uf")
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
+
+                    b.Property<string>("WhatsApp")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Cnpj")
+                        .IsUnique();
+
+                    b.ToTable("Credenciado", (string)null);
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.CredenciadoEspecialidade", b =>
+                {
+                    b.Property<Guid>("CredenciadoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EspecialidadeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CredenciadoId", "EspecialidadeId");
+
+                    b.HasIndex("EspecialidadeId");
+
+                    b.ToTable("CredenciadoEspecialidade", (string)null);
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.CredenciadoProcedimento", b =>
+                {
+                    b.Property<Guid>("CredenciadoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProcedimentoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CredenciadoId", "ProcedimentoId");
+
+                    b.HasIndex("ProcedimentoId");
+
+                    b.ToTable("CredenciadoProcedimento", (string)null);
 
                     b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
             modelBuilder.Entity("PVHSAUDE.Domain.Entities.Dependente", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BeneficiarioId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("BeneficiarioId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
@@ -110,6 +215,131 @@ namespace PVHSAUDE.Infra.Data.Migrations
                     b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.Especialidade", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Nome")
+                        .IsUnique();
+
+                    b.ToTable("Especialidade", (string)null);
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.Plano", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DataValidade")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<int>("Periodicidade")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Valor")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Plano", (string)null);
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.Procedimento", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Nome")
+                        .IsUnique();
+
+                    b.ToTable("Procedimento", (string)null);
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.Beneficiario", b =>
+                {
+                    b.HasOne("PVHSAUDE.Domain.Entities.Credenciado", "Credenciado")
+                        .WithMany()
+                        .HasForeignKey("CredenciadoId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Credenciado");
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.CredenciadoEspecialidade", b =>
+                {
+                    b.HasOne("PVHSAUDE.Domain.Entities.Credenciado", "Credenciado")
+                        .WithMany("Especialidades")
+                        .HasForeignKey("CredenciadoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PVHSAUDE.Domain.Entities.Especialidade", "Especialidade")
+                        .WithMany("Credenciados")
+                        .HasForeignKey("EspecialidadeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Credenciado");
+
+                    b.Navigation("Especialidade");
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.CredenciadoProcedimento", b =>
+                {
+                    b.HasOne("PVHSAUDE.Domain.Entities.Credenciado", "Credenciado")
+                        .WithMany("Procedimentos")
+                        .HasForeignKey("CredenciadoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PVHSAUDE.Domain.Entities.Procedimento", "Procedimento")
+                        .WithMany("Credenciados")
+                        .HasForeignKey("ProcedimentoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Credenciado");
+
+                    b.Navigation("Procedimento");
+                });
+
             modelBuilder.Entity("PVHSAUDE.Domain.Entities.Dependente", b =>
                 {
                     b.HasOne("PVHSAUDE.Domain.Entities.Beneficiario", "Beneficiario")
@@ -124,6 +354,23 @@ namespace PVHSAUDE.Infra.Data.Migrations
             modelBuilder.Entity("PVHSAUDE.Domain.Entities.Beneficiario", b =>
                 {
                     b.Navigation("Dependentes");
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.Credenciado", b =>
+                {
+                    b.Navigation("Especialidades");
+
+                    b.Navigation("Procedimentos");
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.Especialidade", b =>
+                {
+                    b.Navigation("Credenciados");
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.Procedimento", b =>
+                {
+                    b.Navigation("Credenciados");
                 });
 #pragma warning restore 612, 618
         }

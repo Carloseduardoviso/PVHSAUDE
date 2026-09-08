@@ -1,18 +1,27 @@
-﻿namespace PVHSAUDE.Domain.Entities
+using PVHSAUDE.Domain.Enuns;
+namespace PVHSAUDE.Domain.Entities
 {
     public class Dependente
     {
-        public int Id { get; private set; }
-        public int BeneficiarioId { get; private set; }
+        public Guid Id { get; private set; } = Guid.NewGuid();
+        public Guid BeneficiarioId { get; private set; }
         public Beneficiario Beneficiario { get; private set; } = null!;
         public string Nome { get; private set; } = string.Empty;
         public string Cpf { get; private set; } = string.Empty;
         public DateTime DataNascimento { get; private set; }
-        public string GrauParentesco { get; private set; } = string.Empty;
+        public GrauParentesco GrauParentesco { get; private set; }
 
         private Dependente() { }
 
-        public Dependente(int beneficiarioId, string nome, string cpf, DateTime dataNascimento, string grauParentesco)
+        public void Atualizar(string nome, string cpf, DateTime dataNascimento, GrauParentesco grauParentesco)
+        {
+            Nome = nome;
+            Cpf = cpf;
+            DataNascimento = dataNascimento;
+            GrauParentesco = grauParentesco;
+        }
+
+        public Dependente(Guid beneficiarioId, string nome, string cpf, DateTime dataNascimento, GrauParentesco grauParentesco)
         {
             BeneficiarioId = beneficiarioId;
             Nome = nome;

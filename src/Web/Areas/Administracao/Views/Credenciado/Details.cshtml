@@ -1,0 +1,21 @@
+@model CredenciadoViewModel
+@{ ViewData["Title"] = "Detalhes da empresa"; }
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <h1 class="h3">@Model.NomeFantasia</h1>
+    <div><a asp-action="Index" class="btn btn-outline-secondary">Voltar à lista</a> <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a></div>
+</div>
+<div class="card card-body shadow-sm"><dl class="row mb-0">
+    <dt class="col-sm-3">Razão social</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.RazaoSocial) ? "Não informado" : Model.RazaoSocial)</dd>
+    <dt class="col-sm-3">Nome fantasia</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.NomeFantasia) ? "Não informado" : Model.NomeFantasia)</dd>
+    <dt class="col-sm-3">CNPJ</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Cnpj) ? "Não informado" : Model.Cnpj)</dd>
+    <dt class="col-sm-3">Telefone</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Telefone) ? "Não informado" : Model.Telefone)</dd>
+    <dt class="col-sm-3">WhatsApp</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.WhatsApp) ? "Não informado" : Model.WhatsApp)</dd>
+    <dt class="col-sm-3">E-mail</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Email) ? "Não informado" : Model.Email)</dd>
+    <dt class="col-sm-3">CEP</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Cep) ? "Não informado" : Model.Cep)</dd>
+    <dt class="col-sm-3">Endereço</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Endereco) ? "Não informado" : Model.Endereco)</dd>
+    <dt class="col-sm-3">Cidade</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Cidade) ? "Não informado" : Model.Cidade)</dd>
+    <dt class="col-sm-3">UF</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Uf) ? "Não informado" : Model.Uf)</dd>
+    <dt class="col-sm-3">Observações</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Observacoes) ? "Não informado" : Model.Observacoes)</dd>
+    <dt class="col-sm-3">Tipo</dt><dd class="col-sm-9">@Html.DisplayFor(m => m.Tipo)</dd>
+    <dt class="col-sm-3">Situação</dt><dd class="col-sm-9">@Html.DisplayFor(m => m.StatusCredenciamento)</dd>
+</dl></div>

@@ -5,7 +5,7 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <div><h1 class="h3 mb-1">Beneficiários</h1><p class="text-muted mb-0">Cadastros que alimentam o portal PVH Saúde.</p></div>
-    <a asp-action="Create" class="btn btn-success">Novo beneficiário</a>
+    <a asp-action="Create" class="btn btn-success">Cadastrar beneficiário</a>
 </div>
 @if (TempData["Success"] is string success) { <div class="alert alert-success">@success</div> }
 @if (TempData["Error"] is string error) { <div class="alert alert-danger">@error</div> }
@@ -15,7 +15,11 @@
 @foreach (var item in Model) {
 <tr><td>@item.Nome</td><td>@item.Cpf</td><td>@item.Telefone</td><td>@((PVHSAUDE.Domain.Enuns.StatusBeneficiario)item.Status)</td><td>@item.Dependentes.Count</td><td class="text-end">
 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Editar</a>
-<form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline"><button class="btn btn-sm btn-outline-danger" onclick="return confirm('Excluir este beneficiário?')">Excluir</button></form>
+<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Ver detalhes</a>
+@if (item.Status != (int)PVHSAUDE.Domain.Enuns.StatusBeneficiario.Inativo)
+{
+<form asp-action="Inativar" asp-route-id="@item.Id" method="post" class="d-inline"><button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Inativar este beneficiário? O cadastro e os dependentes serão mantidos.')">Inativar</button></form>
+}
 </td></tr> }
 </tbody></table></div></div>
 @if (!Model.Any()) { <p class="text-center text-muted py-4">Nenhum beneficiário cadastrado.</p> }

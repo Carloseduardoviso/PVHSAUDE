@@ -1,47 +1,33 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+@{ var controller = ViewContext.RouteData.Values["controller"]?.ToString(); }
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Web</title>
-    <script type="importmap"></script>
+    <title>@ViewData["Title"] - Administração PVH Saúde</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/administracao.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+<body class="admin-body">
+    <div class="admin-shell">
+        <aside class="admin-sidebar">
+            <a class="admin-brand" asp-area="Administracao" asp-controller="Dashboard" asp-action="Index">PVH Saúde</a>
+            <p class="admin-caption">Área administrativa</p>
+            <button class="btn btn-outline-light d-md-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#admin-menu" aria-controls="admin-menu" aria-expanded="false">Menu</button>
+            <nav id="admin-menu" class="collapse d-md-block" aria-label="Menu administrativo">
+                <a class="admin-nav-link @(controller == "Dashboard" ? "active" : "")" aria-current="@(controller == "Dashboard" ? "page" : null)" asp-area="Administracao" asp-controller="Dashboard" asp-action="Index">Home</a>
+                <a class="admin-nav-link @(controller == "Beneficiario" ? "active" : "")" aria-current="@(controller == "Beneficiario" ? "page" : null)" asp-area="Administracao" asp-controller="Beneficiario" asp-action="Index">Beneficiários</a>
+                <a class="admin-nav-link @(controller == "Plano" ? "active" : "")" aria-current="@(controller == "Plano" ? "page" : null)" asp-area="Administracao" asp-controller="Plano" asp-action="Index">Planos</a>
+                <a class="admin-nav-link @(controller == "Credenciado" ? "active" : "")" aria-current="@(controller == "Credenciado" ? "page" : null)" asp-area="Administracao" asp-controller="Credenciado" asp-action="Index">Empresas credenciadas</a>
+                <a class="admin-nav-link mt-4" asp-area="" asp-controller="Home" asp-action="Index">Voltar ao portal</a>
+            </nav>
+        </aside>
+        <div class="admin-content">
+            <header class="admin-header">Administração <span class="text-muted">/ @ViewData["Title"]</span></header>
+            <main id="conteudo" class="p-3 p-lg-4">@RenderBody()</main>
         </div>
-    </footer>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

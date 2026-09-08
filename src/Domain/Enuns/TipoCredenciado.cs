@@ -1,13 +1,14 @@
-﻿namespace PVHSAUDE.Domain.Enuns
+using System.ComponentModel.DataAnnotations;
+namespace PVHSAUDE.Domain.Enuns
 {
     public enum TipoCredenciado
     {
-        Clinica = 1, 
-        Laboratorio = 2, 
+        [Display(Name = "Clínica")] Clinica = 1, 
+        [Display(Name = "Laboratório")] Laboratorio = 2, 
         Hospital = 3, 
-        CentroDiagnostico = 4, 
-        Farmacia = 5, 
-        Otica = 6, 
+        [Display(Name = "Centro de diagnóstico")] CentroDiagnostico = 4, 
+        [Display(Name = "Farmácia")] Farmacia = 5, 
+        [Display(Name = "Ótica")] Otica = 6, 
         Outro = 7
     }
 }

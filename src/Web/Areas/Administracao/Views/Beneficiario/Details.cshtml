@@ -1,0 +1,35 @@
+@model BeneficiarioViewModel
+@{ ViewData["Title"] = "Detalhes do beneficiário"; }
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div><h1 class="h3 mb-1">Detalhes do beneficiário</h1><p class="text-muted mb-0">@Model.Nome</p></div>
+    <div><a asp-action="Index" class="btn btn-outline-secondary">Voltar à lista</a> <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a></div>
+</div>
+<div class="card shadow-sm mb-4"><div class="card-body">
+    <h2 class="h5 mb-3">Dados do cadastro</h2>
+    <dl class="row mb-0">
+        <dt class="col-sm-3">Nome completo</dt><dd class="col-sm-9">@Model.Nome</dd>
+        <dt class="col-sm-3">CPF</dt><dd class="col-sm-9">@Model.Cpf</dd>
+        <dt class="col-sm-3">Data de nascimento</dt><dd class="col-sm-9">@Model.DataNascimento.ToString("dd/MM/yyyy")</dd>
+        <dt class="col-sm-3">Telefone</dt><dd class="col-sm-9">@(Model.Telefone ?? "Não informado")</dd>
+        <dt class="col-sm-3">E-mail</dt><dd class="col-sm-9">@(Model.Email ?? "Não informado")</dd>
+        <dt class="col-sm-3">Endereço</dt><dd class="col-sm-9">@(Model.Endereco ?? "Não informado")</dd>
+        <dt class="col-sm-3">Plano</dt><dd class="col-sm-9">@(((IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>?)ViewBag.Planos)?.FirstOrDefault(p => p.Value == Model.PlanoId.ToString())?.Text ?? "Plano anterior não cadastrado")</dd>
+        <dt class="col-sm-3">Início do benefício</dt><dd class="col-sm-9">@Model.DataInicio.ToString("dd/MM/yyyy")</dd>
+        <dt class="col-sm-3">Validade do benefício</dt><dd class="col-sm-9">@Model.DataValidade.ToString("dd/MM/yyyy")</dd>
+        <dt class="col-sm-3">Situação</dt><dd class="col-sm-9">@((PVHSAUDE.Domain.Enuns.StatusBeneficiario)Model.Status)</dd>
+    </dl>
+</div></div>
+<div class="card shadow-sm"><div class="card-body">
+    <h2 class="h5 mb-3">Dependentes (@Model.Dependentes.Count)</h2>
+    @if (Model.Dependentes.Any())
+    {
+        <div class="table-responsive"><table class="table mb-0">
+            <thead><tr><th>Nome</th><th>CPF</th><th>Data de nascimento</th><th>Parentesco</th></tr></thead>
+            <tbody>@foreach (var dependente in Model.Dependentes)
+            {
+                <tr><td>@dependente.Nome</td><td>@dependente.Cpf</td><td>@(dependente.DataNascimento?.ToString("dd/MM/yyyy"))</td><td>@Html.DisplayFor(_ => dependente.GrauParentesco)</td></tr>
+            }</tbody>
+        </table></div>
+    }
+    else { <p class="text-muted mb-0">Nenhum dependente cadastrado.</p> }
+</div></div>

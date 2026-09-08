@@ -10,6 +10,10 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IBeneficiarioApiClient, BeneficiarioApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
+builder.Services.AddHttpClient<PlanoApiClient>(client =>
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
+builder.Services.AddHttpClient<CredenciadoApiClient>(client =>
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
 builder.Services.AddInfrastructure();
 
 var app = builder.Build();

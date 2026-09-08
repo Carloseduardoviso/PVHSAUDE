@@ -1,14 +1,48 @@
 @model BeneficiarioViewModel
-<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div asp-validation-summary="All" role="alert" class="text-danger mb-3"></div>
+@if (ViewBag.Planos is ICollection<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> planos && planos.Count == 0)
+{
+    <div class="alert alert-warning">Nenhum plano disponível. <a asp-controller="Plano" asp-action="Create">Cadastrar plano</a></div>
+}
 <div class="row g-3">
     <div class="col-md-8"><label asp-for="Nome" class="form-label"></label><input asp-for="Nome" class="form-control" /><span asp-validation-for="Nome" class="text-danger"></span></div>
-    <div class="col-md-4"><label asp-for="Cpf" class="form-label"></label><input asp-for="Cpf" class="form-control" /><span asp-validation-for="Cpf" class="text-danger"></span></div>
+    <div class="col-md-4"><label asp-for="Cpf" class="form-label"></label><input asp-for="Cpf" class="form-control" data-mask="documento" inputmode="numeric" maxlength="18" /><span asp-validation-for="Cpf" class="text-danger"></span></div>
     <div class="col-md-4"><label asp-for="DataNascimento" class="form-label"></label><input asp-for="DataNascimento" class="form-control" /><span asp-validation-for="DataNascimento" class="text-danger"></span></div>
-    <div class="col-md-4"><label asp-for="Telefone" class="form-label"></label><input asp-for="Telefone" class="form-control" /></div>
+    <div class="col-md-4"><label asp-for="Telefone" class="form-label"></label><input asp-for="Telefone" class="form-control" data-mask="telefone" inputmode="tel" maxlength="15" /></div>
     <div class="col-md-4"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" /><span asp-validation-for="Email" class="text-danger"></span></div>
     <div class="col-12"><label asp-for="Endereco" class="form-label"></label><input asp-for="Endereco" class="form-control" /></div>
-    <div class="col-md-3"><label asp-for="PlanoId" class="form-label"></label><input asp-for="PlanoId" class="form-control" min="1" /><span asp-validation-for="PlanoId" class="text-danger"></span></div>
+    <div class="col-md-3"><label asp-for="PlanoId" class="form-label"></label><select asp-for="PlanoId" asp-items="ViewBag.Planos" class="form-select"><option value="">Selecione um plano</option></select><span asp-validation-for="PlanoId" class="text-danger"></span></div>
     <div class="col-md-3"><label asp-for="DataInicio" class="form-label"></label><input asp-for="DataInicio" class="form-control" /></div>
     <div class="col-md-3"><label asp-for="DataValidade" class="form-label"></label><input asp-for="DataValidade" class="form-control" /></div>
-    <div class="col-md-3"><label asp-for="Status" class="form-label"></label><select asp-for="Status" class="form-select"><option value="1">Ativo</option><option value="2">Pendente</option><option value="3">Inadimplente</option><option value="4">Cancelado</option><option value="5">Em renovação</option></select></div>
+    <div class="col-md-3"><label asp-for="Status" class="form-label"></label><select asp-for="Status" class="form-select"><option value="1">Ativo</option><option value="2">Pendente</option><option value="3">Inadimplente</option><option value="4">Cancelado</option><option value="5">Em renovação</option><option value="6">Inativo</option></select></div>
 </div>
+
+<div class="mt-4" id="dependentes-editor">
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="incluir-dependentes" checked="@(Model.Dependentes.Any())" aria-controls="dependentes-campos" />
+        <label class="form-check-label" for="incluir-dependentes">Incluir dependentes</label>
+    </div>
+    <div id="dependentes-campos" class="mt-3" hidden="@(!Model.Dependentes.Any())">
+        <p class="text-muted">Cadastre até 5 dependentes por beneficiário. Ao desmarcar, os dependentes serão removidos ao salvar.</p>
+        <span asp-validation-for="Dependentes" class="text-danger d-block"></span>
+        <p id="limite-dependentes" class="text-muted" role="status" hidden>Limite de 5 dependentes atingido. Remova um dependente para adicionar outro.</p>
+        <div id="dependentes-lista">
+            @for (var i = 0; i < Model.Dependentes.Count; i++)
+            {
+                var dados = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary(ViewData);
+                dados.TemplateInfo.HtmlFieldPrefix = $"Dependentes[{i}]";
+                dados["Indice"] = i.ToString();
+                <partial name="_Dependente" model="Model.Dependentes.ElementAt(i)" view-data="dados" />
+            }
+        </div>
+        <button type="button" class="btn btn-outline-success" id="adicionar-dependente">Adicionar dependente</button>
+    </div>
+</div>
+<template id="dependente-template">
+    @{
+        var templateData = new Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary(ViewData);
+        templateData.TemplateInfo.HtmlFieldPrefix = "Dependentes[__indice__]";
+        templateData["Indice"] = "__indice__";
+    }
+    <partial name="_Dependente" model="new DependenteViewModel()" view-data="templateData" />
+</template>

@@ -1,12 +1,12 @@
-﻿//using PVHSAUDE.Domain.Enuns;
+//using PVHSAUDE.Domain.Enuns;
 
 //namespace PVHSAUDE.Domain.Entities
 //{
 //    public class Pagamento
 //    {
-//        public int BeneficiarioId { get; private set; }
+//        public Guid BeneficiarioId { get; private set; }
 //        public Beneficiario Beneficiario { get; private set; } = null!;
-//        public int? ContratoId { get; private set; }
+//        public Guid? ContratoId { get; private set; }
 //        public Contrato? Contrato { get; private set; }
 //        public decimal Valor { get; private set; }
 //        public DateTime DataVencimento { get; private set; }
@@ -15,7 +15,7 @@
 //        public string? FormaPagamento { get; private set; }
 //        public string? Observacao { get; private set; }
 
-//        public Pagamento(int beneficiarioId, decimal valor, DateTime vencimento)
+//        public Pagamento(Guid beneficiarioId, decimal valor, DateTime vencimento)
 //        {
 //            BeneficiarioId = beneficiarioId; Valor = valor; DataVencimento = vencimento;
 //        }

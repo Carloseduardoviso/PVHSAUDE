@@ -1,22 +1,27 @@
-﻿//using PVHSAUDE.Domain.Enuns;
-//using System;
-//using System.Collections.Generic;
-//using System.Text;
+using PVHSAUDE.Domain.Enuns;
 
-//namespace PVHSAUDE.Domain.Entities
-//{
-//    public class Plano
-//    {
-//        public string Nome { get; private set; } = string.Empty;
-//        public string? Descricao { get; private set; }
-//        public TipoPessoa TipoPessoa { get; private set; }
-//        public decimal Valor { get; private set; }
-//        public Periodicidade Periodicidade { get; private set; }
-//        public int? DiasValidade { get; private set; }
-//        public ICollection<Beneficiario> Beneficiarios { get; private set; } = new List<Beneficiario>();
-//        public ICollection<Contrato> Contratos { get; private set; } = new List<Contrato>();
+namespace PVHSAUDE.Domain.Entities;
 
-//        public Plano(string nome, TipoPessoa tipoPessoa, decimal valor, Periodicidade periodicidade, string? descricao = null)
-//        { Nome = nome; TipoPessoa = tipoPessoa; Valor = valor; Periodicidade = periodicidade; Descricao = descricao; }
-//    }
-//}
+public class Plano
+{
+    public Guid Id { get; private set; } = Guid.NewGuid();
+    public string Nome { get; private set; } = string.Empty;
+    public string? Descricao { get; private set; }
+    public decimal Valor { get; private set; }
+    public Periodicidade Periodicidade { get; private set; }
+    public DateTime? DataValidade { get; private set; }
+
+    private Plano() { }
+
+    public Plano(string nome, string? descricao, decimal valor, Periodicidade periodicidade, DateTime? dataValidade)
+        => Atualizar(nome, descricao, valor, periodicidade, dataValidade);
+
+    public void Atualizar(string nome, string? descricao, decimal valor, Periodicidade periodicidade, DateTime? dataValidade)
+    {
+        Nome = nome.Trim();
+        Descricao = descricao?.Trim();
+        Valor = valor;
+        Periodicidade = periodicidade;
+        DataValidade = dataValidade?.Date;
+    }
+}
