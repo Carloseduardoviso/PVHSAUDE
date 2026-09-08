@@ -1,0 +1,8 @@
+@model BeneficiarioViewModel
+@{ ViewData["Title"] = "Novo beneficiário"; }
+<h1 class="h3 mb-4">Novo beneficiário</h1>
+<form asp-action="Create" method="post" class="card card-body shadow-sm">
+    <partial name="_Form" model="Model" />
+    <div class="mt-4"><a asp-action="Index" class="btn btn-light">Cancelar</a><button class="btn btn-success">Salvar cadastro</button></div>
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

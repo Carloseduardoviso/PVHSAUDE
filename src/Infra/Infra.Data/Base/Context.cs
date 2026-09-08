@@ -1,7 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.Identity.Client;
+using PVHSAUDE.Application.ViewModels;
+using PVHSAUDE.Domain.Entities;
+using PVHSAUDE.Infra.Auth.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,6 +21,8 @@ namespace Infra.Data.Base
             _account = account;
         }
 
+        public DbSet<Beneficiario> Beneficiarios { get; set; } = null!;
+        public DbSet<Dependente> Dependentes { get; set; } = null!;
 
         #region Configuração do Modelo
 
@@ -118,8 +122,9 @@ namespace Infra.Data.Base
 
         private async Task SetContextInfo()
         {
-            //var usuarioId = _account.Current?.UsuarioId;
-            var usuarioId = _account?.Username ?? "UsuarioNaoAutenticado";
+            var usuarioId = _account.Current.IsLogado
+                ? _account.Current.UsuarioId.ToString()
+                : "UsuarioNaoAutenticado";
 
             var connection = Database.GetDbConnection();
 

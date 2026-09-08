@@ -1,8 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@{ ViewData["Title"] = "PVH Saúde"; }
+<section class="p-5 mb-4 bg-success text-white rounded-3"><h1 class="display-5">PVH Saúde</h1><p class="lead mb-0">Cuidado, saúde e bem-estar para você.</p></section>
+<h2 class="h3 mb-3">Encontre o que precisa</h2>
+<div class="row g-3">
+@foreach (var item in new[] { "Clínicas terapêuticas credenciadas", "Clínicas parceiras", "Clínicos médicos e especialidades", "Laboratórios e exames", "Exames de imagem", "Odontologia", "Clínicos populares", "Esporte e parceiros", "Lojas parceiras" })
+{
+    <div class="col-md-4"><div class="card h-100 shadow-sm"><div class="card-body"><h3 class="h5">@item</h3><p class="text-muted mb-0">Em breve, consulte os parceiros disponíveis.</p></div></div></div>
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<section class="mt-5 p-4 bg-light rounded-3"><h2 class="h4">Já é beneficiário?</h2><p>Consulte as informações do seu benefício ou fale conosco.</p><a asp-area="Administracao" asp-controller="Dashboard" asp-action="Index" class="btn btn-outline-success">Área administrativa</a></section>

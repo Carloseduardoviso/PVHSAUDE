@@ -1,7 +1,16 @@
+using PVHSAUDE.Infra.Ioc;
+using Web.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+// Infra.Auth services depend on these framework services.
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IBeneficiarioApiClient, BeneficiarioApiClient>(client =>
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 
@@ -19,6 +28,11 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+app.MapAreaControllerRoute(
+    name: "administracao",
+    areaName: "Administracao",
+    pattern: "Administracao/{controller=Dashboard}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

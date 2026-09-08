@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AutoMapper;
+using AutoMapper.Extensions.ExpressionMapping;
+using AutoMapper.Internal;
 
-namespace Infra.Helper.Config
+namespace PVHSAUDE.Infra.Helper.Config
 {
-    internal class AutoMapperConfig
+    public static class AutoMapperConfig
     {
+        public static IMapperConfigurationExpression AddExpressionMapping(this IMapperConfigurationExpression config)
+        {
+            config.Internal().Mappers.Insert(0, new ExpressionMapper());
+            return config;
+        }
     }
 }
