@@ -1,0 +1,3 @@
+using Microsoft.EntityFrameworkCore; using Microsoft.EntityFrameworkCore.Metadata.Builders; using PVHSAUDE.Domain.Entities;
+namespace Infra.Data.Config; public class ContatoConfig:IEntityTypeConfiguration<Contato>{public void Configure(EntityTypeBuilder<Contato>b){b.HasKey(x=>x.Id);b.Property(x=>x.Nome).HasMaxLength(100).IsRequired();b.Property(x=>x.Sobrenome).HasMaxLength(100);b.Property(x=>x.Email).HasMaxLength(254).IsRequired();b.Property(x=>x.Telefone).HasMaxLength(30).IsRequired();b.Property(x=>x.Cpf).HasMaxLength(20).IsRequired();b.Property(x=>x.Motivo).HasMaxLength(100).IsRequired();b.Property(x=>x.Mensagem).HasMaxLength(4000).IsRequired();}}
+

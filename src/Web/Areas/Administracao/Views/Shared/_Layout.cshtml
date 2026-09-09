@@ -18,6 +18,7 @@
             <nav id="admin-menu" class="collapse d-md-block" aria-label="Menu administrativo">
                 <a class="admin-nav-link @(controller == "Dashboard" ? "active" : "")" aria-current="@(controller == "Dashboard" ? "page" : null)" asp-area="Administracao" asp-controller="Dashboard" asp-action="Index">Home</a>
                 <a class="admin-nav-link @(controller == "Banner" ? "active" : "")" asp-area="Administracao" asp-controller="Banner" asp-action="Index">Banner</a>
+                <a class="admin-nav-link @(controller == "Contato" ? "active" : "")" asp-area="Administracao" asp-controller="Contato" asp-action="Index">Mensagens</a>
                 <a class="admin-nav-link @(controller == "Beneficiario" ? "active" : "")" aria-current="@(controller == "Beneficiario" ? "page" : null)" asp-area="Administracao" asp-controller="Beneficiario" asp-action="Index">Beneficiários</a>
                 <a class="admin-nav-link @(controller == "Plano" ? "active" : "")" aria-current="@(controller == "Plano" ? "page" : null)" asp-area="Administracao" asp-controller="Plano" asp-action="Index">Planos</a>
                 <a class="admin-nav-link @(controller == "Credenciado" ? "active" : "")" aria-current="@(controller == "Credenciado" ? "page" : null)" asp-area="Administracao" asp-controller="Credenciado" asp-action="Index">Empresas credenciadas</a>

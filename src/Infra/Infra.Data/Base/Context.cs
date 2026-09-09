@@ -30,6 +30,7 @@ namespace Infra.Data.Base
         public DbSet<Plano> Planos { get; set; } = null!;
         public DbSet<Beneficiario> Beneficiarios { get; set; } = null!;
         public DbSet<Dependente> Dependentes { get; set; } = null!;
+        public DbSet<Contato> Contatos { get; set; } = null!;
 
         #region Configuração do Modelo
 

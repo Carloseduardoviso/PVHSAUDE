@@ -21,6 +21,8 @@ builder.Services.AddScoped<Web.Services.UsuarioCookieEvents>();
 builder.Services.AddAuthorization();
 builder.Services.AddHttpClient<BannerApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
+builder.Services.AddHttpClient<ContatoApiClient>(client =>
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
 builder.Services.AddHttpClient<UsuarioApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
 // Infra.Auth services depend on these framework services.

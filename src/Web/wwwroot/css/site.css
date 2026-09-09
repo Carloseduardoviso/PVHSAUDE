@@ -21,10 +21,46 @@ body {
   margin-bottom: 60px;
 }
 
+.whatsapp-float {
+  position: fixed;
+  z-index: 1050;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  width: 3.75rem;
+  height: 3.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 .35rem 1rem rgba(0, 0, 0, .25);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.whatsapp-float svg { width: 2.35rem; height: 2.35rem; fill: currentColor; }
+.whatsapp-float:hover, .whatsapp-float:focus { color: #fff; transform: scale(1.08); box-shadow: 0 .5rem 1.25rem rgba(0, 0, 0, .3); }
+@media (max-width: 575.98px) {
+  .whatsapp-float { right: 1rem; bottom: 1rem; width: 3.4rem; height: 3.4rem; }
+  .whatsapp-float svg { width: 2.1rem; height: 2.1rem; }
+}
+
 .portal-apresentacao { width: 100%; height: clamp(200px, 30vw, 320px); overflow: hidden; background: #fff; padding: 0; border: 1px solid #183c78; }
 .portal-logo { display: block; width: 100%; height: 100%; object-fit: contain; }
 .portal-brand { display: inline-flex; align-items: center; padding: 0; flex-shrink: 0; }
-.portal-brand img { display: block; width: 200px; max-width: 45vw; height: auto; }
+.portal-brand img { display: block; width: 164px; max-width: 45vw; height: auto; }
+
+.portal-navbar { background: #075848; border-bottom: 4px solid #80bc22; min-height: 72px; margin-bottom: 1.5rem; }
+.portal-navbar-inner { gap: 1.5rem; }
+.portal-navbar .navbar-brand { margin-right: auto; }
+.portal-nav-links { gap: .25rem; align-items: center; }
+.portal-navbar .nav-link { color: #fff; font-size: .95rem; font-weight: 500; padding: .65rem .7rem; white-space: nowrap; }
+.portal-navbar .nav-link:hover, .portal-navbar .nav-link:focus { color: #c9f45b; }
+.portal-admin-button { border: 1px solid #c9f45b; border-radius: 999px; color: #fff; font-weight: 600; padding: .55rem 1.1rem; }
+.portal-admin-button:hover, .portal-admin-button:focus { background: #c9f45b; border-color: #c9f45b; color: #075848; }
+@media (max-width: 991.98px) {
+  .portal-navbar .navbar-collapse { padding: .75rem 0; }
+  .portal-nav-links { align-items: flex-start; }
+  .portal-admin-button { display: inline-block; }
+}
 
 .banner-imagem { width: 100%; height: auto; aspect-ratio: 16 / 5; object-fit: contain; object-position: center; }
 .banner-titulo { overflow-wrap: anywhere; }

@@ -1,0 +1,4 @@
+@model Web.Models.ContatoViewModel
+@{ViewData["Title"]="Detalhes da mensagem";}
+<h1 class="h3 mb-4">Detalhes da mensagem</h1>
+<div class="card card-body"><dl class="row"><dt class="col-sm-3">Data</dt><dd class="col-sm-9">@Model.EnviadoEm.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</dd><dt class="col-sm-3">Nome</dt><dd class="col-sm-9">@Model.Nome @Model.Sobrenome</dd><dt class="col-sm-3">E-mail</dt><dd class="col-sm-9">@Model.Email</dd><dt class="col-sm-3">Telefone</dt><dd class="col-sm-9">@Model.Telefone</dd><dt class="col-sm-3">CPF</dt><dd class="col-sm-9">@Model.Cpf</dd><dt class="col-sm-3">Motivo</dt><dd class="col-sm-9">@Model.Motivo</dd><dt class="col-sm-3">Mensagem</dt><dd class="col-sm-9" style="white-space:pre-wrap">@Model.Mensagem</dd></dl><a asp-action="Index" class="btn btn-outline-secondary">Voltar</a></div>
