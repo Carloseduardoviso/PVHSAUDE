@@ -6,7 +6,7 @@ using PVHSAUDE.Api.Contracts;
 using PVHSAUDE.Domain.Entities;
 namespace PVHSAUDE.Api.Controllers;
 
-[ApiController, Route("api/credenciados"), AllowAnonymous]
+[ApiController, Route("api/credenciados")]
 public class CredenciadosController(Context context) : ControllerBase
 {
     [HttpGet]
@@ -18,7 +18,7 @@ public class CredenciadosController(Context context) : ControllerBase
         var empresa = await context.Credenciados.AsNoTracking().Include(x=>x.Especialidades).Include(x=>x.Procedimentos).FirstOrDefaultAsync(x => x.Id == id, ct);
         return empresa is null ? NotFound() : Ok(ParaResponse(empresa));
     }
-    [HttpPost]
+    [Microsoft.AspNetCore.Authorization.Authorize, HttpPost]
     public async Task<IActionResult> Criar(CredenciadoRequest request, CancellationToken ct)
     {
         if (!await context.Planos.AnyAsync(x => x.Id == request.PlanoId, ct)) return BadRequest("Selecione um plano cadastrado.");
@@ -34,7 +34,7 @@ public class CredenciadosController(Context context) : ControllerBase
         await context.SaveChangesAsync(ct);
         return CreatedAtAction(nameof(Obter), new { id = empresa.Id }, ParaResponse(empresa));
     }
-    [HttpPost("{id:guid}/imagem")]
+    [Microsoft.AspNetCore.Authorization.Authorize, HttpPost("{id:guid}/imagem")]
     [RequestSizeLimit(5_242_880)]
     public async Task<IActionResult> UploadImagem(Guid id, IFormFile imagem, IWebHostEnvironment environment, CancellationToken ct)
     {
@@ -54,7 +54,7 @@ public class CredenciadosController(Context context) : ControllerBase
         return Ok(new { empresa.ImagemUrl });
     }
 
-    [HttpPut("{id:guid}")]
+    [Microsoft.AspNetCore.Authorization.Authorize, HttpPut("{id:guid}")]
     public async Task<IActionResult> Atualizar(Guid id, CredenciadoRequest request, CancellationToken ct)
     {
         var empresa = await context.Credenciados.Include(x=>x.Especialidades).Include(x=>x.Procedimentos).FirstOrDefaultAsync(x=>x.Id==id,ct);

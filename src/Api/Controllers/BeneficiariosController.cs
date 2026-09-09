@@ -9,7 +9,7 @@ namespace PVHSAUDE.Api.Controllers;
 
 [ApiController]
 [Route("api/beneficiarios")]
-[AllowAnonymous]
+[Authorize]
 public class BeneficiariosController(Context context) : ControllerBase
 {
     [HttpGet]

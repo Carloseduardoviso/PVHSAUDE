@@ -19,6 +19,20 @@ namespace PVHSAUDE.Api.Configs
             }).AddJwtBearer(options =>
             {
                 options.SaveToken = true;
+                options.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = async context =>
+                    {
+                        var id = context.Principal?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+                        var db = context.HttpContext.RequestServices.GetRequiredService<global::Infra.Data.Base.Context>();
+                        var usuario = Guid.TryParse(id, out var guid)
+                            ? await db.Set<PVHSAUDE.Domain.Entities.Usuario>().FindAsync(new object[] { guid }, context.HttpContext.RequestAborted)
+                            : null;
+                        if (usuario is null || !usuario.Ativo ||
+                            context.Principal?.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value != usuario.Role.ToString())
+                            context.Fail("Usuário indisponível ou permissão alterada.");
+                    }
+                };
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,

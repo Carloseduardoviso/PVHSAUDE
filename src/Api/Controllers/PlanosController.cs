@@ -7,7 +7,7 @@ using PVHSAUDE.Domain.Entities;
 
 namespace PVHSAUDE.Api.Controllers;
 
-[ApiController, Route("api/planos"), AllowAnonymous]
+[ApiController, Route("api/planos")]
 public class PlanosController(Context context) : ControllerBase
 {
     [HttpGet]
@@ -21,7 +21,7 @@ public class PlanosController(Context context) : ControllerBase
         return plano is null ? NotFound() : Ok(ParaResponse(plano));
     }
 
-    [HttpPost]
+    [Microsoft.AspNetCore.Authorization.Authorize, HttpPost]
     public async Task<IActionResult> Criar(PlanoRequest request, CancellationToken ct)
     {
         var plano = new Plano(request.Nome, request.Descricao, request.Valor, request.Periodicidade, request.DataValidade);
@@ -30,7 +30,7 @@ public class PlanosController(Context context) : ControllerBase
         return CreatedAtAction(nameof(Obter), new { id = plano.Id }, ParaResponse(plano));
     }
 
-    [HttpPut("{id:guid}")]
+    [Microsoft.AspNetCore.Authorization.Authorize, HttpPut("{id:guid}")]
     public async Task<IActionResult> Atualizar(Guid id, PlanoRequest request, CancellationToken ct)
     {
         var plano = await context.Planos.FindAsync([id], ct);

@@ -3,6 +3,7 @@
 <section class="portal-apresentacao mb-4 rounded-3" aria-label="PVH Saúde">
     <img class="portal-logo" src="~/images/pvh-saude-horizontal.jpeg" asp-append-version="true" alt="PVH Saúde — descontos e benefícios" width="998" height="548" />
 </section>
+<partial name="_Banners" model="Model.Banners" />
 @if (Model.ErroCatalogos is not null) { <p class="text-muted" role="status">@Model.ErroCatalogos</p> }
 @if (Model.Empresas.Count > 0)
 {

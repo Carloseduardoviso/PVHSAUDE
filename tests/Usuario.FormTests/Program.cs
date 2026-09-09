@@ -1,0 +1,143 @@
+using System.Net;
+using System.Net.Http.Json;
+using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Identity;
+using PVHSAUDE.Application.ViewModels;
+using PVHSAUDE.Domain.Entities;
+using PVHSAUDE.Domain.Enuns;
+using PVHSAUDE.Web.Controllers;
+using Web.Services;
+
+if (args.Contains("--database")) { await UsuarioDatabaseTests.Run(); return; }
+
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions { ApplicationName = typeof(ContaController).Assembly.FullName });
+builder.Logging.ClearProviders();
+builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
+builder.Services.AddControllersWithViews().AddApplicationPart(typeof(ContaController).Assembly);
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(o => { o.LoginPath = "/Conta/Login"; o.AccessDeniedPath = "/Conta/AcessoNegado"; });
+builder.Services.AddAuthorization();
+builder.Services.AddHttpContextAccessor();
+var transport = new Transport();
+builder.Services.AddSingleton(transport);
+builder.Services.AddScoped(sp => new UsuarioApiClient(new HttpClient(transport) { BaseAddress = new Uri("http://api/") }, sp.GetRequiredService<IHttpContextAccessor>()));
+await using var app = builder.Build();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapAreaControllerRoute("admin", "Administracao", "Administracao/{controller=Dashboard}/{action=Index}/{id?}").RequireAuthorization();
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+app.Urls.Add("http://127.0.0.1:0");
+await app.StartAsync();
+using var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { BaseAddress = new Uri(app.Urls.Single()) };
+void Check(bool condition, string message) { if (!condition) throw new Exception(message); Console.WriteLine("PASS: " + message); }
+async Task<string> Token(string path)
+{
+    var html = await client.GetStringAsync(path);
+    return WebUtility.HtmlDecode(Regex.Match(html, "name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\"").Groups[1].Value);
+}
+async Task<HttpResponseMessage> Login(Role role, string password = "senha-de-teste")
+{
+    transport.Role = role;
+    return await client.PostAsync("/Conta/Login?returnUrl=https://outside.example", new FormUrlEncodedContent(new Dictionary<string,string> {
+        ["__RequestVerificationToken"] = await Token("/Conta/Login"), ["Email"] = "teste@example.com", ["Senha"] = password
+    }));
+}
+using (var response = await client.GetAsync("/Administracao/Usuario"))
+    Check(response.StatusCode == HttpStatusCode.Redirect && response.Headers.Location!.OriginalString.Contains("/Conta/Login"), "Anônimo precisa entrar.");
+using (var response = await Login(Role.Comum, "incorreta"))
+    Check(response.StatusCode == HttpStatusCode.OK && WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync()).Contains("inválidos"), "Senha inválida não autentica.");
+foreach (var role in new[] { Role.Comum, Role.Gestor, Role.Administrador })
+{
+    using var login = await Login(role);
+    Check(login.StatusCode == HttpStatusCode.Redirect && login.Headers.Location!.OriginalString == "/Administracao", "Login " + role + " rejeita redirecionamento externo.");
+    using var response = await client.GetAsync("/Administracao/Usuario");
+    Check(role == Role.Administrador ? response.StatusCode == HttpStatusCode.OK : response.StatusCode == HttpStatusCode.Redirect,
+        "Cadastro restrito a Administrador: " + role);
+}
+foreach (var (role, senha, duplicate, valid) in new[] { (0, "senha-de-teste", false, true), (1, "senha-de-teste", false, true), (2, "senha-de-teste", false, true), (99, "senha-de-teste", false, false), (0, "curta", false, false), (0, "senha-de-teste", true, false) })
+{
+    transport.Saved = null;
+    transport.Duplicate = duplicate;
+    using var response = await client.PostAsync("/Administracao/Usuario/Create", new FormUrlEncodedContent(new Dictionary<string,string> {
+        ["__RequestVerificationToken"] = await Token("/Administracao/Usuario/Create"), ["NomeCompleto"] = "Usuário de teste",
+        ["Email"] = "novo@example.com", ["Senha"] = senha, ["Role"] = role.ToString()
+    }));
+    Check(valid ? response.StatusCode == HttpStatusCode.Redirect && (int)transport.Saved!.Role == role : response.StatusCode == HttpStatusCode.OK,
+        $"Formulário: role={role}, senha curta={senha.Length < 8}, duplicado={duplicate}");
+    if (!valid && !duplicate) Check(transport.Saved is null, "Dados inválidos não chegam à API.");
+    if (!valid)
+    {
+        var html = await response.Content.ReadAsStringAsync();
+        Check(!html.Contains("value=\"" + senha + "\""), "Senha não reaparece no formulário.");
+        if (duplicate) Check(WebUtility.HtmlDecode(html).Contains("Já existe um usuário"), "E-mail duplicado mostra mensagem.");
+    }
+}
+using (var response = await client.PostAsync("/Administracao/Usuario/Create", new FormUrlEncodedContent(new Dictionary<string,string>())))
+    Check(response.StatusCode == HttpStatusCode.BadRequest, "Cadastro exige antiforgery.");
+transport.Duplicate = false;
+var editId = Guid.NewGuid();
+foreach (var senha in new[] { "", "nova-senha-teste", "curta" })
+{
+    transport.Edited = null;
+    using var response = await client.PostAsync($"/Administracao/Usuario/Edit/{editId}", new FormUrlEncodedContent(new Dictionary<string,string> {
+        ["__RequestVerificationToken"] = await Token($"/Administracao/Usuario/Edit/{editId}"),
+        ["UsuarioId"] = editId.ToString(), ["NomeCompleto"] = "Nome alterado", ["Email"] = "alterado@example.com", ["Role"] = "1", ["Senha"] = senha
+    }));
+    Check(senha == "curta" ? response.StatusCode == HttpStatusCode.OK && transport.Edited is null :
+        response.StatusCode == HttpStatusCode.Redirect && transport.Edited?.Email == "alterado@example.com",
+        "Edição valida senha opcional: " + senha.Length);
+}
+foreach (var action in new[] { "Inativar", "Ativar", "Excluir" })
+{
+    using var blocked = await client.PostAsync($"/Administracao/Usuario/{action}/{editId}", new FormUrlEncodedContent(new Dictionary<string,string>()));
+    Check(blocked.StatusCode == HttpStatusCode.BadRequest, action + " exige antiforgery.");
+    using var response = await client.PostAsync($"/Administracao/Usuario/{action}/{editId}", new FormUrlEncodedContent(new Dictionary<string,string> {
+        ["__RequestVerificationToken"] = await Token("/Administracao/Usuario")
+    }));
+    Check(response.StatusCode == HttpStatusCode.Redirect && transport.Action == action.ToLowerInvariant(), action + " encaminhado à API.");
+}
+var usuario = new Usuario();
+var hasher = new PasswordHasher<Usuario>();
+var hash = hasher.HashPassword(usuario, "senha-de-teste");
+Check(hash != "senha-de-teste" && hasher.VerifyHashedPassword(usuario, hash, "senha-de-teste") != PasswordVerificationResult.Failed
+    && hasher.VerifyHashedPassword(usuario, hash, "outra") == PasswordVerificationResult.Failed, "Hash verifica senha correta e rejeita incorreta.");
+using (var response = await client.PostAsync("/Conta/Sair", new FormUrlEncodedContent(new Dictionary<string,string> {
+    ["__RequestVerificationToken"] = await Token("/Administracao/Usuario")
+}))) Check(response.StatusCode == HttpStatusCode.Redirect, "Logout concluído.");
+using (var response = await client.GetAsync("/Administracao/Usuario"))
+    Check(response.StatusCode == HttpStatusCode.Redirect, "Logout encerra acesso.");
+await app.StopAsync();
+
+sealed class Transport : HttpMessageHandler
+{
+    public Role Role;
+    public bool Duplicate;
+    public UsuarioCadastroVm? Saved;
+    public UsuarioEdicaoVm? Edited;
+    public string? Action;
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
+    {
+        if (request.RequestUri!.AbsolutePath == "/Auth/login")
+        {
+            var login = await request.Content!.ReadFromJsonAsync<LoginVm>(ct);
+            if (login!.Senha != "senha-de-teste") return new(HttpStatusCode.Unauthorized);
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new LoginResponse("test-token", new UsuarioVm {
+                UsuarioId = Guid.NewGuid(), NomeCompleto = "Teste", Email = login.Email, Role = Role
+            })) };
+        }
+        if (request.Headers.Authorization?.Parameter != "test-token") throw new Exception("Token não encaminhado.");
+        if (request.RequestUri!.AbsolutePath.StartsWith("/api/usuarios/"))
+        {
+            if (request.Method == HttpMethod.Get)
+                return new(HttpStatusCode.OK) { Content = JsonContent.Create(new UsuarioVm { UsuarioId = Guid.Parse(request.RequestUri.Segments.Last()), NomeCompleto = "Teste", Email = "teste@example.com" }) };
+            if (request.Method == HttpMethod.Put) Edited = await request.Content!.ReadFromJsonAsync<UsuarioEdicaoVm>(ct);
+            Action = request.Method == HttpMethod.Delete ? "excluir" : request.RequestUri.Segments.Last();
+            return new(HttpStatusCode.NoContent);
+        }
+        if (request.Method == HttpMethod.Get)
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(Array.Empty<UsuarioVm>()) };
+        Saved = await request.Content!.ReadFromJsonAsync<UsuarioCadastroVm>(ct);
+        return new(Duplicate ? HttpStatusCode.Conflict : HttpStatusCode.Created);
+    }
+}

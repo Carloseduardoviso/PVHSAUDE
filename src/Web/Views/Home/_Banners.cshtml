@@ -1,0 +1,23 @@
+@model List<Web.Models.BannerViewModel>
+@if (Model.Count > 0)
+{
+<section class="mb-4" aria-label="Destaques">
+<div id="banner-carousel" class="carousel slide banner-carousel rounded-3 overflow-hidden" aria-roledescription="carrossel" aria-label="Banners do portal">
+<div class="carousel-inner">
+@for (var i = 0; i < Model.Count; i++)
+{
+var b = Model[i];
+<div class="carousel-item @(i == 0 ? "active" : "")" role="group" aria-label="@(i + 1) de @Model.Count">
+<h2 class="h5 text-center mb-3 banner-titulo">@b.Titulo</h2>
+<img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" class="d-block w-100 banner-imagem" />
+</div>
+}
+</div>
+@if (Model.Count > 1)
+{
+<button class="carousel-control-prev" type="button" data-bs-target="#banner-carousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Banner anterior</span></button>
+<button class="carousel-control-next" type="button" data-bs-target="#banner-carousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Próximo banner</span></button>
+}
+</div>
+</section>
+}

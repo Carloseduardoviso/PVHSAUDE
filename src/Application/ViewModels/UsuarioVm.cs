@@ -15,5 +15,6 @@ namespace PVHSAUDE.Application.ViewModels
 
         [Display(Name = "Permissão")]
         public Role Role { get; set; }
+        public bool Ativo { get; set; } = true;
     }
 }

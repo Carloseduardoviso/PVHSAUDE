@@ -1,0 +1,15 @@
+@model List<Web.Models.BannerViewModel>
+@{ ViewData["Title"] = "Banner"; }
+<div class="d-flex justify-content-between align-items-center mb-4"><h1 class="h3">Banner</h1><a asp-action="Create" class="btn btn-success">Cadastrar banner</a></div>
+@if (TempData["Success"] is string sucesso) { <div class="alert alert-success" role="status">@sucesso</div> }
+@if (TempData["Error"] is string falha) { <div class="alert alert-danger" role="alert">@falha</div> }
+@if (ViewData["Erro"] is string erro) { <div class="alert alert-warning">@erro <a asp-action="Index">Tentar novamente</a></div> }
+else if (Model.Count == 0) { <p>Nenhum banner cadastrado.</p> }
+else
+{
+<div class="table-responsive"><table class="table align-middle"><thead><tr><th>Imagem</th><th>Título</th><th>Status</th><th>Ações</th></tr></thead><tbody>
+@foreach (var banner in Model) {
+<tr><td><img src="@Url.Action("BannerImagem", "Home", new { area = "", id = banner.Id })" alt="@banner.Titulo" width="160" height="75" style="object-fit:contain" /></td><td>@banner.Titulo</td><td><span class="badge @(banner.Ativo ? "bg-success" : "bg-secondary")">@(banner.Ativo ? "Ativo" : "Inativo")</span></td><td><a asp-action="Edit" asp-route-id="@banner.Id" class="btn btn-outline-primary btn-sm">Editar</a></td></tr>
+}
+</tbody></table></div>
+}

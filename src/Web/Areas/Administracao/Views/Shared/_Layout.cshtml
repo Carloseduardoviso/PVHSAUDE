@@ -17,12 +17,22 @@
             <button class="btn btn-outline-light d-md-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#admin-menu" aria-controls="admin-menu" aria-expanded="false">Menu</button>
             <nav id="admin-menu" class="collapse d-md-block" aria-label="Menu administrativo">
                 <a class="admin-nav-link @(controller == "Dashboard" ? "active" : "")" aria-current="@(controller == "Dashboard" ? "page" : null)" asp-area="Administracao" asp-controller="Dashboard" asp-action="Index">Home</a>
+                <a class="admin-nav-link @(controller == "Banner" ? "active" : "")" asp-area="Administracao" asp-controller="Banner" asp-action="Index">Banner</a>
                 <a class="admin-nav-link @(controller == "Beneficiario" ? "active" : "")" aria-current="@(controller == "Beneficiario" ? "page" : null)" asp-area="Administracao" asp-controller="Beneficiario" asp-action="Index">Beneficiários</a>
                 <a class="admin-nav-link @(controller == "Plano" ? "active" : "")" aria-current="@(controller == "Plano" ? "page" : null)" asp-area="Administracao" asp-controller="Plano" asp-action="Index">Planos</a>
                 <a class="admin-nav-link @(controller == "Credenciado" ? "active" : "")" aria-current="@(controller == "Credenciado" ? "page" : null)" asp-area="Administracao" asp-controller="Credenciado" asp-action="Index">Empresas credenciadas</a>
                 <a class="admin-nav-link @(controller == "Catalogo" ? "active" : "")" asp-area="Administracao" asp-controller="Catalogo" asp-action="Especialidades">Especialidades</a>
                 <a class="admin-nav-link" asp-area="Administracao" asp-controller="Catalogo" asp-action="Procedimentos">Procedimentos</a>
+                @if (User.IsInRole("Administrador"))
+                {
+                    <a class="admin-nav-link @(controller == "Usuario" ? "active" : "")" asp-area="Administracao" asp-controller="Usuario" asp-action="Index">Usuários</a>
+                }
                 <a class="admin-nav-link mt-4" asp-area="" asp-controller="Home" asp-action="Index">Voltar ao portal</a>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <p class="text-white mt-3">@User.Identity.Name</p>
+                    <form asp-area="" asp-controller="Conta" asp-action="Sair" method="post"><button class="btn btn-outline-light" type="submit">Sair</button></form>
+                }
             </nav>
         </aside>
         <div class="admin-content">

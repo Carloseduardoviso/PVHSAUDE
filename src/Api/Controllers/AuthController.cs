@@ -1,27 +1,36 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Infra.Data.Base;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
+using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.EntityFrameworkCore;
 using PVHSAUDE.Application.Interface;
-using System.Runtime.Versioning;
+using PVHSAUDE.Application.ViewModels;
+using PVHSAUDE.Domain.Entities;
+namespace PVHSAUDE.Api.Controllers;
 
-namespace PVHSAUDE.Api.Controllers
+[ApiController, Route("Auth")]
+public class AuthController(Context db, IPasswordHasher<Usuario> hasher, IAppJwtService jwt) : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    [Authorize]
-    public class AuthController : ControllerBase
+    [HttpGet("sessao"), Authorize]
+    public IActionResult Sessao() => NoContent();
+    [HttpPost("login"), AllowAnonymous, EnableRateLimiting("login")]
+    public async Task<IActionResult> Login(LoginVm model, CancellationToken ct)
     {
-        private readonly ILogger<AuthController> _logger;
-        private readonly IMemoryCache _cache;
-        private readonly IAppJwtService _jwtService;
-        private readonly IAppServiceUsuario _usuarioApp;
-
-        public AuthController(ILogger<AuthController> logger, IAppServiceUsuario usuarioApp, IAppJwtService jwtService, IMemoryCache cache)
+        var email = model.Email.Trim().ToUpperInvariant();
+        var usuario = await db.Set<Usuario>().SingleOrDefaultAsync(x => x.EmailNormalizado == email, ct);
+        // Also run the password derivation for unknown accounts.
+        var result = hasher.VerifyHashedPassword(usuario ?? new Usuario(),
+            usuario?.SenhaHash ?? DummyHash, model.Senha);
+        if (usuario is null || !usuario.Ativo || result == PasswordVerificationResult.Failed)
+            return Unauthorized();
+        if (result == PasswordVerificationResult.SuccessRehashNeeded)
         {
-            _logger = logger;
-            _usuarioApp = usuarioApp;
-            _jwtService = jwtService;
-            _cache = cache;
+            usuario.SenhaHash = hasher.HashPassword(usuario, model.Senha);
+            await db.SaveChangesAsync(ct);
         }
+        var vm = new UsuarioVm { UsuarioId = usuario.Id, NomeCompleto = usuario.NomeCompleto, Email = usuario.Email, Role = usuario.Role };
+        return Ok(new LoginResponse(jwt.GenereteToken(vm), vm));
     }
+    private static readonly string DummyHash = new PasswordHasher<Usuario>().HashPassword(new Usuario(), Guid.NewGuid().ToString());
 }

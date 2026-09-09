@@ -2,6 +2,7 @@ namespace Web.Models;
 
 public class PortalViewModel
 {
+    public List<BannerViewModel> Banners { get; set; } = [];
     public List<CredenciadoViewModel> Empresas { get; set; } = [];
     public IReadOnlyCollection<CatalogoItemViewModel> Especialidades { get; set; } = [];
     public IReadOnlyCollection<CatalogoItemViewModel> Procedimentos { get; set; } = [];

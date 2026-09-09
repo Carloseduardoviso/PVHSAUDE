@@ -8,6 +8,10 @@ using PVHSAUDE.Infra.Helper.Settings;
 using PVHSAUDE.Api.Configs;
 using PVHSAUDE.Api.Middleware;
 using PVHSAUDE.Infra.Ioc;
+using Microsoft.AspNetCore.Identity;
+using PVHSAUDE.Domain.Entities;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +27,14 @@ builder.Services.AddAutoMapper(config =>
 }, typeof(AutoMapperConfig));
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IPasswordHasher<Usuario>, PasswordHasher<Usuario>>();
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.AddPolicy("login", context => RateLimitPartition.GetFixedWindowLimiter(
+        context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+        _ => new FixedWindowRateLimiterOptions { PermitLimit = 10, Window = TimeSpan.FromMinutes(1), QueueLimit = 0 }));
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthenticationConfig();
@@ -34,6 +46,11 @@ builder.Services.AddHttpClient();
 builder.Services.AddMemoryCache();
 
 var app = builder.Build();
+if (args.Contains("--criar-administrador"))
+{
+    await AdministradorInicial.CriarAsync(app.Services);
+    return;
+}
 
 if (!app.Environment.IsProduction())
 {

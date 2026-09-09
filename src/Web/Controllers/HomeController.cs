@@ -10,7 +10,31 @@ namespace Web.Controllers
     {
         [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
-            => View(await CarregarRede(cancellationToken));
+        {
+            var model = await CarregarRede(cancellationToken);
+            using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            timeout.CancelAfter(TimeSpan.FromSeconds(5));
+            try
+            {
+                model.Banners = await new BannerApiClient(clients.CreateClient("default")).ListarAsync(true, timeout.Token);
+            }
+            catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException || ex is OperationCanceledException && !cancellationToken.IsCancellationRequested)
+            { logger.LogWarning(ex, "Não foi possível carregar os banners do portal."); }
+            return View(model);
+        }
+
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+        public async Task<IActionResult> BannerImagem(Guid id, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var imagem = await new BannerApiClient(clients.CreateClient("default")).ImagemAsync(id, cancellationToken);
+                if (imagem is null) return NotFound();
+                Response.Headers.XContentTypeOptions = "nosniff";
+                return File(imagem.Value.Bytes, imagem.Value.Tipo);
+            }
+            catch (HttpRequestException) { return StatusCode(503); }
+        }
 
         [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> Credenciadas(CancellationToken cancellationToken)

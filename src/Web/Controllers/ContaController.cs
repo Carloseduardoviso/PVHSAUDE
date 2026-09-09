@@ -1,0 +1,48 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PVHSAUDE.Application.ViewModels;
+using Web.Services;
+namespace PVHSAUDE.Web.Controllers;
+
+public class ContaController(UsuarioApiClient usuarios) : Controller
+{
+    [AllowAnonymous, HttpGet]
+    public IActionResult Login(string? returnUrl = null) { ViewData["ReturnUrl"] = returnUrl; return View(new LoginVm()); }
+
+    [AllowAnonymous, HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> Login(LoginVm model, string? returnUrl, CancellationToken ct)
+    {
+        ViewData["ReturnUrl"] = returnUrl;
+        if (!ModelState.IsValid) return View(model);
+        try
+        {
+            var login = await usuarios.LoginAsync(model, ct);
+            if (login is null) { ModelState.AddModelError("", "E-mail ou senha inválidos."); return View(model); }
+            var claims = new[] {
+                new Claim(ClaimTypes.NameIdentifier, login.Usuario.UsuarioId.ToString()),
+                new Claim(ClaimTypes.Name, login.Usuario.NomeCompleto!),
+                new Claim(ClaimTypes.Email, login.Usuario.Email!),
+                new Claim(ClaimTypes.Role, login.Usuario.Role.ToString())
+            };
+            var properties = new AuthenticationProperties { ExpiresUtc = DateTimeOffset.UtcNow.AddHours(6), IsPersistent = false };
+            properties.StoreTokens([new AuthenticationToken { Name = "access_token", Value = login.Token }]);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)), properties);
+            return LocalRedirect(Url.IsLocalUrl(returnUrl) ? returnUrl! : "/Administracao");
+        }
+        catch (HttpRequestException) { ModelState.AddModelError("", "Não foi possível entrar. Verifique a conexão com a API e tente novamente."); }
+        catch (OperationCanceledException) when (!ct.IsCancellationRequested) { ModelState.AddModelError("", "A API demorou para responder. Tente novamente."); }
+        return View(model);
+    }
+    [Authorize, HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> Sair()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToAction(nameof(Login));
+    }
+    [AllowAnonymous]
+    public IActionResult AcessoNegado() => View();
+}

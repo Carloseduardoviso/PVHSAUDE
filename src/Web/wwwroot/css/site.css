@@ -26,6 +26,11 @@ body {
 .portal-brand { display: inline-flex; align-items: center; padding: 0; flex-shrink: 0; }
 .portal-brand img { display: block; width: 200px; max-width: 45vw; height: auto; }
 
+.banner-imagem { width: 100%; height: auto; aspect-ratio: 16 / 5; object-fit: contain; object-position: center; }
+.banner-titulo { overflow-wrap: anywhere; }
+.banner-carousel .carousel-control-prev-icon,
+.banner-carousel .carousel-control-next-icon { filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .8)); }
+
 .rede-carousel { border: 1px solid #dce9e2; border-radius: 1rem; overflow: hidden; background: #f4faf6; }
 .rede-card { display: grid; grid-template-columns: 42% 58%; min-height: 310px; }
 .rede-imagem { position: relative; min-height: 310px; display: grid; place-items: center; background: #dcefe4; }

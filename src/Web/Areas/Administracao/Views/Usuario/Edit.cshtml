@@ -1,0 +1,14 @@
+@model PVHSAUDE.Application.ViewModels.UsuarioEdicaoVm
+@using PVHSAUDE.Domain.Enuns
+@{ ViewData["Title"] = "Editar usuário"; }
+<h1 class="h3 mb-4">Editar usuário</h1>
+<form asp-action="Edit" asp-route-id="@Model.UsuarioId" method="post" class="card card-body" style="max-width:720px">
+    <input asp-for="UsuarioId" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <div class="mb-3"><label asp-for="NomeCompleto" class="form-label"></label><input asp-for="NomeCompleto" class="form-control" /><span asp-validation-for="NomeCompleto" class="text-danger"></span></div>
+    <div class="mb-3"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" /><span asp-validation-for="Email" class="text-danger"></span></div>
+    <div class="mb-3"><label asp-for="Senha" class="form-label"></label><input asp-for="Senha" class="form-control" autocomplete="new-password" aria-describedby="senha-ajuda" /><div id="senha-ajuda" class="form-text">Deixe em branco para manter a senha atual.</div><span asp-validation-for="Senha" class="text-danger"></span></div>
+    <div class="mb-4"><label asp-for="Role" class="form-label"></label><select asp-for="Role" asp-items="Html.GetEnumSelectList<Role>()" class="form-select"></select><span asp-validation-for="Role" class="text-danger"></span></div>
+    <div><button class="btn btn-success" type="submit">Salvar alterações</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a></div>
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
