@@ -1,6 +1,8 @@
 @model Web.Models.PortalViewModel
 @{ ViewData["Title"] = "PVH Saúde"; }
-<section class="p-5 mb-4 bg-success text-white rounded-3"><h1 class="display-5">PVH Saúde</h1><p class="lead mb-0">Cuidado, saúde e bem-estar para você.</p></section>
+<section class="portal-apresentacao mb-4 rounded-3" aria-label="PVH Saúde">
+    <img class="portal-logo" src="~/images/pvh-saude-horizontal.jpeg" asp-append-version="true" alt="PVH Saúde — descontos e benefícios" width="998" height="548" />
+</section>
 @if (Model.ErroCatalogos is not null) { <p class="text-muted" role="status">@Model.ErroCatalogos</p> }
 @if (Model.Empresas.Count > 0)
 {
@@ -50,4 +52,3 @@
 @section Scripts {
     <script src="~/js/portal-carousel.js" asp-append-version="true"></script>
 }
-<section class="mt-5 p-4 bg-light rounded-3"><h2 class="h4">Já é beneficiário?</h2><p>Consulte as informações do seu benefício ou fale conosco.</p><a asp-area="Administracao" asp-controller="Dashboard" asp-action="Index" class="btn btn-outline-success">Área administrativa</a></section>

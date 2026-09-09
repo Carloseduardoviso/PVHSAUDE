@@ -21,6 +21,8 @@ body {
   margin-bottom: 60px;
 }
 
+.portal-apresentacao { width: 100%; height: clamp(200px, 30vw, 320px); overflow: hidden; background: #fff; padding: 0; border: 1px solid #183c78; }
+.portal-logo { display: block; width: 100%; height: 100%; object-fit: contain; }
 .portal-brand { display: inline-flex; align-items: center; padding: 0; flex-shrink: 0; }
 .portal-brand img { display: block; width: 200px; max-width: 45vw; height: auto; }
 
