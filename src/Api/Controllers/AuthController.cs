@@ -13,7 +13,7 @@ namespace PVHSAUDE.Api.Controllers;
 public class AuthController(Context db, IPasswordHasher<Usuario> hasher, IAppJwtService jwt) : ControllerBase
 {
     [HttpGet("sessao"), Authorize]
-    public IActionResult Sessao() => NoContent();
+    public IActionResult Sessao() => Ok(User.FindAll(AcessoMenu.Claim).Select(x => x.Value).ToArray());
     [HttpPost("login"), AllowAnonymous, EnableRateLimiting("login")]
     public async Task<IActionResult> Login(LoginVm model, CancellationToken ct)
     {
@@ -29,7 +29,7 @@ public class AuthController(Context db, IPasswordHasher<Usuario> hasher, IAppJwt
             usuario.SenhaHash = hasher.HashPassword(usuario, model.Senha);
             await db.SaveChangesAsync(ct);
         }
-        var vm = new UsuarioVm { UsuarioId = usuario.Id, NomeCompleto = usuario.NomeCompleto, Email = usuario.Email, Role = usuario.Role };
+        var vm = new UsuarioVm { UsuarioId = usuario.Id, NomeCompleto = usuario.NomeCompleto, Email = usuario.Email, Role = usuario.Role, Menus = PVHSAUDE.Domain.Enuns.MenusAdministrativos.Ler(usuario.MenusPermitidos) };
         return Ok(new LoginResponse(jwt.GenereteToken(vm), vm));
     }
     private static readonly string DummyHash = new PasswordHasher<Usuario>().HashPassword(new Usuario(), Guid.NewGuid().ToString());

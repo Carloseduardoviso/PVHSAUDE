@@ -35,10 +35,16 @@ public static class UsuarioDatabaseTests
             Check(await controller.Inativar(admin.Id, default) is ConflictObjectResult, "Último administrador não pode ser inativado.");
             Check(await controller.Excluir(admin.Id, default) is ConflictObjectResult, "Último administrador não pode ser excluído.");
             Check(await controller.Editar(admin.Id, new UsuarioEdicaoVm { NomeCompleto = admin.NomeCompleto, Email = admin.Email, Role = Role.Comum }, default) is ConflictObjectResult, "Último administrador não pode perder a permissão.");
-            Check(await controller.Criar(new UsuarioCadastroVm { NomeCompleto = "Usuário teste", Email = "user@example.com", Senha = "senha-de-teste", Role = Role.Comum }, default) is ObjectResult { StatusCode: 201 }, "Usuário criado no SQL Server.");
+            Check(await controller.Criar(new UsuarioCadastroVm { NomeCompleto = "Usuário teste", Email = "user@example.com", Senha = "senha-de-teste", Role = Role.Comum, Menus = ["Banner", "Contato"] }, default) is ObjectResult { StatusCode: 201 }, "Usuário criado no SQL Server.");
             var user = await db.Set<Usuario>().SingleAsync(x => x.Email == "user@example.com");
             var oldHash = user.SenhaHash;
+            Check(MenusAdministrativos.Ler((await db.Set<Usuario>().AsNoTracking().SingleAsync(x => x.Id == user.Id)).MenusPermitidos).SequenceEqual(new[] { "Banner", "Contato" }), "Menus gravados no banco.");
+            var obtido = (UsuarioVm)((OkObjectResult)await controller.Obter(user.Id, default)).Value!;
+            Check(obtido.Menus.Length == 2, "Edição recebe as permissões cadastradas.");
+            var lista = (IEnumerable<UsuarioVm>)((OkObjectResult)await controller.Listar(default)).Value!;
+            Check(lista.Single(x => x.UsuarioId == user.Id).Menus.Length == 2, "Listagem retorna permissões.");
             Check(await controller.Editar(user.Id, new UsuarioEdicaoVm { NomeCompleto = "Alterado", Email = "novo@example.com", Role = Role.Gestor }, default) is NoContentResult && user.SenhaHash == oldHash, "Edição sem senha preserva hash.");
+            Check((await db.Set<Usuario>().AsNoTracking().SingleAsync(x => x.Id == user.Id)).MenusPermitidos == "", "Desmarcar todos os menus revoga as permissões no banco.");
             Check(await controller.Editar(user.Id, new UsuarioEdicaoVm { NomeCompleto = "Alterado", Email = "ADMIN@example.com", Role = Role.Gestor }, default) is ConflictObjectResult, "Edição rejeita e-mail duplicado.");
             Check(await controller.Editar(user.Id, new UsuarioEdicaoVm { NomeCompleto = "Alterado", Email = "novo@example.com", Role = Role.Gestor, Senha = "nova-senha-teste" }, default) is NoContentResult && hasher.VerifyHashedPassword(user, user.SenhaHash, "nova-senha-teste") != PasswordVerificationResult.Failed, "Edição altera senha.");
             var jwt = new AppJwtService(Options.Create(new JwtSetting { SecretKey = new string('x', 64), Issuer = "tests", Audience = "tests" }));

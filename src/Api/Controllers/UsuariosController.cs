@@ -14,13 +14,13 @@ public class UsuariosController(Context db, IPasswordHasher<Usuario> hasher) : C
     [HttpGet]
     public async Task<IActionResult> Listar(CancellationToken ct) =>
         Ok(await db.Set<Usuario>().AsNoTracking().OrderBy(x => x.NomeCompleto)
-            .Select(x => new UsuarioVm { UsuarioId = x.Id, NomeCompleto = x.NomeCompleto, Email = x.Email, Role = x.Role, Ativo = x.Ativo }).ToListAsync(ct));
+            .Select(x => new UsuarioVm { UsuarioId = x.Id, NomeCompleto = x.NomeCompleto, Email = x.Email, Role = x.Role, Ativo = x.Ativo, Menus = PVHSAUDE.Domain.Enuns.MenusAdministrativos.Ler(x.MenusPermitidos) }).ToListAsync(ct));
 
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> Obter(Guid id, CancellationToken ct)
     {
         var u = await db.Set<Usuario>().AsNoTracking().SingleOrDefaultAsync(x => x.Id == id, ct);
-        return u is null ? NotFound() : Ok(new UsuarioVm { UsuarioId = u.Id, NomeCompleto = u.NomeCompleto, Email = u.Email, Role = u.Role, Ativo = u.Ativo });
+        return u is null ? NotFound() : Ok(new UsuarioVm { UsuarioId = u.Id, NomeCompleto = u.NomeCompleto, Email = u.Email, Role = u.Role, Ativo = u.Ativo, Menus = PVHSAUDE.Domain.Enuns.MenusAdministrativos.Ler(u.MenusPermitidos) });
     }
 
     [HttpPut("{id:guid}")]
@@ -62,6 +62,7 @@ public class UsuariosController(Context db, IPasswordHasher<Usuario> hasher) : C
                 usuario.Email = model.Email.Trim();
                 usuario.EmailNormalizado = normalizado;
                 usuario.Role = model.Role;
+                usuario.MenusPermitidos = PVHSAUDE.Domain.Enuns.MenusAdministrativos.Gravar(model.Menus);
                 if (!string.IsNullOrEmpty(model.Senha)) usuario.SenhaHash = hasher.HashPassword(usuario, model.Senha);
             }
         }
@@ -81,10 +82,11 @@ public class UsuariosController(Context db, IPasswordHasher<Usuario> hasher) : C
             return Conflict(new ProblemDetails { Detail = "Já existe um usuário com este e-mail." });
         var usuario = new Usuario { NomeCompleto = model.NomeCompleto.Trim(), Email = email, EmailNormalizado = normalizado, Role = model.Role };
         usuario.SenhaHash = hasher.HashPassword(usuario, model.Senha);
+        usuario.MenusPermitidos = PVHSAUDE.Domain.Enuns.MenusAdministrativos.Gravar(model.Menus);
         db.Add(usuario);
         try { await db.SaveChangesAsync(ct); }
         catch (DbUpdateException ex) when (ex.InnerException is SqlException { Number: 2601 or 2627 })
         { return Conflict(new ProblemDetails { Detail = "Já existe um usuário com este e-mail." }); }
-        return StatusCode(201, new UsuarioVm { UsuarioId = usuario.Id, NomeCompleto = usuario.NomeCompleto, Email = usuario.Email, Role = usuario.Role });
+        return StatusCode(201, new UsuarioVm { UsuarioId = usuario.Id, NomeCompleto = usuario.NomeCompleto, Email = usuario.Email, Role = usuario.Role, Menus = model.Menus });
     }
 }

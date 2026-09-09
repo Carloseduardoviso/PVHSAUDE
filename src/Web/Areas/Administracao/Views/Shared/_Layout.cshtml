@@ -17,13 +17,15 @@
             <button class="btn btn-outline-light d-md-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#admin-menu" aria-controls="admin-menu" aria-expanded="false">Menu</button>
             <nav id="admin-menu" class="collapse d-md-block" aria-label="Menu administrativo">
                 <a class="admin-nav-link @(controller == "Dashboard" ? "active" : "")" aria-current="@(controller == "Dashboard" ? "page" : null)" asp-area="Administracao" asp-controller="Dashboard" asp-action="Index">Home</a>
-                <a class="admin-nav-link @(controller == "Banner" ? "active" : "")" asp-area="Administracao" asp-controller="Banner" asp-action="Index">Banner</a>
-                <a class="admin-nav-link @(controller == "Contato" ? "active" : "")" asp-area="Administracao" asp-controller="Contato" asp-action="Index">Mensagens</a>
-                <a class="admin-nav-link @(controller == "Beneficiario" ? "active" : "")" aria-current="@(controller == "Beneficiario" ? "page" : null)" asp-area="Administracao" asp-controller="Beneficiario" asp-action="Index">Beneficiários</a>
-                <a class="admin-nav-link @(controller == "Plano" ? "active" : "")" aria-current="@(controller == "Plano" ? "page" : null)" asp-area="Administracao" asp-controller="Plano" asp-action="Index">Planos</a>
-                <a class="admin-nav-link @(controller == "Credenciado" ? "active" : "")" aria-current="@(controller == "Credenciado" ? "page" : null)" asp-area="Administracao" asp-controller="Credenciado" asp-action="Index">Empresas credenciadas</a>
-                <a class="admin-nav-link @(controller == "Catalogo" ? "active" : "")" asp-area="Administracao" asp-controller="Catalogo" asp-action="Especialidades">Especialidades</a>
-                <a class="admin-nav-link" asp-area="Administracao" asp-controller="Catalogo" asp-action="Procedimentos">Procedimentos</a>
+                @foreach (var menu in PVHSAUDE.Domain.Enuns.MenusAdministrativos.Opcoes)
+                {
+                    if (!PVHSAUDE.Application.ViewModels.AcessoMenu.PodeAcessar(User, menu.Key)) { continue; }
+                    var catalogo = menu.Key is "Especialidades" or "Procedimentos";
+                    var destino = catalogo ? "Catalogo" : menu.Key;
+                    var acao = catalogo ? menu.Key : "Index";
+                    var selecionado = controller == destino && (!catalogo || ViewContext.RouteData.Values["action"]?.ToString() == acao);
+                    <a class="admin-nav-link @(selecionado ? "active" : "")" aria-current="@(selecionado ? "page" : null)" asp-area="Administracao" asp-controller="@destino" asp-action="@acao">@menu.Value</a>
+                }
                 @if (User.IsInRole("Administrador"))
                 {
                     <a class="admin-nav-link @(controller == "Usuario" ? "active" : "")" asp-area="Administracao" asp-controller="Usuario" asp-action="Index">Usuários</a>

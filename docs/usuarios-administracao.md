@@ -3,7 +3,11 @@
 O menu **Usuários** permite listar e cadastrar usuários com nome completo, e-mail, senha e permissão:
 Comum = 0, Gestor = 1, Administrador = 2.
 
-Todos os usuários cadastrados podem entrar na administração. Somente Administradores podem listar e cadastrar usuários, tanto no site quanto na API. Não foram definidas outras diferenças entre Comum e Gestor.
+Todos os usuários cadastrados podem entrar na administração e acessar a Home. Somente Administradores podem gerenciar usuários e suas permissões, tanto no site quanto na API.
+
+No cadastro e na edição, marque **Menus permitidos** para usuários Comum e Gestor: Banner, Mensagens, Beneficiários, Planos, Empresas credenciadas, Especialidades e Procedimentos. Cada permissão libera as operações daquele menu. Nenhuma seleção libera somente a Home. Administradores mantêm acesso completo, independentemente das caixas marcadas.
+
+As permissões são conferidas nas páginas e nas operações protegidas da API. A sessão aberta recebe mudanças no próximo acesso. As consultas públicas do portal continuam disponíveis. A migração PermissoesMenusUsuarios preserva os menus anteriormente acessíveis pelos usuários existentes; novos usuários começam sem menus selecionados.
 
 As senhas têm entre 8 e 128 caracteres e são armazenadas somente como hash com salt pelo PasswordHasher do ASP.NET Core. O e-mail é único, independentemente de maiúsculas/minúsculas. O login dura até seis horas e tem limite de tentativas por IP.
 

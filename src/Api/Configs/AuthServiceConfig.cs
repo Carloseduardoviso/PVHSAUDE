@@ -31,6 +31,9 @@ namespace PVHSAUDE.Api.Configs
                         if (usuario is null || !usuario.Ativo ||
                             context.Principal?.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value != usuario.Role.ToString())
                             context.Fail("Usuário indisponível ou permissão alterada.");
+                        else if (context.Principal?.Identity is System.Security.Claims.ClaimsIdentity identity)
+                            PVHSAUDE.Application.ViewModels.AcessoMenu.Atualizar(identity,
+                                PVHSAUDE.Domain.Enuns.MenusAdministrativos.Ler(usuario.MenusPermitidos));
                     }
                 };
                 options.TokenValidationParameters = new TokenValidationParameters

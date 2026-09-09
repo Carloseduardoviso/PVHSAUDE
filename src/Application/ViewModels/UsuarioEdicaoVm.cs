@@ -4,6 +4,8 @@ namespace PVHSAUDE.Application.ViewModels;
 
 public class UsuarioEdicaoVm
 {
+    [MenusValidos]
+    public string[] Menus { get; set; } = [];
     public Guid UsuarioId { get; set; }
     [Required, StringLength(200), Display(Name = "Nome completo")]
     public string NomeCompleto { get; set; } = "";

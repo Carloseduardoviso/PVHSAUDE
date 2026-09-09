@@ -5,6 +5,7 @@ namespace PVHSAUDE.Application.ViewModels
 {
     public class UsuarioVm
     {
+        public string[] Menus { get; set; } = [];
         public Guid UsuarioId { get; set; }
 
         [Display(Name = "Email")]

@@ -23,7 +23,7 @@ public class UsuarioController(UsuarioApiClient usuarios) : Controller
         {
             var u = await usuarios.ObterAsync(id, ct);
             if (u is null) return NotFound();
-            return View(new UsuarioEdicaoVm { UsuarioId = u.UsuarioId, NomeCompleto = u.NomeCompleto!, Email = u.Email!, Role = u.Role });
+            return View(new UsuarioEdicaoVm { UsuarioId = u.UsuarioId, NomeCompleto = u.NomeCompleto!, Email = u.Email!, Role = u.Role, Menus = u.Menus });
         }
         catch (HttpRequestException) { TempData["Error"] = "Não foi possível carregar o usuário. Tente novamente."; }
         catch (OperationCanceledException) when (!ct.IsCancellationRequested) { TempData["Error"] = "A API demorou para responder."; }

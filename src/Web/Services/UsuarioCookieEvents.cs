@@ -15,9 +15,20 @@ public class UsuarioCookieEvents(IHttpClientFactory factory) : CookieAuthenticat
         try
         {
             using var response = await client.SendAsync(request, timeout.Token);
-            if (response.IsSuccessStatusCode) return;
+            if (response.IsSuccessStatusCode)
+            {
+                var menus = await response.Content.ReadFromJsonAsync<string[]>(timeout.Token);
+                if (menus is not null && context.Principal?.Identity is System.Security.Claims.ClaimsIdentity identity)
+                {
+                    var antigos = identity.FindAll(PVHSAUDE.Application.ViewModels.AcessoMenu.Claim).Select(x => x.Value).Order();
+                    context.ShouldRenew = !antigos.SequenceEqual(menus.Order());
+                    PVHSAUDE.Application.ViewModels.AcessoMenu.Atualizar(identity, menus);
+                    return;
+                }
+            }
         }
         catch (HttpRequestException) { }
+        catch (System.Text.Json.JsonException) { }
         catch (OperationCanceledException) when (!context.HttpContext.RequestAborted.IsCancellationRequested) { }
         context.RejectPrincipal();
         await context.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

@@ -8,6 +8,7 @@ public class UsuarioConfig : IEntityTypeConfiguration<Usuario>
     public void Configure(EntityTypeBuilder<Usuario> builder)
     {
         builder.HasKey(x => x.Id);
+        builder.Property(x => x.MenusPermitidos).HasMaxLength(500).IsRequired();
         builder.Property(x => x.Ativo).HasDefaultValue(true);
         builder.Property(x => x.NomeCompleto).HasMaxLength(200).IsRequired();
         builder.Property(x => x.Email).HasMaxLength(254).IsRequired();

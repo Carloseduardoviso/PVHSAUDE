@@ -4,6 +4,8 @@ namespace PVHSAUDE.Application.ViewModels;
 
 public class UsuarioCadastroVm
 {
+    [MenusValidos]
+    public string[] Menus { get; set; } = [];
     [Required(ErrorMessage = "Informe o nome completo."), StringLength(200), Display(Name = "Nome completo")]
     public string NomeCompleto { get; set; } = "";
     [Required(ErrorMessage = "Informe o e-mail."), EmailAddress(ErrorMessage = "Informe um e-mail válido."), StringLength(254), Display(Name = "E-mail")]

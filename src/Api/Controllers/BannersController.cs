@@ -27,7 +27,7 @@ public class BannersController(Context db) : ControllerBase
     [HttpGet("{id:guid}/imagem")]
     public async Task<IActionResult> Imagem(Guid id, CancellationToken ct)
     {
-        var autenticado = User.Identity?.IsAuthenticated == true;
+        var autenticado = PVHSAUDE.Application.ViewModels.AcessoMenu.PodeAcessar(User, "Banner");
         var b = await db.Set<Banner>().AsNoTracking().SingleOrDefaultAsync(x => x.Id == id && (x.Ativo || autenticado), ct);
         if (b is null) return NotFound();
         Response.Headers.CacheControl = "no-store";

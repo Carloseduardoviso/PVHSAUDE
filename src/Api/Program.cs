@@ -26,7 +26,7 @@ builder.Services.AddAutoMapper(config =>
     config.AddExpressionMapping();
 }, typeof(AutoMapperConfig));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add<MenuApiFilter>());
 builder.Services.AddScoped<IPasswordHasher<Usuario>, PasswordHasher<Usuario>>();
 builder.Services.AddRateLimiter(options =>
 {

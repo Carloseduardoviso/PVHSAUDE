@@ -15,12 +15,14 @@ if (args.Contains("--database")) { await UsuarioDatabaseTests.Run(); return; }
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { ApplicationName = typeof(ContaController).Assembly.FullName });
 builder.Logging.ClearProviders();
 builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
-builder.Services.AddControllersWithViews().AddApplicationPart(typeof(ContaController).Assembly);
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(o => { o.LoginPath = "/Conta/Login"; o.AccessDeniedPath = "/Conta/AcessoNegado"; });
+builder.Services.AddControllersWithViews(o => o.Filters.Add<MenuAdministrativoFilter>()).AddApplicationPart(typeof(ContaController).Assembly);
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(o => { o.LoginPath = "/Conta/Login"; o.AccessDeniedPath = "/Conta/AcessoNegado"; o.EventsType = typeof(UsuarioCookieEvents); });
+builder.Services.AddScoped<UsuarioCookieEvents>();
 builder.Services.AddAuthorization();
 builder.Services.AddHttpContextAccessor();
 var transport = new Transport();
 builder.Services.AddSingleton(transport);
+builder.Services.AddHttpClient("default", c => c.BaseAddress = new Uri("http://api/")).ConfigurePrimaryHttpMessageHandler(() => transport);
 builder.Services.AddScoped(sp => new UsuarioApiClient(new HttpClient(transport) { BaseAddress = new Uri("http://api/") }, sp.GetRequiredService<IHttpContextAccessor>()));
 await using var app = builder.Build();
 app.UseAuthentication();
@@ -61,11 +63,12 @@ foreach (var (role, senha, duplicate, valid) in new[] { (0, "senha-de-teste", fa
     transport.Duplicate = duplicate;
     using var response = await client.PostAsync("/Administracao/Usuario/Create", new FormUrlEncodedContent(new Dictionary<string,string> {
         ["__RequestVerificationToken"] = await Token("/Administracao/Usuario/Create"), ["NomeCompleto"] = "Usuário de teste",
-        ["Email"] = "novo@example.com", ["Senha"] = senha, ["Role"] = role.ToString()
+        ["Email"] = "novo@example.com", ["Senha"] = senha, ["Role"] = role.ToString(), ["Menus"] = "Banner"
     }));
     Check(valid ? response.StatusCode == HttpStatusCode.Redirect && (int)transport.Saved!.Role == role : response.StatusCode == HttpStatusCode.OK,
         $"Formulário: role={role}, senha curta={senha.Length < 8}, duplicado={duplicate}");
     if (!valid && !duplicate) Check(transport.Saved is null, "Dados inválidos não chegam à API.");
+    if (valid) Check(transport.Saved!.Menus.SequenceEqual(new[] { "Banner" }), "Cadastro encaminha menus selecionados.");
     if (!valid)
     {
         var html = await response.Content.ReadAsStringAsync();
@@ -107,10 +110,26 @@ using (var response = await client.PostAsync("/Conta/Sair", new FormUrlEncodedCo
 }))) Check(response.StatusCode == HttpStatusCode.Redirect, "Logout concluído.");
 using (var response = await client.GetAsync("/Administracao/Usuario"))
     Check(response.StatusCode == HttpStatusCode.Redirect, "Logout encerra acesso.");
+transport.Menus = ["Banner"];
+using (var login = await Login(Role.Comum)) { }
+var inicio = await client.GetStringAsync("/Administracao");
+Check(inicio.Contains("href=\"/Administracao/Banner\"") && !inicio.Contains("href=\"/Administracao/Contato\"") && !inicio.Contains("href=\"/Administracao/Usuario\""), "Menu mostra apenas as permissões do usuário.");
+using (var forbidden = await client.GetAsync("/Administracao/Contato"))
+    Check(forbidden.StatusCode == HttpStatusCode.Redirect && forbidden.Headers.Location!.OriginalString.Contains("AcessoNegado"), "URL direta de menu não permitido é bloqueada.");
+transport.Menus = ["Contato"];
+inicio = await client.GetStringAsync("/Administracao");
+Check(!inicio.Contains("href=\"/Administracao/Banner\"") && inicio.Contains("href=\"/Administracao/Contato\""), "Sessão aberta recebe alteração dos menus.");
+using (var forbidden = await client.GetAsync("/Administracao/Banner"))
+    Check(forbidden.StatusCode == HttpStatusCode.Redirect && forbidden.Headers.Location!.OriginalString.Contains("AcessoNegado"), "Revogação bloqueia URL sem novo login.");
+transport.Menus = [];
+inicio = await client.GetStringAsync("/Administracao");
+Check(!inicio.Contains("href=\"/Administracao/Contato\""), "Nenhum menu selecionado mantém somente Home.");
+await MenuPermissionsTests.Run();
 await app.StopAsync();
 
 sealed class Transport : HttpMessageHandler
 {
+    public string[] Menus = [];
     public Role Role;
     public bool Duplicate;
     public UsuarioCadastroVm? Saved;
@@ -123,10 +142,12 @@ sealed class Transport : HttpMessageHandler
             var login = await request.Content!.ReadFromJsonAsync<LoginVm>(ct);
             if (login!.Senha != "senha-de-teste") return new(HttpStatusCode.Unauthorized);
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(new LoginResponse("test-token", new UsuarioVm {
-                UsuarioId = Guid.NewGuid(), NomeCompleto = "Teste", Email = login.Email, Role = Role
+                UsuarioId = Guid.NewGuid(), NomeCompleto = "Teste", Email = login.Email, Role = Role, Menus = Menus
             })) };
         }
         if (request.Headers.Authorization?.Parameter != "test-token") throw new Exception("Token não encaminhado.");
+        if (request.RequestUri!.AbsolutePath == "/Auth/sessao")
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(Menus) };
         if (request.RequestUri!.AbsolutePath.StartsWith("/api/usuarios/"))
         {
             if (request.Method == HttpMethod.Get)

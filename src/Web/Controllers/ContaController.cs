@@ -29,8 +29,10 @@ public class ContaController(UsuarioApiClient usuarios) : Controller
             };
             var properties = new AuthenticationProperties { ExpiresUtc = DateTimeOffset.UtcNow.AddHours(6), IsPersistent = false };
             properties.StoreTokens([new AuthenticationToken { Name = "access_token", Value = login.Token }]);
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            AcessoMenu.Atualizar(identity, login.Usuario.Menus);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)), properties);
+                new ClaimsPrincipal(identity), properties);
             return LocalRedirect(Url.IsLocalUrl(returnUrl) ? returnUrl! : "/Administracao");
         }
         catch (HttpRequestException) { ModelState.AddModelError("", "Não foi possível entrar. Verifique a conexão com a API e tente novamente."); }

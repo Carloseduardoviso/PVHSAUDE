@@ -10,4 +10,5 @@ public class Usuario
     public string SenhaHash { get; set; } = "";
     public Role Role { get; set; }
     public bool Ativo { get; set; } = true;
+    public string MenusPermitidos { get; set; } = "";
 }

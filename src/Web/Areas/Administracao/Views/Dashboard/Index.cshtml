@@ -3,5 +3,8 @@
     <p class="text-success fw-semibold">PVH Saúde</p>
     <h1 class="display-6">Bem-vindo à área administrativa</h1>
     <p class="lead text-muted">Acompanhe os cadastros e gerencie os beneficiários pelo menu lateral.</p>
-    <a asp-area="Administracao" asp-controller="Beneficiario" asp-action="Index" class="btn btn-success">Ver beneficiários</a>
+    @if (PVHSAUDE.Application.ViewModels.AcessoMenu.PodeAcessar(User, "Beneficiario"))
+    {
+        <a asp-area="Administracao" asp-controller="Beneficiario" asp-action="Index" class="btn btn-success">Ver beneficiários</a>
+    }
 </div>

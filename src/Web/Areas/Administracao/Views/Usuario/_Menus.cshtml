@@ -1,0 +1,16 @@
+@model string[]
+@using PVHSAUDE.Domain.Enuns
+<fieldset class="mb-4">
+    <legend class="h6">Menus permitidos</legend>
+    <p class="form-text">Marque os menus que o usuário poderá acessar. A Home está disponível para todos. Administradores têm acesso completo, incluindo Usuários, independentemente desta seleção. Menus novos cadastrados no registro administrativo aparecem aqui automaticamente.</p>
+    <div class="row g-2">
+    @foreach (var menu in MenusAdministrativos.Opcoes)
+    {
+        <div class="col-sm-6"><div class="form-check">
+            <input type="checkbox" name="Menus" value="@menu.Key" id="menu-@menu.Key" class="form-check-input" checked="@Model.Contains(menu.Key)" />
+            <label for="menu-@menu.Key" class="form-check-label">@menu.Value</label>
+        </div></div>
+    }
+    </div>
+    @Html.ValidationMessage("Menus", null, new { @class = "text-danger" })
+</fieldset>

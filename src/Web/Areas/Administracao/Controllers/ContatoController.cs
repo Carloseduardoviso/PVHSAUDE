@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Web.Models;
 using Web.Services;
 namespace PVHSAUDE.Web.Areas.Administracao.Controllers;
-[Area("Administracao"), Authorize(Roles = "Administrador")]
+[Area("Administracao"), Authorize]
 public class ContatoController(ContatoApiClient api) : Controller
 {
     public async Task<IActionResult> Index(CancellationToken ct)
