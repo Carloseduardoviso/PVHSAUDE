@@ -11,20 +11,22 @@ public class CredenciadosController(Context context) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> Listar(CancellationToken ct) =>
-        Ok((await context.Credenciados.AsNoTracking().OrderBy(x => x.NomeFantasia).ToListAsync(ct)).Select(ParaResponse));
+        Ok((await context.Credenciados.AsNoTracking().Include(x=>x.Especialidades).Include(x=>x.Procedimentos).OrderBy(x => x.NomeFantasia).ToListAsync(ct)).Select(ParaResponse));
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> Obter(Guid id, CancellationToken ct)
     {
-        var empresa = await context.Credenciados.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, ct);
+        var empresa = await context.Credenciados.AsNoTracking().Include(x=>x.Especialidades).Include(x=>x.Procedimentos).FirstOrDefaultAsync(x => x.Id == id, ct);
         return empresa is null ? NotFound() : Ok(ParaResponse(empresa));
     }
     [HttpPost]
     public async Task<IActionResult> Criar(CredenciadoRequest request, CancellationToken ct)
     {
+        if (!await context.Planos.AnyAsync(x => x.Id == request.PlanoId, ct)) return BadRequest("Selecione um plano cadastrado.");
         var cnpj = new string(request.Cnpj.Where(char.IsDigit).ToArray());
         if (await context.Credenciados.AnyAsync(x => x.Cnpj == cnpj, ct))
             return Conflict("Já existe uma empresa credenciada com este CNPJ.");
         var empresa = new Credenciado(request.RazaoSocial, request.NomeFantasia, request.Cnpj, request.Telefone, request.WhatsApp, request.Email, request.Cep, request.Endereco, request.Cidade, request.Uf, request.Observacoes, request.Tipo!.Value, request.StatusCredenciamento!.Value);
+        empresa.DefinirPlano(request.PlanoId!.Value);
         context.Credenciados.Add(empresa);
         empresa.Especialidades.ToList().ForEach(x => context.CredenciadoEspecialidades.Remove(x));
         foreach (var id in request.EspecialidadeIds.Distinct()) context.CredenciadoEspecialidades.Add(new CredenciadoEspecialidade(empresa.Id, id));
@@ -57,13 +59,19 @@ public class CredenciadosController(Context context) : ControllerBase
     {
         var empresa = await context.Credenciados.Include(x=>x.Especialidades).Include(x=>x.Procedimentos).FirstOrDefaultAsync(x=>x.Id==id,ct);
         if (empresa is null) return NotFound();
+        if (!await context.Planos.AnyAsync(x => x.Id == request.PlanoId, ct)) return BadRequest("Selecione um plano cadastrado.");
         var cnpj = new string(request.Cnpj.Where(char.IsDigit).ToArray());
         if (await context.Credenciados.AnyAsync(x => x.Id != id && x.Cnpj == cnpj, ct))
             return Conflict("Já existe uma empresa credenciada com este CNPJ.");
         empresa.Atualizar(request.RazaoSocial, request.NomeFantasia, request.Cnpj, request.Telefone, request.WhatsApp, request.Email, request.Cep, request.Endereco, request.Cidade, request.Uf, request.Observacoes, request.Tipo!.Value, request.StatusCredenciamento!.Value);
+        empresa.DefinirPlano(request.PlanoId!.Value);
+        context.CredenciadoEspecialidades.RemoveRange(empresa.Especialidades);
+        context.CredenciadoProcedimentos.RemoveRange(empresa.Procedimentos);
+        foreach (var especialidadeId in request.EspecialidadeIds.Distinct()) context.CredenciadoEspecialidades.Add(new CredenciadoEspecialidade(id, especialidadeId));
+        foreach (var procedimentoId in request.ProcedimentoIds.Distinct()) context.CredenciadoProcedimentos.Add(new CredenciadoProcedimento(id, procedimentoId));
         await context.SaveChangesAsync(ct);
         return NoContent();
     }
     private CredenciadoResponse ParaResponse(Credenciado x) =>
-        new(x.Id, x.RazaoSocial, x.NomeFantasia, x.Cnpj, x.Telefone, x.WhatsApp, x.Email, x.Cep, x.Endereco, x.Cidade, x.Uf, x.Observacoes, x.Tipo, x.StatusCredenciamento, x.ImagemUrl is null ? null : $"{Request.Scheme}://{Request.Host}{x.ImagemUrl}");
+        new(x.Id, x.RazaoSocial, x.NomeFantasia, x.Cnpj, x.Telefone, x.WhatsApp, x.Email, x.Cep, x.Endereco, x.Cidade, x.Uf, x.Observacoes, x.Tipo, x.StatusCredenciamento, x.ImagemUrl is null ? null : $"{Request.Scheme}://{Request.Host}{x.ImagemUrl}", x.Especialidades.Select(e=>e.EspecialidadeId).ToList(), x.Procedimentos.Select(e=>e.ProcedimentoId).ToList(), x.PlanoId);
 }

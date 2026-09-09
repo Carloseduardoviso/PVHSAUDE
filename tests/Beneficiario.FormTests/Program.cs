@@ -20,7 +20,7 @@ app.MapAreaControllerRoute("admin", "Administracao", "Administracao/{controller=
 app.Urls.Add("http://127.0.0.1:0");
 await app.StartAsync();
 using var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { BaseAddress = new Uri(app.Urls.Single()) };
-foreach (var (count, invalidDate) in new[] { (0, false), (1, false), (5, false), (6, false), (1, true) })
+foreach (var (count, invalidDate, semEmpresa) in new[] { (0, false, false), (1, false, false), (5, false, false), (6, false, false), (1, true, false), (0, false, true) })
 {
     var html = await client.GetStringAsync("/Administracao/Beneficiario/Create");
     var token = WebUtility.HtmlDecode(Regex.Match(html, "name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\"").Groups[1].Value);
@@ -31,7 +31,8 @@ foreach (var (count, invalidDate) in new[] { (0, false), (1, false), (5, false),
     Add("Nome", "Cadastro de teste");
     Add("Cpf", "123.456.789-01");
     Add("DataNascimento", "1990-05-12");
-    Add("PlanoId", ApiTransport.PlanoId.ToString());
+    Add("PlanoId", Guid.NewGuid().ToString());
+    Add("CredenciadoId", semEmpresa ? "" : ApiTransport.EmpresaId.ToString());
     Add("DataInicio", "2026-01-01");
     Add("DataValidade", "2027-01-01");
     Add("Status", "2");
@@ -46,8 +47,12 @@ foreach (var (count, invalidDate) in new[] { (0, false), (1, false), (5, false),
     }
     transport.Saved = null;
     using var response = await client.PostAsync("/Administracao/Beneficiario/Create", new FormUrlEncodedContent(fields));
-    if (count <= 5 && !invalidDate)
+    if (count <= 5 && !invalidDate && !semEmpresa)
     {
+        if (transport.Saved?.CredenciadoId != ApiTransport.EmpresaId)
+            throw new Exception("The company selection was not sent correctly.");
+        if (transport.Saved?.PlanoId != ApiTransport.PlanoId)
+            throw new Exception("The plan must be derived from the company, ignoring the submitted plan.");
         if (response.StatusCode != HttpStatusCode.Redirect || transport.Saved?.Dependentes.Count != count)
         {
             var body = await response.Content.ReadAsStringAsync();
@@ -63,7 +68,7 @@ foreach (var (count, invalidDate) in new[] { (0, false), (1, false), (5, false),
         if (!body.Contains("Informe a data de nascimento.") || !body.Contains("Dependente teste 0"))
             throw new Exception("Validation must display the error and preserve the dependent.");
     }
-    Console.WriteLine($"PASS: {count} dependents, invalid date: {invalidDate}.");
+    Console.WriteLine($"PASS: {count} dependents, invalid date: {invalidDate}, missing company: {semEmpresa}, plan derived from company.");
 }
 foreach (var invalid in new[] { false, true })
 {
@@ -78,9 +83,10 @@ foreach (var invalid in new[] { false, true })
         ["Cnpj"] = invalid ? "123" : "12.345.678/0001-90",
         ["Telefone"] = "(69) 99999-8888",
         ["Tipo"] = "1",
+        ["PlanoId"] = ApiTransport.PlanoId.ToString(),
         ["StatusCredenciamento"] = "1"
     }));
-    if (!invalid && (response.StatusCode != HttpStatusCode.Redirect || transport.Empresa?.NomeFantasia != "Clínica de teste"))
+    if (!invalid && (response.StatusCode != HttpStatusCode.Redirect || transport.Empresa?.NomeFantasia != "Clínica de teste" || transport.Empresa?.PlanoId != ApiTransport.PlanoId))
         throw new Exception("Company form failed to send.");
     if (invalid && (response.StatusCode != HttpStatusCode.OK || transport.Empresa != null ||
         !WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync()).Contains("Informe um CNPJ completo.")))
@@ -92,12 +98,17 @@ await app.StopAsync();
 sealed class ApiTransport : HttpMessageHandler
 {
     public static readonly Guid PlanoId = Guid.NewGuid();
+    public static readonly Guid EmpresaId = Guid.NewGuid();
     public BeneficiarioViewModel? Saved;
     public CredenciadoViewModel? Empresa;
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
     {
+        if (request.Method == HttpMethod.Get && request.RequestUri!.AbsolutePath == "/api/credenciados")
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new CredenciadoViewModel { Id = EmpresaId, NomeFantasia = "Empresa teste", PlanoId = PlanoId } }) };
+        if (request.RequestUri!.AbsolutePath is "/api/especialidades" or "/api/procedimentos")
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(Array.Empty<CatalogoItemViewModel>()) };
         if (request.RequestUri!.AbsolutePath == "/api/planos")
-            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new PlanoViewModel { Id = PlanoId, Nome = "Plano teste" } }) };
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new PlanoViewModel { Id = PlanoId, Nome = "Plano teste", Valor = 99.90m } }) };
         if (request.Method == HttpMethod.Post && request.RequestUri.AbsolutePath == "/api/beneficiarios")
         {
             Saved = await request.Content!.ReadFromJsonAsync<BeneficiarioViewModel>(ct);

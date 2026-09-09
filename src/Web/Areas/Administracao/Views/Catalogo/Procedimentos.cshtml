@@ -1,0 +1,5 @@
+@model IReadOnlyCollection<CatalogoItemViewModel>
+@{ ViewData["Title"] = "Procedimentos"; }
+<div class="d-flex justify-content-between mb-4"><h1 class="h3">Procedimentos</h1><a asp-action="Especialidades" class="btn btn-outline-secondary">Especialidades</a></div>
+<form method="post" class="card card-body mb-4"><div class="input-group"><input name="nome" class="form-control" placeholder="Novo procedimento" required maxlength="150" /><button class="btn btn-success">Cadastrar</button></div></form>
+<div class="card"><ul class="list-group list-group-flush">@foreach(var item in Model){<li class="list-group-item">@item.Nome</li>}</ul></div>

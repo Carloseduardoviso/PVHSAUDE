@@ -1,17 +1,21 @@
 @model BeneficiarioViewModel
+<script type="application/json" id="empresas-planos">@Html.Raw(System.Text.Json.JsonSerializer.Serialize((IEnumerable<CredenciadoViewModel>?)ViewBag.EmpresasDisponiveis ?? []))</script>
+<script type="application/json" id="planos-empresas">@Html.Raw(System.Text.Json.JsonSerializer.Serialize((IEnumerable<PlanoViewModel>?)ViewBag.PlanosDisponiveis ?? []))</script>
 <div asp-validation-summary="All" role="alert" class="text-danger mb-3"></div>
 @if (ViewBag.Planos is ICollection<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> planos && planos.Count == 0)
 {
     <div class="alert alert-warning">Nenhum plano disponível. <a asp-controller="Plano" asp-action="Create">Cadastrar plano</a></div>
 }
 <div class="row g-3">
+    <div class="col-12"><label asp-for="CredenciadoId" class="form-label"></label><select asp-for="CredenciadoId" asp-items="ViewBag.Empresas" class="form-select" required><option value="">Selecione a empresa</option></select><span asp-validation-for="CredenciadoId" class="text-danger"></span></div>
     <div class="col-md-8"><label asp-for="Nome" class="form-label"></label><input asp-for="Nome" class="form-control" /><span asp-validation-for="Nome" class="text-danger"></span></div>
     <div class="col-md-4"><label asp-for="Cpf" class="form-label"></label><input asp-for="Cpf" class="form-control" data-mask="documento" inputmode="numeric" maxlength="18" /><span asp-validation-for="Cpf" class="text-danger"></span></div>
     <div class="col-md-4"><label asp-for="DataNascimento" class="form-label"></label><input asp-for="DataNascimento" class="form-control" /><span asp-validation-for="DataNascimento" class="text-danger"></span></div>
     <div class="col-md-4"><label asp-for="Telefone" class="form-label"></label><input asp-for="Telefone" class="form-control" data-mask="telefone" inputmode="tel" maxlength="15" /></div>
     <div class="col-md-4"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" /><span asp-validation-for="Email" class="text-danger"></span></div>
     <div class="col-12"><label asp-for="Endereco" class="form-label"></label><input asp-for="Endereco" class="form-control" /></div>
-    <div class="col-md-3"><label asp-for="PlanoId" class="form-label"></label><select asp-for="PlanoId" asp-items="ViewBag.Planos" class="form-select"><option value="">Selecione um plano</option></select><span asp-validation-for="PlanoId" class="text-danger"></span></div>
+    <div class="col-md-6"><label asp-for="PlanoId" class="form-label"></label><input asp-for="PlanoId" type="hidden" /><input id="nome-plano" class="form-control" readonly aria-label="Plano da empresa" /><span asp-validation-for="PlanoId" class="text-danger"></span><div id="plano-aviso" class="form-text" role="status"></div></div>
+    <div class="col-md-6"><label for="valor-plano" class="form-label">Valor do plano</label><input id="valor-plano" class="form-control" readonly /><div class="form-text">Valor definido no plano da empresa credenciada.</div></div>
     <div class="col-md-3"><label asp-for="DataInicio" class="form-label"></label><input asp-for="DataInicio" class="form-control" /></div>
     <div class="col-md-3"><label asp-for="DataValidade" class="form-label"></label><input asp-for="DataValidade" class="form-control" /></div>
     <div class="col-md-3"><label asp-for="Status" class="form-label"></label><select asp-for="Status" class="form-select"><option value="1">Ativo</option><option value="2">Pendente</option><option value="3">Inadimplente</option><option value="4">Cancelado</option><option value="5">Em renovação</option><option value="6">Inativo</option></select></div>

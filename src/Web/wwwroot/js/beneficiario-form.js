@@ -1,4 +1,32 @@
 (() => {
+    const empresa = document.getElementById("CredenciadoId");
+    const plano = document.getElementById("PlanoId");
+    const catalogo = document.getElementById("planos-empresas");
+    if (empresa && plano && catalogo) {
+        const planos = JSON.parse(catalogo.textContent);
+        const empresas = JSON.parse(document.getElementById("empresas-planos").textContent);
+        const valor = document.getElementById("valor-plano");
+        const aviso = document.getElementById("plano-aviso");
+        const moeda = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+        const periodos = ["Mensal", "Trimestral", "Semestral", "Anual"];
+        function mostrarValor() {
+            const item = planos.find(p => p.Id === plano.value);
+            valor.value = item ? moeda.format(item.Valor) + " / " + periodos[item.Periodicidade] : "";
+        }
+        function filtrar(selecionado) {
+            const empresaSelecionada = empresas.find(e => e.Id === empresa.value);
+            const item = planos.find(p => p.Id === empresaSelecionada?.PlanoId);
+            plano.value = item?.Id ?? "";
+            document.getElementById("nome-plano").value = item?.Nome ?? "";
+            aviso.textContent = !empresa.value ? "Selecione a empresa credenciada." :
+                !item ? "Esta empresa ainda não possui plano. Vincule um plano no cadastro da empresa." :
+                selecionado && selecionado !== item.Id ? "Ao salvar, será utilizado o plano atual da empresa." : "";
+            mostrarValor();
+        }
+        empresa.addEventListener("change", () => filtrar(""));
+        plano.addEventListener("change", mostrarValor);
+        filtrar(plano.value);
+    }
     if (window.jQuery?.validator) {
         window.jQuery.validator.addMethod("birthdate", function (value, element) {
             if (this.optional(element)) return true;

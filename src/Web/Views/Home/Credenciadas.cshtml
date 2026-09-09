@@ -1,0 +1,27 @@
+@model Web.Models.PortalViewModel
+@{ ViewData["Title"] = "Empresas credenciadas"; }
+<section aria-labelledby="credenciadas-titulo">
+    <div class="mb-4">
+        <h1 id="credenciadas-titulo">Empresas credenciadas</h1>
+        <p class="text-muted">Conheça nossa rede, as especialidades, os procedimentos e os planos disponíveis.</p>
+    </div>
+    @if (Model.ErroCatalogos is not null)
+    {
+        <div class="alert alert-warning" role="status">@Model.ErroCatalogos <a asp-action="Credenciadas">Tentar novamente</a></div>
+    }
+    @if (Model.Empresas.Count == 0 && Model.ErroCatalogos is null)
+    {
+        <div class="alert alert-info">Nenhuma empresa credenciada disponível no momento.</div>
+    }
+    <div class="row g-4 rede-lista">
+        @foreach (var empresa in Model.Empresas)
+        {
+            <div class="col-12 col-md-6 col-xl-4">
+                <partial name="_EmpresaCard" model="new Web.Models.EmpresaCardViewModel(empresa, Model)" />
+            </div>
+        }
+    </div>
+</section>
+@section Scripts {
+    <script src="~/js/portal-carousel.js" asp-append-version="true"></script>
+}

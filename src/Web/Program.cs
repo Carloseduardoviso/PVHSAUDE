@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 // Infra.Auth services depend on these framework services.
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
+builder.Services.AddHttpClient("default", client => client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
 builder.Services.AddHttpClient<IBeneficiarioApiClient, BeneficiarioApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
 builder.Services.AddHttpClient<PlanoApiClient>(client =>

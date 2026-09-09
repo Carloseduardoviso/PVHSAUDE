@@ -3,6 +3,9 @@
 .admin-sidebar { width: 250px; flex-shrink: 0; padding: 28px 20px; background: #145c49; color: white; }
 .admin-brand { color: white; text-decoration: none; font-size: 1.6rem; font-weight: 700; }
 .admin-brand:hover { color: white; }
+.admin-brand { display: block; width: fit-content; margin: 0 auto; }
+.admin-brand img { display: block; width: 130px; height: auto; border-radius: 50%; }
+.admin-caption { text-align: center; }
 .admin-caption { color: #c6e1d8; margin: 4px 0 32px; font-size: .9rem; }
 .admin-nav-link { display: block; padding: 12px 16px; margin-bottom: 8px; border-radius: 8px; color: #e0eee9; text-decoration: none; }
 .admin-nav-link:hover, .admin-nav-link.active { color: white; background: #28735f; }
@@ -13,4 +16,40 @@
     .admin-shell { flex-direction: column; }
     .admin-sidebar { width: 100%; padding: 16px 20px; }
     .admin-caption { margin-bottom: 16px; }
+    .admin-brand img { width: 80px; }
 }
+
+.catalogo-multiselect {
+    min-height: 150px;
+    padding: .5rem .75rem;
+    background-image: none;
+}
+.catalogo-multiselect option {
+    padding: .35rem .5rem;
+}
+.catalogo-multiselect option:checked {
+    color: #fff;
+    background-color: #198754 linear-gradient(0deg, #198754 0%, #198754 100%);
+}
+
+.catalogo-opcoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: .5rem;
+    padding: .75rem;
+    border: 1px solid #dee2e6;
+    border-radius: .375rem;
+    background: #fff;
+}
+.catalogo-opcao {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    padding: .55rem .65rem;
+    border-radius: .375rem;
+    cursor: pointer;
+    user-select: none;
+}
+.catalogo-opcao:hover { background: #eaf6f0; }
+.catalogo-opcao input { width: 1.1rem; height: 1.1rem; accent-color: #198754; }
+.catalogo-opcao:has(input:checked) { background: #dff3e7; color: #146c43; font-weight: 600; }

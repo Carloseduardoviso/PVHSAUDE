@@ -34,8 +34,9 @@ public class BeneficiariosController(Context context) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<BeneficiarioResponse>> Criar(BeneficiarioRequest request, CancellationToken cancellationToken)
     {
-        if (!await context.Planos.AnyAsync(x => x.Id == request.PlanoId, cancellationToken) || (request.CredenciadoId.HasValue && !await context.Credenciados.AnyAsync(x => x.Id == request.CredenciadoId, cancellationToken)))
-            return BadRequest("Selecione um plano cadastrado.");
+        var planoEmpresa = await context.Credenciados.Where(x => x.Id == request.CredenciadoId).Select(x => x.PlanoId).FirstOrDefaultAsync(cancellationToken);
+        if (planoEmpresa is null) return BadRequest("Selecione uma empresa com plano cadastrado.");
+        request.PlanoId = planoEmpresa.Value;
 
         if (request.DataValidade < request.DataInicio)
             return ValidationProblem("A validade do benefício deve ser posterior à data de início.");
@@ -56,8 +57,9 @@ public class BeneficiariosController(Context context) : ControllerBase
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> Atualizar(Guid id, BeneficiarioRequest request, CancellationToken cancellationToken)
     {
-        if (!await context.Planos.AnyAsync(x => x.Id == request.PlanoId, cancellationToken) || (request.CredenciadoId.HasValue && !await context.Credenciados.AnyAsync(x => x.Id == request.CredenciadoId, cancellationToken)))
-            return BadRequest("Selecione um plano cadastrado.");
+        var planoEmpresa = await context.Credenciados.Where(x => x.Id == request.CredenciadoId).Select(x => x.PlanoId).FirstOrDefaultAsync(cancellationToken);
+        if (planoEmpresa is null) return BadRequest("Selecione uma empresa com plano cadastrado.");
+        request.PlanoId = planoEmpresa.Value;
 
         if (request.DataValidade < request.DataInicio)
             return ValidationProblem("A validade do benefício deve ser posterior à data de início.");
@@ -132,5 +134,5 @@ public class BeneficiariosController(Context context) : ControllerBase
     private static string NormalizarCpf(string cpf) => new(cpf.Where(char.IsDigit).ToArray());
 
     private static BeneficiarioResponse ParaResponse(Beneficiario x) => new(x.Id, x.Nome, x.Cpf, x.DataNascimento, x.Telefone, x.Email, x.Endereco, x.PlanoId, x.DataInicio, x.DataValidade, x.Status,
-        x.Dependentes.Select(d => new DependenteResponse(d.Id, d.Nome, d.Cpf, d.DataNascimento, d.GrauParentesco)).ToList());
+        x.Dependentes.Select(d => new DependenteResponse(d.Id, d.Nome, d.Cpf, d.DataNascimento, d.GrauParentesco)).ToList(), x.CredenciadoId);
 }

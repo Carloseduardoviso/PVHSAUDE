@@ -20,6 +20,9 @@ public class Credenciado
     public string? ImagemUrl { get; private set; }
     public ICollection<CredenciadoEspecialidade> Especialidades { get; private set; } = new List<CredenciadoEspecialidade>();
     public ICollection<CredenciadoProcedimento> Procedimentos { get; private set; } = new List<CredenciadoProcedimento>();
+    public Guid? PlanoId { get; private set; }
+    public Plano? Plano { get; private set; }
+    public void DefinirPlano(Guid planoId) => PlanoId = planoId;
     private Credenciado() { }
     public void DefinirImagem(string? imagemUrl) => ImagemUrl = imagemUrl;
     public Credenciado(string razaosocial, string nomefantasia, string cnpj, string? telefone, string? whatsapp, string? email, string? cep, string? endereco, string? cidade, string? uf, string? observacoes, TipoCredenciado tipo, StatusCredenciamento statusCredenciamento) => Atualizar(razaosocial, nomefantasia, cnpj, telefone, whatsapp, email, cep, endereco, cidade, uf, observacoes, tipo, statusCredenciamento);

@@ -7,6 +7,7 @@ public class CredenciadoConfig : IEntityTypeConfiguration<Credenciado>
     public void Configure(EntityTypeBuilder<Credenciado> builder)
     {
         builder.ToTable("Credenciado");
+        builder.HasOne(x => x.Plano).WithMany().HasForeignKey(x => x.PlanoId).OnDelete(DeleteBehavior.Restrict);
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();
         builder.Property(x => x.RazaoSocial).HasMaxLength(150).IsRequired(true);

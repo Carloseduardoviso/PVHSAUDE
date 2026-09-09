@@ -5,6 +5,7 @@
     <div><a asp-action="Index" class="btn btn-outline-secondary">Voltar à lista</a> <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a></div>
 </div>
 <div class="card card-body shadow-sm"><dl class="row mb-0">
+    <dt class="col-sm-3">Plano e valor</dt><dd class="col-sm-9">@(((IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>?)ViewBag.Planos)?.FirstOrDefault(x => x.Value == Model.PlanoId?.ToString())?.Text ?? "Não vinculado")</dd>
     <dt class="col-sm-3">Razão social</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.RazaoSocial) ? "Não informado" : Model.RazaoSocial)</dd>
     <dt class="col-sm-3">Nome fantasia</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.NomeFantasia) ? "Não informado" : Model.NomeFantasia)</dd>
     <dt class="col-sm-3">CNPJ</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Cnpj) ? "Não informado" : Model.Cnpj)</dd>
@@ -18,4 +19,4 @@
     <dt class="col-sm-3">Observações</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Observacoes) ? "Não informado" : Model.Observacoes)</dd>
     <dt class="col-sm-3">Tipo</dt><dd class="col-sm-9">@Html.DisplayFor(m => m.Tipo)</dd>
     <dt class="col-sm-3">Situação</dt><dd class="col-sm-9">@Html.DisplayFor(m => m.StatusCredenciamento)</dd>
-</dl></div>
+</dl></div><div class="card card-body shadow-sm mt-4"><h2 class="h5">Especialidades</h2><p>@string.Join(", ", ((IEnumerable<CatalogoItemViewModel>)ViewBag.Especialidades).Where(x => Model.EspecialidadeIds.Contains(x.Id)).Select(x => x.Nome).DefaultIfEmpty("Nenhuma cadastrada"))</p><h2 class="h5 mt-3">Procedimentos</h2><p class="mb-0">@string.Join(", ", ((IEnumerable<CatalogoItemViewModel>)ViewBag.Procedimentos).Where(x => Model.ProcedimentoIds.Contains(x.Id)).Select(x => x.Nome).DefaultIfEmpty("Nenhum cadastrado"))</p></div>

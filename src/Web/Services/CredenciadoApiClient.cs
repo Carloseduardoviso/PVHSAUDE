@@ -5,6 +5,8 @@ namespace Web.Services;
 
 public class CredenciadoApiClient(HttpClient client)
 {
+    public async Task<IReadOnlyCollection<CatalogoItemViewModel>> EspecialidadesAsync(CancellationToken ct) => await client.GetFromJsonAsync<List<CatalogoItemViewModel>>("api/especialidades", ct) ?? [];
+    public async Task<IReadOnlyCollection<CatalogoItemViewModel>> ProcedimentosAsync(CancellationToken ct) => await client.GetFromJsonAsync<List<CatalogoItemViewModel>>("api/procedimentos", ct) ?? [];
     public async Task<IReadOnlyCollection<CredenciadoViewModel>> ListarAsync(CancellationToken ct) =>
         await client.GetFromJsonAsync<List<CredenciadoViewModel>>("api/credenciados", ct) ?? [];
 

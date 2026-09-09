@@ -5,6 +5,10 @@ namespace Web.Models;
 public class CredenciadoViewModel
 {
     public Guid Id { get; set; }
+    [PVHSAUDE.Domain.Validation.GuidNaoVazio(ErrorMessage = "Selecione o plano da empresa."), Display(Name = "Plano")]
+    public Guid? PlanoId { get; set; }
+    public List<Guid> EspecialidadeIds { get; set; } = [];
+    public List<Guid> ProcedimentoIds { get; set; } = [];
     public string? ImagemUrl { get; set; }
     [Display(Name = "Imagem da empresa")] public IFormFile? Imagem { get; set; }
     [Required(ErrorMessage = "Informe razão social."), StringLength(150), Display(Name = "Razão social")]
@@ -34,3 +38,4 @@ public class CredenciadoViewModel
     [Required, EnumDataType(typeof(StatusCredenciamento)), Display(Name = "Situação")]
     public StatusCredenciamento? StatusCredenciamento { get; set; } = PVHSAUDE.Domain.Enuns.StatusCredenciamento.Pendente;
 }
+

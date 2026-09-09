@@ -1,0 +1,52 @@
+@model Web.Models.EmpresaCardViewModel
+@{
+    var empresa = Model.Empresa;
+    var planos = Model.Rede.Planos.Where(x => x.CredenciadoId == empresa.Id).ToList();
+    var especialidades = Model.Rede.Especialidades.Where(x => empresa.EspecialidadeIds.Contains(x.Id)).Select(x => x.Nome).ToList();
+    var procedimentos = Model.Rede.Procedimentos.Where(x => empresa.ProcedimentoIds.Contains(x.Id)).Select(x => x.Nome).ToList();
+}
+<article class="rede-card">
+    <div class="rede-imagem">
+        <span class="rede-sem-imagem" aria-hidden="true">PVH Saúde</span>
+        @if (!string.IsNullOrWhiteSpace(empresa.ImagemUrl))
+        {
+            <img src="@empresa.ImagemUrl" alt="@empresa.NomeFantasia" />
+        }
+    </div>
+    <div class="rede-texto">
+        <p class="text-success fw-semibold mb-2">Rede credenciada</p>
+        <h3 class="h2">@empresa.NomeFantasia</h3>
+        <p class="text-muted mb-2">@Html.DisplayFor(_ => empresa.Tipo)</p>
+        <h4 class="h6 mt-3">Planos e valores</h4>
+        @if (Model.Rede.ErroPlanos is not null)
+        {
+            <p class="text-muted">@Model.Rede.ErroPlanos</p>
+        }
+        else if (planos.Count == 0)
+        {
+            <p class="text-muted">Nenhum plano vinculado a esta empresa.</p>
+        }
+        else
+        {
+            <ul class="list-unstyled mb-3">
+            @foreach (var plano in planos)
+            {
+                <li class="mb-2"><span>@plano.Plano</span> — <strong class="text-success">@plano.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</strong> <span class="text-muted">(@plano.Periodicidade)</span></li>
+            }
+            </ul>
+        }
+        <h4 class="h6 mt-3">Especialidades</h4>
+        <p>@(especialidades.Count > 0 ? string.Join(", ", especialidades) : "Não informadas")</p>
+        <h4 class="h6">Procedimentos</h4>
+        <p>@(procedimentos.Count > 0 ? string.Join(", ", procedimentos) : "Não informados")</p>
+        @if (!string.IsNullOrWhiteSpace(empresa.Cidade))
+        {
+            <p class="mb-2">@empresa.Cidade @(!string.IsNullOrWhiteSpace(empresa.Uf) ? $"/ {empresa.Uf}" : "")</p>
+        }
+        @if (!string.IsNullOrWhiteSpace(empresa.Telefone))
+        {
+            <p class="mb-0">Telefone: @empresa.Telefone</p>
+        }
+    </div>
+</article>
+

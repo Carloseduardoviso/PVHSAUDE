@@ -1,10 +1,53 @@
+@model Web.Models.PortalViewModel
 @{ ViewData["Title"] = "PVH Saúde"; }
 <section class="p-5 mb-4 bg-success text-white rounded-3"><h1 class="display-5">PVH Saúde</h1><p class="lead mb-0">Cuidado, saúde e bem-estar para você.</p></section>
+@if (Model.ErroCatalogos is not null) { <p class="text-muted" role="status">@Model.ErroCatalogos</p> }
+@if (Model.Empresas.Count > 0)
+{
+    <section class="mb-5" aria-labelledby="rede-titulo">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div><h2 id="rede-titulo" class="h3 mb-1">Empresas credenciadas</h2><p class="text-muted mb-0">Conheça quem faz parte da nossa rede.</p></div>
+            @if (Model.Empresas.Count > 1)
+            {
+                <button id="rede-pausar" class="btn btn-outline-success btn-sm" type="button" aria-pressed="false">Pausar</button>
+            }
+        </div>
+        <div id="rede-carousel" class="carousel slide rede-carousel" data-bs-interval="5000" data-bs-wrap="true" role="region" aria-roledescription="carrossel" aria-label="Empresas credenciadas">
+            <div class="carousel-inner">
+                @for (var i = 0; i < Model.Empresas.Count; i++)
+                {
+                    var empresa = Model.Empresas[i];
+                    <div class="carousel-item @(i == 0 ? "active" : "")" role="group" aria-label="@(i + 1) de @Model.Empresas.Count">
+                        <partial name="_EmpresaCard" model="new Web.Models.EmpresaCardViewModel(empresa, Model)" />
+                    </div>
+                }
+            </div>
+            @if (Model.Empresas.Count > 1)
+            {
+                <button class="carousel-control-prev" type="button" data-bs-target="#rede-carousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Empresa anterior</span></button>
+                <button class="carousel-control-next" type="button" data-bs-target="#rede-carousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Próxima empresa</span></button>
+            }
+        </div>
+    </section>
+}
 <h2 class="h3 mb-3">Encontre o que precisa</h2>
 <div class="row g-3">
 @foreach (var item in new[] { "Clínicas terapêuticas credenciadas", "Clínicas parceiras", "Clínicos médicos e especialidades", "Laboratórios e exames", "Exames de imagem", "Odontologia", "Clínicos populares", "Esporte e parceiros", "Lojas parceiras" })
 {
-    <div class="col-md-4"><div class="card h-100 shadow-sm"><div class="card-body"><h3 class="h5">@item</h3><p class="text-muted mb-0">Em breve, consulte os parceiros disponíveis.</p></div></div></div>
+    <div class="col-md-4"><div class="card h-100 shadow-sm"><div class="card-body">
+        @if (item == "Clínicas terapêuticas credenciadas")
+        {
+            <h3 class="h5"><a asp-controller="Home" asp-action="Credenciadas" class="stretched-link text-success">@item</a></h3>
+            <p class="text-muted mb-0">Conheça as empresas, especialidades, procedimentos e planos da nossa rede.</p>
+        }
+        else
+        {
+            <h3 class="h5">@item</h3><p class="text-muted mb-0">Em breve, consulte os parceiros disponíveis.</p>
+        }
+    </div></div></div>
 }
 </div>
+@section Scripts {
+    <script src="~/js/portal-carousel.js" asp-append-version="true"></script>
+}
 <section class="mt-5 p-4 bg-light rounded-3"><h2 class="h4">Já é beneficiário?</h2><p>Consulte as informações do seu benefício ou fale conosco.</p><a asp-area="Administracao" asp-controller="Dashboard" asp-action="Index" class="btn btn-outline-success">Área administrativa</a></section>

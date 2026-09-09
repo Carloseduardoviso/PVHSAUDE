@@ -22,7 +22,7 @@ public class PlanoController(PlanoApiClient planos) : Controller
         model.Id = Guid.Empty;
         if (!ModelState.IsValid) return View(model);
         try { await planos.SalvarAsync(model, ct); }
-        catch (HttpRequestException) { ModelState.AddModelError("", "Não foi possível salvar o plano. Verifique os dados e tente novamente."); return View(model); }
+        catch (HttpRequestException ex) { ModelState.AddModelError("", ex.Message); return View(model); }
         TempData["Success"] = "Plano cadastrado com sucesso.";
         return RedirectToAction(nameof(Index));
     }
@@ -40,7 +40,7 @@ public class PlanoController(PlanoApiClient planos) : Controller
         if (model.Id == Guid.Empty) return BadRequest();
         if (!ModelState.IsValid) return View(model);
         try { await planos.SalvarAsync(model, ct); }
-        catch (HttpRequestException) { ModelState.AddModelError("", "Não foi possível salvar o plano. Verifique os dados e tente novamente."); return View(model); }
+        catch (HttpRequestException ex) { ModelState.AddModelError("", ex.Message); return View(model); }
         TempData["Success"] = "Plano atualizado com sucesso.";
         return RedirectToAction(nameof(Index));
     }

@@ -4,6 +4,7 @@ using Infra.Data.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PVHSAUDE.Infra.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20260909011106_PlanoEmpresaCredenciada")]
+    partial class PlanoEmpresaCredenciada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,9 +119,6 @@ namespace PVHSAUDE.Infra.Data.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<Guid?>("PlanoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("RazaoSocial")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -146,8 +146,6 @@ namespace PVHSAUDE.Infra.Data.Migrations
 
                     b.HasIndex("Cnpj")
                         .IsUnique();
-
-                    b.HasIndex("PlanoId");
 
                     b.ToTable("Credenciado", (string)null);
 
@@ -248,6 +246,9 @@ namespace PVHSAUDE.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CredenciadoId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime?>("DataValidade")
                         .HasColumnType("date");
 
@@ -268,6 +269,8 @@ namespace PVHSAUDE.Infra.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CredenciadoId");
 
                     b.ToTable("Plano", (string)null);
 
@@ -305,16 +308,6 @@ namespace PVHSAUDE.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Credenciado");
-                });
-
-            modelBuilder.Entity("PVHSAUDE.Domain.Entities.Credenciado", b =>
-                {
-                    b.HasOne("PVHSAUDE.Domain.Entities.Plano", "Plano")
-                        .WithMany()
-                        .HasForeignKey("PlanoId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Plano");
                 });
 
             modelBuilder.Entity("PVHSAUDE.Domain.Entities.CredenciadoEspecialidade", b =>
@@ -364,6 +357,16 @@ namespace PVHSAUDE.Infra.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Beneficiario");
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.Plano", b =>
+                {
+                    b.HasOne("PVHSAUDE.Domain.Entities.Credenciado", "Credenciado")
+                        .WithMany()
+                        .HasForeignKey("CredenciadoId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Credenciado");
                 });
 
             modelBuilder.Entity("PVHSAUDE.Domain.Entities.Beneficiario", b =>

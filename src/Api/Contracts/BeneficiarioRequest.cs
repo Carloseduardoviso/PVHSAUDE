@@ -12,7 +12,7 @@ public class BeneficiarioRequest
     [StringLength(20)] public string? Telefone { get; set; }
     [EmailAddress] public string? Email { get; set; }
     [StringLength(250)] public string? Endereco { get; set; }
-    [GuidNaoVazio] public Guid PlanoId { get; set; }
+    public Guid PlanoId { get; set; }
     public Guid? CredenciadoId { get; set; }
     [DataType(DataType.Date)] public DateTime DataInicio { get; set; }
     [DataType(DataType.Date)] public DateTime DataValidade { get; set; }
@@ -25,7 +25,7 @@ public record DependenteResponse(Guid Id, string Nome, string Cpf, DateTime Data
 
 public record BeneficiarioResponse(Guid Id, string Nome, string Cpf, DateTime DataNascimento,
     string? Telefone, string? Email, string? Endereco, Guid PlanoId, DateTime DataInicio,
-    DateTime DataValidade, StatusBeneficiario Status, IReadOnlyCollection<DependenteResponse> Dependentes);
+    DateTime DataValidade, StatusBeneficiario Status, IReadOnlyCollection<DependenteResponse> Dependentes, Guid? CredenciadoId);
 
 public class DependenteRequest
 {

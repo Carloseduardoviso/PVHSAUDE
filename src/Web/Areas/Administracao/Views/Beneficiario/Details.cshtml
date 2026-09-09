@@ -7,6 +7,8 @@
 <div class="card shadow-sm mb-4"><div class="card-body">
     <h2 class="h5 mb-3">Dados do cadastro</h2>
     <dl class="row mb-0">
+        <dt class="col-sm-3">Empresa credenciada</dt><dd class="col-sm-9">@(((IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>?)ViewBag.Empresas)?.FirstOrDefault(p => p.Value == Model.CredenciadoId?.ToString())?.Text ?? "Não vinculada")</dd>
+        <dt class="col-sm-3">Valor atual do plano</dt><dd class="col-sm-9">@(((IEnumerable<PlanoViewModel>?)ViewBag.PlanosDisponiveis)?.FirstOrDefault(p => p.Id == Model.PlanoId)?.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")) ?? "Não disponível")</dd>
         <dt class="col-sm-3">Nome completo</dt><dd class="col-sm-9">@Model.Nome</dd>
         <dt class="col-sm-3">CPF</dt><dd class="col-sm-9">@Model.Cpf</dd>
         <dt class="col-sm-3">Data de nascimento</dt><dd class="col-sm-9">@Model.DataNascimento.ToString("dd/MM/yyyy")</dd>

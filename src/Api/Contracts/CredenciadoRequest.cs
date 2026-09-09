@@ -4,6 +4,8 @@ namespace PVHSAUDE.Api.Contracts;
 
 public class CredenciadoRequest
 {
+    [PVHSAUDE.Domain.Validation.GuidNaoVazio(ErrorMessage = "Selecione o plano da empresa.")]
+    public Guid? PlanoId { get; set; }
     [Required(ErrorMessage = "Informe razão social."), StringLength(150), Display(Name = "Razão social")]
     public string RazaoSocial { get; set; } = string.Empty;
     [Required(ErrorMessage = "Informe nome fantasia."), StringLength(150), Display(Name = "Nome fantasia")]
@@ -28,10 +30,9 @@ public class CredenciadoRequest
     public string? Observacoes { get; set; }
     [Required(ErrorMessage = "Selecione o tipo de estabelecimento."), EnumDataType(typeof(TipoCredenciado)), Display(Name = "Tipo de estabelecimento")]
     public TipoCredenciado? Tipo { get; set; }
-    [Required, EnumDataType(typeof(StatusCredenciamento)), Display(Name = "Situação")]
     public List<Guid> EspecialidadeIds { get; set; } = [];
     public List<Guid> ProcedimentoIds { get; set; } = [];
+    [Required, EnumDataType(typeof(StatusCredenciamento)), Display(Name = "Situação")]
     public StatusCredenciamento? StatusCredenciamento { get; set; } = PVHSAUDE.Domain.Enuns.StatusCredenciamento.Pendente;
 }
-public record CredenciadoResponse(Guid Id, string RazaoSocial, string NomeFantasia, string Cnpj, string? Telefone, string? WhatsApp, string? Email, string? Cep, string? Endereco, string? Cidade, string? Uf, string? Observacoes, TipoCredenciado Tipo, StatusCredenciamento StatusCredenciamento, string? ImagemUrl);
-
+public record CredenciadoResponse(Guid Id, string RazaoSocial, string NomeFantasia, string Cnpj, string? Telefone, string? WhatsApp, string? Email, string? Cep, string? Endereco, string? Cidade, string? Uf, string? Observacoes, TipoCredenciado Tipo, StatusCredenciamento StatusCredenciamento, string? ImagemUrl, List<Guid> EspecialidadeIds, List<Guid> ProcedimentoIds, Guid? PlanoId);
