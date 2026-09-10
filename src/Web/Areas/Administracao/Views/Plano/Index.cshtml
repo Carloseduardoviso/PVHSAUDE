@@ -8,10 +8,23 @@
 @if (ViewData["Error"] is string error) { <div class="alert alert-danger">@error</div> }
 else if (!Model.Any()) { <div class="alert alert-info">Nenhum plano cadastrado. Cadastre o primeiro plano para vinculá-lo aos beneficiários.</div> }
 else {
-<div class="card shadow-sm table-responsive"><table class="table table-hover mb-0">
+<div class="card shadow-sm table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros; role horizontalmente para ver todas as colunas" tabindex="0"><table class="table table-hover mb-0">
     <thead><tr><th>Nome</th><th>Valor</th><th>Periodicidade</th><th>Validade</th><th>Ações</th></tr></thead>
     <tbody>@foreach (var plano in Model) {
         <tr><td>@plano.Nome</td><td>@plano.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</td><td>@plano.Periodicidade</td><td>@(plano.DataValidade?.ToString("dd/MM/yyyy") ?? "Sem validade definida")</td><td><a asp-action="Edit" asp-route-id="@plano.Id" class="btn btn-sm btn-outline-primary">Editar</a></td></tr>
     }</tbody>
 </table></div>
+<div class="admin-record-cards d-md-none">
+@foreach (var plano in Model) {
+    <article class="card shadow-sm"><div class="card-body"><dl class="mb-0">
+        <dt>Nome</dt><dd>@plano.Nome</dd>
+        <dt>Valor</dt><dd>@plano.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</dd>
+        <dt>Periodicidade</dt><dd>@plano.Periodicidade</dd>
+        <dt>Validade</dt><dd>@(plano.DataValidade?.ToString("dd/MM/yyyy") ?? "Sem validade definida")</dd>
+        </dl><div class="admin-record-actions border-top pt-3 mt-3" aria-label="Ações do registro">
+<a asp-action="Edit" asp-route-id="@plano.Id" class="btn btn-sm btn-outline-primary">Editar</a>
+        </div></div></article>
+}
+</div>
+
 }

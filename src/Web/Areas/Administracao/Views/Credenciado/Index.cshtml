@@ -8,11 +8,27 @@
 @if (ViewData["Error"] is string error) { <div class="alert alert-danger">@error</div> }
 else if (!Model.Any()) { <div class="alert alert-info">Nenhuma empresa credenciada cadastrada.</div> }
 else {
-<div class="card shadow-sm table-responsive"><table class="table table-hover mb-0">
+<div class="card shadow-sm table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros; role horizontalmente para ver todas as colunas" tabindex="0"><table class="table table-hover mb-0">
     <thead><tr><th>Imagem</th><th>Nome fantasia</th><th>CNPJ</th><th>Tipo</th><th>Telefone</th><th>Cidade</th><th>Situação</th><th>Ações</th></tr></thead>
     <tbody>@foreach (var empresa in Model) {
         <tr><td>@if (!string.IsNullOrWhiteSpace(empresa.ImagemUrl)) { <img src="@empresa.ImagemUrl" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:8px" /> }</td><td>@empresa.NomeFantasia</td><td>@empresa.Cnpj</td><td>@Html.DisplayFor(_ => empresa.Tipo)</td><td>@empresa.Telefone</td><td>@empresa.Cidade</td><td>@Html.DisplayFor(_ => empresa.StatusCredenciamento)</td>
         <td class="text-nowrap"><a asp-action="Edit" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-primary">Editar</a> <a asp-action="Details" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-secondary">Ver detalhes</a></td></tr>
     }</tbody>
 </table></div>
+<div class="admin-record-cards d-md-none">
+@foreach (var empresa in Model) {
+    <article class="card shadow-sm"><div class="card-body"><dl class="mb-0">
+        <dt>Imagem</dt><dd>@if (!string.IsNullOrWhiteSpace(empresa.ImagemUrl)) { <img src="@empresa.ImagemUrl" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:8px" /> }</dd>
+        <dt>Nome fantasia</dt><dd>@empresa.NomeFantasia</dd>
+        <dt>CNPJ</dt><dd>@empresa.Cnpj</dd>
+        <dt>Tipo</dt><dd>@Html.DisplayFor(_ => empresa.Tipo)</dd>
+        <dt>Telefone</dt><dd>@empresa.Telefone</dd>
+        <dt>Cidade</dt><dd>@empresa.Cidade</dd>
+        <dt>Situação</dt><dd>@Html.DisplayFor(_ => empresa.StatusCredenciamento)</dd>
+        </dl><div class="admin-record-actions border-top pt-3 mt-3" aria-label="Ações do registro">
+<a asp-action="Edit" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-primary">Editar</a> <a asp-action="Details" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-secondary">Ver detalhes</a>
+        </div></div></article>
+}
+</div>
+
 }

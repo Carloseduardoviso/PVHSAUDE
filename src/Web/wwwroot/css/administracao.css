@@ -10,13 +10,54 @@
 .admin-nav-link { display: block; padding: 12px 16px; margin-bottom: 8px; border-radius: 8px; color: #e0eee9; text-decoration: none; }
 .admin-nav-link:hover, .admin-nav-link.active { color: white; background: #28735f; }
 .admin-nav-link.active { font-weight: 600; }
-.admin-content { flex: 1; min-width: 0; }
+.admin-content { flex: 1; min-width: 0; max-width: 100%; }
+.admin-shell { min-height: 100dvh; }
+.admin-sidebar, .admin-content { overflow-wrap: anywhere; }
+.admin-content .card, .admin-content .row > *, .admin-content .d-flex > * { min-width: 0; }
+.admin-content .d-flex { flex-wrap: wrap; gap: .75rem; }
+.admin-content .form-control, .admin-content .form-select { min-width: 0; max-width: 100%; }
+.admin-content .btn { max-width: 100%; white-space: normal; }
+.admin-content .badge { white-space: normal; }
+.admin-content .table-responsive { width: 100%; max-width: 100%; overflow-x: auto; }
+.admin-content .table { min-width: 36rem; overflow-wrap: break-word; }
+.admin-content .table th, .admin-content .table td { vertical-align: middle; }
+.admin-content .table td { max-width: 24rem; overflow-wrap: anywhere; }
+.admin-content .table .btn { margin-block: .125rem; }
+.admin-content .table-responsive:focus-visible { outline: 2px solid #198754; outline-offset: 2px; }
 .admin-header { padding: 22px 28px; background: white; border-bottom: 1px solid #dfe7e3; font-weight: 600; }
-@media (max-width: 767.98px) {
+.usuario-cards, .admin-record-cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+.usuario-cards dt, .admin-record-cards dt { font-size: .875rem; color: #52645d; }
+.usuario-cards dd, .admin-record-cards dd { margin-bottom: .75rem; }
+.admin-record-cards dd:last-child { margin-bottom: 0; }
+.admin-record-cards img { max-width: 100%; }
+.admin-record-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.admin-record-actions > * { flex: 1 1 7rem; min-width: 0; }
+.admin-record-actions .btn { display: flex; align-items: center; justify-content: center; min-height: 44px; width: 100%; }
+.usuario-card-acoes .d-flex > * { flex: 1 1 7rem; }
+.usuario-card-acoes .btn { display: flex; align-items: center; justify-content: center; min-height: 44px; width: 100%; }
+@media (max-width: 991.98px) {
     .admin-shell { flex-direction: column; }
     .admin-sidebar { width: 100%; padding: 16px 20px; }
     .admin-caption { margin-bottom: 16px; }
     .admin-brand img { width: 80px; }
+    .admin-header { padding: 16px; }
+}
+
+@media (max-width: 575.98px) {
+    .admin-content .input-group { flex-direction: column; gap: .5rem; }
+    .admin-content .input-group > .form-control,
+    .admin-content .input-group > .btn { width: 100%; margin: 0; border-radius: .375rem !important; }
+}
+
+@media (max-width: 767.98px) {
+    .admin-list-panel { background: transparent; border: 0; box-shadow: none !important; }
+    .admin-content .btn { min-height: 44px; padding-block: .65rem; }
+    .admin-content .form-control, .admin-content .form-select { min-height: 44px; font-size: 16px; }
+    .admin-content main > .d-flex > .btn { width: 100%; }
+    .admin-content form > .mt-4 { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .admin-content form > .mt-4 > .btn { flex: 1 1 9rem; }
+    .admin-content dl.row > dt, .admin-content dl.row > dd { width: 100%; }
+    .admin-content dl.row > dd { margin-bottom: 1rem; }
 }
 
 .catalogo-multiselect {
@@ -34,7 +75,7 @@
 
 .catalogo-opcoes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
     gap: .5rem;
     padding: .75rem;
     border: 1px solid #dee2e6;
@@ -51,5 +92,6 @@
     user-select: none;
 }
 .catalogo-opcao:hover { background: #eaf6f0; }
-.catalogo-opcao input { width: 1.1rem; height: 1.1rem; accent-color: #198754; }
+.catalogo-opcao input { width: 1.1rem; height: 1.1rem; flex-shrink: 0; accent-color: #198754; }
+.catalogo-opcao, .catalogo-opcao span { min-width: 0; }
 .catalogo-opcao:has(input:checked) { background: #dff3e7; color: #146c43; font-weight: 600; }

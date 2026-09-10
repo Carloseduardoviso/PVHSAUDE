@@ -7,21 +7,34 @@
 else if (Model.Count == 0) { <p class="text-muted">Nenhum usuário cadastrado.</p> }
 else
 {
-    <div class="card table-responsive"><table class="table table-striped mb-0"><thead><tr><th scope="col">Nome completo</th><th scope="col">E-mail</th><th scope="col">Permissão</th><th scope="col">Status</th><th scope="col">Ações</th></tr></thead><tbody>
+    <div class="card table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros; role horizontalmente para ver todas as colunas" tabindex="0"><table class="table table-striped mb-0"><thead><tr><th scope="col">Nome completo</th><th scope="col">E-mail</th><th scope="col">Permissão</th><th scope="col">Status</th><th scope="col">Ações</th></tr></thead><tbody>
     @foreach (var usuario in Model)
     {
         <tr><td>@usuario.NomeCompleto</td><td>@usuario.Email</td><td>@usuario.Role</td><td><span class="badge @(usuario.Ativo ? "bg-success" : "bg-secondary")">@(usuario.Ativo ? "Ativo" : "Inativo")</span></td>
-        <td><div class="d-flex gap-2 flex-wrap">
-            <a asp-action="Edit" asp-route-id="@usuario.UsuarioId" class="btn btn-sm btn-outline-primary">Editar</a>
-            <form asp-action="@(usuario.Ativo ? "Inativar" : "Ativar")" asp-route-id="@usuario.UsuarioId" method="post">
-                <button class="btn btn-sm btn-outline-warning" type="submit">@(usuario.Ativo ? "Inativar" : "Reativar")</button>
-            </form>
-            <form asp-action="Excluir" asp-route-id="@usuario.UsuarioId" method="post" data-confirmar-exclusao data-usuario="@usuario.NomeCompleto">
-                <button class="btn btn-sm btn-outline-danger" type="submit">Excluir</button>
-            </form>
-        </div></td></tr>
+        <td><partial name="_Acoes" model="usuario" /></td></tr>
     }
     </tbody></table></div>
+    <div class="usuario-cards d-md-none">
+        @foreach (var usuario in Model)
+        {
+            <article class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="h5 mb-3">@usuario.NomeCompleto</h2>
+                    <dl class="mb-3">
+                        <dt>E-mail</dt>
+                        <dd>@usuario.Email</dd>
+                        <dt>Permissão</dt>
+                        <dd>@usuario.Role</dd>
+                        <dt>Status</dt>
+                        <dd><span class="badge @(usuario.Ativo ? "bg-success" : "bg-secondary")">@(usuario.Ativo ? "Ativo" : "Inativo")</span></dd>
+                    </dl>
+                    <div class="usuario-card-acoes border-top pt-3">
+                        <partial name="_Acoes" model="usuario" />
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
 }
 @section Scripts {
     <script src="~/lib/sweetalert2/sweetalert2.all.min.js" asp-append-version="true"></script>

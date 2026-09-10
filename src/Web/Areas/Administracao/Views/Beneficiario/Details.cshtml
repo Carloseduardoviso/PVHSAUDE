@@ -25,13 +25,25 @@
     <h2 class="h5 mb-3">Dependentes (@Model.Dependentes.Count)</h2>
     @if (Model.Dependentes.Any())
     {
-        <div class="table-responsive"><table class="table mb-0">
+        <div class="table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros; role horizontalmente para ver todas as colunas" tabindex="0"><table class="table mb-0">
             <thead><tr><th>Nome</th><th>CPF</th><th>Data de nascimento</th><th>Parentesco</th></tr></thead>
             <tbody>@foreach (var dependente in Model.Dependentes)
             {
                 <tr><td>@dependente.Nome</td><td>@dependente.Cpf</td><td>@(dependente.DataNascimento?.ToString("dd/MM/yyyy"))</td><td>@Html.DisplayFor(_ => dependente.GrauParentesco)</td></tr>
             }</tbody>
         </table></div>
+<div class="admin-record-cards d-md-none">
+@foreach (var dependente in Model.Dependentes)
+            {
+    <article class="card shadow-sm"><div class="card-body"><dl class="mb-0">
+        <dt>Nome</dt><dd>@dependente.Nome</dd>
+        <dt>CPF</dt><dd>@dependente.Cpf</dd>
+        <dt>Data de nascimento</dt><dd>@(dependente.DataNascimento?.ToString("dd/MM/yyyy"))</dd>
+        <dt>Parentesco</dt><dd>@Html.DisplayFor(_ => dependente.GrauParentesco)</dd>
+    </dl></div></article>
+}
+</div>
+
     }
     else { <p class="text-muted mb-0">Nenhum dependente cadastrado.</p> }
 </div></div>

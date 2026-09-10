@@ -14,8 +14,8 @@
         <aside class="admin-sidebar">
             <a class="admin-brand" asp-area="Administracao" asp-controller="Dashboard" asp-action="Index" aria-label="PVH Saúde — início da administração"><img src="~/images/pvh-saude-circular.jpeg" asp-append-version="true" alt="PVH Saúde" width="1024" height="1024" /></a>
             <p class="admin-caption">Área administrativa</p>
-            <button class="btn btn-outline-light d-md-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#admin-menu" aria-controls="admin-menu" aria-expanded="false">Menu</button>
-            <nav id="admin-menu" class="collapse d-md-block" aria-label="Menu administrativo">
+            <button class="btn btn-outline-light d-lg-none mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#admin-menu" aria-controls="admin-menu" aria-expanded="false">Menu</button>
+            <nav id="admin-menu" class="collapse d-lg-block" aria-label="Menu administrativo">
                 <a class="admin-nav-link @(controller == "Dashboard" ? "active" : "")" aria-current="@(controller == "Dashboard" ? "page" : null)" asp-area="Administracao" asp-controller="Dashboard" asp-action="Index">Home</a>
                 @foreach (var menu in PVHSAUDE.Domain.Enuns.MenusAdministrativos.Opcoes)
                 {
