@@ -20,23 +20,23 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddScoped<Web.Services.UsuarioCookieEvents>();
 builder.Services.AddAuthorization();
 builder.Services.AddHttpClient<BannerApiClient>(client =>
-    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 builder.Services.AddHttpClient<ContatoApiClient>(client =>
-    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 builder.Services.AddHttpClient<UsuarioApiClient>(client =>
-    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 // Infra.Auth services depend on these framework services.
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<ApiAuthenticationHandler>();
 builder.Services.ConfigureHttpClientDefaults(http => http.AddHttpMessageHandler<ApiAuthenticationHandler>());
 builder.Services.AddHttpClient();
-builder.Services.AddHttpClient("default", client => client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
+builder.Services.AddHttpClient("default", client => client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 builder.Services.AddHttpClient<IBeneficiarioApiClient, BeneficiarioApiClient>(client =>
-    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 builder.Services.AddHttpClient<PlanoApiClient>(client =>
-    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 builder.Services.AddHttpClient<CredenciadoApiClient>(client =>
-    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:7283/"));
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 builder.Services.AddInfrastructure();
 
 var app = builder.Build();

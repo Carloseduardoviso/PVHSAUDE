@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
@@ -9,42 +9,73 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="portal-body">
     <header>
-        <nav class="navbar navbar-expand-lg portal-navbar">
-            <div class="container portal-navbar-inner">
+        <nav class="navbar navbar-expand-xl portal-navbar">
+            <div class="container-fluid portal-navbar-inner">
                 <a class="navbar-brand portal-brand" asp-area="" asp-controller="Home" asp-action="Index" aria-label="PVH Saúde — início"><img src="~/images/pvh-saude-horizontal.jpeg" asp-append-version="true" alt="PVH Saúde — descontos e benefícios" width="998" height="548" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Abrir ou fechar menu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div id="navbarSupportedContent" class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div id="navbarSupportedContent" class="navbar-collapse collapse justify-content-between">
                     <ul class="navbar-nav portal-nav-links">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Início</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Credenciadas">Empresas credenciadas</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Credenciadas">Clínica Terapêutica Credenciada</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" id="clinica-parceira-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                                Clínica Parceira
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="clinica-parceira-menu">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="ClinicaTerapeutica">Clínica Terapêutica</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="ClinicaMedicaTerapeutica">Clínica Médica Terapêutica</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="LaboratorioExames">Laboratório e Exames</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Odontologia">Odontologia</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="ClinicasPopulares">Clínicas Populares</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" id="esporte-parceiros-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                                Esporte Parceiros
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="esporte-parceiros-menu">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Sports" asp-action="Academia">Academia</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Sports" asp-action="Futebol">Futebol</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Sports" asp-action="Natacao">Natação</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" id="loja-parceiras-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                                Loja Parceiras
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="loja-parceiras-menu">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Lojas" asp-action="Otica">Ótica</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Lojas" asp-action="RoupaEsportiva">Roupa Esportiva</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Contato" asp-action="Index">Contato</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Sports" asp-action="Index">Sports</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="SobreNos">Sobre Nós</a>
                         </li>
                     </ul>
-                    <a asp-area="Administracao" asp-controller="Dashboard" asp-action="Index" class="btn portal-admin-button ms-lg-3 my-2 my-lg-0 text-nowrap">Área administrativa</a>
+                    <a asp-area="Administracao" asp-controller="Dashboard" asp-action="Index" class="btn portal-admin-button ms-xl-3 my-2 my-xl-0 text-nowrap">Área administrativa</a>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container portal-content">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer portal-footer">
         <div class="container">
             &copy; 2026 - PVH Saúde - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

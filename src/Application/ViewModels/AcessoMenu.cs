@@ -6,7 +6,7 @@ public static class AcessoMenu
 {
     public const string Claim = "menu";
     public static bool PodeAcessar(ClaimsPrincipal user, string menu) =>
-        user.Identity?.IsAuthenticated == true && (user.IsInRole(nameof(Role.Administrador)) || user.HasClaim(Claim, menu));
+        user.Identity?.IsAuthenticated == true && user.HasClaim(Claim, menu);
 
     public static void Atualizar(ClaimsIdentity identity, IEnumerable<string> menus)
     {

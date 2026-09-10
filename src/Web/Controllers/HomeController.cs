@@ -75,6 +75,18 @@ namespace Web.Controllers
             return model;
         }
 
+        public IActionResult ClinicaTerapeutica() => View();
+
+        public IActionResult ClinicaMedicaTerapeutica() => View();
+
+        public IActionResult LaboratorioExames() => View();
+
+        public IActionResult Odontologia() => View();
+
+        public IActionResult ClinicasPopulares() => View();
+
+        public IActionResult SobreNos() => View();
+
         public IActionResult Privacy()
         {
             return View();

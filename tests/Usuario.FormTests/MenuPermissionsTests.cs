@@ -32,7 +32,7 @@ public static class MenuPermissionsTests
                 if (permitido) identity.AddClaim(new Claim(AcessoMenu.Claim, menu));
                 var ctx = Context(controller, action, method, new ClaimsPrincipal(identity));
                 new MenuApiFilter().OnAuthorization(ctx);
-                if ((ctx.Result is null) != (permitido || role == "Administrador"))
+                if ((ctx.Result is null) != permitido)
                     throw new Exception($"Falha de autorização: {controller}, {role}, permitido={permitido}");
             }
         }

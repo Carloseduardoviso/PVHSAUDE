@@ -2,7 +2,7 @@
 @using PVHSAUDE.Domain.Enuns
 <fieldset class="mb-4">
     <legend class="h6">Menus permitidos</legend>
-    <p class="form-text">Marque os menus que o usuário poderá acessar. A Home está disponível para todos. Administradores têm acesso completo, incluindo Usuários, independentemente desta seleção. Menus novos cadastrados no registro administrativo aparecem aqui automaticamente.</p>
+    <p class="form-text">Marque os menus que o usuário poderá acessar. A Home está disponível para todos. A seleção também se aplica aos Administradores. Sem seleção, nenhum dos menus abaixo será exibido. O cadastro de Usuários é exclusivo de Administradores. Menus novos cadastrados no registro administrativo aparecem aqui automaticamente.</p>
     <div class="row g-2">
     @foreach (var menu in MenusAdministrativos.Opcoes)
     {

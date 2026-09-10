@@ -124,6 +124,22 @@ using (var forbidden = await client.GetAsync("/Administracao/Banner"))
 transport.Menus = [];
 inicio = await client.GetStringAsync("/Administracao");
 Check(!inicio.Contains("href=\"/Administracao/Contato\""), "Nenhum menu selecionado mantém somente Home.");
+foreach (var role in new[] { Role.Comum, Role.Gestor, Role.Administrador })
+{
+    transport.Menus = [];
+    using var loginSemMenus = await Login(role);
+    var paginaSemMenus = await client.GetStringAsync("/Administracao");
+    foreach (var menu in MenusAdministrativos.Opcoes.Keys)
+    {
+        var destino = menu is "Especialidades" or "Procedimentos" ? "Catalogo/" + menu : menu;
+        Check(!paginaSemMenus.Contains("href=\"/Administracao/" + destino + "\""), "Menu não selecionado oculto: " + role + "/" + menu);
+    }
+    using var acessoSemMenu = await client.GetAsync("/Administracao/Contato");
+    Check(acessoSemMenu.StatusCode == HttpStatusCode.Redirect && acessoSemMenu.Headers.Location!.OriginalString.Contains("AcessoNegado"), "Acesso direto sem permissão bloqueado: " + role);
+    transport.Menus = ["Contato"];
+    var paginaComMenu = await client.GetStringAsync("/Administracao");
+    Check(paginaComMenu.Contains("href=\"/Administracao/Contato\"") && !paginaComMenu.Contains("href=\"/Administracao/Banner\""), "Seleção respeitada após atualização: " + role);
+}
 await MenuPermissionsTests.Run();
 await app.StopAsync();
 

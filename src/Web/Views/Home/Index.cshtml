@@ -10,10 +10,6 @@
     <section class="mb-5" aria-labelledby="rede-titulo">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <div><h2 id="rede-titulo" class="h3 mb-1">Empresas credenciadas</h2><p class="text-muted mb-0">Conheça quem faz parte da nossa rede.</p></div>
-            @if (Model.Empresas.Count > 1)
-            {
-                <button id="rede-pausar" class="btn btn-outline-success btn-sm" type="button" aria-pressed="false">Pausar</button>
-            }
         </div>
         <div id="rede-carousel" class="carousel slide rede-carousel" data-bs-interval="5000" data-bs-wrap="true" role="region" aria-roledescription="carrossel" aria-label="Empresas credenciadas">
             <div class="carousel-inner">
@@ -25,31 +21,10 @@
                     </div>
                 }
             </div>
-            @if (Model.Empresas.Count > 1)
-            {
-                <button class="carousel-control-prev" type="button" data-bs-target="#rede-carousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Empresa anterior</span></button>
-                <button class="carousel-control-next" type="button" data-bs-target="#rede-carousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Próxima empresa</span></button>
-            }
+
         </div>
     </section>
 }
-<h2 class="h3 mb-3">Encontre o que precisa</h2>
-<div class="row g-3">
-@foreach (var item in new[] { "Clínicas terapêuticas credenciadas", "Clínicas parceiras", "Clínicos médicos e especialidades", "Laboratórios e exames", "Exames de imagem", "Odontologia", "Clínicos populares", "Esporte e parceiros", "Lojas parceiras" })
-{
-    <div class="col-md-4"><div class="card h-100 shadow-sm"><div class="card-body">
-        @if (item == "Clínicas terapêuticas credenciadas")
-        {
-            <h3 class="h5"><a asp-controller="Home" asp-action="Credenciadas" class="stretched-link text-success">@item</a></h3>
-            <p class="text-muted mb-0">Conheça as empresas, especialidades, procedimentos e planos da nossa rede.</p>
-        }
-        else
-        {
-            <h3 class="h5">@item</h3><p class="text-muted mb-0">Em breve, consulte os parceiros disponíveis.</p>
-        }
-    </div></div></div>
-}
-</div>
 @section Scripts {
     <script src="~/js/portal-carousel.js" asp-append-version="true"></script>
 }
