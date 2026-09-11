@@ -1,4 +1,3 @@
-using PVHSAUDE.Infra.Ioc;
 using Web.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -25,7 +24,7 @@ builder.Services.AddHttpClient<ContatoApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 builder.Services.AddHttpClient<UsuarioApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
-// Infra.Auth services depend on these framework services.
+// API clients use the current HTTP context to forward authentication.
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<ApiAuthenticationHandler>();
 builder.Services.ConfigureHttpClientDefaults(http => http.AddHttpMessageHandler<ApiAuthenticationHandler>());
@@ -40,7 +39,6 @@ builder.Services.AddHttpClient<PlanoApiClient>(client =>
 
 builder.Services.AddHttpClient<CredenciadoApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
-builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 
