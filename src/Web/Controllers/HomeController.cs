@@ -40,9 +40,9 @@ namespace Web.Controllers
         public async Task<IActionResult> Credenciadas(CancellationToken cancellationToken)
             => View(await CarregarRede(cancellationToken));
 
-        private async Task<PortalViewModel> CarregarRede(CancellationToken cancellationToken)
+        private async Task<PortalVm> CarregarRede(CancellationToken cancellationToken)
         {
-            var model = new PortalViewModel();
+            var model = new PortalVm();
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             timeout.CancelAfter(TimeSpan.FromSeconds(5));
             try
@@ -95,7 +95,7 @@ namespace Web.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorVm { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

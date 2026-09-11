@@ -5,32 +5,32 @@ namespace Web.Services;
 
 public class CredenciadoApiClient(HttpClient client)
 {
-    public async Task<IReadOnlyCollection<CatalogoItemViewModel>> EspecialidadesAsync(CancellationToken ct)
+    public async Task<IReadOnlyCollection<CatalogoItemVm>> EspecialidadesAsync(CancellationToken ct)
     {
-        return await client.GetFromJsonAsync<List<CatalogoItemViewModel>>("api/especialidades", ct) ?? [];
+        return await client.GetFromJsonAsync<List<CatalogoItemVm>>("api/especialidades", ct) ?? [];
     }
 
-    public async Task<IReadOnlyCollection<CatalogoItemViewModel>> ProcedimentosAsync(CancellationToken ct)
+    public async Task<IReadOnlyCollection<CatalogoItemVm>> ProcedimentosAsync(CancellationToken ct)
     {
-        return await client.GetFromJsonAsync<List<CatalogoItemViewModel>>("api/procedimentos", ct) ?? [];
+        return await client.GetFromJsonAsync<List<CatalogoItemVm>>("api/procedimentos", ct) ?? [];
     }
 
-    public async Task<IReadOnlyCollection<CredenciadoViewModel>> ListarAsync(CancellationToken ct)
+    public async Task<IReadOnlyCollection<CredenciadoVm>> ListarAsync(CancellationToken ct)
     {
-        return await client.GetFromJsonAsync<List<CredenciadoViewModel>>("api/credenciados", ct) ?? [];
+        return await client.GetFromJsonAsync<List<CredenciadoVm>>("api/credenciados", ct) ?? [];
     }
 
-    public async Task<CredenciadoViewModel?> ObterAsync(Guid id, CancellationToken ct)
+    public async Task<CredenciadoVm?> ObterAsync(Guid id, CancellationToken ct)
     {
         using var response = await client.GetAsync($"api/credenciados/{id}", ct);
 
         if (response.StatusCode == HttpStatusCode.NotFound) return null;
         await Verificar(response, ct);
 
-        return await response.Content.ReadFromJsonAsync<CredenciadoViewModel>(ct);
+        return await response.Content.ReadFromJsonAsync<CredenciadoVm>(ct);
     }
 
-    public async Task SalvarAsync(CredenciadoViewModel model, CancellationToken ct)
+    public async Task SalvarAsync(CredenciadoVm model, CancellationToken ct)
     {
         using var response = model.Id == Guid.Empty
             ? await client.PostAsJsonAsync("api/credenciados", model, ct)

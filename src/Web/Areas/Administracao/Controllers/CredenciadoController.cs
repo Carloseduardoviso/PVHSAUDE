@@ -10,12 +10,12 @@ public class CredenciadoController(CredenciadoApiClient credenciados, PlanoApiCl
     public async Task<IActionResult> Index(CancellationToken ct)
     {
         try { return View(await credenciados.ListarAsync(ct)); }
-        catch (HttpRequestException) { ViewData["Error"] = "Não foi possível carregar os credenciados. Verifique se a API está disponível."; return View(Array.Empty<CredenciadoViewModel>()); }
+        catch (HttpRequestException) { ViewData["Error"] = "Não foi possível carregar os credenciados. Verifique se a API está disponível."; return View(Array.Empty<CredenciadoVm>()); }
     }
 
     [HttpGet]
     private async Task Catalogos(CancellationToken ct) { ViewBag.Planos = (await planos.ListarAsync(ct)).Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(x.Nome + " — " + x.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")), x.Id.ToString())).ToList(); ViewBag.Especialidades = await credenciados.EspecialidadesAsync(ct); ViewBag.Procedimentos = await credenciados.ProcedimentosAsync(ct); }
-    public async Task<IActionResult> Create(CancellationToken ct) { await Catalogos(ct); return View(new CredenciadoViewModel()); }
+    public async Task<IActionResult> Create(CancellationToken ct) { await Catalogos(ct); return View(new CredenciadoVm()); }
 
     [HttpGet]
     public async Task<IActionResult> Details(Guid id, CancellationToken ct)
@@ -26,7 +26,7 @@ public class CredenciadoController(CredenciadoApiClient credenciados, PlanoApiCl
     }
 
     [HttpPost, ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(CredenciadoViewModel model, CancellationToken ct)
+    public async Task<IActionResult> Create(CredenciadoVm model, CancellationToken ct)
     {
         model.Id = Guid.Empty;
         await Catalogos(ct);
@@ -54,7 +54,7 @@ public class CredenciadoController(CredenciadoApiClient credenciados, PlanoApiCl
     }
 
     [HttpPost, ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(CredenciadoViewModel model, CancellationToken ct)
+    public async Task<IActionResult> Edit(CredenciadoVm model, CancellationToken ct)
     {
         if (model.Id == Guid.Empty) return BadRequest();
         await Catalogos(ct);

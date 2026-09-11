@@ -5,30 +5,30 @@ namespace Web.Services;
 
 public class BeneficiarioApiClient(HttpClient httpClient) 
 {
-    public async Task<IReadOnlyCollection<BeneficiarioViewModel>> ListarAsync(CancellationToken cancellationToken = default)
+    public async Task<IReadOnlyCollection<BeneficiarioVm>> ListarAsync(CancellationToken cancellationToken = default)
     {
-        return await httpClient.GetFromJsonAsync<List<BeneficiarioViewModel>>("api/beneficiarios", cancellationToken) ?? [];
+        return await httpClient.GetFromJsonAsync<List<BeneficiarioVm>>("api/beneficiarios", cancellationToken) ?? [];
     }
 
-    public async Task<BeneficiarioViewModel?> ObterAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<BeneficiarioVm?> ObterAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var response = await httpClient.GetAsync($"api/beneficiarios/{id}", cancellationToken);
 
         if (response.StatusCode == HttpStatusCode.NotFound) return null;
         await GarantirSucesso(response);
 
-        return await response.Content.ReadFromJsonAsync<BeneficiarioViewModel>(cancellationToken);
+        return await response.Content.ReadFromJsonAsync<BeneficiarioVm>(cancellationToken);
     }
 
-    public async Task CriarAsync(BeneficiarioViewModel model, CancellationToken cancellationToken = default)
+    public async Task CriarAsync(BeneficiarioVm model, CancellationToken cancellationToken = default)
     {
         var response = await httpClient.PostAsJsonAsync("api/beneficiarios", model, cancellationToken);
         await GarantirSucesso(response);
     }
 
-    public async Task AtualizarAsync(BeneficiarioViewModel model, CancellationToken cancellationToken = default)
+    public async Task AtualizarAsync(BeneficiarioVm model, CancellationToken cancellationToken = default)
     {
-        var response = await httpClient.PutAsJsonAsync($"api/beneficiarios/{model.Id}", model, cancellationToken);
+        var response = await httpClient.PutAsJsonAsync($"api/beneficiarios/{model.BeneficiarioId}", model, cancellationToken);
         await GarantirSucesso(response);
     }
 

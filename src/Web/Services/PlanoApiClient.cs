@@ -5,20 +5,20 @@ namespace Web.Services;
 
 public class PlanoApiClient(HttpClient client)
 {
-    public async Task<IReadOnlyCollection<PlanoViewModel>> ListarAsync(CancellationToken ct)
+    public async Task<IReadOnlyCollection<PlanoVm>> ListarAsync(CancellationToken ct)
     {
-       return await client.GetFromJsonAsync<List<PlanoViewModel>>("api/planos", ct) ?? [];
+       return await client.GetFromJsonAsync<List<PlanoVm>>("api/planos", ct) ?? [];
     }
 
-    public async Task<PlanoViewModel?> ObterAsync(Guid id, CancellationToken ct)
+    public async Task<PlanoVm?> ObterAsync(Guid id, CancellationToken ct)
     {
         using var response = await client.GetAsync($"api/planos/{id}", ct);
         if (response.StatusCode == HttpStatusCode.NotFound) return null;
         await Verificar(response, ct);
-        return await response.Content.ReadFromJsonAsync<PlanoViewModel>(ct);
+        return await response.Content.ReadFromJsonAsync<PlanoVm>(ct);
     }
 
-    public async Task SalvarAsync(PlanoViewModel model, CancellationToken ct)
+    public async Task SalvarAsync(PlanoVm model, CancellationToken ct)
     {
         using var response = model.Id == Guid.Empty
             ? await client.PostAsJsonAsync("api/planos", model, ct)

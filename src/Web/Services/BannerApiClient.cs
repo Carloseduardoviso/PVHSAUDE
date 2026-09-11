@@ -4,19 +4,19 @@ namespace Web.Services;
 
 public class BannerApiClient(HttpClient http)
 {
-    public async Task<List<BannerViewModel>> ListarAsync(bool ativos, CancellationToken ct)
+    public async Task<List<BannerVm>> ListarAsync(bool ativos, CancellationToken ct)
     {
-        return await http.GetFromJsonAsync<List<BannerViewModel>>(ativos ? "api/banners/ativos" : "api/banners", ct) ?? [];
+        return await http.GetFromJsonAsync<List<BannerVm>>(ativos ? "api/banners/ativos" : "api/banners", ct) ?? [];
     }
 
-    public async Task<BannerViewModel?> ObterAsync(Guid id, CancellationToken ct)
+    public async Task<BannerVm?> ObterAsync(Guid id, CancellationToken ct)
     {
         using var response = await http.GetAsync($"api/banners/{id}", ct);
 
         if (response.StatusCode == HttpStatusCode.NotFound) return null;
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<BannerViewModel>(ct);
+        return await response.Content.ReadFromJsonAsync<BannerVm>(ct);
     }
 
     public async Task<(byte[] Bytes, string Tipo)?> ImagemAsync(Guid id, CancellationToken ct)
@@ -29,7 +29,7 @@ public class BannerApiClient(HttpClient http)
         return (await response.Content.ReadAsByteArrayAsync(ct), response.Content.Headers.ContentType?.MediaType ?? "application/octet-stream");
     }
 
-    public async Task<string?> SalvarAsync(BannerViewModel model, CancellationToken ct)
+    public async Task<string?> SalvarAsync(BannerVm model, CancellationToken ct)
     {
         using var content = new MultipartFormDataContent();
 
@@ -39,7 +39,7 @@ public class BannerApiClient(HttpClient http)
         if (model.Imagem is { } imagem)
             content.Add(new StreamContent(imagem.OpenReadStream()), "Imagem", Path.GetFileName(imagem.FileName));
 
-        using var request = new HttpRequestMessage(model.Id == Guid.Empty ? HttpMethod.Post : HttpMethod.Put, model.Id == Guid.Empty ? "api/banners" : $"api/banners/{model.Id}")
+        using var request = new HttpRequestMessage(model.BannerId == Guid.Empty ? HttpMethod.Post : HttpMethod.Put, model.BannerId == Guid.Empty ? "api/banners" : $"api/banners/{model.BannerId}")
         {
             Content = content
         };

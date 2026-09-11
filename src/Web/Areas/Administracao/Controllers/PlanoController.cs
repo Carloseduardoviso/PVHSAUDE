@@ -10,14 +10,14 @@ public class PlanoController(PlanoApiClient planos) : Controller
     public async Task<IActionResult> Index(CancellationToken ct)
     {
         try { return View(await planos.ListarAsync(ct)); }
-        catch (HttpRequestException) { ViewData["Error"] = "Não foi possível carregar os planos. Verifique se a API está disponível."; return View(Array.Empty<PlanoViewModel>()); }
+        catch (HttpRequestException) { ViewData["Error"] = "Não foi possível carregar os planos. Verifique se a API está disponível."; return View(Array.Empty<PlanoVm>()); }
     }
 
     [HttpGet]
-    public IActionResult Create() => View(new PlanoViewModel());
+    public IActionResult Create() => View(new PlanoVm());
 
     [HttpPost, ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(PlanoViewModel model, CancellationToken ct)
+    public async Task<IActionResult> Create(PlanoVm model, CancellationToken ct)
     {
         model.Id = Guid.Empty;
         if (!ModelState.IsValid) return View(model);
@@ -35,7 +35,7 @@ public class PlanoController(PlanoApiClient planos) : Controller
     }
 
     [HttpPost, ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(PlanoViewModel model, CancellationToken ct)
+    public async Task<IActionResult> Edit(PlanoVm model, CancellationToken ct)
     {
         if (model.Id == Guid.Empty) return BadRequest();
         if (!ModelState.IsValid) return View(model);

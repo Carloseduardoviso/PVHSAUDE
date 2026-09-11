@@ -14,13 +14,13 @@ public class BeneficiarioController(BeneficiarioApiClient beneficiarios, PlanoAp
     public async Task<IActionResult> Create(CancellationToken cancellationToken)
     {
         await CarregarPlanos(cancellationToken);
-        return View(new BeneficiarioViewModel());
+        return View(new BeneficiarioVm());
     }
 
     private async Task CarregarPlanos(CancellationToken ct)
     {
-        ViewBag.EmpresasDisponiveis = new List<CredenciadoViewModel>();
-        ViewBag.PlanosDisponiveis = new List<PlanoViewModel>();
+        ViewBag.EmpresasDisponiveis = new List<CredenciadoVm>();
+        ViewBag.PlanosDisponiveis = new List<PlanoVm>();
         ViewBag.Empresas = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
         try
         {
@@ -40,16 +40,16 @@ public class BeneficiarioController(BeneficiarioApiClient beneficiarios, PlanoAp
         }
     }
 
-    private void DefinirPlanoEmpresa(BeneficiarioViewModel model)
+    private void DefinirPlanoEmpresa(BeneficiarioVm model)
     {
-        var empresa = ((IEnumerable<CredenciadoViewModel>)ViewBag.EmpresasDisponiveis).FirstOrDefault(x => x.Id == model.CredenciadoId);
+        var empresa = ((IEnumerable<CredenciadoVm>)ViewBag.EmpresasDisponiveis).FirstOrDefault(x => x.Id == model.CredenciadoId);
         ModelState.Remove(nameof(model.PlanoId));
         model.PlanoId = empresa?.PlanoId ?? Guid.Empty;
         if (model.PlanoId == Guid.Empty) ModelState.AddModelError(nameof(model.CredenciadoId), "Selecione uma empresa com plano cadastrado.");
     }
 
     [HttpPost, ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(BeneficiarioViewModel model, CancellationToken cancellationToken)
+    public async Task<IActionResult> Create(BeneficiarioVm model, CancellationToken cancellationToken)
     {
         await CarregarPlanos(cancellationToken);
         DefinirPlanoEmpresa(model);
@@ -70,7 +70,7 @@ public class BeneficiarioController(BeneficiarioApiClient beneficiarios, PlanoAp
     }
 
     [HttpPost, ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(BeneficiarioViewModel model, CancellationToken cancellationToken)
+    public async Task<IActionResult> Edit(BeneficiarioVm model, CancellationToken cancellationToken)
     {
         await CarregarPlanos(cancellationToken);
         DefinirPlanoEmpresa(model);
