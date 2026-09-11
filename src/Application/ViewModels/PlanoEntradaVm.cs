@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using PVHSAUDE.Domain.Enuns;
 
-namespace PVHSAUDE.Api.Contracts;
+namespace PVHSAUDE.Application.ViewModels;
 
-public class PlanoRequest
+public class PlanoEntradaVm
 {
     [Required, StringLength(150)] public string Nome { get; set; } = string.Empty;
     [StringLength(1000)] public string? Descricao { get; set; }
@@ -12,4 +12,4 @@ public class PlanoRequest
     [DataType(DataType.Date)] public DateTime? DataValidade { get; set; }
 }
 
-public record PlanoResponse(Guid Id, string Nome, string? Descricao, decimal Valor, Periodicidade Periodicidade, DateTime? DataValidade);
+public record PlanoRespostaVm(Guid Id, string Nome, string? Descricao, decimal Valor, Periodicidade Periodicidade, DateTime? DataValidade);

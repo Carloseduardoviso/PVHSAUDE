@@ -39,6 +39,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthenticationConfig();
 builder.Services.AddInfrastructure();
+builder.Services.AddApplicationServices();
+builder.Services.AddScoped<IImagemStorage, PVHSAUDE.Api.Services.ImagemStorage>();
 
 builder.Services.AddConfigRatesLimiter();
 builder.Services.AddHttpContextAccessor();

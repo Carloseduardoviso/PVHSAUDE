@@ -1,14 +1,12 @@
-using Infra.Data.Base;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PVHSAUDE.Api.Contracts;
-using PVHSAUDE.Domain.Entities;
-
+using Microsoft.AspNetCore.Authorization;
+using PVHSAUDE.Application.Interface;
+using PVHSAUDE.Application.ViewModels;
 namespace PVHSAUDE.Api.Controllers;
 
 [ApiController, Route("api/procedimentos")]
-public class ProcedimentosController(Context db) : ControllerBase
+public class ProcedimentosController(ICatalogoService service) : ServiceController
 {
- [HttpGet] public async Task<IActionResult> Get(CancellationToken ct)=>Ok(await db.Procedimentos.AsNoTracking().Where(x=>x.Ativo).OrderBy(x=>x.Nome).Select(x=>new ProcedimentoResponse(x.Id,x.Nome,x.Ativo)).ToListAsync(ct));
- [Microsoft.AspNetCore.Authorization.Authorize, HttpPost] public async Task<IActionResult> Post(CatalogoRequest r,CancellationToken ct){var x=new Procedimento(r.Nome);db.Procedimentos.Add(x);await db.SaveChangesAsync(ct);return Ok(new ProcedimentoResponse(x.Id,x.Nome,x.Ativo));}
+    [HttpGet] public Task<IActionResult> Get(CancellationToken ct) => Executar(async () => Ok(await service.ProcedimentosAsync(ct)));
+    [Authorize, HttpPost] public Task<IActionResult> Post(CatalogoEntradaVm vm, CancellationToken ct) => Executar(async () => Ok(await service.CriarProcedimentoAsync(vm, ct)));
 }

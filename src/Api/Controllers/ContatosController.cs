@@ -1,8 +1,16 @@
-using Infra.Data.Base; using Microsoft.AspNetCore.Authorization; using Microsoft.AspNetCore.Mvc; using Microsoft.EntityFrameworkCore; using PVHSAUDE.Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using PVHSAUDE.Application.Interface;
+using PVHSAUDE.Application.ViewModels;
 namespace PVHSAUDE.Api.Controllers;
-[ApiController,Route("api/contatos")] public class ContatosController(Context db):ControllerBase{
-[HttpGet,Authorize] public async Task<IActionResult> Listar(CancellationToken ct)=>Ok(await db.Set<Contato>().AsNoTracking().OrderByDescending(x=>x.EnviadoEm).ToListAsync(ct));
-[HttpGet("{id:guid}"),Authorize] public async Task<IActionResult> Obter(Guid id,CancellationToken ct){var c=await db.Set<Contato>().AsNoTracking().SingleOrDefaultAsync(x=>x.Id==id,ct);return c is null?NotFound():Ok(c);}
-[HttpDelete("{id:guid}"),Authorize] public async Task<IActionResult> Excluir(Guid id,CancellationToken ct){var c=await db.Set<Contato>().FindAsync(new object[]{id},ct);if(c is null)return NotFound();db.Remove(c);await db.SaveChangesAsync(ct);return NoContent();}
-[HttpPost,AllowAnonymous] public async Task<IActionResult> Criar(Contato contato,CancellationToken ct){contato.Id=Guid.NewGuid();contato.EnviadoEm=DateTime.UtcNow;db.Add(contato);await db.SaveChangesAsync(ct);return Ok();}
+
+[ApiController, Route("api/contatos")]
+public class ContatosController(IContatoService service) : ServiceController
+{
+    [HttpGet, Authorize] public Task<IActionResult> Listar(CancellationToken ct) => Executar(async () => Ok(await service.ListarAsync(ct)));
+    [HttpGet("{id:guid}"), Authorize] public Task<IActionResult> Obter(Guid id, CancellationToken ct) => Executar(async () => Ok(await service.ObterAsync(id, ct)));
+    [HttpDelete("{id:guid}"), Authorize] public Task<IActionResult> Excluir(Guid id, CancellationToken ct) => Executar(async () =>
+    { await service.ExcluirAsync(id, ct); return NoContent(); });
+    [HttpPost, AllowAnonymous] public Task<IActionResult> Criar(ContatoEntradaVm vm, CancellationToken ct) => Executar(async () =>
+    { await service.CriarAsync(vm, ct); return Ok(); });
 }

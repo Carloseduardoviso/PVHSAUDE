@@ -12,6 +12,8 @@ using Web.Services;
 
 if (args.Contains("--database")) { await UsuarioDatabaseTests.Run(); return; }
 
+AutoMapperTests.Run();
+
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { ApplicationName = typeof(ContaController).Assembly.FullName });
 builder.Logging.ClearProviders();
 builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();

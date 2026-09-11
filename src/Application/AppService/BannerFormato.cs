@@ -1,5 +1,5 @@
 using System.Buffers.Binary;
-namespace PVHSAUDE.Api.Configs;
+namespace PVHSAUDE.Application.AppService;
 
 public static class BannerFormato
 {

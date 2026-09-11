@@ -2,9 +2,9 @@ using PVHSAUDE.Domain.Validation;
 using PVHSAUDE.Domain.Enuns;
 using System.ComponentModel.DataAnnotations;
 
-namespace PVHSAUDE.Api.Contracts;
+namespace PVHSAUDE.Application.ViewModels;
 
-public class BeneficiarioRequest
+public class BeneficiarioEntradaVm
 {
     [Required, StringLength(150)] public string Nome { get; set; } = string.Empty;
     [Required, StringLength(18), RegularExpression(@"(?:\d{11}|\d{14}|\d{3}\.\d{3}\.\d{3}-\d{2}|\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2})")] public string Cpf { get; set; } = string.Empty;
@@ -17,17 +17,17 @@ public class BeneficiarioRequest
     [DataType(DataType.Date)] public DateTime DataInicio { get; set; }
     [DataType(DataType.Date)] public DateTime DataValidade { get; set; }
     [MaxLength(5, ErrorMessage = "É permitido cadastrar no máximo 5 dependentes.")]
-    public List<DependenteRequest>? Dependentes { get; set; }
+    public List<DependenteEntradaVm>? Dependentes { get; set; }
     public StatusBeneficiario Status { get; set; } = StatusBeneficiario.Pendente;
 }
 
-public record DependenteResponse(Guid Id, string Nome, string Cpf, DateTime DataNascimento, GrauParentesco GrauParentesco);
+public record DependenteRespostaVm(Guid Id, string Nome, string Cpf, DateTime DataNascimento, GrauParentesco GrauParentesco);
 
-public record BeneficiarioResponse(Guid Id, string Nome, string Cpf, DateTime DataNascimento,
+public record BeneficiarioRespostaVm(Guid Id, string Nome, string Cpf, DateTime DataNascimento,
     string? Telefone, string? Email, string? Endereco, Guid PlanoId, DateTime DataInicio,
-    DateTime DataValidade, StatusBeneficiario Status, IReadOnlyCollection<DependenteResponse> Dependentes, Guid? CredenciadoId);
+    DateTime DataValidade, StatusBeneficiario Status, IReadOnlyCollection<DependenteRespostaVm> Dependentes, Guid? CredenciadoId);
 
-public class DependenteRequest
+public class DependenteEntradaVm
 {
     public Guid Id { get; set; }
     [Required, StringLength(150)] public string Nome { get; set; } = string.Empty;

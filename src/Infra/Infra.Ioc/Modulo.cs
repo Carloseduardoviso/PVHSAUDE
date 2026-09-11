@@ -1,4 +1,4 @@
-﻿using Infra.Auth;
+using Infra.Auth;
 using Microsoft.Extensions.DependencyInjection;
 using PVHSAUDE.Domain.Interfaces.Repository;
 using PVHSAUDE.Infra.Auth;
@@ -9,6 +9,19 @@ namespace PVHSAUDE.Infra.Ioc
 {
     public static class Modulo
     {
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        {
+            services.AddScoped<PVHSAUDE.Application.Interface.IPlanoService, PVHSAUDE.Application.AppService.PlanoService>();
+            services.AddScoped<PVHSAUDE.Application.Interface.ICatalogoService, PVHSAUDE.Application.AppService.CatalogoService>();
+            services.AddScoped<PVHSAUDE.Application.Interface.IBeneficiarioService, PVHSAUDE.Application.AppService.BeneficiarioService>();
+            services.AddScoped<PVHSAUDE.Application.Interface.ICredenciadoService, PVHSAUDE.Application.AppService.CredenciadoService>();
+            services.AddScoped<PVHSAUDE.Application.Interface.IContatoService, PVHSAUDE.Application.AppService.ContatoService>();
+            services.AddScoped<PVHSAUDE.Application.Interface.IPortalService, PVHSAUDE.Application.AppService.PortalService>();
+            services.AddScoped<PVHSAUDE.Application.Interface.IUsuarioService, PVHSAUDE.Application.AppService.UsuarioService>();
+            services.AddScoped<PVHSAUDE.Application.Interface.IAuthService, PVHSAUDE.Application.AppService.AuthService>();
+            services.AddScoped<PVHSAUDE.Application.Interface.IBannerService, PVHSAUDE.Application.AppService.BannerService>();
+            return services;
+        }
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             // Application services
@@ -16,6 +29,9 @@ namespace PVHSAUDE.Infra.Ioc
             // Domain services
 
 
+            services.AddScoped(typeof(IEntityRepository<>), typeof(EntityRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IBannerRepository, BannerRepository>();
             // Repositories
             services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 
