@@ -31,10 +31,13 @@ builder.Services.AddTransient<ApiAuthenticationHandler>();
 builder.Services.ConfigureHttpClientDefaults(http => http.AddHttpMessageHandler<ApiAuthenticationHandler>());
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient("default", client => client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
-builder.Services.AddHttpClient<IBeneficiarioApiClient, BeneficiarioApiClient>(client =>
+
+builder.Services.AddHttpClient<BeneficiarioApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
+
 builder.Services.AddHttpClient<PlanoApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
+
 builder.Services.AddHttpClient<CredenciadoApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 builder.Services.AddInfrastructure();

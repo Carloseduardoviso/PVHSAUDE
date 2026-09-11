@@ -5,7 +5,7 @@ using Web.Services;
 namespace PVHSAUDE.Web.Areas.Administracao.Controllers;
 
 [Area("Administracao")]
-public class BeneficiarioController(IBeneficiarioApiClient beneficiarios, PlanoApiClient planos, CredenciadoApiClient credenciados) : Controller
+public class BeneficiarioController(BeneficiarioApiClient beneficiarios, PlanoApiClient planos, CredenciadoApiClient credenciados) : Controller
 {
     public async Task<IActionResult> Index(CancellationToken cancellationToken) =>
         View(await beneficiarios.ListarAsync(cancellationToken));

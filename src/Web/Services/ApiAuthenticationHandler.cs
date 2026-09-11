@@ -12,6 +12,7 @@ public class ApiAuthenticationHandler(IHttpContextAccessor accessor) : Delegatin
             if (!string.IsNullOrEmpty(token))
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
+
         return await base.SendAsync(request, ct);
     }
 }

@@ -9,7 +9,9 @@ public class UsuarioCookieEvents(IHttpClientFactory factory) : CookieAuthenticat
     {
         using var client = factory.CreateClient("default");
         using var request = new HttpRequestMessage(HttpMethod.Get, "Auth/sessao");
+        
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.Properties.GetTokenValue("access_token"));
+
         using var timeout = CancellationTokenSource.CreateLinkedTokenSource(context.HttpContext.RequestAborted);
         timeout.CancelAfter(TimeSpan.FromSeconds(5));
         try

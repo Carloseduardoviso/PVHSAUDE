@@ -3,16 +3,20 @@ using Web.Models;
 
 namespace Web.Services;
 
-public class BeneficiarioApiClient(HttpClient httpClient) : IBeneficiarioApiClient
+public class BeneficiarioApiClient(HttpClient httpClient) 
 {
-    public async Task<IReadOnlyCollection<BeneficiarioViewModel>> ListarAsync(CancellationToken cancellationToken = default) =>
-        await httpClient.GetFromJsonAsync<List<BeneficiarioViewModel>>("api/beneficiarios", cancellationToken) ?? [];
+    public async Task<IReadOnlyCollection<BeneficiarioViewModel>> ListarAsync(CancellationToken cancellationToken = default)
+    {
+        return await httpClient.GetFromJsonAsync<List<BeneficiarioViewModel>>("api/beneficiarios", cancellationToken) ?? [];
+    }
 
     public async Task<BeneficiarioViewModel?> ObterAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var response = await httpClient.GetAsync($"api/beneficiarios/{id}", cancellationToken);
+
         if (response.StatusCode == HttpStatusCode.NotFound) return null;
         await GarantirSucesso(response);
+
         return await response.Content.ReadFromJsonAsync<BeneficiarioViewModel>(cancellationToken);
     }
 
@@ -43,6 +47,7 @@ public class BeneficiarioApiClient(HttpClient httpClient) : IBeneficiarioApiClie
     private static async Task GarantirSucesso(HttpResponseMessage response)
     {
         if (response.IsSuccessStatusCode) return;
+
         var detalhe = await response.Content.ReadAsStringAsync();
         throw new HttpRequestException(string.IsNullOrWhiteSpace(detalhe) ? "Não foi possível concluir a operação na API." : detalhe, null, response.StatusCode);
     }

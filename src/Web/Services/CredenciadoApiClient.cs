@@ -5,16 +5,28 @@ namespace Web.Services;
 
 public class CredenciadoApiClient(HttpClient client)
 {
-    public async Task<IReadOnlyCollection<CatalogoItemViewModel>> EspecialidadesAsync(CancellationToken ct) => await client.GetFromJsonAsync<List<CatalogoItemViewModel>>("api/especialidades", ct) ?? [];
-    public async Task<IReadOnlyCollection<CatalogoItemViewModel>> ProcedimentosAsync(CancellationToken ct) => await client.GetFromJsonAsync<List<CatalogoItemViewModel>>("api/procedimentos", ct) ?? [];
-    public async Task<IReadOnlyCollection<CredenciadoViewModel>> ListarAsync(CancellationToken ct) =>
-        await client.GetFromJsonAsync<List<CredenciadoViewModel>>("api/credenciados", ct) ?? [];
+    public async Task<IReadOnlyCollection<CatalogoItemViewModel>> EspecialidadesAsync(CancellationToken ct)
+    {
+        return await client.GetFromJsonAsync<List<CatalogoItemViewModel>>("api/especialidades", ct) ?? [];
+    }
+
+    public async Task<IReadOnlyCollection<CatalogoItemViewModel>> ProcedimentosAsync(CancellationToken ct)
+    {
+        return await client.GetFromJsonAsync<List<CatalogoItemViewModel>>("api/procedimentos", ct) ?? [];
+    }
+
+    public async Task<IReadOnlyCollection<CredenciadoViewModel>> ListarAsync(CancellationToken ct)
+    {
+        return await client.GetFromJsonAsync<List<CredenciadoViewModel>>("api/credenciados", ct) ?? [];
+    }
 
     public async Task<CredenciadoViewModel?> ObterAsync(Guid id, CancellationToken ct)
     {
         using var response = await client.GetAsync($"api/credenciados/{id}", ct);
+
         if (response.StatusCode == HttpStatusCode.NotFound) return null;
         await Verificar(response, ct);
+
         return await response.Content.ReadFromJsonAsync<CredenciadoViewModel>(ct);
     }
 
@@ -31,9 +43,12 @@ public class CredenciadoApiClient(HttpClient client)
         using var content = new MultipartFormDataContent();
         await using var stream = imagem.OpenReadStream();
         using var file = new StreamContent(stream);
+
         file.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(imagem.ContentType);
         content.Add(file, "imagem", imagem.FileName);
+
         using var response = await client.PostAsync($"api/credenciados/{id}/imagem", content, ct);
+
         await Verificar(response, ct);
     }
 

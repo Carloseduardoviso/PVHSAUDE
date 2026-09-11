@@ -5,8 +5,10 @@ namespace Web.Services;
 
 public class PlanoApiClient(HttpClient client)
 {
-    public async Task<IReadOnlyCollection<PlanoViewModel>> ListarAsync(CancellationToken ct) =>
-        await client.GetFromJsonAsync<List<PlanoViewModel>>("api/planos", ct) ?? [];
+    public async Task<IReadOnlyCollection<PlanoViewModel>> ListarAsync(CancellationToken ct)
+    {
+       return await client.GetFromJsonAsync<List<PlanoViewModel>>("api/planos", ct) ?? [];
+    }
 
     public async Task<PlanoViewModel?> ObterAsync(Guid id, CancellationToken ct)
     {
