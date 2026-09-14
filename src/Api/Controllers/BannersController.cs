@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using PVHSAUDE.Application.Interface;
 using PVHSAUDE.Application.ViewModels;
+using System.ComponentModel.DataAnnotations;
 namespace PVHSAUDE.Api.Controllers;
 
 [ApiController, Route("api/banners")]
@@ -33,9 +34,10 @@ public class BannersController(IBannerService service) : ServiceController
         return Ok(await service.SalvarAsync(id, new BannerVm { Titulo = request.Titulo, Ativo = request.Ativo }, imagem, ct));
     });
 }
+
 public class BannerRequest
 {
-    [System.ComponentModel.DataAnnotations.Required, System.ComponentModel.DataAnnotations.StringLength(200)]
+    [Required, StringLength(200)]
     public string Titulo { get; set; } = "";
     public bool Ativo { get; set; } = true;
     public IFormFile? Imagem { get; set; }

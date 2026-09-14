@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using PVHSAUDE.Application.AppService;
+using PVHSAUDE.Application.Interface;
+using PVHSAUDE.Application.ViewModels;
 using PVHSAUDE.Infra.Helper.Settings;
 using System.Text;
 
@@ -8,12 +11,12 @@ namespace PVHSAUDE.Api.Configs
 {
     public static class AuthServiceConfig
     {
-        private static async Task<PVHSAUDE.Application.ViewModels.UsuarioVm?> ObterUsuario(
-            PVHSAUDE.Application.Interface.IUsuarioService service, Guid id, CancellationToken ct)
+        private static async Task<UsuarioVm?> ObterUsuario(IUsuarioService service, Guid id, CancellationToken ct)
         {
             try { return await service.ObterAsync(id, ct); }
-            catch (PVHSAUDE.Application.AppService.ServiceException ex)
-                when (ex.Error == PVHSAUDE.Application.AppService.ServiceError.NotFound) { return null; }
+            catch (ServiceException ex)
+                when (ex.Error == ServiceError.NotFound)
+            { return null; }
         }
 
         public static IServiceCollection AddAuthenticationConfig(this IServiceCollection services)
@@ -32,7 +35,7 @@ namespace PVHSAUDE.Api.Configs
                     OnTokenValidated = async context =>
                     {
                         var id = context.Principal?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-                        var service = context.HttpContext.RequestServices.GetRequiredService<PVHSAUDE.Application.Interface.IUsuarioService>();
+                        var service = context.HttpContext.RequestServices.GetRequiredService<IUsuarioService>();
                         var usuario = Guid.TryParse(id, out var guid)
                             ? await ObterUsuario(service, guid, context.HttpContext.RequestAborted)
                             : null;
@@ -40,8 +43,7 @@ namespace PVHSAUDE.Api.Configs
                             context.Principal?.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value != usuario.Role.ToString())
                             context.Fail("Usuário indisponível ou permissão alterada.");
                         else if (context.Principal?.Identity is System.Security.Claims.ClaimsIdentity identity)
-                            PVHSAUDE.Application.ViewModels.AcessoMenu.Atualizar(identity,
-                                usuario.Menus);
+                            AcessoMenu.Atualizar(identity, usuario.Menus);
                     }
                 };
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -60,5 +62,4 @@ namespace PVHSAUDE.Api.Configs
             return services;
         }
     }
-
 }
