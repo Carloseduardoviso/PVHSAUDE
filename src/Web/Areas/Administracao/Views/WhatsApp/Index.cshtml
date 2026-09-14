@@ -13,9 +13,9 @@
     {
         <div class="mb-3"><label asp-for="Nome" class="form-label"></label><input asp-for="Nome" class="form-control" maxlength="100" required /><span asp-validation-for="Nome" class="text-danger"></span></div>
         <div class="mb-3"><label asp-for="Mensagem" class="form-label"></label><textarea asp-for="Mensagem" class="form-control" rows="5" maxlength="2000" required></textarea><span asp-validation-for="Mensagem" class="text-danger"></span><div class="form-text">O texto aberto no WhatsApp terá o nome cadastrado seguido desta mensagem.</div></div>
-        <div class="mb-3"><label asp-for="Telefone" class="form-label">Telefone que receberá as mensagens</label><input asp-for="Telefone" class="form-control" inputmode="numeric" maxlength="15" placeholder="5569992341486" required /><span asp-validation-for="Telefone" class="text-danger"></span><div class="form-text">Somente números: código do país + DDD + telefone. Exemplo: 55 69 99999-9999 → 5569999999999.</div></div>
+        <div class="mb-3"><label asp-for="Telefone" class="form-label">Telefone que receberá as mensagens</label><input asp-for="Telefone" type="hidden" id="TelefoneValor" /><input id="Telefone" class="form-control" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="22" value="@Model.Telefone" placeholder="(69) 99999-9999" aria-describedby="telefone-ajuda" required /><span asp-validation-for="Telefone" class="text-danger"></span><div id="telefone-ajuda" class="form-text">Informe o DDD e telefone. Exemplo: (69) 99999-9999.</div></div>
         <div><button class="btn btn-primary" type="submit">@(ViewData["Cadastrado"] is true ? "Salvar alterações" : "Salvar configuração")</button>
         @if (ViewData["Cadastrado"] is true) { <a asp-area="" asp-controller="WhatsApp" asp-action="Index" target="_blank" rel="noopener noreferrer" class="btn btn-outline-success">Abrir WhatsApp</a> }</div>
     }
 </form>
-@section Scripts { <partial name="_ValidationScriptsPartial" /> }
+@section Scripts { <partial name="_ValidationScriptsPartial" /><script src="~/js/whatsapp-config.js" asp-append-version="true"></script> }

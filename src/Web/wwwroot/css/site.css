@@ -55,21 +55,24 @@ body {
 .portal-navbar-inner { gap: .75rem; max-width: 1600px; padding-inline: clamp(.75rem, 2vw, 2rem); }
 .portal-navbar .navbar-brand { margin-right: auto; }
 .portal-nav-links { gap: .1rem; align-items: center; }
-.portal-navbar .nav-link { color: #fff; font-size: .95rem; font-weight: 500; padding: .65rem .7rem; white-space: nowrap; }
+.portal-navbar .nav-link { color: #fff; font-size: .95rem; font-weight: 500; padding: .65rem .7rem; overflow-wrap: anywhere; }
 .portal-navbar .nav-link:hover, .portal-navbar .nav-link:focus { color: #c9f45b; }
 .portal-admin-button { border: 1px solid #c9f45b; border-radius: 999px; color: #fff; font-weight: 600; padding: .55rem 1.1rem; }
 .portal-admin-button:hover, .portal-admin-button:focus { background: #c9f45b; border-color: #c9f45b; color: #075848; }
-@media (min-width: 1200px) {
+.portal-nav-actions { flex-shrink: 0; }
+@media (min-width: 1400px) {
   .portal-brand img { width: 140px; }
   .portal-navbar .navbar-collapse { min-width: 0; }
-  .portal-nav-links { flex-wrap: wrap; min-width: 0; }
+  .portal-nav-links { flex: 1 1 auto; flex-wrap: wrap; min-width: 0; }
   .portal-navbar .navbar-nav .nav-link { font-size: .875rem; padding-inline: .45rem; }
-  .portal-admin-button { flex-shrink: 0; font-size: .875rem; padding: .55rem .8rem; }
+  .portal-nav-actions { margin-left: 1rem; }
+  .portal-admin-button, .portal-carteirinha-button { font-size: .875rem; padding-inline: .8rem; }
 }
-@media (max-width: 1199.98px) {
+@media (max-width: 1399.98px) {
   .portal-navbar .navbar-collapse { padding: .75rem 0; }
   .portal-nav-links { align-items: flex-start; }
-  .portal-admin-button { display: inline-block; }
+  .portal-nav-actions { margin-top: .75rem; }
+  .portal-nav-actions .btn { text-align: center; }
   .portal-navbar .dropdown-menu { background: transparent; border: 0; box-shadow: none; }
   .portal-navbar .dropdown-item { color: #fff; font-size: .95rem; font-weight: 500; white-space: normal; }
   .portal-navbar .dropdown-item:hover,

@@ -13,6 +13,28 @@
     let selectedTeam = '';
     const field = name => form.elements.namedItem(name);
     const digits = value => value.replace(/\D/g, '');
+    const displayBirthdate = () => field('dataNascimento').value.split('-').reverse().join('/');
+    function maskPhone(input) {
+        const caret = input.selectionStart;
+        const digitsBeforeCaret = digits(input.value.slice(0, caret ?? input.value.length)).length;
+        const phone = digits(input.value).slice(0, 11);
+        let formatted = phone;
+        if (phone.length > 2) {
+            const local = phone.slice(2);
+            const split = phone.length > 10 ? 5 : 4;
+            formatted = `(${phone.slice(0, 2)}) ${local.slice(0, split)}${local.length > split ? '-' + local.slice(split) : ''}`;
+        }
+        input.value = formatted;
+        if (document.activeElement === input && caret !== null) {
+            let position = 0;
+            let count = 0;
+            while (position < formatted.length && count < digitsBeforeCaret) {
+                if (/\d/.test(formatted[position])) count++;
+                position++;
+            }
+            input.setSelectionRange(position, position);
+        }
+    }
     function validCpf(value) {
         const cpf = digits(value);
         if (!/^\d{11}$/.test(cpf) || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -54,6 +76,7 @@
         const values = [
             ['Nome', field('nome').value.trim()], ['E-mail', field('email').value.trim()],
             ['WhatsApp', field('telefone').value], ['CPF', field('cpf').value],
+            ['Data de nascimento', displayBirthdate()],
             ['Endereço', `${field('rua').value}, ${field('numero').value} — ${field('bairro').value}, ${field('cidade').value}/${field('uf').value}, CEP ${field('cep').value}`],
             ['Complemento', field('complemento').value || 'Não informado'],
             ['Esportes', selectedTeam || 'Não incluído'], ['Pagamento', field('pagamento').value],
@@ -89,12 +112,65 @@
     });
     form.addEventListener('input', event => {
         if (event.target.setCustomValidity) event.target.setCustomValidity('');
-        document.getElementById('preview-name').textContent = field('nome').value.trim() || 'Sua carteirinha';
+        document.getElementById('preview-name').textContent = field('nome').value.trim() || 'Seu nome completo';
+        document.getElementById('preview-birthdate').textContent = displayBirthdate() || '— / — / —';
     });
+    field('telefone').addEventListener('input', event => maskPhone(event.target));
+    field('telefone').addEventListener('change', event => maskPhone(event.target));
+    maskPhone(field('telefone'));
     field('cpf').addEventListener('input', event => {
         event.target.value = digits(event.target.value).slice(0, 11).replace(/^(\d{3})(\d)/, '$1.$2').replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3').replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
     });
     field('cep').addEventListener('input', event => { event.target.value = digits(event.target.value).slice(0, 8).replace(/^(\d{5})(\d)/, '$1-$2'); });
+    const cepStatus = document.getElementById('carteirinha-cep-status');
+    let cepRequest;
+    let cepRevision = 0;
+    field('cep').addEventListener('input', () => {
+        cepRevision++;
+        cepRequest?.abort();
+        cepStatus.textContent = '';
+    });
+    field('cep').addEventListener('blur', async () => {
+        const cep = digits(field('cep').value);
+        cepRequest?.abort();
+        const revision = ++cepRevision;
+        if (!cep) { cepStatus.textContent = ''; return; }
+        if (cep.length !== 8) {
+            cepStatus.textContent = 'Informe um CEP com 8 dígitos.';
+            return;
+        }
+        const controller = new AbortController();
+        cepRequest = controller;
+        const timeout = window.setTimeout(() => controller.abort(), 10000);
+        const addressFields = { rua: 'logradouro', bairro: 'bairro', cidade: 'localidade', uf: 'uf' };
+        const initialValues = Object.fromEntries(Object.keys(addressFields).map(name => [name, field(name).value]));
+        cepStatus.textContent = 'Consultando CEP...';
+        try {
+            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`, { signal: controller.signal });
+            if (!response.ok) throw new Error('Consulta indisponível');
+            const address = await response.json();
+            if (revision !== cepRevision) return;
+            if (address.erro || !address.localidade || !address.uf) {
+                cepStatus.textContent = 'CEP não encontrado. Confira o CEP ou preencha o endereço manualmente.';
+                return;
+            }
+            for (const [name, property] of Object.entries(addressFields)) {
+                const input = field(name);
+                // Preserve manual edits made while the lookup was pending.
+                if (input.value !== initialValues[name]) continue;
+                input.value = address[property] || '';
+                input.setCustomValidity('');
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            cepStatus.textContent = 'CEP consultado. Confira o endereço e complete os campos restantes.';
+        } catch {
+            if (revision === cepRevision)
+                cepStatus.textContent = 'Não foi possível consultar o CEP. Preencha o endereço manualmente.';
+        } finally {
+            window.clearTimeout(timeout);
+            if (revision === cepRevision) cepRequest = null;
+        }
+    });
     form.querySelectorAll('[name="pagamento"]').forEach(input => input.addEventListener('change', () => {
         document.getElementById('summary-payment').textContent = input.value;
         document.getElementById('payment-note').textContent = input.value === 'Pix'

@@ -11,7 +11,7 @@
 </head>
 <body class="portal-body">
     <header>
-        <nav class="navbar navbar-expand-xl portal-navbar">
+        <nav class="navbar navbar-expand-xxl portal-navbar">
             <div class="container-fluid portal-navbar-inner">
                 <a class="navbar-brand portal-brand" asp-area="" asp-controller="Home" asp-action="Index" aria-label="PVH Saúde — início"><img src="~/images/pvh-saude-horizontal.jpeg" asp-append-version="true" alt="PVH Saúde — descontos e benefícios" width="998" height="548" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -64,8 +64,10 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="SobreNos">Sobre Nós</a>
                         </li>
                     </ul>
-                    <a asp-area="" asp-controller="Carteirinha" asp-action="Index" class="btn portal-carteirinha-button ms-xl-3 my-2 my-xl-0 text-nowrap">Peça sua carteirinha</a>
-                    <a asp-area="Administracao" asp-controller="Dashboard" asp-action="Index" class="btn portal-admin-button ms-xl-3 my-2 my-xl-0 text-nowrap">Área administrativa</a>
+                    <div class="portal-nav-actions d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2">
+                        <a asp-area="" asp-controller="Carteirinha" asp-action="Index" class="btn portal-carteirinha-button">Peça sua carteirinha</a>
+                        <a asp-area="Administracao" asp-controller="Dashboard" asp-action="Index" class="btn portal-admin-button">Área administrativa</a>
+                    </div>
                 </div>
             </div>
         </nav>

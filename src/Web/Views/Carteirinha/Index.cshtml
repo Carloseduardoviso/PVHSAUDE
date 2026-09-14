@@ -25,6 +25,7 @@
                         <label>E-mail *<input name="email" type="email" autocomplete="email" required maxlength="150" placeholder="voce@exemplo.com" /></label>
                         <label>WhatsApp *<input name="telefone" type="tel" autocomplete="tel" required inputmode="tel" maxlength="16" placeholder="(69) 99999-9999" /></label>
                         <label>CPF *<input name="cpf" autocomplete="off" required inputmode="numeric" maxlength="14" placeholder="000.000.000-00" /></label>
+                        <label>Data de nascimento *<input name="dataNascimento" type="date" autocomplete="bday" required max="@DateTime.Today.ToString("yyyy-MM-dd")" /></label>
                     </div>
                     <label class="carteirinha-check"><input name="maiorIdade" type="checkbox" required />Confirmo que tenho 18 anos ou mais. *</label>
                     <label class="carteirinha-check"><input name="comunicacoes" type="checkbox" />Quero receber novidades da PVH Saúde por canais digitais.</label>
@@ -33,7 +34,7 @@
                     <h2 id="endereco-title" tabindex="-1">Onde você mora?</h2>
                     <p class="carteirinha-muted">Informe seu endereço completo.</p>
                     <div class="carteirinha-fields">
-                        <label>CEP *<input name="cep" autocomplete="postal-code" required inputmode="numeric" maxlength="9" placeholder="00000-000" /></label>
+                        <label>CEP *<input name="cep" autocomplete="postal-code" required inputmode="numeric" maxlength="9" placeholder="00000-000" aria-describedby="carteirinha-cep-status" /><span id="carteirinha-cep-status" class="carteirinha-muted" role="status" aria-live="polite"></span></label>
                         <label>Rua *<input name="rua" autocomplete="address-line1" required maxlength="150" placeholder="Nome da rua ou avenida" /></label>
                         <label>Bairro *<input name="bairro" required maxlength="100" placeholder="Seu bairro" /></label>
                         <label>Número *<input name="numero" required maxlength="15" placeholder="Número ou S/N" /></label>
@@ -67,7 +68,23 @@
             <noscript><p class="carteirinha-notice">Ative o JavaScript do navegador para preencher as etapas.</p></noscript>
         </div>
         <aside class="carteirinha-summary" aria-labelledby="summary-title">
-            <div class="carteirinha-card-preview"><span>PVH <strong>SAÚDE</strong></span><span class="carteirinha-card-chip" aria-hidden="true"></span><strong id="preview-name">Sua carteirinha</strong><small>CUIDADO QUE ACOMPANHA VOCÊ</small></div>
+            <div class="carteirinha-card-preview" aria-label="Prévia da carteirinha PVH Saúde">
+                <img class="carteirinha-card-logo" src="~/images/pvh-saude-horizontal.jpeg" alt="PVH Saúde+ — Descontos e benefícios. Saúde e economia para sua família." />
+                <div class="carteirinha-card-company"><strong>EMPRESA</strong><span>HOUSECLIN</span></div>
+                <svg class="carteirinha-card-waves" viewBox="0 0 820 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                    <path fill="#0063a9" d="M0 345 C190 325 325 440 560 320 C660 268 745 248 820 237 V600 H0Z" />
+                    <path fill="#05285f" d="M0 359 C205 340 338 455 565 338 C680 285 753 270 820 260 V600 H0Z" />
+                    <path fill="#438a36" d="M340 600 C510 548 520 288 820 237 V600Z" />
+                    <path fill="#005c3e" d="M366 600 C532 532 546 306 820 265 V600Z" />
+                </svg>
+                <div class="carteirinha-card-holder">
+                    <span>Titular:</span><strong id="preview-name">Seu nome completo</strong>
+                    <span>Data de nascimento:</span><strong id="preview-birthdate" class="carteirinha-card-date">— / — / —</strong>
+                    <span>Validade:</span><strong class="carteirinha-card-date">A definir</strong>
+                </div>
+                <div class="carteirinha-card-benefits"><span>+ Saúde</span><span>+ Economia</span><span>+ Qualidade de vida</span></div>
+                <span class="carteirinha-card-footer">Consulta, exames e terapia</span>
+            </div>
             <h2 id="summary-title">Sua solicitação</h2>
             <dl><div><dt>Carteirinha</dt><dd>PVH Saúde</dd></div><div><dt>Adicional</dt><dd id="summary-sport">Sem esportes</dd></div><div><dt>Pagamento</dt><dd id="summary-payment">A escolher</dd></div></dl>
             <p class="carteirinha-summary-note">Os valores do plano e dos adicionais serão informados antes da contratação.</p>
