@@ -1,4 +1,4 @@
-@model IReadOnlyCollection<BeneficiarioViewModel>
+@model IReadOnlyCollection<BeneficiarioVm>
 @{
     ViewData["Title"] = "Beneficiários";
 }
@@ -14,11 +14,11 @@
 <tbody>
 @foreach (var item in Model) {
 <tr><td>@item.Nome</td><td>@item.Cpf</td><td>@item.Telefone</td><td>@((PVHSAUDE.Domain.Enuns.StatusBeneficiario)item.Status)</td><td>@item.Dependentes.Count</td><td class="text-end">
-<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Editar</a>
-<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Ver detalhes</a>
+<a asp-action="Edit" asp-route-id="@item.BeneficiarioId" class="btn btn-sm btn-outline-primary">Editar</a>
+<a asp-action="Details" asp-route-id="@item.BeneficiarioId" class="btn btn-sm btn-outline-secondary">Ver detalhes</a>
 @if (item.Status != (int)PVHSAUDE.Domain.Enuns.StatusBeneficiario.Inativo)
 {
-<form asp-action="Inativar" asp-route-id="@item.Id" method="post" class="d-inline"><button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Inativar este beneficiário? O cadastro e os dependentes serão mantidos.')">Inativar</button></form>
+<form asp-action="Inativar" asp-route-id="@item.BeneficiarioId" method="post" class="d-inline"><button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Inativar este beneficiário? O cadastro e os dependentes serão mantidos.')">Inativar</button></form>
 }
 </td></tr> }
 </tbody></table></div>
@@ -32,11 +32,11 @@
         <dt>Dependentes</dt><dd>@item.Dependentes.Count</dd>
         </dl><div class="admin-record-actions border-top pt-3 mt-3" aria-label="Ações do registro">
 
-<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Editar</a>
-<a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Ver detalhes</a>
+<a asp-action="Edit" asp-route-id="@item.BeneficiarioId" class="btn btn-sm btn-outline-primary">Editar</a>
+<a asp-action="Details" asp-route-id="@item.BeneficiarioId" class="btn btn-sm btn-outline-secondary">Ver detalhes</a>
 @if (item.Status != (int)PVHSAUDE.Domain.Enuns.StatusBeneficiario.Inativo)
 {
-<form asp-action="Inativar" asp-route-id="@item.Id" method="post" class="d-inline"><button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Inativar este beneficiário? O cadastro e os dependentes serão mantidos.')">Inativar</button></form>
+<form asp-action="Inativar" asp-route-id="@item.BeneficiarioId" method="post" class="d-inline"><button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Inativar este beneficiário? O cadastro e os dependentes serão mantidos.')">Inativar</button></form>
 }
 
         </div></div></article>

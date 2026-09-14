@@ -1,0 +1,81 @@
+@{
+    ViewData["Title"] = "Peça sua carteirinha";
+}
+<link rel="stylesheet" href="~/css/carteirinha.css" asp-append-version="true" />
+<section class="carteirinha-page" aria-labelledby="carteirinha-title">
+    <div class="carteirinha-heading">
+        <span class="carteirinha-eyebrow">PVH SAÚDE · PARA VOCÊ</span>
+        <h1 id="carteirinha-title">Peça sua carteirinha</h1>
+        <p>Seu próximo passo para cuidar de você e da sua família.</p>
+    </div>
+    <div class="carteirinha-layout">
+        <div class="carteirinha-panel">
+            <ol class="carteirinha-steps" aria-label="Etapas da solicitação">
+                <li aria-current="step"><span>1</span>Cadastro</li>
+                <li><span>2</span>Endereço</li>
+                <li><span>3</span>Adicionais</li>
+                <li><span>4</span>Pagamento</li>
+            </ol>
+            <form id="carteirinha-form">
+                <section data-step="0" aria-labelledby="cadastro-title">
+                    <h2 id="cadastro-title" tabindex="-1">Vamos começar pelo seu cadastro</h2>
+                    <p class="carteirinha-muted">Preencha seus dados. Os campos com * são obrigatórios.</p>
+                    <div class="carteirinha-fields">
+                        <label>Nome completo *<input name="nome" autocomplete="name" required minlength="3" maxlength="150" placeholder="Seu nome completo" /></label>
+                        <label>E-mail *<input name="email" type="email" autocomplete="email" required maxlength="150" placeholder="voce@exemplo.com" /></label>
+                        <label>WhatsApp *<input name="telefone" type="tel" autocomplete="tel" required inputmode="tel" maxlength="16" placeholder="(69) 99999-9999" /></label>
+                        <label>CPF *<input name="cpf" autocomplete="off" required inputmode="numeric" maxlength="14" placeholder="000.000.000-00" /></label>
+                    </div>
+                    <label class="carteirinha-check"><input name="maiorIdade" type="checkbox" required />Confirmo que tenho 18 anos ou mais. *</label>
+                    <label class="carteirinha-check"><input name="comunicacoes" type="checkbox" />Quero receber novidades da PVH Saúde por canais digitais.</label>
+                </section>
+                <section data-step="1" aria-labelledby="endereco-title" hidden>
+                    <h2 id="endereco-title" tabindex="-1">Onde você mora?</h2>
+                    <p class="carteirinha-muted">Informe seu endereço completo.</p>
+                    <div class="carteirinha-fields">
+                        <label>CEP *<input name="cep" autocomplete="postal-code" required inputmode="numeric" maxlength="9" placeholder="00000-000" /></label>
+                        <label>Rua *<input name="rua" autocomplete="address-line1" required maxlength="150" placeholder="Nome da rua ou avenida" /></label>
+                        <label>Bairro *<input name="bairro" required maxlength="100" placeholder="Seu bairro" /></label>
+                        <label>Número *<input name="numero" required maxlength="15" placeholder="Número ou S/N" /></label>
+                        <label>Cidade *<input name="cidade" autocomplete="address-level2" required maxlength="100" placeholder="Sua cidade" /></label>
+                        <label>Estado *<select name="uf" autocomplete="address-level1" required><option value="">Selecione</option>@foreach (var uf in new[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }) { <option value="@uf">@uf</option> }</select></label>
+                        <label class="carteirinha-full">Complemento <span class="carteirinha-optional">(opcional)</span><input name="complemento" autocomplete="address-line2" maxlength="100" placeholder="Apartamento, bloco, referência..." /></label>
+                    </div>
+                </section>
+                <section data-step="2" aria-labelledby="adicionais-title" hidden>
+                    <h2 id="adicionais-title" tabindex="-1">Sua carteirinha, do seu jeito</h2>
+                    <p class="carteirinha-muted">Escolha se deseja incluir o adicional de esportes.</p>
+                    <article class="carteirinha-sports">
+                        <div class="carteirinha-sports-art" aria-hidden="true"><span>⚽</span><strong>A sua paixão<br />também faz parte.</strong></div>
+                        <div class="carteirinha-sports-content"><span class="carteirinha-eyebrow">ADICIONAL OPCIONAL</span><h3>Esportes</h3><p>Escolha seu time do coração para personalizar sua solicitação.</p><p id="sports-selection" class="carteirinha-muted" aria-live="polite">Nenhum time selecionado.</p><button type="button" class="carteirinha-primary" data-bs-toggle="modal" data-bs-target="#esportes-modal" id="sports-open">Incluir esportes</button><button type="button" class="carteirinha-link" id="sports-remove" hidden>Remover adicional</button></div>
+                    </article>
+                </section>
+                <section data-step="3" aria-labelledby="pagamento-title" hidden>
+                    <h2 id="pagamento-title" tabindex="-1">Como você prefere pagar?</h2>
+                    <p class="carteirinha-muted">Selecione uma das formas de pagamento.</p>
+                    <fieldset class="carteirinha-payments"><legend class="visually-hidden">Método de pagamento</legend>
+                        <label><input type="radio" name="pagamento" value="Cartão de débito" required /><span><strong>Cartão de débito</strong><small>Pagamento com débito</small></span></label>
+                        <label><input type="radio" name="pagamento" value="Cartão de crédito" required /><span><strong>Cartão de crédito</strong><small>Pagamento com crédito</small></span></label>
+                        <label><input type="radio" name="pagamento" value="Pix" required /><span><strong>Pix</strong><small>Pagamento via Pix</small></span></label>
+                    </fieldset>
+                    <p class="carteirinha-payment-note" id="payment-note" aria-live="polite">Você poderá revisar os dados antes de continuar.</p>
+                    <div class="carteirinha-notice">A cobrança online ainda não está disponível. Esta etapa permite escolher a forma de pagamento e revisar os dados; nenhum valor será cobrado.</div>
+                </section>
+                <div class="carteirinha-actions"><button type="button" class="carteirinha-link" id="step-back" hidden>← Voltar e editar</button><button type="button" class="carteirinha-primary" id="step-next">Próximo passo <span aria-hidden="true">→</span></button></div>
+            </form>
+            <section id="carteirinha-review" hidden aria-labelledby="review-title"><h2 id="review-title" tabindex="-1">Revise sua solicitação</h2><p>Confira os dados que você preencheu.</p><dl id="review-values" class="carteirinha-review-values"></dl><div class="carteirinha-notice">Seus dados ainda não foram enviados. A finalização da solicitação estará disponível após a configuração do atendimento e do pagamento.</div><button type="button" class="carteirinha-link" id="review-back">← Voltar e editar</button></section>
+            <noscript><p class="carteirinha-notice">Ative o JavaScript do navegador para preencher as etapas.</p></noscript>
+        </div>
+        <aside class="carteirinha-summary" aria-labelledby="summary-title">
+            <div class="carteirinha-card-preview"><span>PVH <strong>SAÚDE</strong></span><span class="carteirinha-card-chip" aria-hidden="true"></span><strong id="preview-name">Sua carteirinha</strong><small>CUIDADO QUE ACOMPANHA VOCÊ</small></div>
+            <h2 id="summary-title">Sua solicitação</h2>
+            <dl><div><dt>Carteirinha</dt><dd>PVH Saúde</dd></div><div><dt>Adicional</dt><dd id="summary-sport">Sem esportes</dd></div><div><dt>Pagamento</dt><dd id="summary-payment">A escolher</dd></div></dl>
+            <p class="carteirinha-summary-note">Os valores do plano e dos adicionais serão informados antes da contratação.</p>
+            <div class="carteirinha-help"><strong>Precisa de ajuda?</strong><p>Nossa equipe pode orientar você.</p><a asp-area="" asp-controller="WhatsApp" asp-action="Index" target="_blank" rel="noopener noreferrer">Fale com a PVH Saúde ↗</a></div>
+        </aside>
+    </div>
+</section>
+<div class="modal fade" id="esportes-modal" tabindex="-1" aria-labelledby="esportes-title" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content carteirinha-modal"><div class="modal-header"><h2 class="modal-title fs-4" id="esportes-title">Inclua sua paixão por esportes</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button></div><div class="modal-body"><div><span class="carteirinha-eyebrow">ESPORTE É CONEXÃO</span><h3>Qual é o seu time do coração?</h3><p>Selecione o time que você quer incluir na sua solicitação.</p><label for="sports-team">Selecione seu time *</label><select id="sports-team" required><option value="">Selecionar time</option>@foreach (var time in new[] { "Flamengo", "Corinthians", "Palmeiras", "São Paulo", "Santos", "Vasco", "Fluminense", "Botafogo", "Grêmio", "Internacional", "Cruzeiro", "Atlético Mineiro", "Bahia", "Fortaleza", "Ceará", "Sport", "Santa Cruz", "Náutico", "ABC", "Sampaio Corrêa", "Fluxo", "Outro time" }) { <option value="@time">@time</option> }</select><p class="carteirinha-muted mt-3">A disponibilidade e os valores do adicional serão confirmados antes da contratação.</p><button type="button" class="carteirinha-primary" id="sports-add">Adicionar</button></div><div class="carteirinha-modal-art" aria-hidden="true"><span>⚽</span><strong>Seu time.<br />Sua torcida.<br />Sua carteirinha.</strong><small>PVH SAÚDE + ESPORTES</small></div></div></div></div></div>
+@section Scripts {
+    <script src="~/js/carteirinha.js" asp-append-version="true"></script>
+}

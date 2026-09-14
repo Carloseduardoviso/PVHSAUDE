@@ -1,4 +1,4 @@
-@model List<Web.Models.BannerViewModel>
+@model List<Web.Models.BannerVm>
 @{ ViewData["Title"] = "Banner"; }
 <div class="d-flex justify-content-between align-items-center mb-4"><h1 class="h3">Banner</h1><a asp-action="Create" class="btn btn-success">Cadastrar banner</a></div>
 @if (TempData["Success"] is string sucesso) { <div class="alert alert-success" role="status">@sucesso</div> }
@@ -9,17 +9,17 @@ else
 {
 <div class="table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros; role horizontalmente para ver todas as colunas" tabindex="0"><table class="table align-middle"><thead><tr><th>Imagem</th><th>Título</th><th>Status</th><th>Ações</th></tr></thead><tbody>
 @foreach (var banner in Model) {
-<tr><td><img src="@Url.Action("BannerImagem", "Home", new { area = "", id = banner.Id })" alt="@banner.Titulo" width="160" height="75" style="object-fit:contain" /></td><td>@banner.Titulo</td><td><span class="badge @(banner.Ativo ? "bg-success" : "bg-secondary")">@(banner.Ativo ? "Ativo" : "Inativo")</span></td><td><a asp-action="Edit" asp-route-id="@banner.Id" class="btn btn-outline-primary btn-sm">Editar</a></td></tr>
+<tr><td><img src="@Url.Action("BannerImagem", "Home", new { area = "", id = banner.BannerId })" alt="@banner.Titulo" width="160" height="75" style="object-fit:contain" /></td><td>@banner.Titulo</td><td><span class="badge @(banner.Ativo ? "bg-success" : "bg-secondary")">@(banner.Ativo ? "Ativo" : "Inativo")</span></td><td><a asp-action="Edit" asp-route-id="@banner.BannerId" class="btn btn-outline-primary btn-sm">Editar</a></td></tr>
 }
 </tbody></table></div>
 <div class="admin-record-cards d-md-none">
 @foreach (var banner in Model) {
     <article class="card shadow-sm"><div class="card-body"><dl class="mb-0">
-        <dt>Imagem</dt><dd><img src="@Url.Action("BannerImagem", "Home", new { area = "", id = banner.Id })" alt="@banner.Titulo" width="160" height="75" style="object-fit:contain" /></dd>
+        <dt>Imagem</dt><dd><img src="@Url.Action("BannerImagem", "Home", new { area = "", id = banner.BannerId })" alt="@banner.Titulo" width="160" height="75" style="object-fit:contain" /></dd>
         <dt>Título</dt><dd>@banner.Titulo</dd>
         <dt>Status</dt><dd><span class="badge @(banner.Ativo ? "bg-success" : "bg-secondary")">@(banner.Ativo ? "Ativo" : "Inativo")</span></dd>
         </dl><div class="admin-record-actions border-top pt-3 mt-3" aria-label="Ações do registro">
-<a asp-action="Edit" asp-route-id="@banner.Id" class="btn btn-outline-primary btn-sm">Editar</a>
+<a asp-action="Edit" asp-route-id="@banner.BannerId" class="btn btn-outline-primary btn-sm">Editar</a>
         </div></div></article>
 }
 </div>

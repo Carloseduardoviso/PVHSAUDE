@@ -1,4 +1,4 @@
-@model Web.Models.PortalViewModel
+@model Web.Models.PortalVm
 @{ ViewData["Title"] = "PVH Saúde"; }
 <section class="portal-apresentacao mb-4 rounded-3" aria-label="PVH Saúde">
     <img class="portal-logo" src="~/images/pvh-saude-horizontal.jpeg" asp-append-version="true" alt="PVH Saúde — descontos e benefícios" width="998" height="548" />
@@ -17,7 +17,7 @@
                 {
                     var empresa = Model.Empresas[i];
                     <div class="carousel-item @(i == 0 ? "active" : "")" role="group" aria-label="@(i + 1) de @Model.Empresas.Count">
-                        <partial name="_EmpresaCard" model="new Web.Models.EmpresaCardViewModel(empresa, Model)" />
+                        <partial name="_EmpresaCard" model="new Web.Models.EmpresaCardVm(empresa, Model)" />
                     </div>
                 }
             </div>

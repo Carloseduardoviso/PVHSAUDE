@@ -28,6 +28,7 @@
                 }
                 @if (User.IsInRole("Administrador"))
                 {
+                    <a class="admin-nav-link @(controller == "WhatsApp" ? "active" : "")" asp-area="Administracao" asp-controller="WhatsApp" asp-action="Index">WhatsApp</a>
                     <a class="admin-nav-link @(controller == "Usuario" ? "active" : "")" asp-area="Administracao" asp-controller="Usuario" asp-action="Index">Usuários</a>
                 }
                 <a class="admin-nav-link mt-4" asp-area="" asp-controller="Home" asp-action="Index">Voltar ao portal</a>

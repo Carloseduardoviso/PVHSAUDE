@@ -14,7 +14,7 @@ var transport = new ApiTransport();
 var api = new HttpClient(transport) { BaseAddress = new Uri("http://test-api/") };
 builder.Services.AddSingleton(new PlanoApiClient(api));
 builder.Services.AddSingleton(new CredenciadoApiClient(api));
-builder.Services.AddSingleton<IBeneficiarioApiClient>(new BeneficiarioApiClient(api));
+builder.Services.AddSingleton(new BeneficiarioApiClient(api));
 await using var app = builder.Build();
 app.MapAreaControllerRoute("admin", "Administracao", "Administracao/{controller=Dashboard}/{action=Index}/{id?}");
 app.Urls.Add("http://127.0.0.1:0");
@@ -99,24 +99,24 @@ sealed class ApiTransport : HttpMessageHandler
 {
     public static readonly Guid PlanoId = Guid.NewGuid();
     public static readonly Guid EmpresaId = Guid.NewGuid();
-    public BeneficiarioViewModel? Saved;
-    public CredenciadoViewModel? Empresa;
+    public BeneficiarioVm? Saved;
+    public CredenciadoVm? Empresa;
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
     {
         if (request.Method == HttpMethod.Get && request.RequestUri!.AbsolutePath == "/api/credenciados")
-            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new CredenciadoViewModel { Id = EmpresaId, NomeFantasia = "Empresa teste", PlanoId = PlanoId } }) };
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new CredenciadoVm { Id = EmpresaId, NomeFantasia = "Empresa teste", PlanoId = PlanoId } }) };
         if (request.RequestUri!.AbsolutePath is "/api/especialidades" or "/api/procedimentos")
-            return new(HttpStatusCode.OK) { Content = JsonContent.Create(Array.Empty<CatalogoItemViewModel>()) };
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(Array.Empty<CatalogoItemVm>()) };
         if (request.RequestUri!.AbsolutePath == "/api/planos")
-            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new PlanoViewModel { Id = PlanoId, Nome = "Plano teste", Valor = 99.90m } }) };
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new PlanoVm { Id = PlanoId, Nome = "Plano teste", Valor = 99.90m } }) };
         if (request.Method == HttpMethod.Post && request.RequestUri.AbsolutePath == "/api/beneficiarios")
         {
-            Saved = await request.Content!.ReadFromJsonAsync<BeneficiarioViewModel>(ct);
+            Saved = await request.Content!.ReadFromJsonAsync<BeneficiarioVm>(ct);
             return new(HttpStatusCode.Created);
         }
         if (request.Method == HttpMethod.Post && request.RequestUri.AbsolutePath == "/api/credenciados")
         {
-            Empresa = await request.Content!.ReadFromJsonAsync<CredenciadoViewModel>(ct);
+            Empresa = await request.Content!.ReadFromJsonAsync<CredenciadoVm>(ct);
             return new(HttpStatusCode.Created);
         }
         throw new Exception("Unexpected API request.");

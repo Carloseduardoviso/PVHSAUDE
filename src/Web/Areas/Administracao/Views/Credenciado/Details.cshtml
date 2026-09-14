@@ -1,4 +1,4 @@
-@model CredenciadoViewModel
+@model CredenciadoVm
 @{ ViewData["Title"] = "Detalhes da empresa"; }
 <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
     <h1 class="h3">@Model.NomeFantasia</h1>
@@ -19,4 +19,4 @@
     <dt class="col-sm-3">Observações</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Observacoes) ? "Não informado" : Model.Observacoes)</dd>
     <dt class="col-sm-3">Tipo</dt><dd class="col-sm-9">@Html.DisplayFor(m => m.Tipo)</dd>
     <dt class="col-sm-3">Situação</dt><dd class="col-sm-9">@Html.DisplayFor(m => m.StatusCredenciamento)</dd>
-</dl></div><div class="card card-body shadow-sm mt-4"><h2 class="h5">Especialidades</h2><p>@string.Join(", ", ((IEnumerable<CatalogoItemViewModel>)ViewBag.Especialidades).Where(x => Model.EspecialidadeIds.Contains(x.Id)).Select(x => x.Nome).DefaultIfEmpty("Nenhuma cadastrada"))</p><h2 class="h5 mt-3">Procedimentos</h2><p class="mb-0">@string.Join(", ", ((IEnumerable<CatalogoItemViewModel>)ViewBag.Procedimentos).Where(x => Model.ProcedimentoIds.Contains(x.Id)).Select(x => x.Nome).DefaultIfEmpty("Nenhum cadastrado"))</p></div>
+</dl></div><div class="card card-body shadow-sm mt-4"><h2 class="h5">Especialidades</h2><p>@string.Join(", ", ((IEnumerable<CatalogoItemVm>)ViewBag.Especialidades).Where(x => Model.EspecialidadeIds.Contains(x.Id)).Select(x => x.Nome).DefaultIfEmpty("Nenhuma cadastrada"))</p><h2 class="h5 mt-3">Procedimentos</h2><p class="mb-0">@string.Join(", ", ((IEnumerable<CatalogoItemVm>)ViewBag.Procedimentos).Where(x => Model.ProcedimentoIds.Contains(x.Id)).Select(x => x.Nome).DefaultIfEmpty("Nenhum cadastrado"))</p></div>

@@ -1,12 +1,12 @@
-@model Web.Models.BannerViewModel
-@{ var novo = Model.Id == Guid.Empty; ViewData["Title"] = novo ? "Cadastrar banner" : "Editar banner"; }
+@model Web.Models.BannerVm
+@{ var novo = Model.BannerId == Guid.Empty; ViewData["Title"] = novo ? "Cadastrar banner" : "Editar banner"; }
 <h1 class="h3 mb-4">@ViewData["Title"]</h1>
-<form asp-action="@(novo ? "Create" : "Edit")" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data" class="card card-body" style="max-width:800px">
-<input asp-for="Id" type="hidden" />
+<form asp-action="@(novo ? "Create" : "Edit")" asp-route-id="@Model.BannerId" method="post" enctype="multipart/form-data" class="card card-body" style="max-width:800px">
+<input asp-for="BannerId" type="hidden" />
 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 <div class="mb-3"><label asp-for="Titulo" class="form-label"></label><input asp-for="Titulo" class="form-control" /><span asp-validation-for="Titulo" class="text-danger"></span></div>
 <div class="mb-3"><label asp-for="Imagem" class="form-label"></label><input asp-for="Imagem" type="file" accept="image/jpeg,image/png,image/webp" class="form-control" aria-describedby="imagem-ajuda" /><div id="imagem-ajuda" class="form-text">JPG, PNG ou WEBP, até 5 MB. Obrigatório: formato paisagem na proporção 16:5. Tamanho recomendado: 1600 × 500 pixels. @(novo ? "" : "Deixe em branco para manter a imagem atual.")</div><span asp-validation-for="Imagem" class="text-danger"></span></div>
-@if (!novo) { <img src="@Url.Action("BannerImagem", "Home", new { area = "", id = Model.Id })" alt="@Model.Titulo" class="img-fluid mb-3 rounded" style="max-height:250px;object-fit:contain" /> }
+@if (!novo) { <img src="@Url.Action("BannerImagem", "Home", new { area = "", id = Model.BannerId })" alt="@Model.Titulo" class="img-fluid mb-3 rounded" style="max-height:250px;object-fit:contain" /> }
 <div class="form-check mb-4"><input asp-for="Ativo" class="form-check-input" /><label asp-for="Ativo" class="form-check-label">Ativo — exibir no portal</label></div>
 <div><button class="btn btn-success" type="submit">Salvar banner</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a></div>
 </form>

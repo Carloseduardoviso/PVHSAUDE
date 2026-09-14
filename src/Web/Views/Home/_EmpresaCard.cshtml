@@ -1,4 +1,4 @@
-@model Web.Models.EmpresaCardViewModel
+@model Web.Models.EmpresaCardVm
 @{
     var empresa = Model.Empresa;
     var planos = Model.Rede.Planos.Where(x => x.CredenciadoId == empresa.Id).ToList();

@@ -1,6 +1,6 @@
-@model BeneficiarioViewModel
-<script type="application/json" id="empresas-planos">@Html.Raw(System.Text.Json.JsonSerializer.Serialize((IEnumerable<CredenciadoViewModel>?)ViewBag.EmpresasDisponiveis ?? []))</script>
-<script type="application/json" id="planos-empresas">@Html.Raw(System.Text.Json.JsonSerializer.Serialize((IEnumerable<PlanoViewModel>?)ViewBag.PlanosDisponiveis ?? []))</script>
+@model BeneficiarioVm
+<script type="application/json" id="empresas-planos">@Html.Raw(System.Text.Json.JsonSerializer.Serialize((IEnumerable<CredenciadoVm>?)ViewBag.EmpresasDisponiveis ?? []))</script>
+<script type="application/json" id="planos-empresas">@Html.Raw(System.Text.Json.JsonSerializer.Serialize((IEnumerable<PlanoVm>?)ViewBag.PlanosDisponiveis ?? []))</script>
 <div asp-validation-summary="All" role="alert" class="text-danger mb-3"></div>
 @if (ViewBag.Planos is ICollection<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> planos && planos.Count == 0)
 {

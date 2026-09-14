@@ -17,6 +17,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.EventsType = typeof(Web.Services.UsuarioCookieEvents);
 });
 builder.Services.AddScoped<Web.Services.UsuarioCookieEvents>();
+builder.Services.AddScoped<WhatsAppApiClient>();
 builder.Services.AddAuthorization();
 builder.Services.AddHttpClient<BannerApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));

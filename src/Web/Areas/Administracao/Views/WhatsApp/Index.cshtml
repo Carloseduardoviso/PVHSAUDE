@@ -1,0 +1,21 @@
+@model PVHSAUDE.Application.ViewModels.ConfiguracaoWhatsAppVm
+@{ ViewData["Title"] = "WhatsApp"; }
+<h1 class="h3 mb-3">Configuração do WhatsApp</h1>
+<p class="text-muted">Cadastre um único contato para o portal. Para alterar o nome, a mensagem ou o telefone, edite os campos abaixo.</p>
+@if (TempData["Sucesso"] is string sucesso) { <div class="alert alert-success" role="status">@sucesso</div> }
+<form method="post" class="card card-body shadow-sm" style="max-width:760px">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    @if (ViewData["Indisponivel"] is true)
+    {
+        <a asp-action="Index">Tentar carregar novamente</a>
+    }
+    else
+    {
+        <div class="mb-3"><label asp-for="Nome" class="form-label"></label><input asp-for="Nome" class="form-control" maxlength="100" required /><span asp-validation-for="Nome" class="text-danger"></span></div>
+        <div class="mb-3"><label asp-for="Mensagem" class="form-label"></label><textarea asp-for="Mensagem" class="form-control" rows="5" maxlength="2000" required></textarea><span asp-validation-for="Mensagem" class="text-danger"></span><div class="form-text">O texto aberto no WhatsApp terá o nome cadastrado seguido desta mensagem.</div></div>
+        <div class="mb-3"><label asp-for="Telefone" class="form-label">Telefone que receberá as mensagens</label><input asp-for="Telefone" class="form-control" inputmode="numeric" maxlength="15" placeholder="5569992341486" required /><span asp-validation-for="Telefone" class="text-danger"></span><div class="form-text">Somente números: código do país + DDD + telefone. Exemplo: 55 69 99999-9999 → 5569999999999.</div></div>
+        <div><button class="btn btn-primary" type="submit">@(ViewData["Cadastrado"] is true ? "Salvar alterações" : "Salvar configuração")</button>
+        @if (ViewData["Cadastrado"] is true) { <a asp-area="" asp-controller="WhatsApp" asp-action="Index" target="_blank" rel="noopener noreferrer" class="btn btn-outline-success">Abrir WhatsApp</a> }</div>
+    }
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

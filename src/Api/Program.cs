@@ -1,16 +1,15 @@
 using AutoMapper.Extensions.ExpressionMapping;
 using Infra.Data.Base;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using PVHSAUDE.Api.Configs;
+using PVHSAUDE.Api.Middleware;
 using PVHSAUDE.Application.AppService;
 using PVHSAUDE.Application.AutoMapper;
 using PVHSAUDE.Application.Interface;
-using PVHSAUDE.Infra.Helper.Settings;
-using PVHSAUDE.Api.Configs;
-using PVHSAUDE.Api.Middleware;
-using PVHSAUDE.Infra.Ioc;
-using Microsoft.AspNetCore.Identity;
 using PVHSAUDE.Domain.Entities;
-using Microsoft.AspNetCore.RateLimiting;
+using PVHSAUDE.Infra.Helper.Settings;
+using PVHSAUDE.Infra.Ioc;
 using System.Threading.RateLimiting;
 
 
