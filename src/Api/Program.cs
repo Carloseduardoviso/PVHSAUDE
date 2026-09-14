@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PVHSAUDE.Api.Configs;
 using PVHSAUDE.Api.Middleware;
+using PVHSAUDE.Api.Services;
 using PVHSAUDE.Application.AppService;
 using PVHSAUDE.Application.AutoMapper;
 using PVHSAUDE.Application.Interface;
@@ -39,7 +40,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthenticationConfig();
 builder.Services.AddInfrastructure();
 builder.Services.AddApplicationServices();
-builder.Services.AddScoped<IImagemStorage, PVHSAUDE.Api.Services.ImagemStorage>();
+builder.Services.AddScoped<IImagemStorage, ImagemStorage>();
 
 builder.Services.AddConfigRatesLimiter();
 builder.Services.AddHttpContextAccessor();
