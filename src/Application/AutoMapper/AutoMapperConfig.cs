@@ -31,8 +31,8 @@ public class AutoMapperConfig : Profile
         CreateMap<Plano, PlanoVm>();
         CreateMap<PlanoVm, Plano>().ConvertUsing((vm, entity, _) =>
         {
-            entity ??= new Plano(vm.Nome, vm.Descricao, vm.Valor, vm.Periodicidade, vm.DataValidade);
-            entity.Atualizar(vm.Nome, vm.Descricao, vm.Valor, vm.Periodicidade, vm.DataValidade);
+            entity ??= new Plano(vm.Nome, vm.Descricao, vm.Valor, vm.Periodicidade, vm.DataValidade, vm.TipoPessoa);
+            entity.Atualizar(vm.Nome, vm.Descricao, vm.Valor, vm.Periodicidade, vm.DataValidade, vm.TipoPessoa);
             return entity;
         });
 

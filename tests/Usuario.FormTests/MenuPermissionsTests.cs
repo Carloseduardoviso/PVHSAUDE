@@ -15,6 +15,7 @@ public static class MenuPermissionsTests
     {
         foreach (var (controller, action, method, menu) in new[]
         {
+            ("ConfiguracaoWhatsApp", "Salvar", "PUT", "WhatsApp"),
             ("Beneficiarios", "Listar", "GET", "Beneficiario"),
             ("Banners", "Listar", "GET", "Banner"),
             ("Banners", "Editar", "PUT", "Banner"),
@@ -22,6 +23,8 @@ public static class MenuPermissionsTests
             ("Contatos", "Excluir", "DELETE", "Contato"),
             ("Planos", "Criar", "POST", "Plano"),
             ("Credenciados", "UploadImagem", "POST", "Credenciado"),
+            ("EmpresaBeneficiada", "Criar", "POST", "EmpresaBeneficiada"),
+            ("EmpresaBeneficiada", "Listar", "GET", "EmpresaBeneficiada"),
             ("Especialidades", "Post", "POST", "Especialidades"),
             ("Procedimentos", "Post", "POST", "Procedimentos")
         })
@@ -40,6 +43,7 @@ public static class MenuPermissionsTests
 
         foreach (var (controller, action, method, allowAnonymous) in new[]
         {
+            ("ConfiguracaoWhatsApp", "Obter", "GET", true),
             ("Banners", "Ativos", "GET", true),
             ("Contatos", "Criar", "POST", true),
             ("Planos", "Listar", "GET", false),
@@ -51,6 +55,20 @@ public static class MenuPermissionsTests
             if (ctx.Result is not null) throw new Exception($"Rota pública indevidamente bloqueada: {controller}/{action}.");
         }
 
+        foreach (var role in new[] { "Comum", "Gestor", "Administrador" })
+        foreach (var permitido in new[] { false, true })
+        {
+            var identity = new ClaimsIdentity([new Claim(ClaimTypes.Role, role)], "tests");
+            if (permitido) identity.AddClaim(new Claim(AcessoMenu.Claim, "WhatsApp"));
+            foreach (var method in new[] { "GET", "POST" })
+            {
+                var ctx = Context("WhatsApp", "Index", method, new ClaimsPrincipal(identity));
+                ctx.RouteData.Values["area"] = "Administracao";
+                new Web.Services.MenuAdministrativoFilter().OnAuthorization(ctx);
+                if ((ctx.Result is null) != permitido)
+                    throw new Exception($"Permissão WhatsApp na Web incorreta: {role}/{method}/{permitido}");
+            }
+        }
         var menus = (IDictionary<string, string>)MenusAdministrativos.Opcoes;
         menus["Categoria"] = "Categorias";
         try
@@ -109,3 +127,5 @@ public static class MenuPermissionsTests
         return new AuthorizationFilterContext(new ActionContext(http, route, descriptor, new ModelStateDictionary()), []);
     }
 }
+
+

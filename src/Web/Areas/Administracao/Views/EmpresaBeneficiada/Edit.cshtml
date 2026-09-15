@@ -1,0 +1,10 @@
+@model CredenciadoVm
+@{ ViewData["Title"] = "Editar empresa beneficiada"; }
+<h1 class="h3 mb-4">Editar empresa beneficiada</h1>
+@if (TempData["Error"] is string error) { <div class="alert alert-warning" role="alert">@error</div> }
+<form asp-action="Edit" method="post" enctype="multipart/form-data" class="card card-body shadow-sm">
+    <input asp-for="Id" type="hidden" />
+    <partial name="_Form" model="Model" />
+    <div class="mt-4"><a asp-action="Index" class="btn btn-light">Cancelar</a> <button type="submit" class="btn btn-success">Salvar empresa</button></div>
+</form>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> <script src="~/js/credenciado-form.js" asp-append-version="true"></script> }

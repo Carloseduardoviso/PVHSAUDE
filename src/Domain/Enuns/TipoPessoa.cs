@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
-namespace PVHSAUDE.Domain.Enuns
+namespace PVHSAUDE.Domain.Enuns;
+
+public enum TipoPessoa
 {
-    public enum TipoPessoa
-    {
-        Fisica = 1,
-        Juridica = 2
-    }
+    [Display(Name = "Pessoa Física")]
+    Fisica = 1,
+    [Display(Name = "Empresarial")]
+    Juridica = 2
 }

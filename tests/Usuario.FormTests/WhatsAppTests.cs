@@ -16,6 +16,8 @@ internal static class WhatsAppTests
     public static async Task Run()
     {
         void Check(bool ok, string message) { if (!ok) throw new Exception(message); Console.WriteLine("PASS: " + message); }
+        Check(PVHSAUDE.Domain.Enuns.MenusAdministrativos.Opcoes.ContainsKey("WhatsApp"), "WhatsApp disponível nos menus permitidos.");
+        await MenuPermissionsTests.Run();
         var model = new ConfiguracaoWhatsAppVm { Nome = "PVH Saúde", Mensagem = "Olá! Quero informações & valores + esportes.", Telefone = "5569992341486" };
         Check(Validator.TryValidateObject(model, new ValidationContext(model), null, true), "Configuração válida aceita.");
         var link = new Uri(model.CriarLink());
@@ -30,8 +32,8 @@ internal static class WhatsAppTests
         using var db = new Context(options, null!);
         var entity = db.GetService<IDesignTimeModel>().Model.FindEntityType(typeof(ConfiguracaoWhatsApp))!;
         Check(entity.FindPrimaryKey()!.Properties.Single().Name == "Id" && entity.FindProperty("Id")!.ValueGenerated == ValueGenerated.Never && entity.GetCheckConstraints().Single().Sql == "[Id] = 1", "Modelo do banco restringe todos os registros à mesma chave, sem identidade automática.");
-        Check(typeof(PVHSAUDE.Api.Controllers.ConfiguracaoWhatsAppController).GetMethod("Salvar")!.GetCustomAttributes(typeof(AuthorizeAttribute), true).Cast<AuthorizeAttribute>().Single().Roles == "Administrador", "Gravação na API restrita a administrador.");
-        Check(typeof(PVHSAUDE.Web.Areas.Administracao.Controllers.WhatsAppController).GetCustomAttributes(typeof(AuthorizeAttribute), true).Cast<AuthorizeAttribute>().Single().Roles == "Administrador", "Tela administrativa protegida.");
+        Check(typeof(PVHSAUDE.Api.Controllers.ConfiguracaoWhatsAppController).GetMethod("Salvar")!.GetCustomAttributes(typeof(AuthorizeAttribute), true).Cast<AuthorizeAttribute>().Single().Roles is null, "Gravação na API exige autenticação e permissão de menu.");
+        Check(typeof(PVHSAUDE.Web.Areas.Administracao.Controllers.WhatsAppController).GetCustomAttributes(typeof(AuthorizeAttribute), true).Cast<AuthorizeAttribute>().Single().Roles is null, "Tela administrativa protegida.");
         var transport = new Transport(model);
         var api = new WhatsAppApiClient(new Factory(transport));
         var controller = new PVHSAUDE.Web.Controllers.WhatsAppController(api) { ControllerContext = new ControllerContext { HttpContext = new DefaultHttpContext() } };
@@ -53,3 +55,4 @@ internal static class WhatsAppTests
             : new HttpResponseMessage(HttpStatusCode.OK) { Content = JsonContent.Create(model) });
     }
 }
+

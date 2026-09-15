@@ -18,7 +18,7 @@ public class ConfiguracaoWhatsAppController(Context db) : ControllerBase
         { Nome = configuracao.Nome, Mensagem = configuracao.Mensagem, Telefone = configuracao.Telefone });
     }
 
-    [HttpPut, Authorize(Roles = "Administrador")]
+    [HttpPut, Authorize]
     public async Task<IActionResult> Salvar(ConfiguracaoWhatsAppVm model, CancellationToken ct)
     {
         var configuracao = await db.Set<ConfiguracaoWhatsApp>().SingleOrDefaultAsync(ct);

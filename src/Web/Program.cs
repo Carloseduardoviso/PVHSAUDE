@@ -41,6 +41,9 @@ builder.Services.AddHttpClient<PlanoApiClient>(client =>
 builder.Services.AddHttpClient<CredenciadoApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 
+builder.Services.AddHttpClient<EmpresaBeneficiadaApiClient>(client =>
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

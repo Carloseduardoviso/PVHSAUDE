@@ -20,6 +20,7 @@ namespace PVHSAUDE.Infra.Ioc
             services.AddScoped<PVHSAUDE.Application.Interface.IUsuarioService, PVHSAUDE.Application.AppService.UsuarioService>();
             services.AddScoped<PVHSAUDE.Application.Interface.IAuthService, PVHSAUDE.Application.AppService.AuthService>();
             services.AddScoped<PVHSAUDE.Application.Interface.IBannerService, PVHSAUDE.Application.AppService.BannerService>();
+            services.AddScoped<PVHSAUDE.Application.Interface.IEmpresaBeneficiadaService, PVHSAUDE.Application.AppService.EmpresaBeneficiadaService>();
             return services;
         }
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)

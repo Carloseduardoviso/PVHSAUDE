@@ -28,6 +28,7 @@ public class MenuApiFilter : IAuthorizationFilter
     private static string? EncontrarMenu(string? controller)
     {
         if (string.IsNullOrWhiteSpace(controller)) return null;
+        if (controller == "ConfiguracaoWhatsApp") return "WhatsApp";
 
         var menu = MenusAdministrativos.Opcoes.Keys.FirstOrDefault(opcao =>
             string.Equals(opcao, controller, StringComparison.OrdinalIgnoreCase));

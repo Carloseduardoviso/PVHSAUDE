@@ -14,10 +14,10 @@ internal static class BannerApiClientTests
         foreach (var ativos in new[] { false, true })
         {
             var lista = await client.ListarAsync(ativos, default);
-            Check(lista.Single().BannerId == banner.Id, "listagem preserva o ID enviado pela API");
+            Check(lista.Single().Id == banner.Id, "listagem preserva o ID enviado pela API");
         }
         var model = await client.ObterAsync(banner.Id, default);
-        Check(model?.BannerId == banner.Id, "abertura da edição preserva o ID enviado pela API");
+        Check(model?.Id == banner.Id, "abertura da edição preserva o ID enviado pela API");
         model!.Titulo = "Banner editado";
         Check(await client.SalvarAsync(model, default) is null, "edição salva sem reenviar imagem");
         Check(transport.SavedMethod == HttpMethod.Put && transport.SavedPath == $"/api/banners/{banner.Id}",
@@ -50,3 +50,4 @@ internal static class BannerApiClientTests
         }
     }
 }
+

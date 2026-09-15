@@ -5,7 +5,7 @@ using Web.Services;
 
 namespace PVHSAUDE.Web.Areas.Administracao.Controllers;
 
-[Area("Administracao"), Authorize(Roles = "Administrador")]
+[Area("Administracao"), Authorize]
 public class WhatsAppController(WhatsAppApiClient api) : Controller
 {
     [HttpGet]

@@ -15,6 +15,7 @@ public class PlanoConfig : IEntityTypeConfiguration<Plano>
         builder.Property(x => x.Descricao).HasMaxLength(1000);
         builder.Property(x => x.DataValidade).HasColumnType("date").IsRequired(false);
         builder.Property(x => x.Valor).HasPrecision(18, 2);
+        builder.Property(x => x.TipoPessoa).HasConversion<int>();
         builder.Property(x => x.Periodicidade).HasConversion<int>();
     }
 }

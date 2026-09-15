@@ -18,6 +18,23 @@ internal static class AutoMapperTests
         }, NullLoggerFactory.Instance);
         config.AssertConfigurationIsValid();
         var mapper = config.CreateMapper();
+        foreach (var tipo in new[] { 1, 2 })
+        {
+            var entrada = System.Text.Json.JsonSerializer.Deserialize<PlanoEntradaVm>(
+                "{\"Nome\":\"Plano teste\",\"TipoPessoa\":" + tipo + "}")!;
+            var entidade = mapper.Map<Plano>(mapper.Map<PlanoVm>(entrada));
+            var resposta = System.Text.Json.JsonSerializer.SerializeToElement(mapper.Map<PlanoRespostaVm>(entidade));
+            if (!resposta.TryGetProperty("TipoPessoa", out var valor) || valor.GetInt32() != tipo)
+                throw new Exception("Tipo de pessoa deve ser preservado no cadastro e na resposta do plano.");
+            var idOriginal = entidade.Id;
+            mapper.Map(new PlanoVm { Nome = "Plano editado", TipoPessoa = (TipoPessoa)(tipo == 1 ? 2 : 1) }, entidade);
+            if (entidade.Id != idOriginal || (int)entidade.TipoPessoa == tipo)
+                throw new Exception("Edição deve alterar o tipo de pessoa e preservar o ID do plano.");
+        }
+        var invalido = new PlanoEntradaVm { Nome = "Inválido", TipoPessoa = (TipoPessoa)99 };
+        if (System.ComponentModel.DataAnnotations.Validator.TryValidateObject(invalido,
+            new System.ComponentModel.DataAnnotations.ValidationContext(invalido), null, true))
+            throw new Exception("Tipo de pessoa inválido não deve ser aceito.");
         void Check(bool value, string message)
         {
             if (!value) throw new Exception(message);

@@ -5,6 +5,9 @@ namespace PVHSAUDE.Application.ViewModels;
 
 public class PlanoVm
 {
+    [EnumDataType(typeof(TipoPessoa)), Display(Name = "Tipo de pessoa")]
+    public TipoPessoa TipoPessoa { get; set; } = TipoPessoa.Fisica;
+
     public Guid Id { get; set; }
     [Required(ErrorMessage = "Informe o nome do plano."), StringLength(150), Display(Name = "Nome do plano")]
     public string Nome { get; set; } = string.Empty;
