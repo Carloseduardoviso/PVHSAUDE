@@ -19,6 +19,9 @@ namespace PVHSAUDE.Domain.Entities
         public Guid PlanoId { get; private set; }
         public Guid? CredenciadoId { get; private set; }
         public Credenciado? Credenciado { get; private set; }
+        public TipoPessoa TipoPessoa { get; private set; } = TipoPessoa.Fisica;
+        public Guid? EmpresaBeneficiadaId { get; private set; }
+        public EmpresaBeneficiada? EmpresaBeneficiada { get; private set; }
         public ICollection<Dependente> Dependentes { get; private set; } = new List<Dependente>();
 
         public Beneficiario(string nome, string cpf, DateTime dataNascimento, Guid planoId, DateTime dataInicio, DateTime dataValidade, Guid? credenciadoId = null)
@@ -39,6 +42,12 @@ namespace PVHSAUDE.Domain.Entities
             DataValidade = validade;
             Status = status;
             CredenciadoId = credenciadoId;
+        }
+
+        public void DefinirPessoa(TipoPessoa tipoPessoa, Guid? empresaBeneficiadaId)
+        {
+            TipoPessoa = tipoPessoa;
+            EmpresaBeneficiadaId = tipoPessoa == TipoPessoa.Juridica ? empresaBeneficiadaId : null;
         }
 
         public void DefinirStatus(StatusBeneficiario status) => Status = status;

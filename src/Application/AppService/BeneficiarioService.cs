@@ -7,6 +7,7 @@ using PVHSAUDE.Domain.Interfaces.Repository;
 namespace PVHSAUDE.Application.AppService;
 
 public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEntityRepository<Credenciado> empresas,
+    IEntityRepository<EmpresaBeneficiada> empresasBeneficiadas,
     IEntityRepository<Dependente> dependentes, IUnitOfWork work, IMapper mapper) : IBeneficiarioService
 {
     public async Task<List<BeneficiarioRespostaVm>> ListarAsync(CancellationToken ct) =>
@@ -17,10 +18,19 @@ public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEn
         mapper.Map<BeneficiarioRespostaVm>(await Encontrar(id, ct));
     private async Task ValidarPlano(BeneficiarioEntradaVm vm, CancellationToken ct)
     {
-        var empresa = await empresas.ObterAsync(x => x.Id == vm.CredenciadoId, ct);
-        if (empresa?.PlanoId is not Guid planoId)
-            throw new ServiceException(ServiceError.Invalid, "Selecione uma empresa com plano cadastrado.");
-        vm.PlanoId = planoId;
+        if (vm.TipoPessoa == TipoPessoa.Juridica)
+        {
+            var empresa = await empresasBeneficiadas.ObterAsync(x => x.Id == vm.EmpresaBeneficiadaId, ct);
+            if (empresa?.PlanoId is not Guid planoId)
+                throw new ServiceException(ServiceError.Invalid, "Selecione uma empresa beneficiada com plano cadastrado.");
+            vm.PlanoId = planoId;
+        }
+        else
+        {
+            vm.EmpresaBeneficiadaId = null;
+            if (vm.PlanoId == Guid.Empty)
+                throw new ServiceException(ServiceError.Invalid, "Selecione um plano para a pessoa física.");
+        }
         if (vm.DataValidade < vm.DataInicio)
             throw new ServiceException(ServiceError.Validation, "A validade do benefício deve ser posterior à data de início.");
     }
@@ -36,6 +46,7 @@ public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEn
         if (vm.Dependentes?.Any(x => x.Id != Guid.Empty) == true)
             throw new ServiceException(ServiceError.Invalid, "Novos dependentes não devem possuir um identificador.");
         var entity = mapper.Map<Beneficiario>(Normalizar(vm));
+        entity.DefinirPessoa(vm.TipoPessoa, vm.EmpresaBeneficiadaId);
         Sincronizar(entity, vm.Dependentes);
         repository.Adicionar(entity);
         await work.SalvarAsync(ct);
@@ -52,6 +63,7 @@ public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEn
             throw new ServiceException(ServiceError.Invalid, "Dependente inválido para este beneficiário.");
         Sincronizar(entity, vm.Dependentes);
         mapper.Map(Normalizar(vm), entity);
+        entity.DefinirPessoa(vm.TipoPessoa, vm.EmpresaBeneficiadaId);
         await work.SalvarAsync(ct);
     }
     public async Task InativarAsync(Guid id, CancellationToken ct)

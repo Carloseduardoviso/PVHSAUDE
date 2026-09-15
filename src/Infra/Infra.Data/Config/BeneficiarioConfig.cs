@@ -20,6 +20,9 @@ namespace Infra.Data.Config
             builder.Property(x => x.DataValidade).IsRequired();
             builder.Property(x => x.CredenciadoId).IsRequired(false);
             builder.HasOne(x => x.Credenciado).WithMany().HasForeignKey(x => x.CredenciadoId).OnDelete(DeleteBehavior.Restrict);
+            builder.Property(x => x.TipoPessoa).HasConversion<int>().IsRequired();
+            builder.Property(x => x.EmpresaBeneficiadaId).IsRequired(false);
+            builder.HasOne(x => x.EmpresaBeneficiada).WithMany().HasForeignKey(x => x.EmpresaBeneficiadaId).OnDelete(DeleteBehavior.Restrict);
             builder.Property(x => x.PlanoId).IsRequired();
             builder.Property(x => x.Telefone).IsRequired(false);
             builder.Property(x => x.Email).IsRequired(false);

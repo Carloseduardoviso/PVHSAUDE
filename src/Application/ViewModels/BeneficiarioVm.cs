@@ -14,8 +14,12 @@ public class BeneficiarioVm
     [EmailAddress, Display(Name = "E-mail")] public string? Email { get; set; }
     [Display(Name = "Endereço")] public string? Endereco { get; set; }
     [GuidNaoVazio, Display(Name = "Plano")] public Guid PlanoId { get; set; }
-    [GuidNaoVazio(ErrorMessage = "Selecione a empresa credenciada."), Display(Name = "Empresa credenciada")]
+    [Display(Name = "Empresa Beneficiada")]
     public Guid? CredenciadoId { get; set; }
+    [Display(Name = "Tipo de pessoa")]
+    public TipoPessoa TipoPessoa { get; set; } = TipoPessoa.Fisica;
+    [Display(Name = "Empresa Beneficiada")]
+    public Guid? EmpresaBeneficiadaId { get; set; }
     [Required, DataType(DataType.Date), Display(Name = "Início do benefício")] public DateTime DataInicio { get; set; } = DateTime.Today;
     [Required, DataType(DataType.Date), Display(Name = "Validade do benefício")] public DateTime DataValidade { get; set; } = DateTime.Today.AddYears(1);
     [Display(Name = "Situação")] public int Status { get; set; } = 2;

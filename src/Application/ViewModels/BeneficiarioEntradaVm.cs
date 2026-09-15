@@ -14,6 +14,8 @@ public class BeneficiarioEntradaVm
     [StringLength(250)] public string? Endereco { get; set; }
     public Guid PlanoId { get; set; }
     public Guid? CredenciadoId { get; set; }
+    public TipoPessoa TipoPessoa { get; set; } = TipoPessoa.Fisica;
+    public Guid? EmpresaBeneficiadaId { get; set; }
     [DataType(DataType.Date)] public DateTime DataInicio { get; set; }
     [DataType(DataType.Date)] public DateTime DataValidade { get; set; }
     [MaxLength(5, ErrorMessage = "É permitido cadastrar no máximo 5 dependentes.")]
@@ -25,7 +27,7 @@ public record DependenteRespostaVm(Guid Id, string Nome, string Cpf, DateTime Da
 
 public record BeneficiarioRespostaVm(Guid Id, string Nome, string Cpf, DateTime DataNascimento,
     string? Telefone, string? Email, string? Endereco, Guid PlanoId, DateTime DataInicio,
-    DateTime DataValidade, StatusBeneficiario Status, IReadOnlyCollection<DependenteRespostaVm> Dependentes, Guid? CredenciadoId);
+    DateTime DataValidade, StatusBeneficiario Status, IReadOnlyCollection<DependenteRespostaVm> Dependentes, Guid? CredenciadoId, TipoPessoa TipoPessoa, Guid? EmpresaBeneficiadaId);
 
 public class DependenteEntradaVm
 {

@@ -43,6 +43,7 @@ public class AutoMapperConfig : Profile
             entity ??= new Beneficiario(vm.Nome, vm.Cpf, vm.DataNascimento, vm.PlanoId, vm.DataInicio, vm.DataValidade, vm.CredenciadoId);
             entity.Atualizar(vm.Nome, vm.Cpf, vm.DataNascimento, vm.Telefone, vm.Email, vm.Endereco,
                 vm.PlanoId, vm.DataInicio, vm.DataValidade, (StatusBeneficiario)vm.Status, vm.CredenciadoId);
+            entity.DefinirPessoa(vm.TipoPessoa, vm.EmpresaBeneficiadaId);
             return entity;
         });
         CreateMap<Dependente, DependenteVm>();
