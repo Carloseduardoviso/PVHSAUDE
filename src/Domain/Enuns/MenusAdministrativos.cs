@@ -10,7 +10,7 @@ public static class MenusAdministrativos
         ["Contato"] = "Mensagens",
         ["Beneficiario"] = "Beneficiários",
         ["Plano"] = "Planos",
-        ["Credenciado"] = "Empresas credenciadas",
+        ["Credenciado"] = "Clinica Credenciadas",
         ["Especialidades"] = "Especialidades",
         ["Procedimentos"] = "Procedimentos"
     };

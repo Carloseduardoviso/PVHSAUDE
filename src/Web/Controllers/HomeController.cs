@@ -11,7 +11,7 @@ namespace Web.Controllers
         [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            var model = await CarregarRede(cancellationToken);
+            var model = new PortalVm();
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             timeout.CancelAfter(TimeSpan.FromSeconds(5));
             try
@@ -80,6 +80,8 @@ namespace Web.Controllers
         public IActionResult ClinicaMedicaTerapeutica() => View();
 
         public IActionResult LaboratorioExames() => View();
+
+        public IActionResult ExamesImagens() => View();
 
         public IActionResult Odontologia() => View();
 

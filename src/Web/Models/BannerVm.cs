@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 namespace Web.Models;
 public class BannerVm
 {
-    public Guid BannerId { get; set; }
+    [JsonPropertyName("id")]
+    public Guid Id { get; set; }
 
     [Required(ErrorMessage = "Informe o título."), StringLength(200), Display(Name = "Título")]
     public string Titulo { get; set; } = "";

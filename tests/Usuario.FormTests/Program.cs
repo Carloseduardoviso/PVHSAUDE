@@ -13,6 +13,8 @@ using Web.Services;
 if (args.Contains("--whatsapp")) { await WhatsAppTests.Run(); return; }
 if (args.Contains("--database")) { await UsuarioDatabaseTests.Run(); return; }
 
+await BannerApiClientTests.Run();
+if (args.Contains("--banner")) return;
 AutoMapperTests.Run();
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { ApplicationName = typeof(ContaController).Assembly.FullName });

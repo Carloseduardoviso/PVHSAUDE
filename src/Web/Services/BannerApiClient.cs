@@ -39,7 +39,7 @@ public class BannerApiClient(HttpClient http)
         if (model.Imagem is { } imagem)
             content.Add(new StreamContent(imagem.OpenReadStream()), "Imagem", Path.GetFileName(imagem.FileName));
 
-        using var request = new HttpRequestMessage(model.BannerId == Guid.Empty ? HttpMethod.Post : HttpMethod.Put, model.BannerId == Guid.Empty ? "api/banners" : $"api/banners/{model.BannerId}")
+        using var request = new HttpRequestMessage(model.Id == Guid.Empty ? HttpMethod.Post : HttpMethod.Put, model.Id == Guid.Empty ? "api/banners" : $"api/banners/{model.Id}")
         {
             Content = content
         };
