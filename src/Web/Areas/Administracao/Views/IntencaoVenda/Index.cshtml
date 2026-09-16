@@ -1,0 +1,14 @@
+@model List<Web.Models.IntencaoVendaVm>
+@using PVHSAUDE.Domain.Enuns
+@{ ViewData["Title"] = "Intenções de venda"; }
+<div class="d-flex justify-content-between align-items-center mb-4"><div><h1 class="h3 mb-1">Intenções de venda</h1><p class="text-muted mb-0">Solicitações de carteirinha aguardando confirmação do Pix.</p></div></div>
+@if (TempData["Sucesso"] is string sucesso) { <div class="alert alert-success">@sucesso</div> }
+@if (TempData["Erro"] is string erro) { <div class="alert alert-danger">@erro</div> }
+@if (ViewData["Erro"] is string carregamento) { <div class="alert alert-warning">@carregamento</div> }
+else if (Model.Count == 0) { <div class="alert alert-info">Nenhuma intenção de venda registrada.</div> }
+else
+{
+<div class="table-responsive"><table class="table table-striped align-middle"><thead><tr><th>Data</th><th>Cliente</th><th>Plano</th><th>Total</th><th>Situação</th><th>Ação</th></tr></thead><tbody>
+@foreach (var item in Model) { <tr><td>@item.CriadoEm.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td><td><strong>@item.Nome</strong><br /><small>@item.Email<br />@item.Telefone</small></td><td>@item.PlanoNome<br /><small>@item.QuantidadeDependentes dependente(s)</small></td><td>@item.ValorTotal.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</td><td><span class="badge @(item.Status == StatusIntencaoVenda.PagamentoEfetuado ? "text-bg-success" : "text-bg-warning")">@(item.Status == StatusIntencaoVenda.PagamentoEfetuado ? "Pagamento efetuado" : "Aguardando pagamento")</span></td><td><form asp-action="AtualizarStatus" method="post"><input type="hidden" name="id" value="@item.Id" /><select name="status" class="form-select form-select-sm mb-2"><option value="AguardandoPagamento" selected="@(item.Status == StatusIntencaoVenda.AguardandoPagamento)">Aguardando pagamento</option><option value="PagamentoEfetuado" selected="@(item.Status == StatusIntencaoVenda.PagamentoEfetuado)">Pagamento efetuado</option></select><button class="btn btn-sm btn-primary">Salvar</button></form></td></tr> }
+</tbody></table></div>
+}

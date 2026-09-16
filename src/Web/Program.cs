@@ -43,6 +43,8 @@ builder.Services.AddHttpClient<CredenciadoApiClient>(client =>
 
 builder.Services.AddHttpClient<EmpresaBeneficiadaApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
+builder.Services.AddHttpClient<IntencaoVendaApiClient>(client =>
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 
 var app = builder.Build();
 

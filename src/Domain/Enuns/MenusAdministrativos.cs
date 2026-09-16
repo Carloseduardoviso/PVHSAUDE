@@ -15,6 +15,7 @@ public static class MenusAdministrativos
         ["EmpresaBeneficiada"] = "Empresas Beneficiadas",
         ["Especialidades"] = "Especialidades",
         ["Procedimentos"] = "Procedimentos"
+        , ["IntencaoVenda"] = "Intenções de venda"
     };
     public static string[] Ler(string valor) => valor.Split(',', StringSplitOptions.RemoveEmptyEntries)
         .Where(Opcoes.ContainsKey).Distinct().ToArray();

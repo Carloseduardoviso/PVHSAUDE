@@ -14,6 +14,7 @@
     const dependentesTemplate = document.getElementById('dependente-carteirinha-template');
     const dependentesAdd = document.getElementById('adicionar-dependente-carteirinha');
     const valorPorDependente = 11.50;
+    let intencaoCriada = false;
     const field = name => form.elements.namedItem(name);
     const digits = value => value.replace(/\D/g, '');
     const displayBirthdate = () => field('dataNascimento').value.split('-').reverse().join('/');
@@ -185,14 +186,43 @@
             : `${input.value} selecionado. Os dados do cartão serão solicitados no ambiente de pagamento quando a cobrança estiver habilitada.`;
     }));
     document.getElementById('summary-payment').textContent = 'Pix';
+    async function registrarIntencaoVenda() {
+        if (intencaoCriada) return;
+        const dependentes = [...dependentesList.querySelectorAll('.carteirinha-dependent')].map(item => ({
+            nome: item.querySelector('[data-dependent="nome"]')?.value || '',
+            cpf: item.querySelector('[data-dependent="cpf"]')?.value || '',
+            nascimento: item.querySelector('[data-dependent="nascimento"]')?.value || '',
+            parentesco: item.querySelector('[data-dependent="parentesco"]')?.value || ''
+        }));
+        const payload = {
+            nome: field('nome').value.trim(), email: field('email').value.trim(), telefone: field('telefone').value,
+            cpf: field('cpf').value, planoId: field('planoId').value,
+            quantidadeDependentes: dependentes.length,
+            endereco: `${field('rua').value}, ${field('numero').value}, ${field('bairro').value}, ${field('cidade').value}/${field('uf').value}, CEP ${field('cep').value}`,
+            dependentes: JSON.stringify(dependentes)
+        };
+        const token = form.querySelector('input[name="__RequestVerificationToken"]')?.value;
+        const response = await fetch('/Carteirinha/CriarIntencao', { method: 'POST', headers: { 'Content-Type': 'application/json', 'RequestVerificationToken': token || '' }, body: JSON.stringify(payload) });
+        if (!response.ok) throw new Error('Não foi possível registrar a solicitação.');
+        intencaoCriada = true;
+    }
     document.getElementById('copiar-pix')?.addEventListener('click', async () => {
         const chave = document.getElementById('carteirinha-pix-chave').textContent.trim();
         const status = document.getElementById('pix-status');
+        let copiada = false;
         try {
             await navigator.clipboard.writeText(chave);
-            status.textContent = 'Chave Pix copiada.';
+            copiada = true;
         } catch {
-            status.textContent = 'Copie a chave Pix manualmente.';
+            // Alguns navegadores bloqueiam o clipboard; o clique ainda deve registrar a intenção.
+        }
+        try {
+            await registrarIntencaoVenda();
+            status.textContent = copiada
+                ? 'Chave Pix copiada. Solicitação registrada como aguardando pagamento.'
+                : 'Solicitação registrada como aguardando pagamento. Copie a chave Pix manualmente.';
+        } catch {
+            status.textContent = 'Não foi possível registrar a solicitação. Verifique os dados e tente novamente.';
         }
     });
     function formatarMoeda(valor) {

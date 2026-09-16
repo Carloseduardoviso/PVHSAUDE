@@ -103,6 +103,7 @@ public class AutoMapperConfig : Profile
             .ForMember(e => e.Id, o => o.Ignore())
             .ForMember(e => e.EnviadoEm, o => o.Ignore());
         CreateMap<Contato, ContatoVm>();
+        CreateMap<IntencaoVenda, IntencaoVendaVm>();
         CreateMap<ContatoVm, Contato>()
             .ForMember(e => e.Id, o => o.Ignore())
             .ForMember(e => e.EnviadoEm, o => o.Ignore());

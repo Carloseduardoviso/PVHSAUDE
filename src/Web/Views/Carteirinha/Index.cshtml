@@ -17,6 +17,7 @@
                 <li><span>4</span>Pagamento</li>
             </ol>
             <form id="carteirinha-form">
+                @Html.AntiForgeryToken()
                 <section data-step="0" aria-labelledby="cadastro-title">
                     <h2 id="cadastro-title" tabindex="-1">Vamos começar pelo seu cadastro</h2>
                     <p class="carteirinha-muted">Preencha seus dados. Os campos com * são obrigatórios.</p>
