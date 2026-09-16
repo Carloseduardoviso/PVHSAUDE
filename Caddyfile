@@ -1,0 +1,7 @@
+www.pvhsaude.com.br {
+    redir https://pvhsaude.com.br{uri} permanent
+}
+
+pvhsaude.com.br {
+    reverse_proxy web:8080
+}

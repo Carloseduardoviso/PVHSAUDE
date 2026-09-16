@@ -11,10 +11,18 @@ using PVHSAUDE.Application.Interface;
 using PVHSAUDE.Domain.Entities;
 using PVHSAUDE.Infra.Helper.Settings;
 using PVHSAUDE.Infra.Ioc;
+using Microsoft.AspNetCore.HttpOverrides;
+using System.Net;
 using System.Threading.RateLimiting;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.KnownProxies.Add(IPAddress.Parse("172.29.0.3"));
+});
 
 builder.Services.AddDbContext<Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -60,6 +68,7 @@ if (!app.Environment.IsProduction())
     app.UseSwaggerUI();
 }
 
+app.UseForwardedHeaders();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -72,5 +81,7 @@ app.UseAuthorization();
 app.UseValidateTokenForgotPasswordMiddleware();
 
 app.MapControllers();
+
+app.MapGet("/health", () => Results.Ok()).AllowAnonymous();
 
 app.Run();
