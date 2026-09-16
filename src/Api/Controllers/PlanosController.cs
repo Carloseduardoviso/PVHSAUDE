@@ -13,4 +13,6 @@ public class PlanosController(IPlanoService service) : ServiceController
     { var p = await service.CriarAsync(vm, ct); return CreatedAtAction(nameof(Obter), new { id = p.Id }, p); });
     [Authorize, HttpPut("{id:guid}")] public Task<IActionResult> Atualizar(Guid id, PlanoEntradaVm vm, CancellationToken ct) => Executar(async () =>
     { await service.AtualizarAsync(id, vm, ct); return NoContent(); });
+    [Authorize, HttpPatch("{id:guid}/suspender-notificacao-validade")] public Task<IActionResult> SuspenderNotificacaoValidade(Guid id, CancellationToken ct) => Executar(async () =>
+    { await service.SuspenderNotificacaoValidadeAsync(id, ct); return NoContent(); });
 }

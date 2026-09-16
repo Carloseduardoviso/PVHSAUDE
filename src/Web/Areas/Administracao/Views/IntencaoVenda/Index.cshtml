@@ -5,7 +5,7 @@
 @if (TempData["Sucesso"] is string sucesso) { <div class="alert alert-success">@sucesso</div> }
 @if (TempData["Erro"] is string erro) { <div class="alert alert-danger">@erro</div> }
 @if (ViewData["Erro"] is string carregamento) { <div class="alert alert-warning">@carregamento</div> }
-else if (Model.Count == 0) { <div class="alert alert-info">Nenhuma intenção de venda registrada.</div> }
+else if (Model.Count == 0) { <div class="alert alert-info" role="status">Nenhuma intenção de venda registrada.</div> }
 else
 {
 <div class="table-responsive"><table class="table table-striped align-middle"><thead><tr><th>Data</th><th>Cliente</th><th>Plano</th><th>Total</th><th>Situação</th><th>Ação</th></tr></thead><tbody>

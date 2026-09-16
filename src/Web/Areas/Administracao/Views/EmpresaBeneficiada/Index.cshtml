@@ -6,7 +6,7 @@
 </div>
 @if (TempData["Success"] is string success) { <div class="alert alert-success">@success</div> }
 @if (ViewData["Error"] is string error) { <div class="alert alert-danger">@error</div> }
-else if (!Model.Any()) { <div class="alert alert-info">Nenhuma empresa beneficiada cadastrada.</div> }
+else if (!Model.Any()) { <div class="alert alert-info" role="status">Nenhuma empresa beneficiada cadastrada.</div> }
 else {
 <div class="card shadow-sm table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros; role horizontalmente para ver todas as colunas" tabindex="0"><table class="table table-hover mb-0">
     <thead><tr><th>Imagem</th><th>Nome fantasia</th><th>CNPJ</th><th>Tipo</th><th>Telefone</th><th>Cidade</th><th>Situação</th><th>Ações</th></tr></thead>

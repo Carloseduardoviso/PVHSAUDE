@@ -15,4 +15,4 @@ public class PlanoEntradaVm
     [DataType(DataType.Date)] public DateTime? DataValidade { get; set; }
 }
 
-public record PlanoRespostaVm(Guid Id, string Nome, string? Descricao, decimal Valor, Periodicidade Periodicidade, DateTime? DataValidade, TipoPessoa TipoPessoa = TipoPessoa.Fisica);
+public record PlanoRespostaVm(Guid Id, string Nome, string? Descricao, decimal Valor, Periodicidade Periodicidade, DateTime? DataValidade, TipoPessoa TipoPessoa = TipoPessoa.Fisica, bool NotificacaoValidadeSuspensa = false);

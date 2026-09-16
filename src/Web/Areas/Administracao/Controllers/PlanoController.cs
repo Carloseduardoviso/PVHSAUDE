@@ -44,4 +44,12 @@ public class PlanoController(PlanoApiClient planos) : Controller
         TempData["Success"] = "Plano atualizado com sucesso.";
         return RedirectToAction(nameof(Index));
     }
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> SuspenderNotificacaoValidade(Guid id, CancellationToken ct)
+    {
+        if (id == Guid.Empty) return BadRequest();
+        await planos.SuspenderNotificacaoValidadeAsync(id, ct);
+        return RedirectToAction(nameof(Index));
+    }
 }

@@ -24,4 +24,10 @@ public class PlanoService(IEntityRepository<Plano> repository, IUnitOfWork work,
         mapper.Map(mapper.Map<PlanoVm>(vm), entity);
         await work.SalvarAsync(ct);
     }
+    public async Task SuspenderNotificacaoValidadeAsync(Guid id, CancellationToken ct)
+    {
+        var entity = await repository.ObterAsync(x => x.Id == id, ct) ?? throw new ServiceException(ServiceError.NotFound);
+        entity.SuspenderNotificacaoValidade();
+        await work.SalvarAsync(ct);
+    }
 }

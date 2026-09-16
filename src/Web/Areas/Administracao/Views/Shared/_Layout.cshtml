@@ -39,7 +39,7 @@
             </nav>
         </aside>
         <div class="admin-content">
-            <header class="admin-header">Administração <span class="text-muted">/ @ViewData["Title"]</span></header>
+            <header class="admin-header d-flex align-items-center justify-content-between gap-3"><span>Administração <span class="text-muted">/ @ViewData["Title"]</span></span>@await Component.InvokeAsync("PlanoAvisos")</header>
             <main id="conteudo" class="p-3 p-lg-4">@RenderBody()</main>
         </div>
     </div>

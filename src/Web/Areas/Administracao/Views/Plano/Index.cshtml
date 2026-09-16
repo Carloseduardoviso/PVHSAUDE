@@ -6,7 +6,7 @@
 </div>
 @if (TempData["Success"] is string success) { <div class="alert alert-success">@success</div> }
 @if (ViewData["Error"] is string error) { <div class="alert alert-danger">@error</div> }
-else if (!Model.Any()) { <div class="alert alert-info">Nenhum plano cadastrado. Cadastre o primeiro plano para vinculá-lo aos beneficiários.</div> }
+else if (!Model.Any()) { <div class="alert alert-info" role="status">Nenhum plano cadastrado. Cadastre o primeiro plano para vinculá-lo aos beneficiários.</div> }
 else {
 <div class="card shadow-sm table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros; role horizontalmente para ver todas as colunas" tabindex="0"><table class="table table-hover mb-0">
     <thead><tr><th>Nome</th><th>Tipo de pessoa</th><th>Valor</th><th>Periodicidade</th><th>Validade</th><th>Ações</th></tr></thead>

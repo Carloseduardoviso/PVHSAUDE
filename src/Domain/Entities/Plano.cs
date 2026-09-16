@@ -10,6 +10,7 @@ public class Plano
     public decimal Valor { get; private set; }
     public Periodicidade Periodicidade { get; private set; }
     public DateTime? DataValidade { get; private set; }
+    public bool NotificacaoValidadeSuspensa { get; private set; }
 
     public TipoPessoa TipoPessoa { get; private set; }
 
@@ -26,6 +27,10 @@ public class Plano
         Descricao = descricao?.Trim();
         Valor = valor;
         Periodicidade = periodicidade;
-        DataValidade = dataValidade?.Date;
+        var novaDataValidade = dataValidade?.Date;
+        if (DataValidade != novaDataValidade) NotificacaoValidadeSuspensa = false;
+        DataValidade = novaDataValidade;
     }
+
+    public void SuspenderNotificacaoValidade() => NotificacaoValidadeSuspensa = true;
 }

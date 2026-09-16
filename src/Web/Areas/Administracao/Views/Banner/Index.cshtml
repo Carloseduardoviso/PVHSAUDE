@@ -4,7 +4,7 @@
 @if (TempData["Success"] is string sucesso) { <div class="alert alert-success" role="status">@sucesso</div> }
 @if (TempData["Error"] is string falha) { <div class="alert alert-danger" role="alert">@falha</div> }
 @if (ViewData["Erro"] is string erro) { <div class="alert alert-warning">@erro <a asp-action="Index">Tentar novamente</a></div> }
-else if (Model.Count == 0) { <p>Nenhum banner cadastrado.</p> }
+else if (Model.Count == 0) { <div class="alert alert-info" role="status">Nenhum banner cadastrado.</div> }
 else
 {
 <div class="table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros; role horizontalmente para ver todas as colunas" tabindex="0"><table class="table align-middle"><thead><tr><th>Imagem</th><th>Título</th><th>Status</th><th>Ações</th></tr></thead><tbody>

@@ -26,6 +26,12 @@ public class PlanoApiClient(HttpClient client)
         await Verificar(response, ct);
     }
 
+    public async Task SuspenderNotificacaoValidadeAsync(Guid id, CancellationToken ct)
+    {
+        using var response = await client.PatchAsync($"api/planos/{id}/suspender-notificacao-validade", null, ct);
+        await Verificar(response, ct);
+    }
+
     private static async Task Verificar(HttpResponseMessage response, CancellationToken ct)
     {
         if (response.IsSuccessStatusCode) return;

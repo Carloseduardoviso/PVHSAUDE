@@ -25,6 +25,12 @@
 .admin-content .table .btn { margin-block: .125rem; }
 .admin-content .table-responsive:focus-visible { outline: 2px solid #198754; outline-offset: 2px; }
 .admin-header { padding: 22px 28px; background: white; border-bottom: 1px solid #dfe7e3; font-weight: 600; }
+.admin-notification-bell { position: relative; display: grid; place-items: center; width: 42px; height: 42px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #15357a; }
+.admin-notification-bell:hover, .admin-notification-bell:focus-visible { background: #eaf0ff; }
+.admin-notification-bell svg { width: 27px; height: 27px; fill: currentColor; }
+.admin-notification-count { position: absolute; top: 1px; right: 0; min-width: 18px; padding: 1px 5px; border-radius: 99px; background: #dc3545; color: #fff; font-size: .7rem; line-height: 1.2; }
+.admin-notification-bell.has-notifications { animation: admin-bell-pulse 1.15s ease-in-out infinite; }
+@keyframes admin-bell-pulse { 50% { transform: scale(1.12); color: #dc3545; } }
 .usuario-cards, .admin-record-cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
 .usuario-cards dt, .admin-record-cards dt { font-size: .875rem; color: #52645d; }
 .usuario-cards dd, .admin-record-cards dd { margin-bottom: .75rem; }

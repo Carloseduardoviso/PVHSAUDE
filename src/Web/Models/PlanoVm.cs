@@ -31,4 +31,5 @@ public class PlanoVm
     [DataType(DataType.Date)]
     [Display(Name = "Data de validade (opcional)")]
     public DateTime? DataValidade { get; set; }
+    public bool NotificacaoValidadeSuspensa { get; set; }
 }

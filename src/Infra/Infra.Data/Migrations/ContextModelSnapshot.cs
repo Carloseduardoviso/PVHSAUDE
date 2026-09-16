@@ -560,6 +560,11 @@ namespace PVHSAUDE.Infra.Data.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<bool>("NotificacaoValidadeSuspensa")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<int>("Periodicidade")
                         .HasColumnType("int");
 

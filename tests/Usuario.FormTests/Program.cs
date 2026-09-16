@@ -62,6 +62,12 @@ foreach (var role in new[] { Role.Comum, Role.Gestor, Role.Administrador })
     Check(role == Role.Administrador ? response.StatusCode == HttpStatusCode.OK : response.StatusCode == HttpStatusCode.Redirect,
         "Cadastro restrito a Administrador: " + role);
 }
+using (var response = await client.GetAsync("/Administracao/Usuario"))
+{
+    var html = WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync());
+    Check(html.Contains("alert alert-info") && html.Contains("Nenhum usuário cadastrado."),
+        "Lista vazia de usuários usa alerta informativo.");
+}
 foreach (var (role, senha, duplicate, valid) in new[] { (0, "senha-de-teste", false, true), (1, "senha-de-teste", false, true), (2, "senha-de-teste", false, true), (99, "senha-de-teste", false, false), (0, "curta", false, false), (0, "senha-de-teste", true, false) })
 {
     transport.Saved = null;
