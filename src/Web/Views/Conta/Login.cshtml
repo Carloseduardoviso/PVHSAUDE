@@ -1,13 +1,22 @@
 @model PVHSAUDE.Application.ViewModels.LoginVm
 @{ ViewData["Title"] = "Entrar na administração"; }
-<div class="mx-auto py-4" style="max-width: 440px">
-    <h1 class="h3">Entrar na administração</h1>
-    <p class="text-muted">Informe seu e-mail e senha para acessar.</p>
-    <form asp-action="Login" method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]">
-        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-        <div class="mb-3"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" autocomplete="username" /><span asp-validation-for="Email" class="text-danger"></span></div>
-        <div class="mb-3"><label asp-for="Senha" class="form-label"></label><input asp-for="Senha" class="form-control" autocomplete="current-password" /><span asp-validation-for="Senha" class="text-danger"></span></div>
-        <button class="btn btn-success w-100" type="submit">Entrar</button>
-    </form>
-</div>
+<section class="login-page" aria-labelledby="login-title">
+    <div class="login-card">
+        <div class="login-brand">
+            <img src="~/images/pvh-saude-horizontal.jpeg" asp-append-version="true" alt="PVH Saúde" />
+        </div>
+        <div class="login-heading">
+            <span class="login-eyebrow">ÁREA ADMINISTRATIVA</span>
+            <h1 id="login-title">Entrar na administração</h1>
+            <p>Informe seus dados para acessar o painel da PVH Saúde.</p>
+        </div>
+        <form asp-action="Login" method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="login-form">
+            <div asp-validation-summary="ModelOnly" class="login-validation" role="alert"></div>
+            <div class="login-field"><label asp-for="Email"></label><input asp-for="Email" autocomplete="username" placeholder="seu@email.com" /><span asp-validation-for="Email"></span></div>
+            <div class="login-field"><label asp-for="Senha"></label><input asp-for="Senha" autocomplete="current-password" placeholder="Digite sua senha" /><span asp-validation-for="Senha"></span></div>
+            <button class="login-submit" type="submit">Entrar <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="login-footer-note">Acesso restrito à equipe autorizada.</p>
+    </div>
+</section>
 @section Scripts { <partial name="_ValidationScriptsPartial" /> }

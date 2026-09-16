@@ -32,7 +32,7 @@ public class CredenciadoVm
     public string? Uf { get; set; }
     [StringLength(1000), Display(Name = "Observações")]
     public string? Observacoes { get; set; }
-    [Required(ErrorMessage = "Selecione o tipo de estabelecimento."), EnumDataType(typeof(TipoCredenciado)), Display(Name = "Tipo de estabelecimento")]
+    [Required(ErrorMessage = "Selecione o menu da clínica."), EnumDataType(typeof(TipoCredenciado)), Display(Name = "Menu da clínica")]
     public TipoCredenciado? Tipo { get; set; }
     [Required, EnumDataType(typeof(StatusCredenciamento)), Display(Name = "Situação")]
     public StatusCredenciamento? StatusCredenciamento { get; set; } = PVHSAUDE.Domain.Enuns.StatusCredenciamento.Pendente;

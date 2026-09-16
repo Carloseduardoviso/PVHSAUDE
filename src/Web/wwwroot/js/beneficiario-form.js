@@ -1,8 +1,9 @@
 (() => {
-    const empresa = document.getElementById("CredenciadoId");
+    const empresa = document.getElementById("EmpresaBeneficiadaId");
+    const tipoPessoa = document.getElementById("TipoPessoa");
     const plano = document.getElementById("PlanoId");
     const catalogo = document.getElementById("planos-empresas");
-    if (empresa && plano && catalogo) {
+    if (empresa && plano && catalogo && tipoPessoa) {
         const planos = JSON.parse(catalogo.textContent);
         const empresas = JSON.parse(document.getElementById("empresas-planos").textContent);
         const valor = document.getElementById("valor-plano");
@@ -16,16 +17,29 @@
         function filtrar(selecionado) {
             const empresaSelecionada = empresas.find(e => e.Id === empresa.value);
             const item = planos.find(p => p.Id === empresaSelecionada?.PlanoId);
+            if (tipoPessoa.value !== "2") {
+                plano.disabled = false;
+                aviso.textContent = "Selecione o plano da pessoa física.";
+                mostrarValor();
+                return;
+            }
             plano.value = item?.Id ?? "";
-            document.getElementById("nome-plano").value = item?.Nome ?? "";
-            aviso.textContent = !empresa.value ? "Selecione a empresa credenciada." :
+            plano.disabled = true;
+            aviso.textContent = !empresa.value ? "Selecione a empresa beneficiada." :
                 !item ? "Esta empresa ainda não possui plano. Vincule um plano no cadastro da empresa." :
                 selecionado && selecionado !== item.Id ? "Ao salvar, será utilizado o plano atual da empresa." : "";
             mostrarValor();
         }
         empresa.addEventListener("change", () => filtrar(""));
+        tipoPessoa.addEventListener("change", () => {
+            const empresarial = tipoPessoa.value === "2";
+            document.getElementById("documento-label").textContent = empresarial ? "CNPJ" : "CPF";
+            document.getElementById("empresa-beneficiada-campo").hidden = !empresarial;
+            empresa.required = empresarial;
+            filtrar("");
+        });
         plano.addEventListener("change", mostrarValor);
-        filtrar(plano.value);
+        tipoPessoa.dispatchEvent(new Event("change"));
     }
     if (window.jQuery?.validator) {
         window.jQuery.validator.addMethod("birthdate", function (value, element) {

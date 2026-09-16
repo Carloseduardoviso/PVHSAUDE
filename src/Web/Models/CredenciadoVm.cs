@@ -63,7 +63,7 @@ public class CredenciadoVm
     public string? Observacoes { get; set; }
 
     [Required(ErrorMessage = "Selecione o tipo de estabelecimento."), EnumDataType(typeof(TipoCredenciado))]
-    [Display(Name = "Tipo de estabelecimento")]
+    [Display(Name = "Menu da clínica")]
     public TipoCredenciado? Tipo { get; set; }
 
     [Required, EnumDataType(typeof(StatusCredenciamento))]

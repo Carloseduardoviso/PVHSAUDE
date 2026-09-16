@@ -23,6 +23,31 @@ html {
 body {
   margin-bottom: 60px;
 }
+.login-body { margin-bottom: 0; }
+.login-body { background: linear-gradient(135deg, #eef3ff 0%, #f8fbff 52%, #e8efff 100%); }
+.login-body .portal-content { max-width: none; padding-inline: 0; }
+.login-body main { padding-bottom: 0 !important; }
+.login-page { min-height: 100dvh; display: grid; place-items: center; padding: 2rem 1rem 3rem; }
+.login-card { width: min(100%, 460px); padding: clamp(1.75rem, 5vw, 2.75rem); background: #fff; border: 1px solid #d8e2f2; border-radius: 1.25rem; box-shadow: 0 1.25rem 3rem rgba(21, 53, 122, .14); }
+.login-brand { display: flex; justify-content: center; margin-bottom: 1.75rem; }
+.login-brand img { display: block; width: min(210px, 75%); height: auto; border-radius: .35rem; }
+.login-heading { margin-bottom: 1.75rem; text-align: center; }
+.login-eyebrow { display: inline-block; margin-bottom: .65rem; color: #15357a; font-size: .72rem; font-weight: 800; letter-spacing: .12em; }
+.login-heading h1 { margin: 0; color: #142753; font-size: clamp(1.65rem, 4vw, 2rem); font-weight: 750; }
+.login-heading p { margin: .65rem 0 0; color: #60708c; line-height: 1.5; }
+.login-form { display: grid; gap: 1.1rem; }
+.login-field { display: grid; gap: .4rem; }
+.login-field label { color: #273858; font-size: .9rem; font-weight: 650; }
+.login-field input { width: 100%; min-height: 3rem; padding: .7rem .85rem; color: #172846; background: #fbfdff; border: 1px solid #ccd8ec; border-radius: .55rem; outline: none; transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease; }
+.login-field input::placeholder { color: #93a0b5; }
+.login-field input:focus { background: #fff; border-color: #15357a; box-shadow: 0 0 0 .2rem rgba(21, 53, 122, .14); }
+.login-field span { color: #b42318; font-size: .8rem; }
+.login-validation { margin-bottom: .1rem; color: #b42318; font-size: .88rem; }
+.login-submit { display: flex; align-items: center; justify-content: center; gap: .55rem; min-height: 3rem; margin-top: .25rem; padding: .7rem 1rem; color: #fff; background: #15357a; border: 0; border-radius: .55rem; font-weight: 750; box-shadow: 0 .45rem 1rem rgba(21, 53, 122, .2); transition: background-color .15s ease, transform .15s ease, box-shadow .15s ease; }
+.login-submit:hover, .login-submit:focus-visible { color: #fff; background: #21458e; box-shadow: 0 .65rem 1.25rem rgba(21, 53, 122, .26); transform: translateY(-1px); }
+.login-submit:focus-visible { outline: 3px solid rgba(128, 188, 34, .75); outline-offset: 2px; }
+.login-footer-note { margin: 1.5rem 0 0; padding-top: 1rem; color: #7a879c; border-top: 1px solid #e6ebf4; font-size: .78rem; text-align: center; }
+@media (max-width: 575.98px) { .login-page { align-items: start; padding-top: 1.25rem; } .login-card { border-radius: 1rem; } }
 
 .whatsapp-float {
   position: fixed;
@@ -51,14 +76,17 @@ body {
 .portal-brand { display: inline-flex; align-items: center; padding: 0; flex-shrink: 0; }
 .portal-brand img { display: block; width: 164px; max-width: 45vw; height: auto; }
 
-.portal-navbar { background: #075848; border-bottom: 4px solid #80bc22; min-height: 72px; margin-bottom: 1.5rem; }
+.portal-navbar { background: #15357a; border-bottom: 4px solid #80bc22; min-height: 72px; margin-bottom: 1.5rem; }
 .portal-navbar-inner { gap: .75rem; max-width: 1600px; padding-inline: clamp(.75rem, 2vw, 2rem); }
 .portal-navbar .navbar-brand { margin-right: auto; }
 .portal-nav-links { gap: .1rem; align-items: center; }
 .portal-navbar .nav-link { color: #fff; font-size: .95rem; font-weight: 500; padding: .65rem .7rem; overflow-wrap: anywhere; }
 .portal-navbar .nav-link:hover, .portal-navbar .nav-link:focus { color: #c9f45b; }
+.portal-navbar .navbar-toggler { border-color: rgba(255, 255, 255, .65); }
+.portal-navbar .navbar-toggler:focus { box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .25); }
+.portal-navbar .navbar-toggler-icon { filter: invert(1) grayscale(1) brightness(2); }
 .portal-admin-button { border: 1px solid #c9f45b; border-radius: 999px; color: #fff; font-weight: 600; padding: .55rem 1.1rem; }
-.portal-admin-button:hover, .portal-admin-button:focus { background: #c9f45b; border-color: #c9f45b; color: #075848; }
+.portal-admin-button:hover, .portal-admin-button:focus { background: #c9f45b; border-color: #c9f45b; color: #15357a; }
 .portal-nav-actions { flex-shrink: 0; }
 @media (min-width: 1400px) {
   .portal-brand img { width: 140px; }
@@ -114,14 +142,14 @@ body {
 }
 
 .portal-carousel-controls { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: min(100%, 320px); margin: 1.25rem auto 0; }
-.portal-carousel-arrow { display: grid; place-items: center; flex: 0 0 36px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: #075848; color: #fff; font-size: 1.4rem; line-height: 1; }
-.portal-carousel-arrow:hover { background: #08715b; }
-.portal-carousel-indicators { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: #075848; }
+.portal-carousel-arrow { display: grid; place-items: center; flex: 0 0 36px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: #15357a; color: #fff; font-size: 1.4rem; line-height: 1; }
+.portal-carousel-arrow:hover { background: #21458e; }
+.portal-carousel-indicators { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: #15357a; }
 .portal-carousel-indicators button { width: 7px; height: 7px; flex-shrink: 0; padding: 0; border: 0; border-radius: 999px; background: #0bb899; }
 .portal-carousel-indicators button.active { width: 28px; background: #b5ff00; }
 .portal-carousel-controls button:focus-visible { outline: 3px solid #80bc22; outline-offset: 3px; }
 .portal-body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; margin: 0; }
 .portal-content { flex: 1 0 auto; }
-.portal-body .portal-footer { position: static; flex-shrink: 0; width: 100%; min-height: 60px; padding-block: 1rem; line-height: 1.5; white-space: normal; background: #075848; color: #fff; }
+.portal-body .portal-footer { position: static; flex-shrink: 0; width: 100%; min-height: 60px; padding-block: 1rem; line-height: 1.5; white-space: normal; background: #15357a; color: #fff; }
 .portal-footer a { color: #c9f45b; }
 .portal-footer a:hover, .portal-footer a:focus { color: #fff; }

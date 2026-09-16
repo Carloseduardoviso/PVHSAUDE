@@ -1,0 +1,8 @@
+@{
+    var titulo = ViewData["Title"]?.ToString() ?? "Menu";
+}
+<section class="menu-listagem" aria-labelledby="menu-listagem-titulo">
+    <h1 id="menu-listagem-titulo">@titulo</h1>
+    <p class="text-muted">Conheça os estabelecimentos, especialidades, procedimentos e planos disponíveis neste menu.</p>
+    <div class="alert alert-info" role="status">Nenhuma empresa credenciada disponível no momento.</div>
+</section>

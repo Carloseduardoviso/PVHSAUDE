@@ -75,17 +75,20 @@ namespace Web.Controllers
             return model;
         }
 
-        public IActionResult ClinicaTerapeutica() => View();
+        public async Task<IActionResult> ClinicaTerapeutica(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Clinica, "Clínica Terapêutica", ct);
+        public async Task<IActionResult> ClinicaMedicaTerapeutica(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Laboratorio, "Clínica Médica e Especialidade", ct);
+        public async Task<IActionResult> LaboratorioExames(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Hospital, "Laboratório e Exames", ct);
+        public async Task<IActionResult> ExamesImagens(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.CentroDiagnostico, "Exames e Imagens", ct);
+        public async Task<IActionResult> Odontologia(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Farmacia, "Odontologia", ct);
+        public async Task<IActionResult> ClinicasPopulares(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Otica, "Clínicas Populares", ct);
 
-        public IActionResult ClinicaMedicaTerapeutica() => View();
-
-        public IActionResult LaboratorioExames() => View();
-
-        public IActionResult ExamesImagens() => View();
-
-        public IActionResult Odontologia() => View();
-
-        public IActionResult ClinicasPopulares() => View();
+        private async Task<IActionResult> MenuCredenciado(TipoCredenciado tipo, string titulo, CancellationToken ct)
+        {
+            var model = await CarregarRede(ct);
+            model.Empresas = model.Empresas.Where(x => x.Tipo == tipo).ToList();
+            ViewData["Title"] = titulo;
+            return View("Credenciadas", model);
+        }
 
         public IActionResult SobreNos() => View();
 

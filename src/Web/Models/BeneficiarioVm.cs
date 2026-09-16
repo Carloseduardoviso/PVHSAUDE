@@ -32,9 +32,14 @@ public class BeneficiarioVm
     [GuidNaoVazio, Display(Name = "Plano")]
     public Guid PlanoId { get; set; }
 
-    [GuidNaoVazio(ErrorMessage = "Selecione a empresa credenciada.")]
-    [Display(Name = "Empresa credenciada")]
+    [Display(Name = "Empresa Beneficiada")]
     public Guid? CredenciadoId { get; set; }
+
+    [Display(Name = "Tipo de pessoa")]
+    public TipoPessoa TipoPessoa { get; set; } = TipoPessoa.Fisica;
+
+    [Display(Name = "Empresa Beneficiada")]
+    public Guid? EmpresaBeneficiadaId { get; set; }
 
     [Required, DataType(DataType.Date)]
     [Display(Name = "Início do benefício")]

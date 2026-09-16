@@ -3,12 +3,12 @@ namespace PVHSAUDE.Domain.Enuns
 {
     public enum TipoCredenciado
     {
-        [Display(Name = "Clínica")] Clinica = 1, 
-        [Display(Name = "Laboratório")] Laboratorio = 2, 
-        Hospital = 3, 
-        [Display(Name = "Centro de diagnóstico")] CentroDiagnostico = 4, 
-        [Display(Name = "Farmácia")] Farmacia = 5, 
-        [Display(Name = "Ótica")] Otica = 6, 
-        Outro = 7
+        [Display(Name = "Clínica Terapêutica")] Clinica = 1,
+        [Display(Name = "Clínica Médica e Especialidade")] Laboratorio = 2,
+        [Display(Name = "Laboratório e Exames")] Hospital = 3,
+        [Display(Name = "Exames e Imagens")] CentroDiagnostico = 4,
+        [Display(Name = "Odontologia")] Farmacia = 5,
+        [Display(Name = "Clínicas Populares")] Otica = 6,
+        [Display(Name = "Outro menu")] Outro = 7
     }
 }

@@ -68,8 +68,16 @@
 .carteirinha-payments strong, .carteirinha-payments small { display: block; }
 .carteirinha-payments strong { font-size: .9rem; }
 .carteirinha-payments small { color: #61718b; font-size: .78rem; margin-top: .25rem; }
+.carteirinha-pix-box { display: grid; gap: .55rem; margin-top: 1.5rem; padding: 1.25rem; background: #edf3ff; border: 1px solid #c9d8f4; border-radius: 14px; }
+.carteirinha-pix-label { color: #61718b; font-size: .78rem; font-weight: 650; }
+.carteirinha-pix-box strong { color: #15357a; font-size: 1.15rem; letter-spacing: .04em; }
+.carteirinha-pix-box .carteirinha-link { justify-self: start; padding-block: .35rem; }
+.carteirinha-pix-status { min-height: 1.1em; color: #1c7046; font-size: .78rem; }
 .carteirinha-payment-note { font-size: .85rem; margin: 1.2rem 0; }
 .carteirinha-notice { background: #f0f4fb; border-left: 3px solid #8ca8d8; padding: 1rem; font-size: .82rem; line-height: 1.6; color: #465a79; }
+.carteirinha-dependent { border: 1px solid #dce3ef; border-radius: 12px; padding: 1rem; margin-top: 1rem; }
+.carteirinha-dependent h3 { font-size: 1rem; margin: 0; }
+.carteirinha-dependent .carteirinha-fields { margin: 1rem 0; }
 .carteirinha-modal { border: 0; border-radius: 20px; color: #172b4d; overflow: hidden; }
 .carteirinha-modal .modal-header { padding: 1.4rem 1.7rem; }
 .carteirinha-modal .modal-body { padding: 1.7rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }

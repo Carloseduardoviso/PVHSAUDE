@@ -14,6 +14,7 @@ var transport = new ApiTransport();
 var api = new HttpClient(transport) { BaseAddress = new Uri("http://test-api/") };
 builder.Services.AddSingleton(new PlanoApiClient(api));
 builder.Services.AddSingleton(new CredenciadoApiClient(api));
+builder.Services.AddSingleton(new EmpresaBeneficiadaApiClient(api));
 builder.Services.AddSingleton(new BeneficiarioApiClient(api));
 await using var app = builder.Build();
 app.MapAreaControllerRoute("admin", "Administracao", "Administracao/{controller=Dashboard}/{action=Index}/{id?}");
@@ -31,8 +32,9 @@ foreach (var (count, invalidDate, semEmpresa) in new[] { (0, false, false), (1, 
     Add("Nome", "Cadastro de teste");
     Add("Cpf", "123.456.789-01");
     Add("DataNascimento", "1990-05-12");
+    Add("TipoPessoa", "2");
     Add("PlanoId", Guid.NewGuid().ToString());
-    Add("CredenciadoId", semEmpresa ? "" : ApiTransport.EmpresaId.ToString());
+    Add("EmpresaBeneficiadaId", semEmpresa ? "" : ApiTransport.EmpresaId.ToString());
     Add("DataInicio", "2026-01-01");
     Add("DataValidade", "2027-01-01");
     Add("Status", "2");
@@ -49,7 +51,7 @@ foreach (var (count, invalidDate, semEmpresa) in new[] { (0, false, false), (1, 
     using var response = await client.PostAsync("/Administracao/Beneficiario/Create", new FormUrlEncodedContent(fields));
     if (count <= 5 && !invalidDate && !semEmpresa)
     {
-        if (transport.Saved?.CredenciadoId != ApiTransport.EmpresaId)
+        if (transport.Saved?.EmpresaBeneficiadaId != ApiTransport.EmpresaId)
             throw new Exception("The company selection was not sent correctly.");
         if (transport.Saved?.PlanoId != ApiTransport.PlanoId)
             throw new Exception("The plan must be derived from the company, ignoring the submitted plan.");
@@ -103,7 +105,7 @@ sealed class ApiTransport : HttpMessageHandler
     public CredenciadoVm? Empresa;
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
     {
-        if (request.Method == HttpMethod.Get && request.RequestUri!.AbsolutePath == "/api/credenciados")
+        if (request.Method == HttpMethod.Get && request.RequestUri!.AbsolutePath == "/api/empresas-beneficiadas")
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new CredenciadoVm { Id = EmpresaId, NomeFantasia = "Empresa teste", PlanoId = PlanoId } }) };
         if (request.RequestUri!.AbsolutePath is "/api/especialidades" or "/api/procedimentos")
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(Array.Empty<CatalogoItemVm>()) };

@@ -28,6 +28,12 @@ public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEn
         else
         {
             vm.EmpresaBeneficiadaId = null;
+            // Compatibilidade com beneficiários antigos que ainda enviam CredenciadoId.
+            if (vm.CredenciadoId is Guid credenciadoId)
+            {
+                var empresaLegada = await empresas.ObterAsync(x => x.Id == credenciadoId, ct);
+                if (empresaLegada?.PlanoId is Guid planoLegado) vm.PlanoId = planoLegado;
+            }
             if (vm.PlanoId == Guid.Empty)
                 throw new ServiceException(ServiceError.Invalid, "Selecione um plano para a pessoa física.");
         }

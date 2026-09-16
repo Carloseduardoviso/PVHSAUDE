@@ -49,7 +49,7 @@ internal static class ApiDatabaseTests
         var portal = new PortalService(empresasRepo, mapper);
         Check((await portal.PlanosPorEmpresaAsync(ct)).Single().Valor == 120, "portal mantém valor do plano da empresa.");
 
-        var service = new BeneficiarioService(beneficiariosRepo, empresasRepo, dependentesRepo, work, mapper);
+        var service = new BeneficiarioService(beneficiariosRepo, empresasRepo, new EntityRepository<EmpresaBeneficiada>(db), dependentesRepo, work, mapper);
         var controller = new BeneficiariosController(service);
         var request = new BeneficiarioEntradaVm { Nome = " Titular ", Cpf = "123.456.789-01", CredenciadoId = empresa.Id,
             PlanoId = Guid.NewGuid(), DataNascimento = new DateTime(1990, 1, 1), DataInicio = DateTime.Today,

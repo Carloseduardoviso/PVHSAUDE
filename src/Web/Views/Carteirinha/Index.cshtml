@@ -26,7 +26,9 @@
                         <label>WhatsApp *<input name="telefone" type="tel" autocomplete="tel" required inputmode="tel" maxlength="16" placeholder="(69) 99999-9999" /></label>
                         <label>CPF *<input name="cpf" autocomplete="off" required inputmode="numeric" maxlength="14" placeholder="000.000.000-00" /></label>
                         <label>Data de nascimento *<input name="dataNascimento" type="date" autocomplete="bday" required max="@DateTime.Today.ToString("yyyy-MM-dd")" /></label>
+                        <label>Plano *<select name="planoId" id="plano-carteirinha" required><option value="">Selecione seu plano</option>@foreach (var plano in (IEnumerable<Web.Models.PlanoVm>?)ViewBag.Planos ?? []) { <option value="@plano.Id" data-valor="@plano.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))">@plano.Nome — @plano.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</option> }</select></label>
                     </div>
+                    @if (ViewData["PlanosErro"] is string planosErro) { <p class="carteirinha-muted" role="alert">@planosErro</p> }
                     <label class="carteirinha-check"><input name="maiorIdade" type="checkbox" required />Confirmo que tenho 18 anos ou mais. *</label>
                     <label class="carteirinha-check"><input name="comunicacoes" type="checkbox" />Quero receber novidades da PVH Saúde por canais digitais.</label>
                 </section>
@@ -45,22 +47,27 @@
                 </section>
                 <section data-step="2" aria-labelledby="adicionais-title" hidden>
                     <h2 id="adicionais-title" tabindex="-1">Sua carteirinha, do seu jeito</h2>
-                    <p class="carteirinha-muted">Escolha se deseja incluir o adicional de esportes.</p>
-                    <article class="carteirinha-sports">
-                        <div class="carteirinha-sports-art" aria-hidden="true"><span>⚽</span><strong>A sua paixão<br />também faz parte.</strong></div>
-                        <div class="carteirinha-sports-content"><span class="carteirinha-eyebrow">ADICIONAL OPCIONAL</span><h3>Esportes</h3><p>Escolha seu time do coração para personalizar sua solicitação.</p><p id="sports-selection" class="carteirinha-muted" aria-live="polite">Nenhum time selecionado.</p><button type="button" class="carteirinha-primary" data-bs-toggle="modal" data-bs-target="#esportes-modal" id="sports-open">Incluir esportes</button><button type="button" class="carteirinha-link" id="sports-remove" hidden>Remover adicional</button></div>
-                    </article>
+                    <p class="carteirinha-muted">Inclua até 5 dependentes na sua carteirinha, se desejar.</p>
+                    <label class="carteirinha-check"><input id="incluir-dependentes" type="checkbox" />Incluir dependentes</label>
+                    <div id="dependentes-carteirinha" hidden>
+                        <div id="dependentes-carteirinha-lista"></div>
+                        <button type="button" class="carteirinha-link" id="adicionar-dependente-carteirinha">Adicionar dependente</button>
+                        <p id="dependentes-limite-carteirinha" class="carteirinha-muted" hidden>Limite de 5 dependentes atingido.</p>
+                    </div>
+                    <template id="dependente-carteirinha-template"><article class="carteirinha-dependent"><h3>Dependente</h3><div class="carteirinha-fields"><label>Nome completo *<input data-dependent="nome" required maxlength="150" /></label><label>CPF *<input data-dependent="cpf" required inputmode="numeric" maxlength="14" /></label><label>Data de nascimento *<input data-dependent="nascimento" type="date" required /></label><label>Parentesco *<select data-dependent="parentesco" required><option value="">Selecione o parentesco</option><option>Filho(a)</option><option>Cônjuge</option><option>Pai/Mãe</option><option>Outro</option></select></label></div><button type="button" class="carteirinha-link" data-dependent="remover">Remover</button></article></template>
                 </section>
                 <section data-step="3" aria-labelledby="pagamento-title" hidden>
                     <h2 id="pagamento-title" tabindex="-1">Como você prefere pagar?</h2>
-                    <p class="carteirinha-muted">Selecione uma das formas de pagamento.</p>
-                    <fieldset class="carteirinha-payments"><legend class="visually-hidden">Método de pagamento</legend>
-                        <label><input type="radio" name="pagamento" value="Cartão de débito" required /><span><strong>Cartão de débito</strong><small>Pagamento com débito</small></span></label>
-                        <label><input type="radio" name="pagamento" value="Cartão de crédito" required /><span><strong>Cartão de crédito</strong><small>Pagamento com crédito</small></span></label>
-                        <label><input type="radio" name="pagamento" value="Pix" required /><span><strong>Pix</strong><small>Pagamento via Pix</small></span></label>
-                    </fieldset>
-                    <p class="carteirinha-payment-note" id="payment-note" aria-live="polite">Você poderá revisar os dados antes de continuar.</p>
-                    <div class="carteirinha-notice">A cobrança online ainda não está disponível. Esta etapa permite escolher a forma de pagamento e revisar os dados; nenhum valor será cobrado.</div>
+                    <p class="carteirinha-muted">Faça o pagamento da sua carteirinha via Pix.</p>
+                    <div class="carteirinha-pix-box">
+                        <span class="carteirinha-pix-label">Chave Pix (CNPJ)</span>
+                        <strong id="carteirinha-pix-chave">68.895.181/0001-03</strong>
+                        <button type="button" class="carteirinha-link" id="copiar-pix">Copiar chave Pix</button>
+                        <span class="carteirinha-pix-status" id="pix-status" role="status" aria-live="polite"></span>
+                    </div>
+                    <input type="hidden" name="pagamento" value="Pix" />
+                    <p class="carteirinha-payment-note" id="payment-note" aria-live="polite">Após realizar o Pix, confira os dados e finalize a solicitação.</p>
+                    <div class="carteirinha-notice">As opções de cartão de crédito e débito estão temporariamente indisponíveis. O pagamento será confirmado após a identificação do Pix.</div>
                 </section>
                 <div class="carteirinha-actions"><button type="button" class="carteirinha-link" id="step-back" hidden>← Voltar e editar</button><button type="button" class="carteirinha-primary" id="step-next">Próximo passo <span aria-hidden="true">→</span></button></div>
             </form>
@@ -70,7 +77,6 @@
         <aside class="carteirinha-summary" aria-labelledby="summary-title">
             <div class="carteirinha-card-preview" aria-label="Prévia da carteirinha PVH Saúde">
                 <img class="carteirinha-card-logo" src="~/images/pvh-saude-horizontal.jpeg" alt="PVH Saúde+ — Descontos e benefícios. Saúde e economia para sua família." />
-                <div class="carteirinha-card-company"><strong>EMPRESA</strong><span>HOUSECLIN</span></div>
                 <svg class="carteirinha-card-waves" viewBox="0 0 820 600" preserveAspectRatio="none" aria-hidden="true" focusable="false">
                     <path fill="#0063a9" d="M0 345 C190 325 325 440 560 320 C660 268 745 248 820 237 V600 H0Z" />
                     <path fill="#05285f" d="M0 359 C205 340 338 455 565 338 C680 285 753 270 820 260 V600 H0Z" />
@@ -86,13 +92,12 @@
                 <span class="carteirinha-card-footer">Consulta, exames e terapia</span>
             </div>
             <h2 id="summary-title">Sua solicitação</h2>
-            <dl><div><dt>Carteirinha</dt><dd>PVH Saúde</dd></div><div><dt>Adicional</dt><dd id="summary-sport">Sem esportes</dd></div><div><dt>Pagamento</dt><dd id="summary-payment">A escolher</dd></div></dl>
+            <dl><div><dt>Carteirinha</dt><dd>PVH Saúde</dd></div><div><dt>Plano</dt><dd id="summary-plano">A escolher</dd></div><div><dt>Valor do plano</dt><dd id="summary-plano-valor">R$ 0,00</dd></div><div><dt>Dependentes</dt><dd id="summary-dependentes">Nenhum</dd></div><div><dt>Valor por dependente</dt><dd>R$ 11,50</dd></div><div><dt>Total dos dependentes</dt><dd id="summary-dependentes-total">R$ 0,00</dd></div><div><dt>Total da carteirinha</dt><dd id="summary-total-carteirinha">R$ 0,00</dd></div><div><dt>Pagamento</dt><dd id="summary-payment">A escolher</dd></div></dl>
             <p class="carteirinha-summary-note">Os valores do plano e dos adicionais serão informados antes da contratação.</p>
             <div class="carteirinha-help"><strong>Precisa de ajuda?</strong><p>Nossa equipe pode orientar você.</p><a asp-area="" asp-controller="WhatsApp" asp-action="Index" target="_blank" rel="noopener noreferrer">Fale com a PVH Saúde ↗</a></div>
         </aside>
     </div>
 </section>
-<div class="modal fade" id="esportes-modal" tabindex="-1" aria-labelledby="esportes-title" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered"><div class="modal-content carteirinha-modal"><div class="modal-header"><h2 class="modal-title fs-4" id="esportes-title">Inclua sua paixão por esportes</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button></div><div class="modal-body"><div><span class="carteirinha-eyebrow">ESPORTE É CONEXÃO</span><h3>Qual é o seu time do coração?</h3><p>Selecione o time que você quer incluir na sua solicitação.</p><label for="sports-team">Selecione seu time *</label><select id="sports-team" required><option value="">Selecionar time</option>@foreach (var time in new[] { "Flamengo", "Corinthians", "Palmeiras", "São Paulo", "Santos", "Vasco", "Fluminense", "Botafogo", "Grêmio", "Internacional", "Cruzeiro", "Atlético Mineiro", "Bahia", "Fortaleza", "Ceará", "Sport", "Santa Cruz", "Náutico", "ABC", "Sampaio Corrêa", "Fluxo", "Outro time" }) { <option value="@time">@time</option> }</select><p class="carteirinha-muted mt-3">A disponibilidade e os valores do adicional serão confirmados antes da contratação.</p><button type="button" class="carteirinha-primary" id="sports-add">Adicionar</button></div><div class="carteirinha-modal-art" aria-hidden="true"><span>⚽</span><strong>Seu time.<br />Sua torcida.<br />Sua carteirinha.</strong><small>PVH SAÚDE + ESPORTES</small></div></div></div></div></div>
 @section Scripts {
     <script src="~/js/carteirinha.js" asp-append-version="true"></script>
 }

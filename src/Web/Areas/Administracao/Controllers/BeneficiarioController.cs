@@ -5,7 +5,7 @@ using Web.Services;
 namespace PVHSAUDE.Web.Areas.Administracao.Controllers;
 
 [Area("Administracao")]
-public class BeneficiarioController(BeneficiarioApiClient beneficiarios, PlanoApiClient planos, CredenciadoApiClient credenciados) : Controller
+public class BeneficiarioController(BeneficiarioApiClient beneficiarios, PlanoApiClient planos, EmpresaBeneficiadaApiClient empresasBeneficiadas) : Controller
 {
     public async Task<IActionResult> Index(CancellationToken cancellationToken) =>
         View(await beneficiarios.ListarAsync(cancellationToken));
@@ -19,33 +19,40 @@ public class BeneficiarioController(BeneficiarioApiClient beneficiarios, PlanoAp
 
     private async Task CarregarPlanos(CancellationToken ct)
     {
-        ViewBag.EmpresasDisponiveis = new List<CredenciadoVm>();
+        ViewBag.EmpresasBeneficiadasDisponiveis = new List<CredenciadoVm>();
         ViewBag.PlanosDisponiveis = new List<PlanoVm>();
-        ViewBag.Empresas = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
+        ViewBag.EmpresasBeneficiadas = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
         try
         {
             var catalogo = await planos.ListarAsync(ct);
             ViewBag.PlanosDisponiveis = catalogo;
             ViewBag.Planos = catalogo
                 .Select(p => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(p.Nome, p.Id.ToString())).ToList();
-            var empresas = await credenciados.ListarAsync(ct);
-            ViewBag.EmpresasDisponiveis = empresas;
-            ViewBag.Empresas = empresas
+            var empresas = await empresasBeneficiadas.ListarAsync(ct);
+            ViewBag.EmpresasBeneficiadasDisponiveis = empresas;
+            ViewBag.EmpresasBeneficiadas = empresas
                 .Select(p => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(p.NomeFantasia, p.Id.ToString())).ToList();
         }
         catch (HttpRequestException)
         {
             ViewBag.Planos = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
-            ModelState.AddModelError("", "Não foi possível carregar os planos e as empresas. Verifique a API e tente novamente.");
+            ModelState.AddModelError("", "Não foi possível carregar os planos e as empresas beneficiadas. Verifique a API e tente novamente.");
         }
     }
 
     private void DefinirPlanoEmpresa(BeneficiarioVm model)
     {
-        var empresa = ((IEnumerable<CredenciadoVm>)ViewBag.EmpresasDisponiveis).FirstOrDefault(x => x.Id == model.CredenciadoId);
+        if (model.TipoPessoa != PVHSAUDE.Domain.Enuns.TipoPessoa.Juridica)
+        {
+            model.EmpresaBeneficiadaId = null;
+            model.CredenciadoId = null;
+            return;
+        }
+        var empresa = ((IEnumerable<CredenciadoVm>)ViewBag.EmpresasBeneficiadasDisponiveis).FirstOrDefault(x => x.Id == model.EmpresaBeneficiadaId);
         ModelState.Remove(nameof(model.PlanoId));
         model.PlanoId = empresa?.PlanoId ?? Guid.Empty;
-        if (model.PlanoId == Guid.Empty) ModelState.AddModelError(nameof(model.CredenciadoId), "Selecione uma empresa com plano cadastrado.");
+        model.CredenciadoId = null;
+        if (model.PlanoId == Guid.Empty) ModelState.AddModelError(nameof(model.EmpresaBeneficiadaId), "Selecione uma empresa beneficiada com plano cadastrado.");
     }
 
     [HttpPost, ValidateAntiForgeryToken]

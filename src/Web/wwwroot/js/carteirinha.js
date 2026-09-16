@@ -7,10 +7,13 @@
     const next = document.getElementById('step-next');
     const back = document.getElementById('step-back');
     const review = document.getElementById('carteirinha-review');
-    const modal = document.getElementById('esportes-modal');
-    const teamSelect = document.getElementById('sports-team');
     let current = 0;
-    let selectedTeam = '';
+    const dependentesToggle = document.getElementById('incluir-dependentes');
+    const dependentesContainer = document.getElementById('dependentes-carteirinha');
+    const dependentesList = document.getElementById('dependentes-carteirinha-lista');
+    const dependentesTemplate = document.getElementById('dependente-carteirinha-template');
+    const dependentesAdd = document.getElementById('adicionar-dependente-carteirinha');
+    const valorPorDependente = 11.50;
     const field = name => form.elements.namedItem(name);
     const digits = value => value.replace(/\D/g, '');
     const displayBirthdate = () => field('dataNascimento').value.split('-').reverse().join('/');
@@ -47,6 +50,7 @@
         return true;
     }
     function validate(section) {
+        if (section.querySelector('[data-dependent="cpf"]')) validarDocumentos();
         for (const input of section.querySelectorAll('input, select')) {
             input.setCustomValidity('');
             if (input.required && input.type === 'text' && !input.value.trim()) input.setCustomValidity('Preencha este campo.');
@@ -73,13 +77,16 @@
         steps[current].querySelector('h2').focus();
     }
     function showReview() {
+        const total = calcularTotal();
         const values = [
             ['Nome', field('nome').value.trim()], ['E-mail', field('email').value.trim()],
             ['WhatsApp', field('telefone').value], ['CPF', field('cpf').value],
             ['Data de nascimento', displayBirthdate()],
+            ['Plano', field('planoId').selectedOptions[0]?.textContent || 'Não selecionado'],
+            ['Total da carteirinha', formatarMoeda(total)],
             ['Endereço', `${field('rua').value}, ${field('numero').value} — ${field('bairro').value}, ${field('cidade').value}/${field('uf').value}, CEP ${field('cep').value}`],
             ['Complemento', field('complemento').value || 'Não informado'],
-            ['Esportes', selectedTeam || 'Não incluído'], ['Pagamento', field('pagamento').value],
+            ['Dependentes', dependentesToggle.checked ? `${dependentesList.children.length} incluído(s)` : 'Não incluídos'], ['Pagamento', field('pagamento').value],
             ['Comunicações', field('comunicacoes').checked ? 'Desejo receber' : 'Não desejo receber']
         ];
         const list = document.getElementById('review-values');
@@ -177,19 +184,79 @@
             ? 'Pix selecionado. O código de pagamento será disponibilizado quando a cobrança online estiver habilitada.'
             : `${input.value} selecionado. Os dados do cartão serão solicitados no ambiente de pagamento quando a cobrança estiver habilitada.`;
     }));
-    function updateSports() {
-        document.getElementById('sports-selection').textContent = selectedTeam ? `Time escolhido: ${selectedTeam}` : 'Nenhum time selecionado.';
-        document.getElementById('summary-sport').textContent = selectedTeam || 'Sem esportes';
-        document.getElementById('sports-open').textContent = selectedTeam ? 'Alterar time' : 'Incluir esportes';
-        document.getElementById('sports-remove').hidden = !selectedTeam;
-    }
-    modal.addEventListener('show.bs.modal', () => { teamSelect.value = selectedTeam; });
-    modal.addEventListener('shown.bs.modal', () => teamSelect.focus());
-    document.getElementById('sports-add').addEventListener('click', () => {
-        if (!teamSelect.reportValidity()) return;
-        selectedTeam = teamSelect.value;
-        updateSports();
-        bootstrap.Modal.getOrCreateInstance(modal).hide();
+    document.getElementById('summary-payment').textContent = 'Pix';
+    document.getElementById('copiar-pix')?.addEventListener('click', async () => {
+        const chave = document.getElementById('carteirinha-pix-chave').textContent.trim();
+        const status = document.getElementById('pix-status');
+        try {
+            await navigator.clipboard.writeText(chave);
+            status.textContent = 'Chave Pix copiada.';
+        } catch {
+            status.textContent = 'Copie a chave Pix manualmente.';
+        }
     });
-    document.getElementById('sports-remove').addEventListener('click', () => { selectedTeam = ''; updateSports(); });
+    function formatarMoeda(valor) {
+        return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+    function valorPlanoSelecionado() {
+        const texto = field('planoId').selectedOptions[0]?.dataset.valor || '';
+        const valor = Number(texto.replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.'));
+        return Number.isFinite(valor) ? valor : 0;
+    }
+    function calcularTotal() {
+        const totalDependentes = dependentesToggle.checked ? dependentesList.children.length * valorPorDependente : 0;
+        return valorPlanoSelecionado() + totalDependentes;
+    }
+    function atualizarResumoValores() {
+        const totalDependentes = dependentesToggle.checked ? dependentesList.children.length * valorPorDependente : 0;
+        document.getElementById('summary-plano-valor').textContent = formatarMoeda(valorPlanoSelecionado());
+        document.getElementById('summary-dependentes-total').textContent = formatarMoeda(totalDependentes);
+        document.getElementById('summary-total-carteirinha').textContent = formatarMoeda(calcularTotal());
+    }
+    function validarDocumentos() {
+        const titular = digits(field('cpf').value);
+        const vistos = new Set();
+        dependentesList.querySelectorAll('[data-dependent="cpf"]').forEach(input => {
+            input.setCustomValidity('');
+            const cpf = digits(input.value);
+            if (!validCpf(cpf)) input.setCustomValidity('Informe um CPF válido.');
+            else if (cpf === titular) input.setCustomValidity('O CPF do dependente não pode ser igual ao do titular.');
+            else if (vistos.has(cpf)) input.setCustomValidity('Cada dependente deve ter um CPF diferente.');
+            vistos.add(cpf);
+        });
+    }
+    function updateDependentes() {
+        dependentesContainer.hidden = !dependentesToggle.checked;
+        dependentesContainer.querySelectorAll('input, select').forEach(input => input.disabled = !dependentesToggle.checked);
+        dependentesAdd.disabled = !dependentesToggle.checked || dependentesList.children.length >= 5;
+        document.getElementById('dependentes-limite-carteirinha').hidden = dependentesList.children.length < 5;
+        document.getElementById('summary-dependentes').textContent = dependentesToggle.checked && dependentesList.children.length
+            ? `${dependentesList.children.length} incluído(s)` : 'Nenhum';
+        atualizarResumoValores();
+    }
+    function addDependente() {
+        if (dependentesList.children.length >= 5) return updateDependentes();
+        dependentesList.append(dependentesTemplate.content.cloneNode(true));
+        updateDependentes();
+    }
+    dependentesToggle.addEventListener('change', () => {
+        if (dependentesToggle.checked && !dependentesList.children.length) addDependente();
+        updateDependentes();
+    });
+    field('planoId').addEventListener('change', event => {
+        document.getElementById('summary-plano').textContent = event.target.selectedOptions[0]?.textContent || 'A escolher';
+    });
+    dependentesAdd.addEventListener('click', addDependente);
+    dependentesList.addEventListener('click', event => {
+        if (!event.target.matches('[data-dependent="remover"]')) return;
+        event.target.closest('.carteirinha-dependent').remove();
+        updateDependentes();
+    });
+    dependentesList.addEventListener('input', event => {
+        if (event.target.matches('[data-dependent="cpf"]')) {
+            event.target.value = digits(event.target.value).slice(0, 11).replace(/^(\d{3})(\d)/, '$1.$2').replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3').replace(/(\d{3})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3-$4');
+            validarDocumentos();
+        }
+    });
+    updateDependentes();
 })();
