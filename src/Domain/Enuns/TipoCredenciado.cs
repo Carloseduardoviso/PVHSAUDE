@@ -8,7 +8,11 @@ namespace PVHSAUDE.Domain.Enuns
         [Display(Name = "Laboratório e Exames")] Hospital = 3,
         [Display(Name = "Exames e Imagens")] CentroDiagnostico = 4,
         [Display(Name = "Odontologia")] Farmacia = 5,
-        [Display(Name = "Clínicas Populares")] Otica = 6,
-        [Display(Name = "Outro menu")] Outro = 7
+        [Display(Name = "Clínicas Populares")] ClinicasPopulares = 6,
+        [Display(Name = "Academia")] Academia = 7,
+        [Display(Name = "Futebol")] Futebol = 8,
+        [Display(Name = "Natação")] Natacao = 9,
+        [Display(Name = "Ótica")] Otica = 10,
+        [Display(Name = "Roupa Esportiva")] RoupaEsportiva = 11
     }
 }

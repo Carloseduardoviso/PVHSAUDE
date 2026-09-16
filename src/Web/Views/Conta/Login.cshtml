@@ -12,7 +12,7 @@
         </div>
         <form asp-action="Login" method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="login-form">
             <div asp-validation-summary="ModelOnly" class="login-validation" role="alert"></div>
-            <div class="login-field"><label asp-for="Email"></label><input asp-for="Email" autocomplete="username" placeholder="seu@email.com" /><span asp-validation-for="Email"></span></div>
+            <div class="login-field"><label asp-for="Email"></label><input asp-for="Email" autocomplete="username" placeholder="seu@email.com" data-val-email="Informe um e-mail válido." /><span asp-validation-for="Email"></span></div>
             <div class="login-field"><label asp-for="Senha"></label><input asp-for="Senha" autocomplete="current-password" placeholder="Digite sua senha" /><span asp-validation-for="Senha"></span></div>
             <button class="login-submit" type="submit">Entrar <span aria-hidden="true">→</span></button>
         </form>

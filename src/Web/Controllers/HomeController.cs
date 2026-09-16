@@ -80,7 +80,12 @@ namespace Web.Controllers
         public async Task<IActionResult> LaboratorioExames(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Hospital, "Laboratório e Exames", ct);
         public async Task<IActionResult> ExamesImagens(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.CentroDiagnostico, "Exames e Imagens", ct);
         public async Task<IActionResult> Odontologia(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Farmacia, "Odontologia", ct);
-        public async Task<IActionResult> ClinicasPopulares(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Otica, "Clínicas Populares", ct);
+        public async Task<IActionResult> ClinicasPopulares(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.ClinicasPopulares, "Clínicas Populares", ct);
+        public async Task<IActionResult> Academia(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Academia, "Academia", ct);
+        public async Task<IActionResult> Futebol(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Futebol, "Futebol", ct);
+        public async Task<IActionResult> Natacao(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Natacao, "Natação", ct);
+        public async Task<IActionResult> Otica(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Otica, "Ótica", ct);
+        public async Task<IActionResult> RoupaEsportiva(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.RoupaEsportiva, "Roupa Esportiva", ct);
 
         private async Task<IActionResult> MenuCredenciado(TipoCredenciado tipo, string titulo, CancellationToken ct)
         {
