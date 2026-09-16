@@ -19,7 +19,7 @@ public class LoginVm
 {
     [Required, EmailAddress, StringLength(254), Display(Name = "E-mail")]
     public string Email { get; set; } = "";
-    [Required, StringLength(128), DataType(DataType.Password)]
+    [Required(ErrorMessage = "Informe sua senha."), StringLength(128), DataType(DataType.Password)]
     public string Senha { get; set; } = "";
 }
 public record LoginResponse(string Token, UsuarioVm Usuario);

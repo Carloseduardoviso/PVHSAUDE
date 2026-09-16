@@ -54,6 +54,14 @@ using (var response = await client.GetAsync("/Administracao/Usuario"))
     Check(response.StatusCode == HttpStatusCode.Redirect && response.Headers.Location!.OriginalString.Contains("/Conta/Login"), "Anônimo precisa entrar.");
 using (var response = await Login(Role.Comum, "incorreta"))
     Check(response.StatusCode == HttpStatusCode.OK && WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync()).Contains("inválidos"), "Senha inválida não autentica.");
+using (var response = await client.PostAsync("/Conta/Login", new FormUrlEncodedContent(new Dictionary<string,string> {
+    ["__RequestVerificationToken"] = await Token("/Conta/Login"), ["Email"] = "teste@example.com"
+})))
+{
+    var html = WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync());
+    Check(response.StatusCode == HttpStatusCode.OK && html.Contains("Informe sua senha."),
+        "Senha obrigatória é exibida em português.");
+}
 foreach (var role in new[] { Role.Comum, Role.Gestor, Role.Administrador })
 {
     using var login = await Login(role);
