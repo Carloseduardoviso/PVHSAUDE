@@ -7,7 +7,8 @@
 .admin-brand img { display: block; width: 130px; height: auto; border-radius: 50%; }
 .admin-caption { text-align: center; }
 .admin-caption { color: #c6e1d8; margin: 4px 0 32px; font-size: .9rem; }
-.admin-nav-link { display: block; padding: 12px 16px; margin-bottom: 8px; border-radius: 8px; color: #e0eee9; text-decoration: none; }
+.admin-nav-link { display: flex; align-items: center; gap: .65rem; padding: 12px 16px; margin-bottom: 8px; border-radius: 8px; color: #e0eee9; text-decoration: none; }
+.admin-nav-icon { width: 1.15rem; height: 1.15rem; flex: 0 0 1.15rem; }
 .admin-nav-link:hover, .admin-nav-link.active { color: white; background: #21458e; }
 .admin-nav-link.active { font-weight: 600; }
 .admin-content { flex: 1; min-width: 0; max-width: 100%; }

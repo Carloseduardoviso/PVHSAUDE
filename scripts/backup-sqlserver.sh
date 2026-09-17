@@ -16,4 +16,4 @@ backup_file="/var/opt/mssql/backups/PVHSAUDE-${timestamp}.bak"
 
 docker compose exec -T -e SQLCMDPASSWORD="$MSSQL_SA_PASSWORD" sqlserver \
   /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -b \
-  -Q "BACKUP DATABASE [PVHSAUDE] TO DISK = N'${backup_file}' WITH INIT, COMPRESSION;"
+  -Q "BACKUP DATABASE [PVHSAUDE] TO DISK = N'${backup_file}' WITH INIT;"

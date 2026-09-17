@@ -80,7 +80,9 @@ body {
 .portal-navbar-inner { gap: .75rem; max-width: 1600px; padding-inline: clamp(.75rem, 2vw, 2rem); }
 .portal-navbar .navbar-brand { margin-right: auto; }
 .portal-nav-links { gap: .1rem; align-items: center; }
-.portal-navbar .nav-link { color: #fff; font-size: .95rem; font-weight: 500; padding: .65rem .7rem; overflow-wrap: anywhere; }
+.portal-navbar .nav-icon { width: 1.2em; height: 1.2em; flex: 0 0 auto; }
+.portal-navbar .nav-link { color: #fff; font-size: .95rem; font-weight: 500; padding: .65rem .7rem; overflow-wrap: anywhere; display: inline-flex; align-items: center; gap: .4rem; }
+.portal-navbar .dropdown-item { display: inline-flex; align-items: center; gap: .4rem; width: 100%; }
 .portal-navbar .nav-link:hover, .portal-navbar .nav-link:focus { color: #c9f45b; }
 .portal-navbar .navbar-toggler { border-color: rgba(255, 255, 255, .65); }
 .portal-navbar .navbar-toggler:focus { box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .25); }
