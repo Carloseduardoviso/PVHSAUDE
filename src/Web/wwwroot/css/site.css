@@ -77,31 +77,29 @@ body {
 .portal-brand img { display: block; width: 164px; max-width: 45vw; height: auto; }
 
 .portal-navbar { background: #15357a; border-bottom: 4px solid #80bc22; min-height: 72px; margin-bottom: 1.5rem; }
-.portal-navbar-inner { gap: .75rem; max-width: 1600px; padding-inline: clamp(.75rem, 2vw, 2rem); }
+.portal-navbar-inner { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; max-width: 1600px; min-width: 0; padding-inline: clamp(.75rem, 2vw, 2rem); }
 .portal-navbar .navbar-brand { margin-right: auto; }
-.portal-nav-links { gap: .1rem; align-items: center; }
+.portal-nav-links { display: flex; flex-direction: row; flex-wrap: wrap; min-width: 0; gap: .1rem; align-items: center; }
 .portal-navbar .nav-icon { width: 1.2em; height: 1.2em; flex: 0 0 auto; }
 .portal-navbar .nav-link { color: #fff; font-size: .95rem; font-weight: 500; padding: .65rem .7rem; overflow-wrap: anywhere; display: inline-flex; align-items: center; gap: .4rem; }
 .portal-navbar .dropdown-item { display: inline-flex; align-items: center; gap: .4rem; width: 100%; }
 .portal-navbar .nav-link:hover, .portal-navbar .nav-link:focus { color: #c9f45b; }
-.portal-navbar .navbar-toggler { border-color: rgba(255, 255, 255, .65); }
-.portal-navbar .navbar-toggler:focus { box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .25); }
-.portal-navbar .navbar-toggler-icon { filter: invert(1) grayscale(1) brightness(2); }
+.portal-navbar .navbar-collapse { display: flex !important; flex: 1 1 auto; flex-basis: auto; flex-wrap: wrap; min-width: 0; justify-content: flex-end; }
 .portal-admin-button { border: 1px solid #c9f45b; border-radius: 999px; color: #fff; font-weight: 600; padding: .55rem 1.1rem; }
 .portal-admin-button:hover, .portal-admin-button:focus { background: #c9f45b; border-color: #c9f45b; color: #15357a; }
-.portal-nav-actions { flex-shrink: 0; }
+.portal-nav-actions { display: flex; flex-direction: row !important; flex-wrap: nowrap; flex: 0 0 auto; width: auto; min-width: 0; margin-left: auto; }
+.portal-nav-actions .btn { flex: 0 0 auto; min-width: 0; white-space: nowrap; }
 @media (min-width: 1400px) {
   .portal-brand img { width: 140px; }
-  .portal-navbar .navbar-collapse { min-width: 0; }
   .portal-nav-links { flex: 1 1 auto; flex-wrap: wrap; min-width: 0; }
   .portal-navbar .navbar-nav .nav-link { font-size: .875rem; padding-inline: .45rem; }
   .portal-nav-actions { margin-left: 1rem; }
   .portal-admin-button, .portal-carteirinha-button { font-size: .875rem; padding-inline: .8rem; }
 }
 @media (max-width: 1399.98px) {
-  .portal-navbar .navbar-collapse { padding: .75rem 0; }
-  .portal-nav-links { align-items: flex-start; }
-  .portal-nav-actions { margin-top: .75rem; }
+  .portal-navbar .navbar-collapse { padding: .5rem 0; }
+  .portal-nav-links { flex: 1 1 auto; align-items: flex-start; flex-wrap: wrap; min-width: 0; }
+  .portal-nav-actions { margin-top: 0; flex: 0 1 auto; }
   .portal-nav-actions .btn { text-align: center; }
   .portal-navbar .dropdown-menu { background: transparent; border: 0; box-shadow: none; }
   .portal-navbar .dropdown-item { color: #fff; font-size: .95rem; font-weight: 500; white-space: normal; }
@@ -109,6 +107,25 @@ body {
   .portal-navbar .dropdown-item:focus,
   .portal-navbar .dropdown-item.active,
   .portal-navbar .dropdown-item:active { color: #c9f45b; background: transparent; }
+}
+
+@media (max-width: 767.98px) {
+  .portal-brand img { width: 120px; max-width: 35vw; }
+  .portal-navbar-inner { gap: .4rem; }
+  .portal-navbar .nav-link { font-size: .82rem; padding: .45rem .4rem; gap: .25rem; }
+  .portal-nav-actions { flex-direction: row !important; flex-wrap: nowrap; flex: 0 0 auto; width: auto; margin-left: auto; gap: .35rem !important; }
+  .portal-nav-actions .btn { flex: 0 0 auto; min-width: 0; font-size: .68rem; padding: .3rem .35rem; white-space: nowrap; }
+}
+
+@media (min-width: 1200px) {
+  .portal-navbar-inner { flex-wrap: nowrap; gap: .45rem; }
+  .portal-brand img { width: 118px; max-width: none; }
+  .portal-navbar .navbar-collapse { flex-direction: row; align-items: center; flex-wrap: nowrap; min-width: 0; }
+  .portal-nav-links { flex: 0 1 auto; flex-wrap: nowrap; gap: 0; min-width: 0; }
+  .portal-navbar .nav-link { font-size: .72rem; padding: .4rem .3rem; gap: .25rem; white-space: nowrap; }
+  .portal-navbar .nav-icon { width: 1.1em; height: 1.1em; }
+  .portal-nav-actions { flex: 0 0 auto; margin-left: auto; flex-wrap: nowrap; gap: .3rem !important; }
+  .portal-nav-actions .btn { font-size: .7rem; padding: .35rem .5rem; }
 }
 
 .banner-imagem { width: 100%; height: auto; aspect-ratio: 16 / 5; object-fit: contain; object-position: center; }

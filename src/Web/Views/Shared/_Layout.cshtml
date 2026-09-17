@@ -15,13 +15,10 @@
     @if (!isLoginPage)
     {
     <header>
-        <nav class="navbar navbar-expand-xxl portal-navbar">
+        <nav class="navbar portal-navbar">
             <div class="container-fluid portal-navbar-inner">
                 <a class="navbar-brand portal-brand" asp-area="" asp-controller="Home" asp-action="Index" aria-label="PVH Saúde — início"><img src="~/images/pvh-saude-horizontal-transparent.png" asp-append-version="true" alt="PVH Saúde — descontos e benefícios" width="1692" height="929" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir ou fechar menu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div id="navbarSupportedContent" class="navbar-collapse collapse justify-content-between">
+                <div id="navbarSupportedContent" class="navbar-collapse justify-content-between">
                     <ul class="navbar-nav portal-nav-links">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>Início</a>
