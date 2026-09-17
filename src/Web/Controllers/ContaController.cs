@@ -27,7 +27,7 @@ public class ContaController(UsuarioApiClient usuarios) : Controller
                 new Claim(ClaimTypes.Email, login.Usuario.Email!),
                 new Claim(ClaimTypes.Role, login.Usuario.Role.ToString())
             };
-            var properties = new AuthenticationProperties { ExpiresUtc = DateTimeOffset.UtcNow.AddHours(6), IsPersistent = false };
+            var properties = new AuthenticationProperties { IsPersistent = false };
             properties.StoreTokens([new AuthenticationToken { Name = "access_token", Value = login.Token }]);
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             AcessoMenu.Atualizar(identity, login.Usuario.Menus);
