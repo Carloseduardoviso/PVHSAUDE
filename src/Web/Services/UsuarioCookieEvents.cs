@@ -22,8 +22,6 @@ public class UsuarioCookieEvents(IHttpClientFactory factory) : CookieAuthenticat
                 var menus = await response.Content.ReadFromJsonAsync<string[]>(timeout.Token);
                 if (menus is not null && context.Principal?.Identity is System.Security.Claims.ClaimsIdentity identity)
                 {
-                    var antigos = identity.FindAll(PVHSAUDE.Application.ViewModels.AcessoMenu.Claim).Select(x => x.Value).Order();
-                    context.ShouldRenew = !antigos.SequenceEqual(menus.Order());
                     PVHSAUDE.Application.ViewModels.AcessoMenu.Atualizar(identity, menus);
                     return;
                 }

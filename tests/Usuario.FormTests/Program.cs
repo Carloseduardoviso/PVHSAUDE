@@ -58,11 +58,12 @@ async Task<string> Token(string path)
     var html = await client.GetStringAsync(path);
     return WebUtility.HtmlDecode(Regex.Match(html, "name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\"").Groups[1].Value);
 }
-async Task<HttpResponseMessage> Login(Role role, string password = "senha-de-teste")
+async Task<HttpResponseMessage> Login(Role role, string password = "senha-de-teste", string returnUrl = "https://outside.example")
 {
     transport.Role = role;
-    return await client.PostAsync("/Conta/Login?returnUrl=https://outside.example", new FormUrlEncodedContent(new Dictionary<string,string> {
-        ["__RequestVerificationToken"] = await Token("/Conta/Login"), ["Email"] = "teste@example.com", ["Senha"] = password
+    var url = "/Conta/Login?returnUrl=" + Uri.EscapeDataString(returnUrl);
+    return await client.PostAsync(url, new FormUrlEncodedContent(new Dictionary<string,string> {
+        ["__RequestVerificationToken"] = await Token(url), ["Email"] = "teste@example.com", ["Senha"] = password
     }));
 }
 using (var response = await client.GetAsync("/Administracao/Usuario"))
@@ -73,12 +74,21 @@ using (var login = await Login(Role.Comum))
     Check(login.StatusCode == HttpStatusCode.Redirect, "Login cria uma sessão autenticada.");
 using (var response = await client.GetAsync("/Administracao"))
     Check(response.StatusCode == HttpStatusCode.OK, "Sessão recém-criada acessa área administrativa.");
-clock.Advance(TimeSpan.FromHours(6).Add(TimeSpan.FromTicks(1)));
+clock.Advance(TimeSpan.FromHours(4));
+transport.Menus = ["Contato"];
+using (var response = await client.GetAsync("/Administracao"))
+    Check(response.StatusCode == HttpStatusCode.OK, "Atualização de permissões não encerra a sessão ativa.");
+clock.Advance(TimeSpan.FromHours(2).Add(TimeSpan.FromTicks(1)));
 using (var response = await client.GetAsync("/Administracao"))
 {
-    Check(response.StatusCode == HttpStatusCode.Redirect && response.Headers.Location!.AbsolutePath == "/Conta/Login" &&
-        response.Headers.Location.Query.Contains("ReturnUrl=%2FAdministracao", StringComparison.OrdinalIgnoreCase),
+    var location = response.Headers.Location ?? throw new Exception("Sessão expirada não informou o destino de login.");
+    Check(response.StatusCode == HttpStatusCode.Redirect && location.AbsolutePath == "/Conta/Login" &&
+        location.Query.Contains("ReturnUrl=%2FAdministracao", StringComparison.OrdinalIgnoreCase),
         "Sessão expirada redireciona ao login preservando o destino.");
+    var returnUrl = Uri.UnescapeDataString(location.Query["?ReturnUrl=".Length..]);
+    using var reauth = await Login(Role.Comum, returnUrl: returnUrl);
+    Check(reauth.StatusCode == HttpStatusCode.Redirect && reauth.Headers.Location!.OriginalString == "/Administracao",
+        "Novo login retorna ao destino solicitado antes da expiração.");
 }
 using (var response = await client.PostAsync("/Conta/Login", new FormUrlEncodedContent(new Dictionary<string,string> {
     ["__RequestVerificationToken"] = await Token("/Conta/Login"), ["Email"] = "teste@example.com"
