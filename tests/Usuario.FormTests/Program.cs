@@ -17,18 +17,32 @@ await BannerApiClientTests.Run();
 if (args.Contains("--banner")) return;
 AutoMapperTests.Run();
 
+var clock = new TestTimeProvider(DateTimeOffset.UtcNow);
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { ApplicationName = typeof(ContaController).Assembly.FullName });
 builder.Logging.ClearProviders();
 builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
 builder.Services.AddControllersWithViews(o => o.Filters.Add<MenuAdministrativoFilter>()).AddApplicationPart(typeof(ContaController).Assembly);
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(o => { o.LoginPath = "/Conta/Login"; o.AccessDeniedPath = "/Conta/AcessoNegado"; o.EventsType = typeof(UsuarioCookieEvents); });
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(o =>
+{
+    o.LoginPath = "/Conta/Login";
+    o.AccessDeniedPath = "/Conta/AcessoNegado";
+    o.Cookie.SecurePolicy = CookieSecurePolicy.None;
+    o.ExpireTimeSpan = TimeSpan.FromHours(6);
+    o.SlidingExpiration = false;
+    o.TimeProvider = clock;
+    o.EventsType = typeof(UsuarioCookieEvents);
+});
 builder.Services.AddScoped<UsuarioCookieEvents>();
 builder.Services.AddAuthorization();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddTransient<ApiAuthenticationHandler>();
 var transport = new Transport();
 builder.Services.AddSingleton(transport);
 builder.Services.AddHttpClient("default", c => c.BaseAddress = new Uri("http://api/")).ConfigurePrimaryHttpMessageHandler(() => transport);
 builder.Services.AddScoped(sp => new UsuarioApiClient(new HttpClient(transport) { BaseAddress = new Uri("http://api/") }, sp.GetRequiredService<IHttpContextAccessor>()));
+builder.Services.AddHttpClient<PlanoApiClient>(c => c.BaseAddress = new Uri("http://api/"))
+    .ConfigurePrimaryHttpMessageHandler(() => transport)
+    .AddHttpMessageHandler<ApiAuthenticationHandler>();
 await using var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
@@ -36,7 +50,8 @@ app.MapAreaControllerRoute("admin", "Administracao", "Administracao/{controller=
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 app.Urls.Add("http://127.0.0.1:0");
 await app.StartAsync();
-using var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { BaseAddress = new Uri(app.Urls.Single()) };
+var cookies = new CookieContainer();
+using var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false, CookieContainer = cookies }) { BaseAddress = new Uri(app.Urls.Single()) };
 void Check(bool condition, string message) { if (!condition) throw new Exception(message); Console.WriteLine("PASS: " + message); }
 async Task<string> Token(string path)
 {
@@ -54,6 +69,17 @@ using (var response = await client.GetAsync("/Administracao/Usuario"))
     Check(response.StatusCode == HttpStatusCode.Redirect && response.Headers.Location!.OriginalString.Contains("/Conta/Login"), "Anônimo precisa entrar.");
 using (var response = await Login(Role.Comum, "incorreta"))
     Check(response.StatusCode == HttpStatusCode.OK && WebUtility.HtmlDecode(await response.Content.ReadAsStringAsync()).Contains("inválidos"), "Senha inválida não autentica.");
+using (var login = await Login(Role.Comum))
+    Check(login.StatusCode == HttpStatusCode.Redirect, "Login cria uma sessão autenticada.");
+using (var response = await client.GetAsync("/Administracao"))
+    Check(response.StatusCode == HttpStatusCode.OK, "Sessão recém-criada acessa área administrativa.");
+clock.Advance(TimeSpan.FromHours(6).Add(TimeSpan.FromTicks(1)));
+using (var response = await client.GetAsync("/Administracao"))
+{
+    Check(response.StatusCode == HttpStatusCode.Redirect && response.Headers.Location!.AbsolutePath == "/Conta/Login" &&
+        response.Headers.Location.Query.Contains("ReturnUrl=%2FAdministracao", StringComparison.OrdinalIgnoreCase),
+        "Sessão expirada redireciona ao login preservando o destino.");
+}
 using (var response = await client.PostAsync("/Conta/Login", new FormUrlEncodedContent(new Dictionary<string,string> {
     ["__RequestVerificationToken"] = await Token("/Conta/Login"), ["Email"] = "teste@example.com"
 })))
@@ -196,4 +222,13 @@ sealed class Transport : HttpMessageHandler
         Saved = await request.Content!.ReadFromJsonAsync<UsuarioCadastroVm>(ct);
         return new(Duplicate ? HttpStatusCode.Conflict : HttpStatusCode.Created);
     }
+}
+
+sealed class TestTimeProvider(DateTimeOffset utcNow) : TimeProvider
+{
+    private DateTimeOffset _utcNow = utcNow;
+
+    public override DateTimeOffset GetUtcNow() => _utcNow;
+
+    public void Advance(TimeSpan duration) => _utcNow = _utcNow.Add(duration);
 }
