@@ -1,11 +1,15 @@
 using PVHSAUDE.Domain.Enuns;
 using PVHSAUDE.Domain.Validation;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Web.Models;
 
 public class BeneficiarioVm
 {
+    // A API expõe o identificador como "id"; manter o nome usado pelas views
+    // evita gerar links de edição/detalhes com Guid.Empty.
+    [JsonPropertyName("id")]
     public Guid BeneficiarioId { get; set; }
 
     [Required(ErrorMessage = "Informe o nome.")]

@@ -16,6 +16,11 @@
 .admin-sidebar, .admin-content { overflow-wrap: anywhere; }
 .admin-content .card, .admin-content .row > *, .admin-content .d-flex > * { min-width: 0; }
 .admin-content .d-flex { flex-wrap: wrap; gap: .75rem; }
+.admin-content .catalogo-item { flex-wrap: nowrap; }
+.admin-content .catalogo-editar { flex: 1 1 auto; min-width: 0; flex-wrap: nowrap; }
+.admin-content .catalogo-editar input { flex: 1 1 auto; min-width: 0; }
+.admin-content .catalogo-excluir { display: flex; flex: 0 0 auto; align-items: center; margin: 0; }
+.admin-content .catalogo-item .btn { white-space: nowrap; }
 .admin-content .form-control, .admin-content .form-select { min-width: 0; max-width: 100%; }
 .admin-content .btn { max-width: 100%; white-space: normal; }
 .admin-content .badge { white-space: normal; }

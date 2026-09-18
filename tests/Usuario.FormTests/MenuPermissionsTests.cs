@@ -69,6 +69,28 @@ public static class MenuPermissionsTests
                     throw new Exception($"Permissão WhatsApp na Web incorreta: {role}/{method}/{permitido}");
             }
         }
+        foreach (var (action, menu) in new[]
+        {
+            ("Especialidades", "Especialidades"),
+            ("EditarEspecialidade", "Especialidades"),
+            ("ExcluirEspecialidade", "Especialidades"),
+            ("Procedimentos", "Procedimentos"),
+            ("EditarProcedimento", "Procedimentos"),
+            ("ExcluirProcedimento", "Procedimentos")
+        })
+        {
+            var permitido = new ClaimsPrincipal(new ClaimsIdentity([new Claim(AcessoMenu.Claim, menu)], "tests"));
+            var outroMenu = menu == "Especialidades" ? "Procedimentos" : "Especialidades";
+            var bloqueado = new ClaimsPrincipal(new ClaimsIdentity([new Claim(AcessoMenu.Claim, outroMenu)], "tests"));
+            foreach (var (user, devePermitir) in new[] { (permitido, true), (bloqueado, false) })
+            {
+                var ctx = Context("Catalogo", action, "POST", user);
+                ctx.RouteData.Values["area"] = "Administracao";
+                new Web.Services.MenuAdministrativoFilter().OnAuthorization(ctx);
+                if ((ctx.Result is null) != devePermitir)
+                    throw new Exception($"Permissão de catálogo incorreta: Catalogo/{action}, permitido={devePermitir}");
+            }
+        }
         var menus = (IDictionary<string, string>)MenusAdministrativos.Opcoes;
         menus["Categoria"] = "Categorias";
         try

@@ -16,6 +16,7 @@ if (args.Contains("--database")) { await UsuarioDatabaseTests.Run(); return; }
 await BannerApiClientTests.Run();
 if (args.Contains("--banner")) return;
 AutoMapperTests.Run();
+await CatalogoTests.Run();
 
 var clock = new TestTimeProvider(DateTimeOffset.UtcNow);
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { ApplicationName = typeof(ContaController).Assembly.FullName });

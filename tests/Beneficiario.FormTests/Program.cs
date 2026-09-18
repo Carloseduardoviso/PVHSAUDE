@@ -21,6 +21,10 @@ app.MapAreaControllerRoute("admin", "Administracao", "Administracao/{controller=
 app.Urls.Add("http://127.0.0.1:0");
 await app.StartAsync();
 using var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { BaseAddress = new Uri(app.Urls.Single()) };
+var pessoaFisicaDetalhes = WebUtility.HtmlDecode(await client.GetStringAsync($"/Administracao/Beneficiario/Details/{ApiTransport.BeneficiarioId}"));
+if (pessoaFisicaDetalhes.Contains("Empresa Beneficiada", StringComparison.OrdinalIgnoreCase))
+    throw new Exception("Detalhes de pessoa física não devem exibir a empresa beneficiada.");
+Console.WriteLine("PASS: detalhes de pessoa física ocultam a empresa beneficiada.");
 foreach (var (count, invalidDate, semEmpresa) in new[] { (0, false, false), (1, false, false), (5, false, false), (6, false, false), (1, true, false), (0, false, true) })
 {
     var html = await client.GetStringAsync("/Administracao/Beneficiario/Create");
@@ -101,10 +105,23 @@ sealed class ApiTransport : HttpMessageHandler
 {
     public static readonly Guid PlanoId = Guid.NewGuid();
     public static readonly Guid EmpresaId = Guid.NewGuid();
+    public static readonly Guid BeneficiarioId = Guid.NewGuid();
     public BeneficiarioVm? Saved;
     public CredenciadoVm? Empresa;
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
     {
+        if (request.Method == HttpMethod.Get && request.RequestUri!.AbsolutePath == $"/api/beneficiarios/{BeneficiarioId}")
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new BeneficiarioVm
+            {
+                BeneficiarioId = BeneficiarioId,
+                Nome = "Pessoa física de teste",
+                Cpf = "123.456.789-01",
+                TipoPessoa = PVHSAUDE.Domain.Enuns.TipoPessoa.Fisica,
+                PlanoId = PlanoId,
+                DataNascimento = new DateTime(1990, 1, 1),
+                DataInicio = new DateTime(2026, 1, 1),
+                DataValidade = new DateTime(2027, 1, 1)
+            }) };
         if (request.Method == HttpMethod.Get && request.RequestUri!.AbsolutePath == "/api/empresas-beneficiadas")
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new CredenciadoVm { Id = EmpresaId, NomeFantasia = "Empresa teste", PlanoId = PlanoId } }) };
         if (request.RequestUri!.AbsolutePath is "/api/especialidades" or "/api/procedimentos")

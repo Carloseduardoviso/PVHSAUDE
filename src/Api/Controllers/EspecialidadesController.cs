@@ -9,4 +9,6 @@ public class EspecialidadesController(ICatalogoService service) : ServiceControl
 {
     [HttpGet] public Task<IActionResult> Get(CancellationToken ct) => Executar(async () => Ok(await service.EspecialidadesAsync(ct)));
     [Authorize, HttpPost] public Task<IActionResult> Post(CatalogoEntradaVm vm, CancellationToken ct) => Executar(async () => Ok(await service.CriarEspecialidadeAsync(vm, ct)));
+    [Authorize, HttpPut("{id:guid}")] public Task<IActionResult> Put(Guid id, CatalogoEntradaVm vm, CancellationToken ct) => Executar(async () => Ok(await service.AtualizarEspecialidadeAsync(id, vm, ct)));
+    [Authorize, HttpDelete("{id:guid}")] public Task<IActionResult> Delete(Guid id, CancellationToken ct) => Executar(async () => { await service.ExcluirEspecialidadeAsync(id, ct); return NoContent(); });
 }
