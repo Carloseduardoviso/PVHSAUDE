@@ -23,4 +23,5 @@ public class IntencaoVendaVm : IntencaoVendaEntradaVm
     public decimal ValorTotal { get; set; }
     public StatusIntencaoVenda Status { get; set; }
     public DateTime CriadoEm { get; set; }
+    public bool NotificacaoSuspensa { get; set; }
 }

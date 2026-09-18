@@ -30,4 +30,10 @@ public class ContatoApiClient(HttpClient http)
         using var r = await http.DeleteAsync($"api/contatos/{id}", ct);
         r.EnsureSuccessStatusCode();
     }
+
+    public async Task SuspenderNotificacaoAsync(Guid id, CancellationToken ct)
+    {
+        using var r = await http.PatchAsync($"api/contatos/{id}/suspender-notificacao", null, ct);
+        r.EnsureSuccessStatusCode();
+    }
 }

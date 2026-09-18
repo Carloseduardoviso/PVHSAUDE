@@ -14,7 +14,28 @@ public class BeneficiarioController(BeneficiarioApiClient beneficiarios, PlanoAp
     public async Task<IActionResult> Create(CancellationToken cancellationToken)
     {
         await CarregarPlanos(cancellationToken);
-        return View(new BeneficiarioVm());
+        var model = new BeneficiarioVm();
+        try
+        {
+            var beneficiariosCadastrados = await beneficiarios.ListarAsync(cancellationToken);
+            var maior = beneficiariosCadastrados
+                .SelectMany(x => new[] { x.Codigo }.Concat(x.Dependentes.Select(d => d.Codigo)))
+                .Select(ExtrairNumero)
+                .DefaultIfEmpty(0)
+                .Max();
+            model.Codigo = $"RO{maior + 1:000}/{DateTime.UtcNow:yyyy}";
+        }
+        catch (HttpRequestException)
+        {
+            // Mantém o valor visual padrão se a API estiver indisponível; o servidor valida a sequência ao salvar.
+        }
+        return View(model);
+    }
+
+    private static int ExtrairNumero(string? codigo)
+    {
+        var match = System.Text.RegularExpressions.Regex.Match(codigo ?? string.Empty, @"^RO(\d+)/\d{4}$");
+        return match.Success && int.TryParse(match.Groups[1].Value, out var numero) ? numero : 0;
     }
 
     private async Task CarregarPlanos(CancellationToken ct)
@@ -25,8 +46,11 @@ public class BeneficiarioController(BeneficiarioApiClient beneficiarios, PlanoAp
         try
         {
             var catalogo = await planos.ListarAsync(ct);
-            ViewBag.PlanosDisponiveis = catalogo;
-            ViewBag.Planos = catalogo
+            var planosPessoaFisica = catalogo
+                .Where(p => p.TipoPessoa == PVHSAUDE.Domain.Enuns.TipoPessoa.Fisica)
+                .ToList();
+            ViewBag.PlanosDisponiveis = planosPessoaFisica;
+            ViewBag.Planos = planosPessoaFisica
                 .Select(p => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(p.Nome, p.Id.ToString())).ToList();
             var empresas = await empresasBeneficiadas.ListarAsync(ct);
             ViewBag.EmpresasBeneficiadasDisponiveis = empresas;

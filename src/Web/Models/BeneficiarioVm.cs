@@ -12,6 +12,9 @@ public class BeneficiarioVm
     [JsonPropertyName("id")]
     public Guid BeneficiarioId { get; set; }
 
+    [Display(Name = "Código")]
+    public string Codigo { get; set; } = $"RO001/{DateTime.UtcNow:yyyy}";
+
     [Required(ErrorMessage = "Informe o nome.")]
     [Display(Name = "Nome completo")]
     public string Nome { get; set; } = string.Empty;
@@ -63,6 +66,8 @@ public class BeneficiarioVm
 public class DependenteViewModel
 {
     public Guid Id { get; set; }
+    [Display(Name = "Código")]
+    public string Codigo { get; set; } = string.Empty;
 
     [Required, StringLength(150)]
     public string Nome { get; set; } = string.Empty;

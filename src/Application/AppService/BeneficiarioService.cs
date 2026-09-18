@@ -4,6 +4,7 @@ using PVHSAUDE.Application.Interface;
 using PVHSAUDE.Domain.Entities;
 using PVHSAUDE.Domain.Enuns;
 using PVHSAUDE.Domain.Interfaces.Repository;
+using System.Text.RegularExpressions;
 namespace PVHSAUDE.Application.AppService;
 
 public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEntityRepository<Credenciado> empresas,
@@ -51,9 +52,12 @@ public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEn
         await ValidarDocumento(null, Digitos(vm.Cpf), ct);
         if (vm.Dependentes?.Any(x => x.Id != Guid.Empty) == true)
             throw new ServiceException(ServiceError.Invalid, "Novos dependentes não devem possuir um identificador.");
+        var ano = DateTime.UtcNow.Year;
+        var proximo = await ProximoNumeroAsync(ct);
         var entity = mapper.Map<Beneficiario>(Normalizar(vm));
+        entity.DefinirCodigo(FormatarCodigo(proximo++, ano));
         entity.DefinirPessoa(vm.TipoPessoa, vm.EmpresaBeneficiadaId);
-        Sincronizar(entity, vm.Dependentes);
+        Sincronizar(entity, vm.Dependentes, () => FormatarCodigo(proximo++, ano));
         repository.Adicionar(entity);
         await work.SalvarAsync(ct);
         return mapper.Map<BeneficiarioRespostaVm>(entity);
@@ -62,12 +66,14 @@ public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEn
     {
         await ValidarPlano(vm, ct);
         var entity = await Encontrar(id, ct);
+        var ano = DateTime.UtcNow.Year;
+        var proximo = await ProximoNumeroAsync(ct);
         await ValidarDocumento(id, Digitos(vm.Cpf), ct);
         if (vm.Dependentes is { } lista &&
             (lista.Any(d => d.Id != Guid.Empty && !entity.Dependentes.Any(x => x.Id == d.Id)) ||
             lista.Where(d => d.Id != Guid.Empty).GroupBy(d => d.Id).Any(g => g.Count() > 1)))
             throw new ServiceException(ServiceError.Invalid, "Dependente inválido para este beneficiário.");
-        Sincronizar(entity, vm.Dependentes);
+        Sincronizar(entity, vm.Dependentes, () => FormatarCodigo(proximo++, ano));
         mapper.Map(Normalizar(vm), entity);
         entity.DefinirPessoa(vm.TipoPessoa, vm.EmpresaBeneficiadaId);
         await work.SalvarAsync(ct);
@@ -82,7 +88,21 @@ public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEn
         repository.Remover(await Encontrar(id, ct));
         await work.SalvarAsync(ct);
     }
-    private void Sincronizar(Beneficiario entity, List<DependenteEntradaVm>? lista)
+    private async Task<int> ProximoNumeroAsync(CancellationToken ct)
+    {
+        var codigos = (await repository.ListarAsync(null, ct)).Select(x => x.Codigo)
+            .Concat((await dependentes.ListarAsync(null, ct)).Select(x => x.Codigo));
+        var maior = codigos.Select(ExtrairNumero).DefaultIfEmpty(0).Max();
+        return maior + 1;
+    }
+
+    private static int ExtrairNumero(string? codigo) =>
+        codigo is not null && Regex.Match(codigo, @"^RO(\d+)/\d{4}$") is { Success: true } m
+            ? int.Parse(m.Groups[1].Value) : 0;
+
+    private static string FormatarCodigo(int numero, int ano) => $"RO{numero:000}/{ano}";
+
+    private void Sincronizar(Beneficiario entity, List<DependenteEntradaVm>? lista, Func<string> gerarCodigo)
     {
         if (lista is null) return;
         foreach (var antigo in entity.Dependentes.Where(x => !lista.Any(d => d.Id == x.Id)).ToList())
@@ -98,6 +118,8 @@ public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEn
             var dependente = item.Id == Guid.Empty
                 ? new Dependente(entity.Id, vm.Nome, vm.Cpf, vm.DataNascimento!.Value, vm.GrauParentesco!.Value)
                 : entity.Dependentes.Single(x => x.Id == item.Id);
+            if (item.Id == Guid.Empty || string.Equals(dependente.Codigo, entity.Codigo, StringComparison.OrdinalIgnoreCase))
+                dependente.DefinirCodigo(gerarCodigo());
             mapper.Map(vm, dependente);
             if (item.Id == Guid.Empty) entity.Dependentes.Add(dependente);
         }

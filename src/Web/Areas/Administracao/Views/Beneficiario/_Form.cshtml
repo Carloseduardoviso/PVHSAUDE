@@ -7,6 +7,7 @@
     <div class="alert alert-warning">Nenhum plano disponível. <a asp-controller="Plano" asp-action="Create">Cadastrar plano</a></div>
 }
 <div class="row g-3">
+    <div class="col-md-4"><label asp-for="Codigo" class="form-label"></label><input asp-for="Codigo" class="form-control codigo-readonly" readonly aria-readonly="true" /></div>
     <div class="col-md-4"><label asp-for="TipoPessoa" class="form-label"></label><select asp-for="TipoPessoa" asp-items="Html.GetEnumSelectList<PVHSAUDE.Domain.Enuns.TipoPessoa>()" class="form-select" id="TipoPessoa"></select><span asp-validation-for="TipoPessoa" class="text-danger"></span></div>
     <div class="col-md-8" id="empresa-beneficiada-campo"><label asp-for="EmpresaBeneficiadaId" class="form-label"></label><select asp-for="EmpresaBeneficiadaId" asp-items="ViewBag.EmpresasBeneficiadas" class="form-select" id="EmpresaBeneficiadaId"><option value="">Selecione a empresa beneficiada</option></select><span asp-validation-for="EmpresaBeneficiadaId" class="text-danger"></span></div>
     <div class="col-md-8"><label asp-for="Nome" class="form-label"></label><input asp-for="Nome" class="form-control" /><span asp-validation-for="Nome" class="text-danger"></span></div>

@@ -16,6 +16,12 @@ public class ContatoService(IEntityRepository<Contato> repository, IUnitOfWork w
         repository.Adicionar(mapper.Map<Contato>(vm));
         await work.SalvarAsync(ct);
     }
+    public async Task SuspenderNotificacaoAsync(Guid id, CancellationToken ct)
+    {
+        var entity = await repository.ObterAsync(x => x.Id == id, ct) ?? throw new ServiceException(ServiceError.NotFound);
+        entity.SuspenderNotificacao();
+        await work.SalvarAsync(ct);
+    }
     public async Task ExcluirAsync(Guid id, CancellationToken ct)
     {
         repository.Remover(await repository.ObterAsync(x => x.Id == id, ct) ?? throw new ServiceException(ServiceError.NotFound));

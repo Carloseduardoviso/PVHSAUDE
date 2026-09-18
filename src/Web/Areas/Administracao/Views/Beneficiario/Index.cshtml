@@ -15,7 +15,7 @@
 <thead><tr><th>Nome</th><th>CPF</th><th>Telefone</th><th>Situação</th><th>Dependentes</th><th class="text-end">Ações</th></tr></thead>
 <tbody>
 @foreach (var item in Model) {
-<tr><td>@item.Nome</td><td>@item.Cpf</td><td>@item.Telefone</td><td>@((PVHSAUDE.Domain.Enuns.StatusBeneficiario)item.Status)</td><td>@item.Dependentes.Count</td><td class="text-end">
+<tr><td>@item.Nome</td><td>@item.Cpf</td><td>@item.Telefone</td><td>@((PVHSAUDE.Domain.Enuns.StatusBeneficiario)item.Status)</td><td>@if (item.Dependentes.Any()) { foreach (var dependente in item.Dependentes) { <div>@dependente.Nome</div> } } else { <span class="text-muted">Nenhum</span> }</td><td class="text-end">
 <a asp-action="Edit" asp-route-id="@item.BeneficiarioId" class="btn btn-sm btn-outline-primary">Editar</a>
 <a asp-action="Details" asp-route-id="@item.BeneficiarioId" class="btn btn-sm btn-outline-secondary">Ver detalhes</a>
 @if (item.Status != (int)PVHSAUDE.Domain.Enuns.StatusBeneficiario.Inativo)
@@ -31,7 +31,7 @@
         <dt>CPF</dt><dd>@item.Cpf</dd>
         <dt>Telefone</dt><dd>@item.Telefone</dd>
         <dt>Situação</dt><dd>@((PVHSAUDE.Domain.Enuns.StatusBeneficiario)item.Status)</dd>
-        <dt>Dependentes</dt><dd>@item.Dependentes.Count</dd>
+        <dt>Dependentes</dt><dd>@if (item.Dependentes.Any()) { foreach (var dependente in item.Dependentes) { <div>@dependente.Nome</div> } } else { <span class="text-muted">Nenhum</span> }</dd>
         </dl><div class="admin-record-actions border-top pt-3 mt-3" aria-label="Ações do registro">
 
 <a asp-action="Edit" asp-route-id="@item.BeneficiarioId" class="btn btn-sm btn-outline-primary">Editar</a>

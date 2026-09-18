@@ -12,6 +12,7 @@ namespace Infra.Data.Config
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedNever();
+            builder.Property(x => x.Codigo).HasMaxLength(10).IsRequired();
             builder.Property(x => x.BeneficiarioId).IsRequired();
             builder.Property(x => x.Nome).IsRequired();
             builder.Property(x => x.Cpf).IsRequired();

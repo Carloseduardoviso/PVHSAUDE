@@ -4,6 +4,7 @@ namespace PVHSAUDE.Domain.Entities
     public class Dependente
     {
         public Guid Id { get; private set; } = Guid.NewGuid();
+        public string Codigo { get; private set; } = string.Empty;
         public Guid BeneficiarioId { get; private set; }
         public Beneficiario Beneficiario { get; private set; } = null!;
         public string Nome { get; private set; } = string.Empty;
@@ -20,6 +21,8 @@ namespace PVHSAUDE.Domain.Entities
             DataNascimento = dataNascimento;
             GrauParentesco = grauParentesco;
         }
+
+        public void DefinirCodigo(string codigo) => Codigo = codigo;
 
         public Dependente(Guid beneficiarioId, string nome, string cpf, DateTime dataNascimento, GrauParentesco grauParentesco)
         {

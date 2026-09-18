@@ -12,5 +12,6 @@ public class ContatoController(ContatoApiClient api) : Controller
         catch (HttpRequestException) { ViewData["Erro"] = "Não foi possível carregar as mensagens."; return View(new List<ContatoVm>()); }
     }
     [HttpGet] public async Task<IActionResult> Detalhes(Guid id,CancellationToken ct){var c=await api.ObterAsync(id,ct);return c is null?NotFound():View(c);}
+    [HttpPost,ValidateAntiForgeryToken] public async Task<IActionResult> SuspenderNotificacao(Guid id,CancellationToken ct){try{await api.SuspenderNotificacaoAsync(id,ct);TempData["Sucesso"]="Notificação da mensagem suspensa.";}catch(HttpRequestException){TempData["Erro"]="Não foi possível suspender a notificação.";}return RedirectToAction(nameof(Index));}
     [HttpPost,ValidateAntiForgeryToken] public async Task<IActionResult> Excluir(Guid id,CancellationToken ct){try{await api.ExcluirAsync(id,ct);TempData["Sucesso"]="Mensagem excluída.";}catch(HttpRequestException){TempData["Erro"]="Não foi possível excluir a mensagem.";}return RedirectToAction(nameof(Index));}
 }

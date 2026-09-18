@@ -172,3 +172,10 @@ body {
 .portal-body .portal-footer { position: static; flex-shrink: 0; width: 100%; min-height: 60px; padding-block: 1rem; line-height: 1.5; white-space: normal; background: #15357a; color: #fff; }
 .portal-footer a { color: #c9f45b; }
 .portal-footer a:hover, .portal-footer a:focus { color: #fff; }
+.codigo-readonly {
+    background-color: #d9dde2 !important;
+    border-color: #9aa3ad !important;
+    color: #495057 !important;
+    font-weight: 600;
+    cursor: not-allowed;
+}

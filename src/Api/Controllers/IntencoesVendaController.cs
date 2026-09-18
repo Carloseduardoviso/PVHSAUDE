@@ -17,4 +17,7 @@ public class IntencaoVendaController(IIntencaoVendaService service) : ServiceCon
 
     [HttpPut("{id:guid}/status"), Authorize]
     public Task<IActionResult> AtualizarStatus(Guid id, [FromBody] StatusIntencaoVenda status, CancellationToken ct) => Executar(async () => { await service.AtualizarStatusAsync(id, status, ct); return NoContent(); });
+
+    [HttpPatch("{id:guid}/suspender-notificacao"), Authorize]
+    public Task<IActionResult> SuspenderNotificacao(Guid id, CancellationToken ct) => Executar(async () => { await service.SuspenderNotificacaoAsync(id, ct); return NoContent(); });
 }

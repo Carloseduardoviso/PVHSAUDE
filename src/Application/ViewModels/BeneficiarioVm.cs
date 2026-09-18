@@ -7,6 +7,7 @@ namespace PVHSAUDE.Application.ViewModels;
 public class BeneficiarioVm
 {
     public Guid Id { get; set; }
+    public string Codigo { get; set; } = $"RO001/{DateTime.UtcNow:yyyy}";
     [Required(ErrorMessage = "Informe o nome."), Display(Name = "Nome completo")] public string Nome { get; set; } = string.Empty;
     [Required, StringLength(18), RegularExpression(@"(?:\d{11}|\d{14}|\d{3}\.\d{3}\.\d{3}-\d{2}|\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2})", ErrorMessage = "Informe um CPF ou CNPJ completo."), Display(Name = "CPF/CNPJ")] public string Cpf { get; set; } = string.Empty;
     [Required, DataType(DataType.Date), Display(Name = "Data de nascimento")] public DateTime DataNascimento { get; set; }
@@ -30,6 +31,7 @@ public class BeneficiarioVm
 public class DependenteVm
 {
     public Guid Id { get; set; }
+    public string Codigo { get; set; } = string.Empty;
     [Required, StringLength(150)] public string Nome { get; set; } = string.Empty;
     [Required, RegularExpression(@"(?:\d{11}|\d{3}\.\d{3}\.\d{3}-\d{2})", ErrorMessage = "Informe um CPF completo.")] public string Cpf { get; set; } = string.Empty;
     [Required(ErrorMessage = "Informe a data de nascimento."), DataNascimento, DataType(DataType.Date)] public DateTime? DataNascimento { get; set; }

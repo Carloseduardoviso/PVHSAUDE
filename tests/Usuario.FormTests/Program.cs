@@ -17,6 +17,8 @@ await BannerApiClientTests.Run();
 if (args.Contains("--banner")) return;
 AutoMapperTests.Run();
 await CatalogoTests.Run();
+await ContatoAvisosTests.Run();
+await IntencaoAvisosTests.Run();
 
 var clock = new TestTimeProvider(DateTimeOffset.UtcNow);
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { ApplicationName = typeof(ContaController).Assembly.FullName });
@@ -42,6 +44,12 @@ builder.Services.AddSingleton(transport);
 builder.Services.AddHttpClient("default", c => c.BaseAddress = new Uri("http://api/")).ConfigurePrimaryHttpMessageHandler(() => transport);
 builder.Services.AddScoped(sp => new UsuarioApiClient(new HttpClient(transport) { BaseAddress = new Uri("http://api/") }, sp.GetRequiredService<IHttpContextAccessor>()));
 builder.Services.AddHttpClient<PlanoApiClient>(c => c.BaseAddress = new Uri("http://api/"))
+    .ConfigurePrimaryHttpMessageHandler(() => transport)
+    .AddHttpMessageHandler<ApiAuthenticationHandler>();
+builder.Services.AddHttpClient<ContatoApiClient>(c => c.BaseAddress = new Uri("http://api/"))
+    .ConfigurePrimaryHttpMessageHandler(() => transport)
+    .AddHttpMessageHandler<ApiAuthenticationHandler>();
+builder.Services.AddHttpClient<IntencaoVendaApiClient>(c => c.BaseAddress = new Uri("http://api/"))
     .ConfigurePrimaryHttpMessageHandler(() => transport)
     .AddHttpMessageHandler<ApiAuthenticationHandler>();
 await using var app = builder.Build();

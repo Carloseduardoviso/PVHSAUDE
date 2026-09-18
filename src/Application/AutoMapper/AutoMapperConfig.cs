@@ -101,12 +101,14 @@ public class AutoMapperConfig : Profile
             .ForMember(e => e.Titulo, o => o.MapFrom(vm => vm.Titulo.Trim()));
         CreateMap<ContatoEntradaVm, Contato>()
             .ForMember(e => e.Id, o => o.Ignore())
-            .ForMember(e => e.EnviadoEm, o => o.Ignore());
+            .ForMember(e => e.EnviadoEm, o => o.Ignore())
+            .ForMember(e => e.NotificacaoSuspensa, o => o.Ignore());
         CreateMap<Contato, ContatoVm>();
         CreateMap<IntencaoVenda, IntencaoVendaVm>();
         CreateMap<ContatoVm, Contato>()
             .ForMember(e => e.Id, o => o.Ignore())
-            .ForMember(e => e.EnviadoEm, o => o.Ignore());
+            .ForMember(e => e.EnviadoEm, o => o.Ignore())
+            .ForMember(e => e.NotificacaoSuspensa, o => o.Ignore());
 
         CreateMap<Usuario, UsuarioVm>()
             .ForMember(vm => vm.UsuarioId, o => o.MapFrom(e => e.Id))

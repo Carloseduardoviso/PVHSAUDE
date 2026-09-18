@@ -14,5 +14,6 @@ public class IntencaoVendaConfig : IEntityTypeConfiguration<IntencaoVenda>
         builder.Property(x => x.PlanoNome).HasMaxLength(150).IsRequired(); builder.Property(x => x.ValorPlano).HasPrecision(18, 2);
         builder.Property(x => x.ValorTotal).HasPrecision(18, 2); builder.Property(x => x.Endereco).HasMaxLength(500);
         builder.Property(x => x.Dependentes).HasMaxLength(4000); builder.Property(x => x.Status).HasConversion<int>();
+        builder.Property(x => x.NotificacaoSuspensa).HasDefaultValue(false);
     }
 }

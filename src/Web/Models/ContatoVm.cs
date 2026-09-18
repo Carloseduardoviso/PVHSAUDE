@@ -28,5 +28,6 @@ public class ContatoVm
     [Display(Name = "Mensagem")]
     public string Mensagem{get;set;}="";
     
-    public DateTime EnviadoEm{get;set;} }
+    public DateTime EnviadoEm{get;set;} 
+    public bool NotificacaoSuspensa { get; set; } }
 

@@ -16,15 +16,31 @@ builder.Services.AddSingleton(new PlanoApiClient(api));
 builder.Services.AddSingleton(new CredenciadoApiClient(api));
 builder.Services.AddSingleton(new EmpresaBeneficiadaApiClient(api));
 builder.Services.AddSingleton(new BeneficiarioApiClient(api));
+builder.Services.AddSingleton(new ContatoApiClient(api));
+builder.Services.AddSingleton(new IntencaoVendaApiClient(api));
 await using var app = builder.Build();
 app.MapAreaControllerRoute("admin", "Administracao", "Administracao/{controller=Dashboard}/{action=Index}/{id?}");
 app.Urls.Add("http://127.0.0.1:0");
 await app.StartAsync();
 using var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { BaseAddress = new Uri(app.Urls.Single()) };
-var pessoaFisicaDetalhes = WebUtility.HtmlDecode(await client.GetStringAsync($"/Administracao/Beneficiario/Details/{ApiTransport.BeneficiarioId}"));
+var detalhesResponse = await client.GetAsync($"/Administracao/Beneficiario/Details/{ApiTransport.BeneficiarioId}");
+if (!detalhesResponse.IsSuccessStatusCode) throw new Exception($"Details failed: {(int)detalhesResponse.StatusCode} {await detalhesResponse.Content.ReadAsStringAsync()}");
+var pessoaFisicaDetalhes = WebUtility.HtmlDecode(await detalhesResponse.Content.ReadAsStringAsync());
+if (!pessoaFisicaDetalhes.Contains($"RO001/{DateTime.UtcNow:yyyy}", StringComparison.Ordinal))
+    throw new Exception("Detalhes devem exibir o código do beneficiário.");
+var createHtml = WebUtility.HtmlDecode(await client.GetStringAsync("/Administracao/Beneficiario/Create"));
+if (!createHtml.Contains($"value=\"RO001/{DateTime.UtcNow:yyyy}\"", StringComparison.Ordinal))
+    throw new Exception("O cadastro deve exibir o código automático antes do tipo de pessoa.");
+Console.WriteLine("PASS: código do beneficiário exibido no cadastro e nos detalhes.");
 if (pessoaFisicaDetalhes.Contains("Empresa Beneficiada", StringComparison.OrdinalIgnoreCase))
     throw new Exception("Detalhes de pessoa física não devem exibir a empresa beneficiada.");
 Console.WriteLine("PASS: detalhes de pessoa física ocultam a empresa beneficiada.");
+var createCheckResponse = await client.GetAsync("/Administracao/Beneficiario/Create");
+if (!createCheckResponse.IsSuccessStatusCode) throw new Exception($"Create failed: {(int)createCheckResponse.StatusCode} {await createCheckResponse.Content.ReadAsStringAsync()}");
+var createCheckHtml = WebUtility.HtmlDecode(await createCheckResponse.Content.ReadAsStringAsync());
+if (!createCheckHtml.Contains($"value=\"RO001/{DateTime.UtcNow:yyyy}\"", StringComparison.Ordinal))
+    throw new Exception("O cadastro deve exibir o código automático antes do tipo de pessoa.");
+Console.WriteLine("PASS: código do beneficiário exibido no cadastro e nos detalhes.");
 foreach (var (count, invalidDate, semEmpresa) in new[] { (0, false, false), (1, false, false), (5, false, false), (6, false, false), (1, true, false), (0, false, true) })
 {
     var html = await client.GetStringAsync("/Administracao/Beneficiario/Create");
@@ -120,12 +136,18 @@ sealed class ApiTransport : HttpMessageHandler
                 PlanoId = PlanoId,
                 DataNascimento = new DateTime(1990, 1, 1),
                 DataInicio = new DateTime(2026, 1, 1),
-                DataValidade = new DateTime(2027, 1, 1)
+                DataValidade = new DateTime(2027, 1, 1),
+                Codigo = $"RO001/{DateTime.UtcNow:yyyy}",
+                Dependentes = []
             }) };
+        if (request.Method == HttpMethod.Get && request.RequestUri.AbsolutePath == "/api/beneficiarios")
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(Array.Empty<BeneficiarioVm>()) };
         if (request.Method == HttpMethod.Get && request.RequestUri!.AbsolutePath == "/api/empresas-beneficiadas")
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new CredenciadoVm { Id = EmpresaId, NomeFantasia = "Empresa teste", PlanoId = PlanoId } }) };
         if (request.RequestUri!.AbsolutePath is "/api/especialidades" or "/api/procedimentos")
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(Array.Empty<CatalogoItemVm>()) };
+        if (request.RequestUri.AbsolutePath is "/api/contatos" or "/api/intencoes-venda")
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(Array.Empty<object>()) };
         if (request.RequestUri!.AbsolutePath == "/api/planos")
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new PlanoVm { Id = PlanoId, Nome = "Plano teste", Valor = 99.90m } }) };
         if (request.Method == HttpMethod.Post && request.RequestUri.AbsolutePath == "/api/beneficiarios")

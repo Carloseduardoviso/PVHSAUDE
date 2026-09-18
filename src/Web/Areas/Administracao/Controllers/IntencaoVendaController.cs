@@ -22,4 +22,19 @@ public class IntencaoVendaController(IntencaoVendaApiClient api) : Controller
         catch (HttpRequestException) { TempData["Erro"] = "Não foi possível atualizar a situação."; }
         return RedirectToAction(nameof(Index));
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Detalhes(Guid id, CancellationToken ct)
+    {
+        try { var item = (await api.ListarAsync(ct)).FirstOrDefault(x => x.Id == id); return item is null ? NotFound() : View(item); }
+        catch (HttpRequestException) { return NotFound(); }
+    }
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> SuspenderNotificacao(Guid id, CancellationToken ct)
+    {
+        try { await api.SuspenderNotificacaoAsync(id, ct); TempData["Sucesso"] = "Notificação da intenção suspensa."; }
+        catch (HttpRequestException) { TempData["Erro"] = "Não foi possível suspender a notificação."; }
+        return RedirectToAction(nameof(Index));
+    }
 }

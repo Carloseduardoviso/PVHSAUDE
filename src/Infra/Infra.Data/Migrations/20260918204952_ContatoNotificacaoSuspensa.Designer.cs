@@ -4,6 +4,7 @@ using Infra.Data.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PVHSAUDE.Infra.Data.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20260918204952_ContatoNotificacaoSuspensa")]
+    partial class ContatoNotificacaoSuspensa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,11 +62,6 @@ namespace PVHSAUDE.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Codigo")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
@@ -172,6 +170,10 @@ namespace PVHSAUDE.Infra.Data.Migrations
                     b.Property<DateTime>("EnviadoEm")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("NotificacaoSuspensa")
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Mensagem")
                         .IsRequired()
                         .HasMaxLength(4000)
@@ -186,11 +188,6 @@ namespace PVHSAUDE.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<bool>("NotificacaoSuspensa")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
 
                     b.Property<string>("Sobrenome")
                         .IsRequired()
@@ -327,11 +324,6 @@ namespace PVHSAUDE.Infra.Data.Migrations
 
                     b.Property<Guid>("BeneficiarioId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Codigo")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
@@ -523,11 +515,6 @@ namespace PVHSAUDE.Infra.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
-
-                    b.Property<bool>("NotificacaoSuspensa")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
 
                     b.Property<Guid>("PlanoId")
                         .HasColumnType("uniqueidentifier");

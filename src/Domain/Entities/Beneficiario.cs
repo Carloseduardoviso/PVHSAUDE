@@ -5,6 +5,7 @@ namespace PVHSAUDE.Domain.Entities
     public class Beneficiario
     {
         public Guid Id { get; private set; } = Guid.NewGuid();
+        public string Codigo { get; private set; } = $"RO001/{DateTime.UtcNow:yyyy}";
         public string Nome { get; private set; } = string.Empty;
         public string Cpf { get; private set; } = string.Empty;
         public DateTime DataNascimento { get; private set; }
@@ -51,6 +52,7 @@ namespace PVHSAUDE.Domain.Entities
         }
 
         public void DefinirStatus(StatusBeneficiario status) => Status = status;
+        public void DefinirCodigo(string codigo) => Codigo = codigo;
     }
 }
 

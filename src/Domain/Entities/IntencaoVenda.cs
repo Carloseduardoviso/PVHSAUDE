@@ -18,6 +18,7 @@ public class IntencaoVenda
     public string Dependentes { get; private set; } = "";
     public StatusIntencaoVenda Status { get; private set; } = StatusIntencaoVenda.AguardandoPagamento;
     public DateTime CriadoEm { get; private set; } = DateTime.UtcNow;
+    public bool NotificacaoSuspensa { get; private set; }
 
     private IntencaoVenda() { }
 
@@ -30,4 +31,5 @@ public class IntencaoVenda
     }
 
     public void AtualizarStatus(StatusIntencaoVenda status) => Status = status;
+    public void SuspenderNotificacao() => NotificacaoSuspensa = true;
 }

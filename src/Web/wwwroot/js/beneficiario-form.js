@@ -86,12 +86,27 @@
     if (!toggle || !fields || !list) return;
     const addButton = document.getElementById("adicionar-dependente");
     const limitMessage = document.getElementById("limite-dependentes");
+    function atualizarPlanoDependentes() {
+        const selecionado = plano?.selectedOptions?.[0]?.textContent?.trim() ?? "";
+        list.querySelectorAll("[data-dependente-plano]").forEach(input => input.value = selecionado);
+    }
     function updateLimit() {
         const reached = list.children.length >= 5;
         addButton.disabled = !toggle.checked || reached;
         if (limitMessage) limitMessage.hidden = !reached;
     }
     let next = list.children.length;
+    function proximoCodigoDependente() {
+        const titularInput = document.querySelector('input[name="Codigo"]') ?? document.getElementById("Codigo");
+        const titular = titularInput?.value.trim().match(/^RO(\d+)\/(\d{4})$/);
+        const ano = titular?.[2] ?? String(new Date().getFullYear());
+        let maior = titular ? Number(titular[1]) : 0;
+        list.querySelectorAll("[data-codigo-dependente]").forEach(input => {
+            const codigo = input.value.trim().match(/^RO(\d+)\/(\d{4})$/);
+            if (codigo && codigo[2] === ano) maior = Math.max(maior, Number(codigo[1]));
+        });
+        return `RO${String(maior + 1).padStart(3, "0")}/${ano}`;
+    }
     function validate() {
         if (window.jQuery?.validator?.unobtrusive) {
             const form = window.jQuery(toggle.form);
@@ -105,6 +120,9 @@
         list.insertAdjacentHTML("beforeend", html);
         const row = list.lastElementChild;
         row.querySelector('input[type="date"]').value = "";
+        const codigo = row.querySelector("[data-codigo-dependente]");
+        if (codigo) codigo.value = proximoCodigoDependente();
+        atualizarPlanoDependentes();
         updateLimit();
         validate();
     }
@@ -116,6 +134,7 @@
         updateLimit();
     }
     toggle.addEventListener("change", update);
+    plano?.addEventListener("change", atualizarPlanoDependentes);
     document.getElementById("adicionar-dependente").addEventListener("click", add);
     list.addEventListener("click", event => {
         const button = event.target.closest(".remover-dependente");
@@ -136,4 +155,5 @@
         validate();
     });
     update();
+    atualizarPlanoDependentes();
 })();

@@ -23,9 +23,9 @@ public class BeneficiarioEntradaVm
     public StatusBeneficiario Status { get; set; } = StatusBeneficiario.Pendente;
 }
 
-public record DependenteRespostaVm(Guid Id, string Nome, string Cpf, DateTime DataNascimento, GrauParentesco GrauParentesco);
+public record DependenteRespostaVm(Guid Id, string Codigo, string Nome, string Cpf, DateTime DataNascimento, GrauParentesco GrauParentesco);
 
-public record BeneficiarioRespostaVm(Guid Id, string Nome, string Cpf, DateTime DataNascimento,
+public record BeneficiarioRespostaVm(Guid Id, string Codigo, string Nome, string Cpf, DateTime DataNascimento,
     string? Telefone, string? Email, string? Endereco, Guid PlanoId, DateTime DataInicio,
     DateTime DataValidade, StatusBeneficiario Status, IReadOnlyCollection<DependenteRespostaVm> Dependentes, Guid? CredenciadoId, TipoPessoa TipoPessoa, Guid? EmpresaBeneficiadaId);
 

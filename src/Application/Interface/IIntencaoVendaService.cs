@@ -8,4 +8,5 @@ public interface IIntencaoVendaService
     Task<List<IntencaoVendaVm>> ListarAsync(CancellationToken ct);
     Task CriarAsync(IntencaoVendaEntradaVm vm, CancellationToken ct);
     Task AtualizarStatusAsync(Guid id, StatusIntencaoVenda status, CancellationToken ct);
+    Task SuspenderNotificacaoAsync(Guid id, CancellationToken ct);
 }
