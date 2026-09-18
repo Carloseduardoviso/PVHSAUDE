@@ -11,7 +11,8 @@ public static class MenusAdministrativos
         ["Contato"] = "Mensagens",
         ["Beneficiario"] = "Beneficiários",
         ["Plano"] = "Planos",
-        ["Credenciado"] = "Clínicas Credenciadas",
+        ["Desconto"] = "Descontos",
+        ["Credenciado"] = "Credenciamentos",
         ["EmpresaBeneficiada"] = "Empresas Beneficiadas",
         ["Especialidades"] = "Especialidades",
         ["Procedimentos"] = "Procedimentos"

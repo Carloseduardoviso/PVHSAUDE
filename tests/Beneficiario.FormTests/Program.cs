@@ -13,6 +13,7 @@ builder.Services.AddControllersWithViews().AddApplicationPart(typeof(Beneficiari
 var transport = new ApiTransport();
 var api = new HttpClient(transport) { BaseAddress = new Uri("http://test-api/") };
 builder.Services.AddSingleton(new PlanoApiClient(api));
+builder.Services.AddSingleton(new DescontoApiClient(api));
 builder.Services.AddSingleton(new CredenciadoApiClient(api));
 builder.Services.AddSingleton(new EmpresaBeneficiadaApiClient(api));
 builder.Services.AddSingleton(new BeneficiarioApiClient(api));
@@ -150,6 +151,8 @@ sealed class ApiTransport : HttpMessageHandler
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(Array.Empty<object>()) };
         if (request.RequestUri!.AbsolutePath == "/api/planos")
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new PlanoVm { Id = PlanoId, Nome = "Plano teste", Valor = 99.90m } }) };
+        if (request.RequestUri.AbsolutePath == "/api/descontos")
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new PlanoVm { Id = PlanoId, Nome = "Desconto teste", Valor = 10m } }) };
         if (request.Method == HttpMethod.Post && request.RequestUri.AbsolutePath == "/api/beneficiarios")
         {
             Saved = await request.Content!.ReadFromJsonAsync<BeneficiarioVm>(ct);

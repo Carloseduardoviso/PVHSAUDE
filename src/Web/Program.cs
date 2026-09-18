@@ -45,6 +45,8 @@ builder.Services.AddHttpClient<BeneficiarioApiClient>(client =>
 
 builder.Services.AddHttpClient<PlanoApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
+builder.Services.AddHttpClient<DescontoApiClient>(client =>
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 
 builder.Services.AddHttpClient<CredenciadoApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));

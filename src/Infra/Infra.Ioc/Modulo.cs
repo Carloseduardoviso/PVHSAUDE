@@ -12,6 +12,7 @@ namespace PVHSAUDE.Infra.Ioc
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<PVHSAUDE.Application.Interface.IPlanoService, PVHSAUDE.Application.AppService.PlanoService>();
+            services.AddScoped<PVHSAUDE.Application.Interface.IDescontoService, PVHSAUDE.Application.AppService.DescontoService>();
             services.AddScoped<PVHSAUDE.Application.Interface.ICatalogoService, PVHSAUDE.Application.AppService.CatalogoService>();
             services.AddScoped<PVHSAUDE.Application.Interface.IBeneficiarioService, PVHSAUDE.Application.AppService.BeneficiarioService>();
             services.AddScoped<PVHSAUDE.Application.Interface.ICredenciadoService, PVHSAUDE.Application.AppService.CredenciadoService>();

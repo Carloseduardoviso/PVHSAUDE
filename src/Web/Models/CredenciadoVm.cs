@@ -7,7 +7,9 @@ public class CredenciadoVm
 {
     public Guid Id { get; set; }
 
-    [GuidNaoVazio(ErrorMessage = "Selecione o plano da empresa.")]
+    [Display(Name = "Desconto")]
+    public Guid? DescontoId { get; set; }
+
     [Display(Name = "Plano")]
     public Guid? PlanoId { get; set; }
 

@@ -7,7 +7,7 @@ namespace PVHSAUDE.Application.AppService;
 
 public class CredenciadoService(IEntityRepository<Credenciado> repository, IEntityRepository<Plano> planos,
     IEntityRepository<CredenciadoEspecialidade> especialidades, IEntityRepository<CredenciadoProcedimento> procedimentos,
-    IUnitOfWork work, IMapper mapper, IImagemStorage storage) : ICredenciadoService
+    IUnitOfWork work, IMapper mapper, IImagemStorage storage, IEntityRepository<Desconto>? descontos = null) : ICredenciadoService
 {
     public async Task<List<CredenciadoRespostaVm>> ListarAsync(CancellationToken ct) =>
         mapper.Map<List<CredenciadoRespostaVm>>((await repository.ListarAsync(null, ct, x => x.Especialidades, x => x.Procedimentos)).OrderBy(x => x.NomeFantasia));
@@ -17,8 +17,10 @@ public class CredenciadoService(IEntityRepository<Credenciado> repository, IEnti
         mapper.Map<CredenciadoRespostaVm>(await Encontrar(id, ct));
     private async Task Validar(Guid? id, CredenciadoEntradaVm vm, CancellationToken ct)
     {
-        if (!await planos.ExisteAsync(x => x.Id == vm.PlanoId, ct))
-            throw new ServiceException(ServiceError.Invalid, "Selecione um plano cadastrado.");
+        if (vm.DescontoId is Guid descontoId && descontos is not null && !await descontos.ExisteAsync(x => x.Id == descontoId, ct))
+            throw new ServiceException(ServiceError.Invalid, "Selecione um desconto cadastrado.");
+        if (vm.DescontoId is null && !await planos.ExisteAsync(x => x.Id == vm.PlanoId, ct))
+            throw new ServiceException(ServiceError.Invalid, "Selecione um desconto cadastrado.");
         var cnpj = new string(vm.Cnpj.Where(char.IsDigit).ToArray());
         if (await repository.ExisteAsync(x => x.Id != id && x.Cnpj == cnpj, ct))
             throw new ServiceException(ServiceError.Conflict, "Já existe uma empresa credenciada com este CNPJ.");

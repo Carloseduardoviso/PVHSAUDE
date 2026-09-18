@@ -1,8 +1,8 @@
 @model IReadOnlyCollection<CredenciadoVm>
 @{ ViewData["Title"] = "Empresas Beneficiadas"; }
 <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-    <div><h1 class="h3">Empresas Beneficiadas</h1><p class="text-muted mb-0">Gerencie os empresas beneficiadas.</p></div>
-    <a asp-action="Create" class="btn btn-success">Cadastrar empresa</a>
+    <div><h1 class="h3">Empresas Beneficiadas</h1><p class="text-muted mb-0">Gerencie as empresas beneficiadas.</p></div>
+    <a asp-action="Create" class="btn btn-success">Cadastrar empresa beneficiada</a>
 </div>
 @if (TempData["Success"] is string success) { <div class="alert alert-success">@success</div> }
 @if (ViewData["Error"] is string error) { <div class="alert alert-danger">@error</div> }

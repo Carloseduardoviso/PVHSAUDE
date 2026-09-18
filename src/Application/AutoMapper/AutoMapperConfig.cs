@@ -15,6 +15,13 @@ public class AutoMapperConfig : Profile
         CreateMap<DependenteEntradaVm, DependenteVm>();
         CreateMap<BeneficiarioEntradaVm, BeneficiarioVm>().ForMember(x => x.Id, o => o.Ignore());
         CreateMap<Plano, PlanoRespostaVm>();
+        CreateMap<Desconto, PlanoRespostaVm>();
+        CreateMap<PlanoVm, Desconto>().ConvertUsing((vm, entity, _) =>
+        {
+            entity ??= new Desconto(vm.Nome, vm.Descricao, vm.Valor, vm.Periodicidade, vm.DataValidade, vm.TipoPessoa);
+            entity.Atualizar(vm.Nome, vm.Descricao, vm.Valor, vm.Periodicidade, vm.DataValidade, vm.TipoPessoa);
+            return entity;
+        });
         CreateMap<Dependente, DependenteRespostaVm>();
         CreateMap<Beneficiario, BeneficiarioRespostaVm>();
         CreateMap<Especialidade, EspecialidadeRespostaVm>();
@@ -61,13 +68,16 @@ public class AutoMapperConfig : Profile
             .ForMember(vm => vm.ProcedimentoIds, o => o.MapFrom(e => e.Procedimentos.Select(x => x.ProcedimentoId)));
         CreateMap<CredenciadoVm, Credenciado>().ConvertUsing((vm, entity, _) =>
         {
-            if (!vm.Tipo.HasValue || !vm.StatusCredenciamento.HasValue || !vm.PlanoId.HasValue || vm.PlanoId == Guid.Empty)
-                throw new ArgumentException("Informe tipo, situação e plano do credenciado.");
+            if (!vm.Tipo.HasValue || !vm.StatusCredenciamento.HasValue
+                || ((!vm.PlanoId.HasValue || vm.PlanoId == Guid.Empty)
+                    && (!vm.DescontoId.HasValue || vm.DescontoId == Guid.Empty)))
+                throw new ArgumentException("Informe tipo, situação e plano ou desconto do credenciado.");
             entity ??= new Credenciado(vm.RazaoSocial, vm.NomeFantasia, vm.Cnpj, vm.Telefone, vm.WhatsApp,
                 vm.Email, vm.Cep, vm.Endereco, vm.Cidade, vm.Uf, vm.Observacoes, vm.Tipo.Value, vm.StatusCredenciamento.Value);
             entity.Atualizar(vm.RazaoSocial, vm.NomeFantasia, vm.Cnpj, vm.Telefone, vm.WhatsApp,
                 vm.Email, vm.Cep, vm.Endereco, vm.Cidade, vm.Uf, vm.Observacoes, vm.Tipo.Value, vm.StatusCredenciamento.Value);
-            entity.DefinirPlano(vm.PlanoId.Value);
+            if (vm.PlanoId is Guid planoId) entity.DefinirPlano(planoId);
+            if (vm.DescontoId is Guid descontoId) entity.DefinirDesconto(descontoId);
             return entity;
         });
 

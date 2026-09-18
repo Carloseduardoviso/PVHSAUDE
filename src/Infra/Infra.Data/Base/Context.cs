@@ -28,6 +28,7 @@ namespace Infra.Data.Base
         public DbSet<CredenciadoProcedimento> CredenciadoProcedimentos { get; set; } = null!;
         public DbSet<Credenciado> Credenciados { get; set; } = null!;
         public DbSet<Plano> Planos { get; set; } = null!;
+        public DbSet<Desconto> Descontos { get; set; } = null!;
         public DbSet<Beneficiario> Beneficiarios { get; set; } = null!;
         public DbSet<Dependente> Dependentes { get; set; } = null!;
         public DbSet<Contato> Contatos { get; set; } = null!;

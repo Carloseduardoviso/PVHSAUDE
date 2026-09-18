@@ -4,6 +4,7 @@ namespace PVHSAUDE.Application.ViewModels;
 
 public class CredenciadoVm
 {
+    public Guid? DescontoId { get; set; }
     public Guid Id { get; set; }
     [PVHSAUDE.Domain.Validation.GuidNaoVazio(ErrorMessage = "Selecione o plano da empresa."), Display(Name = "Plano")]
     public Guid? PlanoId { get; set; }

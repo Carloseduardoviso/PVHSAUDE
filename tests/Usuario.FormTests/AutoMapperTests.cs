@@ -71,6 +71,14 @@ internal static class AutoMapperTests
         var empresaVm = new CredenciadoVm { NomeFantasia = " Clínica ", RazaoSocial = " Empresa ", Cnpj = "12.345.678/0001-90",
             Uf = " am ", PlanoId = planoId, Tipo = (TipoCredenciado)1, StatusCredenciamento = StatusCredenciamento.Ativo };
         var empresa = mapper.Map<Credenciado>(empresaVm);
+        var descontoId = Guid.NewGuid();
+        var empresaComDesconto = mapper.Map<Credenciado>(new CredenciadoVm
+        {
+            NomeFantasia = "Clinica com desconto", RazaoSocial = "Empresa com desconto", Cnpj = "98.765.432/0001-10",
+            DescontoId = descontoId, Tipo = (TipoCredenciado)1, StatusCredenciamento = StatusCredenciamento.Pendente
+        });
+        Check(empresaComDesconto.DescontoId == descontoId && empresaComDesconto.PlanoId is null,
+            "credenciado pode ser cadastrado com desconto sem plano.");
         empresa.DefinirImagem("/imagem-existente.png");
         var especialidade = new Especialidade(" Clínica ");
         var procedimento = new Procedimento(" Exame ");
