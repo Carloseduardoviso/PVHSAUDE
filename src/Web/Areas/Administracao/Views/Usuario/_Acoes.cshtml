@@ -1,10 +1,10 @@
 @model PVHSAUDE.Application.ViewModels.UsuarioVm
 <div class="d-flex gap-2 flex-wrap">
             <a asp-action="Edit" asp-route-id="@Model.UsuarioId" class="btn btn-sm btn-outline-primary">Editar</a>
-            <form asp-action="@(Model.Ativo ? "Inativar" : "Ativar")" asp-route-id="@Model.UsuarioId" method="post">
+            <form asp-action="@(Model.Ativo ? "Inativar" : "Ativar")" asp-route-id="@Model.UsuarioId" method="post" data-swal-confirm data-swal-title="@(Model.Ativo ? "Inativar usuário?" : "Reativar usuário?")" data-swal-text="@(Model.Ativo ? "O usuário perderá o acesso até ser reativado." : "O usuário poderá acessar novamente o sistema.")" data-swal-confirm-text="@(Model.Ativo ? "Sim, inativar" : "Sim, reativar")" data-swal-confirm-color="@(Model.Ativo ? "#dc3545" : "#198754")">
                 <button class="btn btn-sm btn-outline-warning" type="submit">@(Model.Ativo ? "Inativar" : "Reativar")</button>
             </form>
-            <form asp-action="Excluir" asp-route-id="@Model.UsuarioId" method="post" data-confirmar-exclusao data-usuario="@Model.NomeCompleto">
+            <form asp-action="Excluir" asp-route-id="@Model.UsuarioId" method="post" data-swal-confirm data-swal-title="Excluir usuário?" data-swal-text="Deseja excluir @Model.NomeCompleto? Esta ação não pode ser desfeita." data-swal-confirm-text="Sim, excluir">
                 <button class="btn btn-sm btn-outline-danger" type="submit">Excluir</button>
             </form>
         </div>

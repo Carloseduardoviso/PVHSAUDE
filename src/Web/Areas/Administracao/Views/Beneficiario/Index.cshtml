@@ -21,7 +21,7 @@
 <a asp-action="Details" asp-route-id="@item.BeneficiarioId" class="btn btn-sm btn-outline-secondary">Ver detalhes</a>
 @if (item.Status != (int)PVHSAUDE.Domain.Enuns.StatusBeneficiario.Inativo)
 {
-<form asp-action="Inativar" asp-route-id="@item.BeneficiarioId" method="post" class="d-inline"><button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Inativar este beneficiário? O cadastro e os dependentes serão mantidos.')">Inativar</button></form>
+<form asp-action="Inativar" asp-route-id="@item.BeneficiarioId" method="post" class="d-inline" data-swal-confirm data-swal-title="Inativar beneficiário?" data-swal-text="O cadastro e os dependentes serão mantidos." data-swal-confirm-text="Sim, inativar"><button type="submit" class="btn btn-sm btn-outline-danger">Inativar</button></form>
 }
 </td></tr> }
 </tbody></table></div>
@@ -41,7 +41,7 @@
 <a asp-action="Details" asp-route-id="@item.BeneficiarioId" class="btn btn-sm btn-outline-secondary">Ver detalhes</a>
 @if (item.Status != (int)PVHSAUDE.Domain.Enuns.StatusBeneficiario.Inativo)
 {
-<form asp-action="Inativar" asp-route-id="@item.BeneficiarioId" method="post" class="d-inline"><button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Inativar este beneficiário? O cadastro e os dependentes serão mantidos.')">Inativar</button></form>
+<form asp-action="Inativar" asp-route-id="@item.BeneficiarioId" method="post" class="d-inline" data-swal-confirm data-swal-title="Inativar beneficiário?" data-swal-text="O cadastro e os dependentes serão mantidos." data-swal-confirm-text="Sim, inativar"><button type="submit" class="btn btn-sm btn-outline-danger">Inativar</button></form>
 }
 
         </div></div></article>
