@@ -4,6 +4,7 @@ namespace PVHSAUDE.Domain.Entities;
 public class EmpresaBeneficiada
 {
     public Guid Id { get; private set; } = Guid.NewGuid();
+    public DateTime DataCadastro { get; private set; } = DateTime.UtcNow;
     public string RazaoSocial { get; private set; } = string.Empty;
     public string NomeFantasia { get; private set; } = string.Empty;
     public string Cnpj { get; private set; } = string.Empty;

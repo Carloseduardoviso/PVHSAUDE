@@ -1,5 +1,9 @@
 using AutoMapper;
 using AutoMapper.Extensions.ExpressionMapping;
+using Infra.Data.Base;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging.Abstractions;
 using PVHSAUDE.Application.AutoMapper;
 using PVHSAUDE.Application.ViewModels;
@@ -9,8 +13,54 @@ using System.Linq.Expressions;
 
 internal static class AutoMapperTests
 {
+    public static void RunGaleria()
+    {
+        void Check(bool value, string message)
+        {
+            if (!value) throw new Exception(message);
+            Console.WriteLine("PASS: Galeria - " + message);
+        }
+
+        var config = new MapperConfiguration(c => c.AddProfile<AutoMapperConfig>(), NullLoggerFactory.Instance);
+        var mapper = config.CreateMapper();
+        var empresa = new Credenciado("Empresa", "Clinica", "12345678000190", null, null, null, null,
+            null, null, null, null, TipoCredenciado.Clinica, StatusCredenciamento.Ativo);
+        empresa.DefinirImagem("/imagem-existente.png");
+        var maisNova = empresa.AdicionarImagem("/imagem-existente.png", new DateTime(2026, 9, 18, 10, 1, 0, DateTimeKind.Utc));
+        var maisAntiga = empresa.AdicionarImagem(" /galeria-antiga.png ", new DateTime(2026, 9, 18, 10, 0, 0, DateTimeKind.Utc));
+
+        Check(empresa.Imagens.All(x => x.CredenciadoId == empresa.Id)
+            && maisAntiga.Url == "/galeria-antiga.png"
+            && maisNova.CriadoEm.Kind == DateTimeKind.Utc,
+            "dominio vincula, normaliza e preserva a criacao UTC das imagens.");
+
+        var urlsEsperadas = new[] { "/imagem-existente.png", "/galeria-antiga.png" };
+        var vm = mapper.Map<CredenciadoVm>(empresa);
+        var resposta = mapper.Map<CredenciadoRespostaVm>(empresa);
+        Check(vm.ImagemUrl == "/imagem-existente.png" && vm.ImagemUrls.SequenceEqual(urlsEsperadas),
+            "CredenciadoVm combina URL legada e galeria sem duplicatas, em ordem deterministica.");
+        Check(resposta.ImagemUrl == "/imagem-existente.png" && resposta.ImagemUrls!.SequenceEqual(urlsEsperadas),
+            "CredenciadoRespostaVm combina URL legada e galeria sem duplicatas, em ordem deterministica.");
+
+        var options = new DbContextOptionsBuilder<Context>()
+            .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=MetadataOnly;Integrated Security=true")
+            .Options;
+        using var db = new Context(options, null!);
+        var entity = db.GetService<IDesignTimeModel>().Model.FindEntityType(typeof(CredenciadoImagem))!;
+        var foreignKey = entity.GetForeignKeys().Single();
+        var index = entity.GetIndexes().Single(x => x.Properties[0].Name == nameof(CredenciadoImagem.CredenciadoId));
+        Check(entity.FindProperty(nameof(CredenciadoImagem.Url))!.GetMaxLength() == 500
+            && !entity.FindProperty(nameof(CredenciadoImagem.Url))!.IsNullable
+            && foreignKey.DeleteBehavior == DeleteBehavior.Cascade,
+            "modelo EF exige URL de ate 500 caracteres e remove a galeria em cascata.");
+        Check(index.Properties.Select(x => x.Name).SequenceEqual([
+                nameof(CredenciadoImagem.CredenciadoId), nameof(CredenciadoImagem.CriadoEm), nameof(CredenciadoImagem.Id)]),
+            "indice EF sustenta ordem por criacao com desempate pelo identificador.");
+    }
+
     public static void Run()
     {
+        RunGaleria();
         var config = new MapperConfiguration(c =>
         {
             c.AddExpressionMapping();

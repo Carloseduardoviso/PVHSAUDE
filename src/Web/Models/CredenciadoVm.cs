@@ -6,6 +6,7 @@ namespace Web.Models;
 public class CredenciadoVm
 {
     public Guid Id { get; set; }
+    public DateTime DataCadastro { get; set; }
 
     [Display(Name = "Desconto")]
     public Guid? DescontoId { get; set; }
@@ -16,9 +17,11 @@ public class CredenciadoVm
     public List<Guid> EspecialidadeIds { get; set; } = [];
     public List<Guid> ProcedimentoIds { get; set; } = [];
     public string? ImagemUrl { get; set; }
+    public List<string> ImagemUrls { get; set; } = [];
 
     [Display(Name = "Imagem da empresa")] 
     public IFormFile? Imagem { get; set; }
+    public List<IFormFile> Imagens { get; set; } = [];
 
     [Required(ErrorMessage = "Informe razão social."), StringLength(150)]
     [Display(Name = "Razão social")]
@@ -64,8 +67,8 @@ public class CredenciadoVm
     [Display(Name = "Observações")]
     public string? Observacoes { get; set; }
 
-    [Required(ErrorMessage = "Selecione o tipo de estabelecimento."), EnumDataType(typeof(TipoCredenciado))]
-    [Display(Name = "Menu da clínica")]
+    [Required(ErrorMessage = "Selecione o menu."), EnumDataType(typeof(TipoCredenciado))]
+    [Display(Name = "Menus")]
     public TipoCredenciado? Tipo { get; set; }
 
     [Required, EnumDataType(typeof(StatusCredenciamento))]

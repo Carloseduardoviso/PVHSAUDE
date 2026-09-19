@@ -29,11 +29,11 @@ public class CredenciadoEntradaVm
     public string? Uf { get; set; }
     [StringLength(1000), Display(Name = "Observações")]
     public string? Observacoes { get; set; }
-    [Required(ErrorMessage = "Selecione o menu da clínica."), EnumDataType(typeof(TipoCredenciado)), Display(Name = "Menu da clínica")]
+    [Required(ErrorMessage = "Selecione o menu."), EnumDataType(typeof(TipoCredenciado)), Display(Name = "Menus")]
     public TipoCredenciado? Tipo { get; set; }
     public List<Guid> EspecialidadeIds { get; set; } = [];
     public List<Guid> ProcedimentoIds { get; set; } = [];
     [Required, EnumDataType(typeof(StatusCredenciamento)), Display(Name = "Situação")]
     public StatusCredenciamento? StatusCredenciamento { get; set; } = PVHSAUDE.Domain.Enuns.StatusCredenciamento.Pendente;
 }
-public record CredenciadoRespostaVm(Guid Id, string RazaoSocial, string NomeFantasia, string Cnpj, string? Telefone, string? WhatsApp, string? Email, string? Cep, string? Endereco, string? Cidade, string? Uf, string? Observacoes, TipoCredenciado Tipo, StatusCredenciamento StatusCredenciamento, string? ImagemUrl, List<Guid> EspecialidadeIds, List<Guid> ProcedimentoIds, Guid? PlanoId, Guid? DescontoId = null);
+public record CredenciadoRespostaVm(Guid Id, string RazaoSocial, string NomeFantasia, string Cnpj, string? Telefone, string? WhatsApp, string? Email, string? Cep, string? Endereco, string? Cidade, string? Uf, string? Observacoes, TipoCredenciado Tipo, StatusCredenciamento StatusCredenciamento, string? ImagemUrl, List<Guid> EspecialidadeIds, List<Guid> ProcedimentoIds, Guid? PlanoId, DateTime DataCadastro, Guid? DescontoId = null, List<string>? ImagemUrls = null);

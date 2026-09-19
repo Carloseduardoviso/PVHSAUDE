@@ -4,6 +4,7 @@ namespace PVHSAUDE.Domain.Entities;
 public class Credenciado
 {
     public Guid Id { get; private set; } = Guid.NewGuid();
+    public DateTime DataCadastro { get; private set; } = DateTime.UtcNow;
     public string RazaoSocial { get; private set; } = string.Empty;
     public string NomeFantasia { get; private set; } = string.Empty;
     public string Cnpj { get; private set; } = string.Empty;
@@ -18,6 +19,7 @@ public class Credenciado
     public TipoCredenciado Tipo { get; private set; }
     public StatusCredenciamento StatusCredenciamento { get; private set; }
     public string? ImagemUrl { get; private set; }
+    public ICollection<CredenciadoImagem> Imagens { get; private set; } = new List<CredenciadoImagem>();
     public ICollection<CredenciadoEspecialidade> Especialidades { get; private set; } = new List<CredenciadoEspecialidade>();
     public ICollection<CredenciadoProcedimento> Procedimentos { get; private set; } = new List<CredenciadoProcedimento>();
     public Guid? PlanoId { get; private set; }
@@ -28,6 +30,12 @@ public class Credenciado
     public void DefinirDesconto(Guid descontoId) { DescontoId = descontoId; PlanoId = null; }
     private Credenciado() { }
     public void DefinirImagem(string? imagemUrl) => ImagemUrl = imagemUrl;
+    public CredenciadoImagem AdicionarImagem(string url, DateTime? criadoEm = null)
+    {
+        var imagem = new CredenciadoImagem(Id, url, criadoEm);
+        Imagens.Add(imagem);
+        return imagem;
+    }
     public Credenciado(string razaosocial, string nomefantasia, string cnpj, string? telefone, string? whatsapp, string? email, string? cep, string? endereco, string? cidade, string? uf, string? observacoes, TipoCredenciado tipo, StatusCredenciamento statusCredenciamento) => Atualizar(razaosocial, nomefantasia, cnpj, telefone, whatsapp, email, cep, endereco, cidade, uf, observacoes, tipo, statusCredenciamento);
     public void Atualizar(string razaosocial, string nomefantasia, string cnpj, string? telefone, string? whatsapp, string? email, string? cep, string? endereco, string? cidade, string? uf, string? observacoes, TipoCredenciado tipo, StatusCredenciamento statusCredenciamento)
     {

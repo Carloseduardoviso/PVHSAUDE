@@ -7,15 +7,16 @@
     <div><h1 class="h3 mb-1">Beneficiários</h1><p class="text-muted mb-0">Cadastros que alimentam o portal PVH Saúde.</p></div>
     <a asp-action="Create" class="btn btn-success">Cadastrar beneficiário</a>
 </div>
+<form method="get" class="card card-body shadow-sm mb-4"><div class="row g-3 align-items-end"><div class="col-md-4"><label for="nome" class="form-label">Nome ou nome do dependente</label><input id="nome" name="nome" value="@ViewBag.Nome" class="form-control" /></div><div class="col-md-3"><label for="inicioBeneficio" class="form-label">Início do benefício</label><input id="inicioBeneficio" name="inicioBeneficio" type="date" value="@ViewBag.InicioBeneficio" class="form-control" /></div><div class="col-md-3"><label for="validadeBeneficio" class="form-label">Validade do benefício</label><input id="validadeBeneficio" name="validadeBeneficio" type="date" value="@ViewBag.ValidadeBeneficio" class="form-control" /></div><div class="col-md-2 d-flex gap-2"><button type="submit" class="btn btn-primary">Buscar</button><a asp-action="Index" class="btn btn-light">Limpar</a></div></div></form>
 @if (TempData["Success"] is string success) { <div class="alert alert-success">@success</div> }
 @if (TempData["Error"] is string error) { <div class="alert alert-danger">@error</div> }
 @if (Model.Any())
 {
 <div class="card shadow-sm admin-list-panel"><div class="table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros; role horizontalmente para ver todas as colunas" tabindex="0"><table class="table table-hover mb-0">
-<thead><tr><th>Nome</th><th>CPF</th><th>Telefone</th><th>Situação</th><th>Dependentes</th><th class="text-end">Ações</th></tr></thead>
+<thead><tr><th>Nome</th><th>CPF</th><th>Telefone</th><th>Início do benefício</th><th>Validade do benefício</th><th>Situação</th><th>Dependentes</th><th class="text-end">Ações</th></tr></thead>
 <tbody>
 @foreach (var item in Model) {
-<tr><td>@item.Nome</td><td>@item.Cpf</td><td>@item.Telefone</td><td>@((PVHSAUDE.Domain.Enuns.StatusBeneficiario)item.Status)</td><td>@if (item.Dependentes.Any()) { foreach (var dependente in item.Dependentes) { <div>@dependente.Nome</div> } } else { <span class="text-muted">Nenhum</span> }</td><td class="text-end">
+<tr><td>@item.Nome</td><td>@item.Cpf</td><td>@item.Telefone</td><td>@item.DataInicio.ToString("dd/MM/yyyy")</td><td>@item.DataValidade.ToString("dd/MM/yyyy")</td><td>@((PVHSAUDE.Domain.Enuns.StatusBeneficiario)item.Status)</td><td>@if (item.Dependentes.Any()) { foreach (var dependente in item.Dependentes) { <div>@dependente.Nome</div> } } else { <span class="text-muted">Nenhum</span> }</td><td class="text-end">
 <a asp-action="Edit" asp-route-id="@item.BeneficiarioId" class="btn btn-sm btn-outline-primary">Editar</a>
 <a asp-action="Details" asp-route-id="@item.BeneficiarioId" class="btn btn-sm btn-outline-secondary">Ver detalhes</a>
 @if (item.Status != (int)PVHSAUDE.Domain.Enuns.StatusBeneficiario.Inativo)
@@ -30,6 +31,8 @@
         <dt>Nome</dt><dd>@item.Nome</dd>
         <dt>CPF</dt><dd>@item.Cpf</dd>
         <dt>Telefone</dt><dd>@item.Telefone</dd>
+        <dt>Início do benefício</dt><dd>@item.DataInicio.ToString("dd/MM/yyyy")</dd>
+        <dt>Validade do benefício</dt><dd>@item.DataValidade.ToString("dd/MM/yyyy")</dd>
         <dt>Situação</dt><dd>@((PVHSAUDE.Domain.Enuns.StatusBeneficiario)item.Status)</dd>
         <dt>Dependentes</dt><dd>@if (item.Dependentes.Any()) { foreach (var dependente in item.Dependentes) { <div>@dependente.Nome</div> } } else { <span class="text-muted">Nenhum</span> }</dd>
         </dl><div class="admin-record-actions border-top pt-3 mt-3" aria-label="Ações do registro">

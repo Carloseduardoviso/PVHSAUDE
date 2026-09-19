@@ -12,6 +12,7 @@ using Web.Services;
 
 if (args.Contains("--whatsapp")) { await WhatsAppTests.Run(); return; }
 if (args.Contains("--database")) { await UsuarioDatabaseTests.Run(); return; }
+if (args.Contains("--galeria")) { AutoMapperTests.RunGaleria(); return; }
 
 await BannerApiClientTests.Run();
 if (args.Contains("--banner")) return;

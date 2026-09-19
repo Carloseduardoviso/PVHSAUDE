@@ -218,8 +218,8 @@
         }
         try {
             await registrarIntencaoVenda();
-            status.textContent = copiada
-                ? 'Chave Pix copiada. Solicitação registrada como aguardando pagamento.'
+            status.innerHTML = copiada
+                ? '<strong>Solicitação registrada com sucesso!</strong><br><br>O código <strong>Pix foi copiado</strong> e sua solicitação da carteirinha foi registrada com sucesso.<br><br>Agora, basta realizar o pagamento utilizando o Pix informado.<br><br>Após o pagamento, sua solicitação ficará <strong>aguardando a confirmação</strong>. Nossa equipe realizará a conferência do pagamento e, assim que ele for identificado, <strong>entrará em contato para dar continuidade ao atendimento</strong>.<br><br><strong>Importante:</strong> guarde o comprovante de pagamento até a confirmação pela nossa equipe.'
                 : 'Solicitação registrada como aguardando pagamento. Copie a chave Pix manualmente.';
         } catch {
             status.textContent = 'Não foi possível registrar a solicitação. Verifique os dados e tente novamente.';

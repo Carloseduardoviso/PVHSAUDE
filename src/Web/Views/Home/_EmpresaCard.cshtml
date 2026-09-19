@@ -1,40 +1,38 @@
 @model Web.Models.EmpresaCardVm
 @{
     var empresa = Model.Empresa;
-    var planos = Model.Rede.Planos.Where(x => x.CredenciadoId == empresa.Id).ToList();
+    var imagens = empresa.ImagemUrls?.Where(x => !string.IsNullOrWhiteSpace(x)).ToList() ?? [];
+    if (imagens.Count == 0 && !string.IsNullOrWhiteSpace(empresa.ImagemUrl)) imagens.Add(empresa.ImagemUrl);
     var especialidades = Model.Rede.Especialidades.Where(x => empresa.EspecialidadeIds.Contains(x.Id)).Select(x => x.Nome).ToList();
     var procedimentos = Model.Rede.Procedimentos.Where(x => empresa.ProcedimentoIds.Contains(x.Id)).Select(x => x.Nome).ToList();
 }
 <article class="rede-card">
     <div class="rede-imagem">
-        <span class="rede-sem-imagem" aria-hidden="true">PVH Saúde</span>
-        @if (!string.IsNullOrWhiteSpace(empresa.ImagemUrl))
+        @if (imagens.Count > 0)
         {
-            <img src="@empresa.ImagemUrl" alt="@empresa.NomeFantasia" />
+            <div id="galeria-@empresa.Id" class="carousel slide h-100" data-bs-ride="carousel">
+                <div class="carousel-inner h-100">
+                    @for (var i = 0; i < imagens.Count; i++)
+                    {
+                        <div class="carousel-item h-100 @(i == 0 ? "active" : "")"><img src="@imagens[i]" alt="@empresa.NomeFantasia - imagem @(i + 1)" /></div>
+                    }
+                </div>
+                @if (imagens.Count > 1)
+                {
+                    <button class="carousel-control-prev" type="button" data-bs-target="#galeria-@empresa.Id" data-bs-slide="prev" aria-label="Imagem anterior"><span class="carousel-control-prev-icon" aria-hidden="true"></span></button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#galeria-@empresa.Id" data-bs-slide="next" aria-label="Próxima imagem"><span class="carousel-control-next-icon" aria-hidden="true"></span></button>
+                }
+            </div>
+        }
+        else
+        {
+            <span class="rede-sem-imagem" aria-hidden="true">PVH Saúde</span>
         }
     </div>
     <div class="rede-texto">
         <p class="text-success fw-semibold mb-2">Rede credenciada</p>
         <h3 class="h2">@empresa.NomeFantasia</h3>
         <p class="text-muted mb-2">@Html.DisplayFor(_ => empresa.Tipo)</p>
-        <h4 class="h6 mt-3">Planos e valores</h4>
-        @if (Model.Rede.ErroPlanos is not null)
-        {
-            <p class="text-muted">@Model.Rede.ErroPlanos</p>
-        }
-        else if (planos.Count == 0)
-        {
-            <p class="text-muted">Nenhum plano vinculado a esta empresa.</p>
-        }
-        else
-        {
-            <ul class="list-unstyled mb-3">
-            @foreach (var plano in planos)
-            {
-                <li class="mb-2"><span>@plano.Plano</span> — <strong class="text-success">@plano.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</strong> <span class="text-muted">(@plano.Periodicidade)</span></li>
-            }
-            </ul>
-        }
         <h4 class="h6 mt-3">Especialidades</h4>
         <p>@(especialidades.Count > 0 ? string.Join(", ", especialidades) : "Não informadas")</p>
         <h4 class="h6">Procedimentos</h4>
@@ -49,4 +47,3 @@
         }
     </div>
 </article>
-

@@ -11,6 +11,7 @@ public class BeneficiarioVm
     // evita gerar links de edição/detalhes com Guid.Empty.
     [JsonPropertyName("id")]
     public Guid BeneficiarioId { get; set; }
+    public DateTime DataAdesao { get; set; }
 
     [Display(Name = "Código")]
     public string Codigo { get; set; } = $"RO001/{DateTime.UtcNow:yyyy}";

@@ -27,6 +27,7 @@ namespace Infra.Data.Base
         public DbSet<CredenciadoEspecialidade> CredenciadoEspecialidades { get; set; } = null!;
         public DbSet<CredenciadoProcedimento> CredenciadoProcedimentos { get; set; } = null!;
         public DbSet<Credenciado> Credenciados { get; set; } = null!;
+        public DbSet<CredenciadoImagem> CredenciadoImagens { get; set; } = null!;
         public DbSet<Plano> Planos { get; set; } = null!;
         public DbSet<Desconto> Descontos { get; set; } = null!;
         public DbSet<Beneficiario> Beneficiarios { get; set; } = null!;
@@ -46,6 +47,7 @@ namespace Infra.Data.Base
 
             RemovePluralizingTableNameConvention(modelBuilder);
             RemoveCascadeDeleteConventions(modelBuilder);
+            modelBuilder.ApplyConfiguration(new CredenciadoImagemConfig());
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {

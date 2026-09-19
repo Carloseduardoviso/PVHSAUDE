@@ -27,7 +27,7 @@ public record DependenteRespostaVm(Guid Id, string Codigo, string Nome, string C
 
 public record BeneficiarioRespostaVm(Guid Id, string Codigo, string Nome, string Cpf, DateTime DataNascimento,
     string? Telefone, string? Email, string? Endereco, Guid PlanoId, DateTime DataInicio,
-    DateTime DataValidade, StatusBeneficiario Status, IReadOnlyCollection<DependenteRespostaVm> Dependentes, Guid? CredenciadoId, TipoPessoa TipoPessoa, Guid? EmpresaBeneficiadaId);
+    DateTime DataValidade, DateTime DataAdesao, StatusBeneficiario Status, IReadOnlyCollection<DependenteRespostaVm> Dependentes, Guid? CredenciadoId, TipoPessoa TipoPessoa, Guid? EmpresaBeneficiadaId);
 
 public class DependenteEntradaVm
 {

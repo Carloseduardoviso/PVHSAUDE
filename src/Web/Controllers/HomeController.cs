@@ -75,7 +75,8 @@ namespace Web.Controllers
             return model;
         }
 
-        public async Task<IActionResult> ClinicaTerapeutica(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Clinica, "Clínica Terapêutica", ct);
+        public async Task<IActionResult> ClinicaTerapeutica(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Clinica, "Clínica terapêutica Parceiras", ct);
+        public async Task<IActionResult> ClinicaTerapeuticaCredenciada(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.ClinicaTerapeuticaCredenciada, "Clínica terapêutica credenciada", ct);
         public async Task<IActionResult> ClinicaMedicaTerapeutica(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Laboratorio, "Clínica Médica e Especialidade", ct);
         public async Task<IActionResult> LaboratorioExames(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.Hospital, "Laboratório e Exames", ct);
         public async Task<IActionResult> ExamesImagens(CancellationToken ct) => await MenuCredenciado(TipoCredenciado.CentroDiagnostico, "Exames e Imagens", ct);

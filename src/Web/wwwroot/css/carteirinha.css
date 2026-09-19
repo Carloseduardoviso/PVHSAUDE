@@ -72,7 +72,7 @@
 .carteirinha-pix-label { color: #61718b; font-size: .78rem; font-weight: 650; }
 .carteirinha-pix-box strong { color: #15357a; font-size: 1.15rem; letter-spacing: .04em; }
 .carteirinha-pix-box .carteirinha-link { justify-self: start; padding-block: .35rem; }
-.carteirinha-pix-status { min-height: 1.1em; color: #1c7046; font-size: .78rem; }
+.carteirinha-pix-status { display: block; min-height: 1.1em; margin-top: .35rem; color: #1c7046; font-size: .78rem; line-height: 1.7; }
 .carteirinha-payment-note { font-size: .85rem; margin: 1.2rem 0; }
 .carteirinha-notice { background: #f0f4fb; border-left: 3px solid #8ca8d8; padding: 1rem; font-size: .82rem; line-height: 1.6; color: #465a79; }
 .carteirinha-dependent { border: 1px solid #dce3ef; border-radius: 12px; padding: 1rem; margin-top: 1rem; }

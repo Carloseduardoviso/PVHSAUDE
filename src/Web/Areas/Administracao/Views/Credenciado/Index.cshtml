@@ -1,34 +1,17 @@
 @model IReadOnlyCollection<CredenciadoVm>
 @{ ViewData["Title"] = "Credenciamentos"; }
-<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-    <div><h1 class="h3">Credenciamentos</h1><p class="text-muted mb-0">Gerencie os credenciamentos da rede.</p></div>
-    <a asp-action="Create" class="btn btn-success">Cadastrar credenciamento</a>
-</div>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4"><div><h1 class="h3">Credenciamentos</h1><p class="text-muted mb-0">Gerencie os credenciamentos da rede.</p></div><a asp-action="Create" class="btn btn-success">Cadastrar credenciamento</a></div>
+<form method="get" class="card card-body shadow-sm mb-4"><div class="row g-3 align-items-end"><div class="col-md-6"><label for="nomeFantasia" class="form-label">Nome fantasia</label><input id="nomeFantasia" name="nomeFantasia" value="@ViewBag.NomeFantasia" class="form-control" /></div><div class="col-md-4"><label for="dataCadastro" class="form-label">Data de cadastro</label><input id="dataCadastro" name="dataCadastro" type="date" value="@ViewBag.DataCadastro" class="form-control" /></div><div class="col-md-2 d-flex gap-2"><button type="submit" class="btn btn-primary">Buscar</button><a asp-action="Index" class="btn btn-light">Limpar</a></div></div></form>
 @if (TempData["Success"] is string success) { <div class="alert alert-success">@success</div> }
 @if (ViewData["Error"] is string error) { <div class="alert alert-danger">@error</div> }
 else if (!Model.Any()) { <div class="alert alert-info" role="status">Nenhuma clínica credenciada cadastrada.</div> }
 else {
-<div class="card shadow-sm table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros; role horizontalmente para ver todas as colunas" tabindex="0"><table class="table table-hover mb-0">
-    <thead><tr><th>Imagem</th><th>Nome fantasia</th><th>CNPJ</th><th>Tipo</th><th>Telefone</th><th>Cidade</th><th>Situação</th><th>Ações</th></tr></thead>
-    <tbody>@foreach (var empresa in Model) {
-        <tr><td>@if (!string.IsNullOrWhiteSpace(empresa.ImagemUrl)) { <img src="@empresa.ImagemUrl" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:8px" /> }</td><td>@empresa.NomeFantasia</td><td>@empresa.Cnpj</td><td>@Html.DisplayFor(_ => empresa.Tipo)</td><td>@empresa.Telefone</td><td>@empresa.Cidade</td><td>@Html.DisplayFor(_ => empresa.StatusCredenciamento)</td>
-        <td class="text-nowrap"><a asp-action="Edit" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-primary">Editar</a> <a asp-action="Details" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-secondary">Ver detalhes</a></td></tr>
-    }</tbody>
-</table></div>
-<div class="admin-record-cards d-md-none">
-@foreach (var empresa in Model) {
-    <article class="card shadow-sm"><div class="card-body"><dl class="mb-0">
-        <dt>Imagem</dt><dd>@if (!string.IsNullOrWhiteSpace(empresa.ImagemUrl)) { <img src="@empresa.ImagemUrl" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:8px" /> }</dd>
-        <dt>Nome fantasia</dt><dd>@empresa.NomeFantasia</dd>
-        <dt>CNPJ</dt><dd>@empresa.Cnpj</dd>
-        <dt>Tipo</dt><dd>@Html.DisplayFor(_ => empresa.Tipo)</dd>
-        <dt>Telefone</dt><dd>@empresa.Telefone</dd>
-        <dt>Cidade</dt><dd>@empresa.Cidade</dd>
-        <dt>Situação</dt><dd>@Html.DisplayFor(_ => empresa.StatusCredenciamento)</dd>
-        </dl><div class="admin-record-actions border-top pt-3 mt-3" aria-label="Ações do registro">
-<a asp-action="Edit" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-primary">Editar</a> <a asp-action="Details" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-secondary">Ver detalhes</a>
-        </div></div></article>
+<div class="card shadow-sm table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros" tabindex="0"><table class="table table-hover mb-0"><thead><tr><th>Imagem</th><th>Nome fantasia</th><th>CNPJ</th><th>Tipo</th><th>Telefone</th><th>Data de cadastro</th><th>Cidade</th><th>Situação</th><th>Ações</th></tr></thead><tbody>
+@foreach (var empresa in Model) { var imagens = empresa.ImagemUrls?.Where(x => !string.IsNullOrWhiteSpace(x)).ToList() ?? []; if (imagens.Count == 0 && !string.IsNullOrWhiteSpace(empresa.ImagemUrl)) imagens.Add(empresa.ImagemUrl); var galeriaId = $"admin-galeria-{empresa.Id:N}";
+<tr><td>@if (imagens.Count > 0) { <div id="@galeriaId" class="carousel slide" data-bs-interval="false" style="width:64px"><div class="carousel-inner"><div class="carousel-item active"><img src="@imagens[0]" alt="@empresa.NomeFantasia" style="width:48px;height:48px;object-fit:cover;border-radius:8px" /></div>@foreach (var imagem in imagens.Skip(1)) { <div class="carousel-item"><img src="@imagem" alt="@empresa.NomeFantasia" style="width:48px;height:48px;object-fit:cover;border-radius:8px" /></div> }</div>@if (imagens.Count > 1) { <button class="carousel-control-prev" type="button" data-bs-target="#@galeriaId" data-bs-slide="prev" aria-label="Imagem anterior"><span class="carousel-control-prev-icon"></span></button><button class="carousel-control-next" type="button" data-bs-target="#@galeriaId" data-bs-slide="next" aria-label="Próxima imagem"><span class="carousel-control-next-icon"></span></button> }</div> }</td><td>@empresa.NomeFantasia</td><td>@empresa.Cnpj</td><td>@Html.DisplayFor(_ => empresa.Tipo)</td><td>@empresa.Telefone</td><td>@empresa.DataCadastro.ToLocalTime().ToString("dd/MM/yyyy")</td><td>@empresa.Cidade</td><td>@Html.DisplayFor(_ => empresa.StatusCredenciamento)</td><td class="text-nowrap"><a asp-action="Edit" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-primary">Editar</a> <a asp-action="Details" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-secondary">Ver detalhes</a></td></tr>
 }
+</tbody></table></div>
+<div class="admin-record-cards d-md-none">@foreach (var empresa in Model) { var imagens = empresa.ImagemUrls?.Where(x => !string.IsNullOrWhiteSpace(x)).ToList() ?? []; if (imagens.Count == 0 && !string.IsNullOrWhiteSpace(empresa.ImagemUrl)) imagens.Add(empresa.ImagemUrl); var galeriaId = $"admin-galeria-mobile-{empresa.Id:N}";
+<article class="card shadow-sm"><div class="card-body"><dl class="mb-0"><dt>Imagem</dt><dd>@if (imagens.Count > 0) { <div id="@galeriaId" class="carousel slide" data-bs-interval="false" style="width:64px"><div class="carousel-inner"><div class="carousel-item active"><img src="@imagens[0]" alt="@empresa.NomeFantasia" style="width:48px;height:48px;object-fit:cover;border-radius:8px" /></div>@foreach (var imagem in imagens.Skip(1)) { <div class="carousel-item"><img src="@imagem" alt="@empresa.NomeFantasia" style="width:48px;height:48px;object-fit:cover;border-radius:8px" /></div> }</div>@if (imagens.Count > 1) { <button class="carousel-control-prev" type="button" data-bs-target="#@galeriaId" data-bs-slide="prev" aria-label="Imagem anterior"><span class="carousel-control-prev-icon"></span></button><button class="carousel-control-next" type="button" data-bs-target="#@galeriaId" data-bs-slide="next" aria-label="Próxima imagem"><span class="carousel-control-next-icon"></span></button> }</div> }</dd><dt>Nome fantasia</dt><dd>@empresa.NomeFantasia</dd><dt>CNPJ</dt><dd>@empresa.Cnpj</dd><dt>Tipo</dt><dd>@Html.DisplayFor(_ => empresa.Tipo)</dd><dt>Telefone</dt><dd>@empresa.Telefone</dd><dt>Data de cadastro</dt><dd>@empresa.DataCadastro.ToLocalTime().ToString("dd/MM/yyyy")</dd><dt>Cidade</dt><dd>@empresa.Cidade</dd><dt>Situação</dt><dd>@Html.DisplayFor(_ => empresa.StatusCredenciamento)</dd></dl><div class="admin-record-actions border-top pt-3 mt-3"><a asp-action="Edit" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-primary">Editar</a> <a asp-action="Details" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-secondary">Ver detalhes</a></div></div></article> }
 </div>
-
 }

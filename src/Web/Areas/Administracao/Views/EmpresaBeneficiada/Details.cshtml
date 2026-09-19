@@ -9,6 +9,7 @@
     <dt class="col-sm-3">Razão social</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.RazaoSocial) ? "Não informado" : Model.RazaoSocial)</dd>
     <dt class="col-sm-3">Nome fantasia</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.NomeFantasia) ? "Não informado" : Model.NomeFantasia)</dd>
     <dt class="col-sm-3">CNPJ</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Cnpj) ? "Não informado" : Model.Cnpj)</dd>
+    <dt class="col-sm-3">Data de cadastro</dt><dd class="col-sm-9">@(Model.DataCadastro == default ? "Não informado" : Model.DataCadastro.ToLocalTime().ToString("dd/MM/yyyy"))</dd>
     <dt class="col-sm-3">Telefone</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Telefone) ? "Não informado" : Model.Telefone)</dd>
     <dt class="col-sm-3">WhatsApp</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.WhatsApp) ? "Não informado" : Model.WhatsApp)</dd>
     <dt class="col-sm-3">E-mail</dt><dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.Email) ? "Não informado" : Model.Email)</dd>

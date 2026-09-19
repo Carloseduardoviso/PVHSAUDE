@@ -7,8 +7,21 @@ namespace PVHSAUDE.Web.Areas.Administracao.Controllers;
 [Area("Administracao")]
 public class BeneficiarioController(BeneficiarioApiClient beneficiarios, PlanoApiClient planos, EmpresaBeneficiadaApiClient empresasBeneficiadas) : Controller
 {
-    public async Task<IActionResult> Index(CancellationToken cancellationToken) =>
-        View(await beneficiarios.ListarAsync(cancellationToken));
+    public async Task<IActionResult> Index(string? nome, DateTime? inicioBeneficio, DateTime? validadeBeneficio, CancellationToken cancellationToken)
+    {
+        var model = await beneficiarios.ListarAsync(cancellationToken);
+        if (!string.IsNullOrWhiteSpace(nome))
+        {
+            var termo = nome.Trim();
+            model = model.Where(x => x.Nome.Contains(termo, StringComparison.OrdinalIgnoreCase) || x.Dependentes.Any(d => d.Nome.Contains(termo, StringComparison.OrdinalIgnoreCase))).ToList();
+        }
+        if (inicioBeneficio.HasValue) model = model.Where(x => x.DataInicio.Date == inicioBeneficio.Value.Date).ToList();
+        if (validadeBeneficio.HasValue) model = model.Where(x => x.DataValidade.Date == validadeBeneficio.Value.Date).ToList();
+        ViewBag.Nome = nome;
+        ViewBag.InicioBeneficio = inicioBeneficio?.ToString("yyyy-MM-dd");
+        ViewBag.ValidadeBeneficio = validadeBeneficio?.ToString("yyyy-MM-dd");
+        return View(model);
+    }
 
     [HttpGet]
     public async Task<IActionResult> Create(CancellationToken cancellationToken)

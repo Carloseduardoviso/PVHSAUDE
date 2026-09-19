@@ -8,7 +8,11 @@ namespace PVHSAUDE.Api.Controllers;
 public class CredenciadosController(ICredenciadoService service) : ServiceController
 {
     private CredenciadoRespostaVm UrlPublica(CredenciadoRespostaVm vm) =>
-        vm with { ImagemUrl = vm.ImagemUrl is null ? null : $"{Request.Scheme}://{Request.Host}{vm.ImagemUrl}" };
+        vm with
+        {
+            ImagemUrl = vm.ImagemUrl is null ? null : $"{Request.Scheme}://{Request.Host}{vm.ImagemUrl}",
+            ImagemUrls = vm.ImagemUrls?.Select(url => $"{Request.Scheme}://{Request.Host}{url}").ToList()
+        };
     [HttpGet] public Task<IActionResult> Listar(CancellationToken ct) => Executar(async () => Ok((await service.ListarAsync(ct)).Select(UrlPublica)));
     [HttpGet("{id:guid}")] public Task<IActionResult> Obter(Guid id, CancellationToken ct) => Executar(async () => Ok(UrlPublica(await service.ObterAsync(id, ct))));
     [Authorize, HttpPost] public Task<IActionResult> Criar(CredenciadoEntradaVm vm, CancellationToken ct) => Executar(async () =>

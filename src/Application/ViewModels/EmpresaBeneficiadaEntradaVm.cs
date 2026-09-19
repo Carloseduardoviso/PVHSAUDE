@@ -35,4 +35,4 @@ public class EmpresaBeneficiadaEntradaVm
     [Required, EnumDataType(typeof(StatusCredenciamento)), Display(Name = "Situação")]
     public StatusCredenciamento? StatusCredenciamento { get; set; } = PVHSAUDE.Domain.Enuns.StatusCredenciamento.Pendente;
 }
-public record EmpresaBeneficiadaRespostaVm(Guid Id, string RazaoSocial, string NomeFantasia, string Cnpj, string? Telefone, string? WhatsApp, string? Email, string? Cep, string? Endereco, string? Cidade, string? Uf, string? Observacoes, TipoCredenciado Tipo, StatusCredenciamento StatusCredenciamento, string? ImagemUrl, List<Guid> EspecialidadeIds, List<Guid> ProcedimentoIds, Guid? PlanoId);
+public record EmpresaBeneficiadaRespostaVm(Guid Id, string RazaoSocial, string NomeFantasia, string Cnpj, string? Telefone, string? WhatsApp, string? Email, string? Cep, string? Endereco, string? Cidade, string? Uf, string? Observacoes, TipoCredenciado Tipo, StatusCredenciamento StatusCredenciamento, string? ImagemUrl, List<Guid> EspecialidadeIds, List<Guid> ProcedimentoIds, Guid? PlanoId, DateTime DataCadastro);

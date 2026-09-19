@@ -1,5 +1,54 @@
 (() => {
     const imagem = document.getElementById("Imagem");
+    const imagens = document.getElementById("Imagens");
+    const imagensSelecionadas = document.getElementById("imagens-selecionadas");
+    const imagensPreview = document.getElementById("imagem-preview-container");
+    const imagensSalvas = document.getElementById("imagem-salva-list");
+    const imagensPreviewList = document.getElementById("imagem-preview-list");
+    let arquivosSelecionados = [];
+    let urlsPreview = [];
+    const tiposImagem = ["image/jpeg", "image/png", "image/webp"];
+    const renderizarImagens = () => {
+        urlsPreview.forEach(url => URL.revokeObjectURL(url));
+        urlsPreview = [];
+        imagensPreviewList?.replaceChildren();
+        imagensSelecionadas.textContent = arquivosSelecionados.length === 0
+            ? "Selecione várias imagens JPG, PNG ou WEBP, até 5 MB cada."
+            : `${arquivosSelecionados.length} imagem(ns) selecionada(s). JPG, PNG ou WEBP, até 5 MB cada.`;
+        for (const [indice, arquivo] of arquivosSelecionados.entries()) {
+            const url = URL.createObjectURL(arquivo);
+            urlsPreview.push(url);
+            const item = document.createElement("div");
+            item.className = "d-flex flex-column align-items-center gap-1";
+            const img = document.createElement("img");
+            img.src = url;
+            img.alt = arquivo.name;
+            img.style.cssText = "width:96px;height:72px;object-fit:cover;border-radius:6px;border:2px solid #198754;padding:2px";
+            const remover = document.createElement("button");
+            remover.type = "button";
+            remover.className = "btn btn-sm btn-outline-danger";
+            remover.textContent = "Remover";
+            remover.addEventListener("click", () => {
+                arquivosSelecionados.splice(indice, 1);
+                const transfer = new DataTransfer();
+                arquivosSelecionados.forEach(arquivoAtual => transfer.items.add(arquivoAtual));
+                imagens.files = transfer.files;
+                renderizarImagens();
+            });
+            item.append(img, remover);
+            imagensPreviewList?.appendChild(item);
+        }
+        if (imagensPreview) imagensPreview.hidden = arquivosSelecionados.length === 0 && (!imagensSalvas || imagensSalvas.children.length === 0);
+    };
+    if (imagens && imagensSelecionadas) imagens.addEventListener("change", () => {
+        const novosArquivos = [...(imagens.files || [])].filter(arquivo => tiposImagem.includes(arquivo.type) && arquivo.size <= 5 * 1024 * 1024);
+        const existentes = new Set(arquivosSelecionados.map(arquivo => `${arquivo.name}|${arquivo.size}|${arquivo.lastModified}`));
+        arquivosSelecionados.push(...novosArquivos.filter(arquivo => !existentes.has(`${arquivo.name}|${arquivo.size}|${arquivo.lastModified}`)));
+        const transfer = new DataTransfer();
+        arquivosSelecionados.forEach(arquivo => transfer.items.add(arquivo));
+        imagens.files = transfer.files;
+        renderizarImagens();
+    });
     const preview = document.getElementById("imagem-preview");
     const previewContainer = document.getElementById("imagem-preview-container");
     let imagemUrl;
@@ -48,19 +97,32 @@
         input.addEventListener("input", () => mask(input));
     });
     const cep = document.getElementById("Cep");
+    const numero = document.getElementById("Numero");
+    const endereco = document.getElementById("Endereco");
     const cidade = document.getElementById("Cidade");
     const uf = document.getElementById("Uf");
     const status = document.getElementById("cep-status");
-    if (!cep || !cidade || !uf || !status) return;
+    if (!cep || !numero || !endereco || !cidade || !uf || !status) return;
 
     let pending;
     let revision = 0;
+    // Existing addresses on edit forms are user data and must not be replaced by CEP lookup.
+    let addressWasEdited = Boolean(endereco.value.trim());
+    let addressParts;
+    const composeAddress = () => {
+        if (!addressParts || addressWasEdited) return;
+        const locality = cidade.value || addressParts.localidade;
+        const state = uf.value || addressParts.uf;
+        if (!addressParts.logradouro || !locality || !state) return;
+        endereco.value = `${addressParts.logradouro}${numero.value.trim() ? ", " + numero.value.trim() : ""} - ${addressParts.bairro || ""} - ${locality}/${state}`;
+    };
+    endereco.addEventListener("input", () => { addressWasEdited = true; });
+    numero.addEventListener("input", composeAddress);
     cep.addEventListener("input", () => {
         revision++;
         pending?.abort();
         status.textContent = "";
-        cidade.value = "";
-        uf.value = "";
+        addressParts = null;
     });
     cep.addEventListener("blur", async () => {
         const digits = cep.value.replace(/\D/g, "");
@@ -76,6 +138,7 @@
         const timeout = window.setTimeout(() => controller.abort(), 10000);
         const initialCity = cidade.value;
         const initialUf = uf.value;
+        const initialEndereco = endereco.value;
         status.textContent = "Consultando CEP...";
         try {
             const response = await fetch("https://viacep.com.br/ws/" + digits + "/json/", { signal: controller.signal });
@@ -89,6 +152,8 @@
             // Keep manual edits made while the request was in progress.
             if (cidade.value === initialCity) cidade.value = data.localidade;
             if (uf.value === initialUf) uf.value = data.uf;
+            addressParts = data;
+            if (endereco.value === initialEndereco) composeAddress();
             cidade.dispatchEvent(new Event("change", { bubbles: true }));
             uf.dispatchEvent(new Event("change", { bubbles: true }));
             status.textContent = "Consulta de CEP concluída.";

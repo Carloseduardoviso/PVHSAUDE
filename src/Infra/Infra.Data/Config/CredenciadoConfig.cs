@@ -11,6 +11,7 @@ public class CredenciadoConfig : IEntityTypeConfiguration<Credenciado>
         builder.HasOne(x => x.Desconto).WithMany().HasForeignKey(x => x.DescontoId).OnDelete(DeleteBehavior.Restrict);
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();
+        builder.Property(x => x.DataCadastro).IsRequired().HasDefaultValueSql("GETUTCDATE()");
         builder.Property(x => x.RazaoSocial).HasMaxLength(150).IsRequired(true);
         builder.Property(x => x.NomeFantasia).HasMaxLength(150).IsRequired(true);
         builder.Property(x => x.Cnpj).HasMaxLength(14).IsRequired(true);

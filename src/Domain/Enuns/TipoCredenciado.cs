@@ -3,7 +3,7 @@ namespace PVHSAUDE.Domain.Enuns
 {
     public enum TipoCredenciado
     {
-        [Display(Name = "Clínica Terapêutica")] Clinica = 1,
+        [Display(Name = "Clínica terapêutica Parceiras")] Clinica = 1,
         [Display(Name = "Clínica Médica e Especialidade")] Laboratorio = 2,
         [Display(Name = "Laboratório e Exames")] Hospital = 3,
         [Display(Name = "Exames e Imagens")] CentroDiagnostico = 4,
@@ -13,6 +13,7 @@ namespace PVHSAUDE.Domain.Enuns
         [Display(Name = "Futebol")] Futebol = 8,
         [Display(Name = "Natação")] Natacao = 9,
         [Display(Name = "Ótica")] Otica = 10,
-        [Display(Name = "Roupa Esportiva")] RoupaEsportiva = 11
+        [Display(Name = "Roupa Esportiva")] RoupaEsportiva = 11,
+        [Display(Name = "Clínica terapêutica credenciada")] ClinicaTerapeuticaCredenciada = 12
     }
 }

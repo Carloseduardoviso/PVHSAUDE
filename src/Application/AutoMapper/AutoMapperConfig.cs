@@ -11,7 +11,9 @@ public class AutoMapperConfig : Profile
     {
         CreateMap<PlanoEntradaVm, PlanoVm>().ForMember(x => x.Id, o => o.Ignore());
         CreateMap<CredenciadoEntradaVm, CredenciadoVm>()
-            .ForMember(x => x.Id, o => o.Ignore()).ForMember(x => x.ImagemUrl, o => o.Ignore());
+            .ForMember(x => x.Id, o => o.Ignore())
+            .ForMember(x => x.ImagemUrl, o => o.Ignore())
+            .ForMember(x => x.ImagemUrls, o => o.Ignore());
         CreateMap<DependenteEntradaVm, DependenteVm>();
         CreateMap<BeneficiarioEntradaVm, BeneficiarioVm>().ForMember(x => x.Id, o => o.Ignore());
         CreateMap<Plano, PlanoRespostaVm>();
@@ -28,7 +30,8 @@ public class AutoMapperConfig : Profile
         CreateMap<Procedimento, ProcedimentoRespostaVm>();
         CreateMap<Credenciado, CredenciadoRespostaVm>()
             .ForCtorParam("EspecialidadeIds", o => o.MapFrom(e => e.Especialidades.Select(x => x.EspecialidadeId).ToList()))
-            .ForCtorParam("ProcedimentoIds", o => o.MapFrom(e => e.Procedimentos.Select(x => x.ProcedimentoId).ToList()));
+            .ForCtorParam("ProcedimentoIds", o => o.MapFrom(e => e.Procedimentos.Select(x => x.ProcedimentoId).ToList()))
+            .ForCtorParam("ImagemUrls", o => o.MapFrom(e => ImagemUrls(e)));
         CreateMap<Credenciado, EmpresaPlanoVm>()
             .ForCtorParam("CredenciadoId", o => o.MapFrom(e => e.Id))
             .ForCtorParam("PlanoId", o => o.MapFrom(e => e.Plano!.Id))
@@ -65,7 +68,8 @@ public class AutoMapperConfig : Profile
 
         CreateMap<Credenciado, CredenciadoVm>()
             .ForMember(vm => vm.EspecialidadeIds, o => o.MapFrom(e => e.Especialidades.Select(x => x.EspecialidadeId)))
-            .ForMember(vm => vm.ProcedimentoIds, o => o.MapFrom(e => e.Procedimentos.Select(x => x.ProcedimentoId)));
+            .ForMember(vm => vm.ProcedimentoIds, o => o.MapFrom(e => e.Procedimentos.Select(x => x.ProcedimentoId)))
+            .ForMember(vm => vm.ImagemUrls, o => o.MapFrom(e => ImagemUrls(e)));
         CreateMap<CredenciadoVm, Credenciado>().ConvertUsing((vm, entity, _) =>
         {
             if (!vm.Tipo.HasValue || !vm.StatusCredenciamento.HasValue
@@ -145,4 +149,12 @@ public class AutoMapperConfig : Profile
             .ForMember(e => e.EmailNormalizado, o => o.MapFrom(vm => vm.Email.Trim().ToUpperInvariant()))
             .ForMember(e => e.MenusPermitidos, o => o.MapFrom(vm => MenusAdministrativos.Gravar(vm.Menus)));
     }
+
+    private static List<string> ImagemUrls(Credenciado credenciado) =>
+        new[] { credenciado.ImagemUrl }
+            .Concat(credenciado.Imagens.OrderBy(x => x.CriadoEm).ThenBy(x => x.Id).Select(x => x.Url))
+            .Where(x => !string.IsNullOrWhiteSpace(x))
+            .Select(x => x!)
+            .Distinct(StringComparer.Ordinal)
+            .ToList();
 }

@@ -7,9 +7,17 @@ namespace PVHSAUDE.Web.Areas.Administracao.Controllers;
 [Area("Administracao")]
 public class CredenciadoController(CredenciadoApiClient credenciados, DescontoApiClient descontos) : Controller
 {
-    public async Task<IActionResult> Index(CancellationToken ct)
+    public async Task<IActionResult> Index(string? nomeFantasia, DateTime? dataCadastro, CancellationToken ct)
     {
-        try { return View(await credenciados.ListarAsync(ct)); }
+        try
+        {
+            var model = await credenciados.ListarAsync(ct);
+            if (!string.IsNullOrWhiteSpace(nomeFantasia)) model = model.Where(x => x.NomeFantasia.Contains(nomeFantasia.Trim(), StringComparison.OrdinalIgnoreCase)).ToList();
+            if (dataCadastro.HasValue) model = model.Where(x => x.DataCadastro.ToLocalTime().Date == dataCadastro.Value.Date).ToList();
+            ViewBag.NomeFantasia = nomeFantasia;
+            ViewBag.DataCadastro = dataCadastro?.ToString("yyyy-MM-dd");
+            return View(model);
+        }
         catch (HttpRequestException) { ViewData["Error"] = "Não foi possível carregar os credenciados."; return View(Array.Empty<CredenciadoVm>()); }
     }
     private async Task Catalogos(CancellationToken ct)
@@ -28,13 +36,15 @@ public class CredenciadoController(CredenciadoApiClient credenciados, DescontoAp
 
     private async Task EnviarImagem(CredenciadoVm model, CancellationToken ct)
     {
-        if (model.Imagem is null) return;
+        if (model.Imagens.Count == 0 && model.Imagem is not null) model.Imagens = [model.Imagem];
+        if (model.Imagens.Count == 0) return;
         var id = model.Id;
         if (id == Guid.Empty)
         {
             var cnpj = new string(model.Cnpj.Where(char.IsDigit).ToArray());
             id = (await credenciados.ListarAsync(ct)).FirstOrDefault(x => x.Cnpj == cnpj)?.Id ?? Guid.Empty;
         }
-        if (id != Guid.Empty) await credenciados.UploadImagemAsync(id, model.Imagem, ct);
+        if (id != Guid.Empty)
+            foreach (var imagem in model.Imagens) await credenciados.UploadImagemAsync(id, imagem, ct);
     }
 }

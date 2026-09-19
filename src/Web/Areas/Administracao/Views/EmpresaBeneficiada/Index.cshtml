@@ -4,14 +4,15 @@
     <div><h1 class="h3">Empresas Beneficiadas</h1><p class="text-muted mb-0">Gerencie as empresas beneficiadas.</p></div>
     <a asp-action="Create" class="btn btn-success">Cadastrar empresa beneficiada</a>
 </div>
+<form method="get" class="card card-body shadow-sm mb-4"><div class="row g-3 align-items-end"><div class="col-md-6"><label for="nomeFantasia" class="form-label">Nome fantasia</label><input id="nomeFantasia" name="nomeFantasia" value="@ViewBag.NomeFantasia" class="form-control" /></div><div class="col-md-4"><label for="dataCadastro" class="form-label">Data de cadastro</label><input id="dataCadastro" name="dataCadastro" type="date" value="@ViewBag.DataCadastro" class="form-control" /></div><div class="col-md-2 d-flex gap-2"><button type="submit" class="btn btn-primary">Buscar</button><a asp-action="Index" class="btn btn-light">Limpar</a></div></div></form>
 @if (TempData["Success"] is string success) { <div class="alert alert-success">@success</div> }
 @if (ViewData["Error"] is string error) { <div class="alert alert-danger">@error</div> }
 else if (!Model.Any()) { <div class="alert alert-info" role="status">Nenhuma empresa beneficiada cadastrada.</div> }
 else {
 <div class="card shadow-sm table-responsive d-none d-md-block" role="region" aria-label="Tabela de registros; role horizontalmente para ver todas as colunas" tabindex="0"><table class="table table-hover mb-0">
-    <thead><tr><th>Imagem</th><th>Nome fantasia</th><th>CNPJ</th><th>Tipo</th><th>Telefone</th><th>Cidade</th><th>Situação</th><th>Ações</th></tr></thead>
+    <thead><tr><th>Imagem</th><th>Nome fantasia</th><th>CNPJ</th><th>Tipo</th><th>Telefone</th><th>Data de cadastro</th><th>Cidade</th><th>Situação</th><th>Ações</th></tr></thead>
     <tbody>@foreach (var empresa in Model) {
-        <tr><td>@if (!string.IsNullOrWhiteSpace(empresa.ImagemUrl)) { <img src="@empresa.ImagemUrl" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:8px" /> }</td><td>@empresa.NomeFantasia</td><td>@empresa.Cnpj</td><td>@Html.DisplayFor(_ => empresa.Tipo)</td><td>@empresa.Telefone</td><td>@empresa.Cidade</td><td>@Html.DisplayFor(_ => empresa.StatusCredenciamento)</td>
+        <tr><td>@if (!string.IsNullOrWhiteSpace(empresa.ImagemUrl)) { <img src="@empresa.ImagemUrl" alt="" style="width:48px;height:48px;object-fit:cover;border-radius:8px" /> }</td><td>@empresa.NomeFantasia</td><td>@empresa.Cnpj</td><td>@Html.DisplayFor(_ => empresa.Tipo)</td><td>@empresa.Telefone</td><td>@empresa.DataCadastro.ToLocalTime().ToString("dd/MM/yyyy")</td><td>@empresa.Cidade</td><td>@Html.DisplayFor(_ => empresa.StatusCredenciamento)</td>
         <td class="text-nowrap"><a asp-action="Edit" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-primary">Editar</a> <a asp-action="Details" asp-route-id="@empresa.Id" class="btn btn-sm btn-outline-secondary">Ver detalhes</a></td></tr>
     }</tbody>
 </table></div>
@@ -23,6 +24,7 @@ else {
         <dt>CNPJ</dt><dd>@empresa.Cnpj</dd>
         <dt>Tipo</dt><dd>@Html.DisplayFor(_ => empresa.Tipo)</dd>
         <dt>Telefone</dt><dd>@empresa.Telefone</dd>
+        <dt>Data de cadastro</dt><dd>@empresa.DataCadastro.ToLocalTime().ToString("dd/MM/yyyy")</dd>
         <dt>Cidade</dt><dd>@empresa.Cidade</dd>
         <dt>Situação</dt><dd>@Html.DisplayFor(_ => empresa.StatusCredenciamento)</dd>
         </dl><div class="admin-record-actions border-top pt-3 mt-3" aria-label="Ações do registro">

@@ -10,9 +10,9 @@ public class CredenciadoService(IEntityRepository<Credenciado> repository, IEnti
     IUnitOfWork work, IMapper mapper, IImagemStorage storage, IEntityRepository<Desconto>? descontos = null) : ICredenciadoService
 {
     public async Task<List<CredenciadoRespostaVm>> ListarAsync(CancellationToken ct) =>
-        mapper.Map<List<CredenciadoRespostaVm>>((await repository.ListarAsync(null, ct, x => x.Especialidades, x => x.Procedimentos)).OrderBy(x => x.NomeFantasia));
+        mapper.Map<List<CredenciadoRespostaVm>>((await repository.ListarAsync(null, ct, x => x.Especialidades, x => x.Procedimentos, x => x.Imagens)).OrderBy(x => x.NomeFantasia));
     private async Task<Credenciado> Encontrar(Guid id, CancellationToken ct) =>
-        await repository.ObterAsync(x => x.Id == id, ct, x => x.Especialidades, x => x.Procedimentos) ?? throw new ServiceException(ServiceError.NotFound);
+        await repository.ObterAsync(x => x.Id == id, ct, x => x.Especialidades, x => x.Procedimentos, x => x.Imagens) ?? throw new ServiceException(ServiceError.NotFound);
     public async Task<CredenciadoRespostaVm> ObterAsync(Guid id, CancellationToken ct) =>
         mapper.Map<CredenciadoRespostaVm>(await Encontrar(id, ct));
     private async Task Validar(Guid? id, CredenciadoEntradaVm vm, CancellationToken ct)
@@ -67,8 +67,10 @@ public class CredenciadoService(IEntityRepository<Credenciado> repository, IEnti
         var extensao = Path.GetExtension(nome).ToLowerInvariant();
         if (tamanho == 0 || tamanho > 5_242_880 || !new[] { ".jpg", ".jpeg", ".png", ".webp" }.Contains(extensao))
             throw new ServiceException(ServiceError.Invalid, "Envie uma imagem JPG, PNG ou WEBP de até 5 MB.");
-        entity.DefinirImagem(await storage.SalvarCredenciadoAsync(id, extensao, conteudo, ct));
+        var url = await storage.SalvarCredenciadoAsync(id, extensao, conteudo, ct);
+        entity.DefinirImagem(url);
+        entity.AdicionarImagem(url);
         await work.SalvarAsync(ct);
-        return entity.ImagemUrl!;
+        return url;
     }
 }

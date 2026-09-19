@@ -56,6 +56,10 @@ builder.Services.AddHttpClient();
 builder.Services.AddMemoryCache();
 
 var app = builder.Build();
+using (var migrationScope = app.Services.CreateScope())
+{
+    await migrationScope.ServiceProvider.GetRequiredService<Context>().Database.MigrateAsync();
+}
 if (args.Contains("--criar-administrador"))
 {
     await AdministradorInicial.CriarAsync(app.Services);

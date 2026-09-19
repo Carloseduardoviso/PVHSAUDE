@@ -10,6 +10,7 @@ public class EmpresaBeneficiadaConfig : IEntityTypeConfiguration<EmpresaBenefici
         builder.HasOne(x => x.Plano).WithMany().HasForeignKey(x => x.PlanoId).OnDelete(DeleteBehavior.Restrict);
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();
+        builder.Property(x => x.DataCadastro).IsRequired().HasDefaultValueSql("GETUTCDATE()");
         builder.Property(x => x.RazaoSocial).HasMaxLength(150).IsRequired(true);
         builder.Property(x => x.NomeFantasia).HasMaxLength(150).IsRequired(true);
         builder.Property(x => x.Cnpj).HasMaxLength(14).IsRequired(true);

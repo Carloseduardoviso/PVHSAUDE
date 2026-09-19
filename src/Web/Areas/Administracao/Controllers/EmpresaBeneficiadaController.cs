@@ -8,9 +8,17 @@ namespace PVHSAUDE.Web.Areas.Administracao.Controllers;
 [Area("Administracao")]
 public class EmpresaBeneficiadaController(EmpresaBeneficiadaApiClient empresas, PlanoApiClient planos) : Controller
 {
-    public async Task<IActionResult> Index(CancellationToken ct)
+    public async Task<IActionResult> Index(string? nomeFantasia, DateTime? dataCadastro, CancellationToken ct)
     {
-        try { return View(await empresas.ListarAsync(ct)); }
+        try
+        {
+            var model = await empresas.ListarAsync(ct);
+            if (!string.IsNullOrWhiteSpace(nomeFantasia)) model = model.Where(x => x.NomeFantasia.Contains(nomeFantasia.Trim(), StringComparison.OrdinalIgnoreCase)).ToList();
+            if (dataCadastro.HasValue) model = model.Where(x => x.DataCadastro.ToLocalTime().Date == dataCadastro.Value.Date).ToList();
+            ViewBag.NomeFantasia = nomeFantasia;
+            ViewBag.DataCadastro = dataCadastro?.ToString("yyyy-MM-dd");
+            return View(model);
+        }
         catch (HttpRequestException)
         {
             ViewData["Error"] = "Não foi possível carregar as empresas beneficiadas. Verifique se a API está disponível.";
@@ -20,7 +28,7 @@ public class EmpresaBeneficiadaController(EmpresaBeneficiadaApiClient empresas, 
 
     private async Task Catalogos(CancellationToken ct)
     {
-        ViewBag.Planos = (await planos.ListarAsync(ct)).Select(x => new SelectListItem(
+        ViewBag.Planos = (await planos.ListarAsync(ct)).Where(x => x.TipoPessoa == PVHSAUDE.Domain.Enuns.TipoPessoa.Juridica).Select(x => new SelectListItem(
             x.Nome + " — " + x.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")), x.Id.ToString())).ToList();
         ViewBag.Especialidades = await empresas.EspecialidadesAsync(ct);
         ViewBag.Procedimentos = await empresas.ProcedimentosAsync(ct);
@@ -30,7 +38,10 @@ public class EmpresaBeneficiadaController(EmpresaBeneficiadaApiClient empresas, 
     public async Task<IActionResult> Create(CancellationToken ct)
     {
         await Catalogos(ct);
-        return View(new CredenciadoVm());
+        var model = new CredenciadoVm();
+        var primeiroPlano = (ViewBag.Planos as IEnumerable<SelectListItem>)?.FirstOrDefault();
+        if (Guid.TryParse(primeiroPlano?.Value, out var planoId)) model.PlanoId = planoId;
+        return View(model);
     }
 
     [HttpGet]
