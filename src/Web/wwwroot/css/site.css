@@ -200,3 +200,11 @@ body {
     font-weight: 600;
     cursor: not-allowed;
 }
+
+.portal-banners-superior { display: grid; grid-template-columns: minmax(160px, 1fr) minmax(0, 4fr) minmax(160px, 1fr); gap: 1rem; align-items: start; }
+.portal-banners img { display: block; width: 100%; object-fit: cover; border-radius: .5rem; }
+.banner-lateral img { aspect-ratio: 4 / 5; }
+.banner-central img { aspect-ratio: 16 / 5; }
+.portal-banners-inferior { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+.portal-banners-inferior img { aspect-ratio: 16 / 5; }
+@media (max-width: 767.98px) { .portal-banners-superior { grid-template-columns: 1fr; } .banner-lateral { max-width: 400px; margin-inline: auto; } }

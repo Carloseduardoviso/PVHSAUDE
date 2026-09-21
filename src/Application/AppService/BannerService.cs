@@ -26,7 +26,7 @@ public class BannerService(IBannerRepository repository, IUnitOfWork work, IMapp
                 throw new ServiceException(ServiceError.Invalid, "A imagem deve ter até 5 MB.");
             var type = DetectarImagem(imagem);
             if (type is null) throw new ServiceException(ServiceError.Invalid, "Envie uma imagem JPG, PNG ou WEBP válida.");
-            if (!BannerFormato.Valido(imagem)) throw new ServiceException(ServiceError.Invalid, BannerFormato.Mensagem);
+            if (!BannerFormato.Valido(imagem, vm.Posicao)) throw new ServiceException(ServiceError.Invalid, BannerFormato.Mensagem(vm.Posicao));
             entity.Imagem = imagem;
             entity.ContentType = type;
         }

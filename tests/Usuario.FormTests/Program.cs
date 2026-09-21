@@ -15,6 +15,7 @@ if (args.Contains("--database")) { await UsuarioDatabaseTests.Run(); return; }
 if (args.Contains("--galeria")) { AutoMapperTests.RunGaleria(); return; }
 ClientScriptTests.Run();
 
+BannerFormatTests.Run();
 await BannerApiClientTests.Run();
 if (args.Contains("--banner")) return;
 AutoMapperTests.Run();

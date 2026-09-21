@@ -31,7 +31,7 @@ public class BannersController(IBannerService service) : ServiceController
             await request.Imagem.CopyToAsync(stream, ct);
             imagem = stream.ToArray();
         }
-        return Ok(await service.SalvarAsync(id, new BannerVm { Titulo = request.Titulo, Ativo = request.Ativo }, imagem, ct));
+        return Ok(await service.SalvarAsync(id, new BannerVm { Titulo = request.Titulo, Posicao = request.Posicao, Ativo = request.Ativo }, imagem, ct));
     });
 }
 
@@ -39,6 +39,7 @@ public class BannerRequest
 {
     [Required, StringLength(200)]
     public string Titulo { get; set; } = "";
+    public PVHSAUDE.Domain.Enuns.PosicaoBanner Posicao { get; set; } = PVHSAUDE.Domain.Enuns.PosicaoBanner.Central;
     public bool Ativo { get; set; } = true;
     public IFormFile? Imagem { get; set; }
 }

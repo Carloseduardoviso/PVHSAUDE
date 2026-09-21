@@ -1,19 +1,28 @@
 @model List<Web.Models.BannerVm>
+@using PVHSAUDE.Domain.Enuns
+@{
+    var centro = Model.Where(x => x.Posicao == PosicaoBanner.Central).ToList();
+    var esquerda = Model.Where(x => x.Posicao == PosicaoBanner.LateralEsquerda).ToList();
+    var direita = Model.Where(x => x.Posicao == PosicaoBanner.LateralDireita).ToList();
+    var inferiorEsquerda = Model.Where(x => x.Posicao == PosicaoBanner.InferiorEsquerda).ToList();
+    var inferiorDireita = Model.Where(x => x.Posicao == PosicaoBanner.InferiorDireita).ToList();
+}
 @if (Model.Count > 0)
 {
-<section class="mb-4" aria-label="Destaques">
-<div id="banner-carousel" class="carousel slide banner-carousel rounded-3 overflow-hidden" aria-roledescription="carrossel" aria-label="Banners do portal">
-<div class="carousel-inner">
-@for (var i = 0; i < Model.Count; i++)
-{
-var b = Model[i];
-<div class="carousel-item @(i == 0 ? "active" : "")" role="group" aria-label="@(i + 1) de @Model.Count">
-<h2 class="h5 text-center mb-3 banner-titulo">@b.Titulo</h2>
-<img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" class="d-block w-100 banner-imagem" />
-</div>
-}
-</div>
-
-</div>
+<section class="portal-banners mb-4" aria-label="Destaques">
+    <div class="portal-banners-superior">
+        @foreach (var b in esquerda) { <article class="banner-lateral"><h2 class="visually-hidden">@b.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" /></article> }
+        <div class="portal-banners-central">
+            @foreach (var b in centro) { <article class="banner-central"><h2 class="visually-hidden">@b.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" /></article> }
+        </div>
+        @foreach (var b in direita) { <article class="banner-lateral"><h2 class="visually-hidden">@b.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" /></article> }
+    </div>
+    @if (inferiorEsquerda.Count > 0 || inferiorDireita.Count > 0)
+    {
+    <div class="portal-banners-inferior">
+        <div>@foreach (var b in inferiorEsquerda) { <article><h2 class="visually-hidden">@b.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" /></article> }</div>
+        <div>@foreach (var b in inferiorDireita) { <article><h2 class="visually-hidden">@b.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" /></article> }</div>
+    </div>
+    }
 </section>
 }

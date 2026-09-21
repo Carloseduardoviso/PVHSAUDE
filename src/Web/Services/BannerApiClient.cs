@@ -34,6 +34,7 @@ public class BannerApiClient(HttpClient http)
         using var content = new MultipartFormDataContent();
 
         content.Add(new StringContent(model.Titulo), "Titulo");
+        content.Add(new StringContent(model.Posicao.ToString()), "Posicao");
         content.Add(new StringContent(model.Ativo.ToString()), "Ativo");
 
         if (model.Imagem is { } imagem)
@@ -46,7 +47,7 @@ public class BannerApiClient(HttpClient http)
 
         using var response = await http.SendAsync(request, ct);
 
-        if (response.StatusCode == HttpStatusCode.BadRequest) return "Informe o título e envie uma imagem em paisagem na proporção 16:5 (1600 × 500 pixels), JPG, PNG ou WEBP de até 5 MB.";
+        if (response.StatusCode == HttpStatusCode.BadRequest) return "Confira a posição e envie uma imagem JPG, PNG ou WEBP de até 5 MB na proporção exigida para ela.";
         response.EnsureSuccessStatusCode();
 
         return null;

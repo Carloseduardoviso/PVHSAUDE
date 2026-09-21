@@ -43,6 +43,11 @@ namespace PVHSAUDE.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<int>("Posicao")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasMaxLength(200)
