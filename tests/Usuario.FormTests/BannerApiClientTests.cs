@@ -7,7 +7,7 @@ internal static class BannerApiClientTests
 {
     public static async Task Run()
     {
-        var banner = new BannerVm { Id = Guid.NewGuid(), Titulo = "Banner existente", Ativo = true };
+        var banner = new BannerVm { Id = Guid.NewGuid(), Titulo = "Banner existente", Ativo = true, Posicao = PVHSAUDE.Domain.Enuns.PosicaoBanner.LateralEsquerda };
         using var transport = new BannerTransport(banner);
         using var http = new HttpClient(transport) { BaseAddress = new Uri("http://api/") };
         var client = new BannerApiClient(http);
@@ -15,6 +15,7 @@ internal static class BannerApiClientTests
         {
             var lista = await client.ListarAsync(ativos, default);
             Check(lista.Single().Id == banner.Id, "listagem preserva o ID enviado pela API");
+            Check(lista.Single().Posicao == PVHSAUDE.Domain.Enuns.PosicaoBanner.LateralEsquerda, "listagem preserva a posição enviada pela API");
         }
         var model = await client.ObterAsync(banner.Id, default);
         Check(model?.Id == banner.Id, "abertura da edição preserva o ID enviado pela API");

@@ -1,28 +1,28 @@
-@model List<Web.Models.BannerVm>
-@using PVHSAUDE.Domain.Enuns
+@model Web.Models.PortalVm
 @{
-    var centro = Model.Where(x => x.Posicao == PosicaoBanner.Central).ToList();
-    var esquerda = Model.Where(x => x.Posicao == PosicaoBanner.LateralEsquerda).ToList();
-    var direita = Model.Where(x => x.Posicao == PosicaoBanner.LateralDireita).ToList();
-    var inferiorEsquerda = Model.Where(x => x.Posicao == PosicaoBanner.InferiorEsquerda).ToList();
-    var inferiorDireita = Model.Where(x => x.Posicao == PosicaoBanner.InferiorDireita).ToList();
-}
-@if (Model.Count > 0)
-{
-<section class="portal-banners mb-4" aria-label="Destaques">
-    <div class="portal-banners-superior">
-        @foreach (var b in esquerda) { <article class="banner-lateral"><h2 class="visually-hidden">@b.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" /></article> }
-        <div class="portal-banners-central">
-            @foreach (var b in centro) { <article class="banner-central"><h2 class="visually-hidden">@b.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" /></article> }
-        </div>
-        @foreach (var b in direita) { <article class="banner-lateral"><h2 class="visually-hidden">@b.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" /></article> }
-    </div>
-    @if (inferiorEsquerda.Count > 0 || inferiorDireita.Count > 0)
+    var slots = new[]
     {
-    <div class="portal-banners-inferior">
-        <div>@foreach (var b in inferiorEsquerda) { <article><h2 class="visually-hidden">@b.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" /></article> }</div>
-        <div>@foreach (var b in inferiorDireita) { <article><h2 class="visually-hidden">@b.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = b.Id })" alt="@b.Titulo" /></article> }</div>
-    </div>
+        (Model.BannersLateralEsquerda, "banner-carousel-lateral-esquerda", "Lateral esquerda", "banner-lateral-esquerda"),
+        (Model.BannersCentral, "banner-carousel-central", "Destaques centrais", "banner-central"),
+        (Model.BannersLateralDireita, "banner-carousel-lateral-direita", "Lateral direita", "banner-lateral-direita"),
+        (Model.BannersInferiorEsquerda, "banner-carousel-inferior-esquerda", "Destaques inferiores à esquerda", "banner-inferior-esquerda"),
+        (Model.BannersInferiorDireita, "banner-carousel-inferior-direita", "Destaques inferiores à direita", "banner-inferior-direita")
+    };
+}
+@if (slots.Any(x => x.Item1.Count > 0))
+{
+    <section class="portal-banner-layout mb-4" aria-label="Destaques">
+    @foreach (var (banners, carouselId, label, cssClass) in slots.Where(x => x.Item1.Count > 0))
+    {
+        <div class="@cssClass">
+            <div id="@carouselId" class="carousel slide banner-carousel" aria-roledescription="carrossel" aria-label="@label"><div class="carousel-inner">
+            @for (var i = 0; i < banners.Count; i++)
+            {
+                var banner = banners[i];
+                <div class="carousel-item @(i == 0 ? "active" : "")" role="group" aria-label="@(i + 1) de @banners.Count"><h2 class="h6 text-center banner-titulo">@banner.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = banner.Id })" alt="@banner.Titulo" class="d-block w-100 banner-imagem" /></div>
+            }
+            </div></div>
+        </div>
     }
-</section>
+    </section>
 }

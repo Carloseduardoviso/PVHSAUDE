@@ -1,5 +1,13 @@
-@{ var isLoginPage = string.Equals(ViewContext.RouteData.Values["Controller"]?.ToString(), "Conta", StringComparison.OrdinalIgnoreCase)
-        && string.Equals(ViewContext.RouteData.Values["Action"]?.ToString(), "Login", StringComparison.OrdinalIgnoreCase); }
+@{
+    var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+    var isLoginPage = string.Equals(currentController, "Conta", StringComparison.OrdinalIgnoreCase)
+        && string.Equals(currentAction, "Login", StringComparison.OrdinalIgnoreCase);
+    bool IsCurrent(string controller, string action) => string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase)
+        && string.Equals(currentAction, action, StringComparison.OrdinalIgnoreCase);
+    bool IsInHomeSection(params string[] actions) => string.Equals(currentController, "Home", StringComparison.OrdinalIgnoreCase)
+        && actions.Any(action => string.Equals(currentAction, action, StringComparison.OrdinalIgnoreCase));
+}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -15,19 +23,19 @@
     @if (!isLoginPage)
     {
     <header>
-        <nav class="navbar portal-navbar">
+        <nav class="navbar portal-navbar" aria-label="Navegação principal">
             <div class="container-fluid portal-navbar-inner">
                 <a class="navbar-brand portal-brand" asp-area="" asp-controller="Home" asp-action="Index" aria-label="PVH Saúde — início"><img src="~/images/pvh-saude-horizontal-transparent.png" asp-append-version="true" alt="PVH Saúde — descontos e benefícios" width="1692" height="929" /></a>
                 <div id="navbarSupportedContent" class="navbar-collapse justify-content-between">
                     <ul class="navbar-nav portal-nav-links">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>Início</a>
+                            <a class="nav-link@(IsCurrent("Home", "Index") ? " is-active" : "")" asp-area="" asp-controller="Home" asp-action="Index" aria-current="@(IsCurrent("Home", "Index") ? "page" : null)"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>Início</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="ClinicaTerapeuticaCredenciada"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14M8 8h2m4 0h2m-8 4h2m4 0h2M9 20v-4h6v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>Clínica terapêutica credenciada</a>
+                            <a class="nav-link@(IsCurrent("Home", "ClinicaTerapeuticaCredenciada") ? " is-active" : "")" asp-area="" asp-controller="Home" asp-action="ClinicaTerapeuticaCredenciada" aria-current="@(IsCurrent("Home", "ClinicaTerapeuticaCredenciada") ? "page" : null)"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14M8 8h2m4 0h2m-8 4h2m4 0h2M9 20v-4h6v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>Clínica terapêutica credenciada</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" id="clinica-parceira-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="nav-link dropdown-toggle border-0 bg-transparent@(IsInHomeSection("ClinicaTerapeutica", "ClinicaMedicaTerapeutica", "LaboratorioExames", "ExamesImagens", "Odontologia", "ClinicasPopulares") ? " is-active" : "")" type="button" id="clinica-parceira-menu" data-bs-toggle="dropdown" aria-expanded="false" aria-current="@(IsInHomeSection("ClinicaTerapeutica", "ClinicaMedicaTerapeutica", "LaboratorioExames", "ExamesImagens", "Odontologia", "ClinicasPopulares") ? "page" : null)">
                                 <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14M8 8h2m4 0h2m-8 4h2m4 0h2M9 20v-4h6v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>Clínica Parceira
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="clinica-parceira-menu">
@@ -40,7 +48,7 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" id="esporte-parceiros-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="nav-link dropdown-toggle border-0 bg-transparent@(IsInHomeSection("Academia", "Futebol", "Natacao") ? " is-active" : "")" type="button" id="esporte-parceiros-menu" data-bs-toggle="dropdown" aria-expanded="false" aria-current="@(IsInHomeSection("Academia", "Futebol", "Natacao") ? "page" : null)">
                                 <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 4v16m12-16v16M3 8h6m6 0h6M3 16h6m6 0h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>Esporte Parceiros
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="esporte-parceiros-menu">
@@ -50,7 +58,7 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" id="loja-parceiras-menu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="nav-link dropdown-toggle border-0 bg-transparent@(IsInHomeSection("Otica", "RoupaEsportiva") ? " is-active" : "")" type="button" id="loja-parceiras-menu" data-bs-toggle="dropdown" aria-expanded="false" aria-current="@(IsInHomeSection("Otica", "RoupaEsportiva") ? "page" : null)">
                                 <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9h16l-1-5H5L4 9Zm1 0v10h14V9M9 13h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>Loja Parceiras
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="loja-parceiras-menu">
@@ -59,10 +67,10 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Contato" asp-action="Index"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16v11H8l-4 4V5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>Contato</a>
+                            <a class="nav-link@(IsCurrent("Contato", "Index") ? " is-active" : "")" asp-area="" asp-controller="Contato" asp-action="Index" aria-current="@(IsCurrent("Contato", "Index") ? "page" : null)"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16v11H8l-4 4V5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>Contato</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="SobreNos"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8" /><path d="M12 11v5m0-8h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>Sobre Nós</a>
+                            <a class="nav-link@(IsCurrent("Home", "SobreNos") ? " is-active" : "")" asp-area="" asp-controller="Home" asp-action="SobreNos" aria-current="@(IsCurrent("Home", "SobreNos") ? "page" : null)"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8" /><path d="M12 11v5m0-8h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>Sobre Nós</a>
                         </li>
                     </ul>
                     <div class="portal-nav-actions d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2">

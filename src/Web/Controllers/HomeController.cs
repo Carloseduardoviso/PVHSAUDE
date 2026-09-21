@@ -17,6 +17,11 @@ namespace Web.Controllers
             try
             {
                 model.Banners = await new BannerApiClient(clients.CreateClient("default")).ListarAsync(true, timeout.Token);
+                model.BannersLateralEsquerda = model.Banners.Where(x => x.Posicao == PVHSAUDE.Domain.Enuns.PosicaoBanner.LateralEsquerda).ToList();
+                model.BannersCentral = model.Banners.Where(x => x.Posicao == PVHSAUDE.Domain.Enuns.PosicaoBanner.Central).ToList();
+                model.BannersLateralDireita = model.Banners.Where(x => x.Posicao == PVHSAUDE.Domain.Enuns.PosicaoBanner.LateralDireita).ToList();
+                model.BannersInferiorEsquerda = model.Banners.Where(x => x.Posicao == PVHSAUDE.Domain.Enuns.PosicaoBanner.InferiorEsquerda).ToList();
+                model.BannersInferiorDireita = model.Banners.Where(x => x.Posicao == PVHSAUDE.Domain.Enuns.PosicaoBanner.InferiorDireita).ToList();
             }
             catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException || ex is OperationCanceledException && !cancellationToken.IsCancellationRequested)
             { logger.LogWarning(ex, "Não foi possível carregar os banners do portal."); }

@@ -2,9 +2,9 @@ namespace PVHSAUDE.Domain.Enuns;
 
 public enum PosicaoBanner
 {
-    Central,
-    LateralDireita,
-    LateralEsquerda,
-    InferiorDireita,
-    InferiorEsquerda
+    LateralEsquerda = 1,
+    Central = 2,
+    LateralDireita = 3,
+    InferiorEsquerda = 4,
+    InferiorDireita = 5
 }

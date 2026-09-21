@@ -11,5 +11,6 @@ public class BannerConfig : IEntityTypeConfiguration<Banner>
         b.Property(x => x.Posicao).HasDefaultValue(PVHSAUDE.Domain.Enuns.PosicaoBanner.Central);
         b.Property(x => x.ContentType).HasMaxLength(30).IsRequired();
         b.Property(x => x.Imagem).IsRequired();
+        b.Property(x => x.Posicao).IsRequired();
     }
 }

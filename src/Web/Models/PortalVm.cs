@@ -3,6 +3,11 @@ namespace Web.Models;
 public class PortalVm
 {
     public List<BannerVm> Banners { get; set; } = [];
+    public List<BannerVm> BannersLateralEsquerda { get; set; } = [];
+    public List<BannerVm> BannersCentral { get; set; } = [];
+    public List<BannerVm> BannersLateralDireita { get; set; } = [];
+    public List<BannerVm> BannersInferiorEsquerda { get; set; } = [];
+    public List<BannerVm> BannersInferiorDireita { get; set; } = [];
     public List<CredenciadoVm> Empresas { get; set; } = [];
     public IReadOnlyCollection<CatalogoItemVm> Especialidades { get; set; } = [];
     public IReadOnlyCollection<CatalogoItemVm> Procedimentos { get; set; } = [];

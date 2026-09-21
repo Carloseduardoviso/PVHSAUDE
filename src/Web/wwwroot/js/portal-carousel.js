@@ -5,7 +5,7 @@
         if (img.complete && !img.naturalWidth) hide();
     });
 
-    document.querySelectorAll("#banner-carousel, #rede-carousel").forEach(element => {
+    document.querySelectorAll(".banner-carousel, #rede-carousel").forEach(element => {
         const slides = element.querySelectorAll(".carousel-item");
         if (slides.length < 2) return;
         const carousel = new bootstrap.Carousel(element, {
