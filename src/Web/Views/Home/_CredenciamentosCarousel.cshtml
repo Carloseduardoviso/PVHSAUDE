@@ -1,0 +1,52 @@
+@model Web.Models.PortalVm
+@if (Model.Empresas.Count > 0)
+{
+    var culturaBrasileira = System.Globalization.CultureInfo.GetCultureInfo("pt-BR");
+    <section class="credenciamentos-section mb-4" aria-labelledby="credenciamentos-titulo">
+        <div class="credenciamentos-cabecalho">
+            <div>
+                <p class="text-success fw-semibold mb-1">Rede PVH Saúde</p>
+                <h2 id="credenciamentos-titulo" class="h3 mb-1">Credenciamentos</h2>
+                <p class="text-muted mb-0">Conheça os estabelecimentos cadastrados na nossa rede.</p>
+            </div>
+        </div>
+        <div id="credenciamentos-carousel" class="carousel slide banner-carousel credenciamentos-carousel" data-always-controls aria-roledescription="carrossel" aria-label="Credenciamentos ativos">
+            <div class="carousel-inner">
+                @for (var indice = 0; indice < Model.Empresas.Count; indice++)
+                {
+                    var credenciado = Model.Empresas[indice];
+                    var imagem = credenciado.ImagemUrls.FirstOrDefault(x => !string.IsNullOrWhiteSpace(x)) ?? credenciado.ImagemUrl;
+                    var desconto = Model.Descontos.FirstOrDefault(x => x.Id == credenciado.DescontoId);
+                    var especialidades = Model.Especialidades.Where(x => credenciado.EspecialidadeIds.Contains(x.Id)).Select(x => x.Nome).ToList();
+                    var procedimentos = Model.Procedimentos.Where(x => credenciado.ProcedimentoIds.Contains(x.Id)).Select(x => x.Nome).ToList();
+                    var endereco = string.Join(", ", new[] { credenciado.Endereco, credenciado.Cidade, credenciado.Uf }.Where(x => !string.IsNullOrWhiteSpace(x)));
+                    <div class="carousel-item @(indice == 0 ? "active" : "")" role="group" aria-label="Credenciamento @(indice + 1) de @Model.Empresas.Count">
+                        <article class="credenciamento-card">
+                            <div class="credenciamento-imagem">
+                                @if (!string.IsNullOrWhiteSpace(imagem)) { <img src="@imagem" alt="@credenciado.NomeFantasia" /> }
+                                else { <span aria-hidden="true">PVH Saúde</span> }
+                            </div>
+                            <div class="credenciamento-conteudo">
+                                <p class="text-success small fw-semibold mb-2">@credenciado.Tipo</p>
+                                <div class="credenciamento-detalhes">
+                                    @if (desconto is not null) { <div><span>Desconto</span><strong>@desconto.Nome — @desconto.Valor.ToString("C", culturaBrasileira)</strong></div> }
+                                    @if (!string.IsNullOrWhiteSpace(credenciado.NomeFantasia)) { <div><span>Nome fantasia</span><strong>@credenciado.NomeFantasia</strong></div> }
+                                    @if (!string.IsNullOrWhiteSpace(credenciado.Cnpj)) { <div><span>CNPJ</span><strong>@credenciado.Cnpj</strong></div> }
+                                    @if (!string.IsNullOrWhiteSpace(credenciado.WhatsApp)) { <div><span>WhatsApp</span><strong>@credenciado.WhatsApp</strong></div> }
+                                    @if (!string.IsNullOrWhiteSpace(endereco)) { <div class="credenciamento-detalhe-completo"><span>Endereço</span><strong>@endereco</strong></div> }
+                                </div>
+                                @if (especialidades.Count > 0 || procedimentos.Count > 0)
+                                {
+                                    <div class="credenciamento-servicos">
+                                        @if (especialidades.Count > 0) { <div><span>Especialidades</span><strong>@string.Join(", ", especialidades)</strong></div> }
+                                        @if (procedimentos.Count > 0) { <div><span>Procedimentos</span><strong>@string.Join(", ", procedimentos)</strong></div> }
+                                    </div>
+                                }
+                            </div>
+                        </article>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}

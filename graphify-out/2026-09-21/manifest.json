@@ -270,9 +270,9 @@
     "semantic_hash": "e7a1ca3e645dcfffad2a09b79e40d7be"
   },
   "src/Application/AppService/BannerFormato.cs": {
-    "mtime": 1789999140.176139,
-    "seen": 1790000358.5082233,
-    "ast_hash": "ea9e9bdeeeacf07b8b7b79c36d7bb6db",
+    "mtime": 1790008173.5930574,
+    "seen": 1790008516.1678653,
+    "ast_hash": "91389f6229d764f572c51b8f7d177909",
     "semantic_hash": ""
   },
   "src/Application/AppService/BannerService.cs": {
@@ -1488,9 +1488,9 @@
     "semantic_hash": "4dddcbcedd609103aae8104cb7fa8088"
   },
   "src/Web/Areas/Administracao/Views/Banner/Form.cshtml": {
-    "mtime": 1790000223.6180158,
-    "seen": 1790000358.5085542,
-    "ast_hash": "e1c4bb49f59dd78ead97b054a6d41d01",
+    "mtime": 1790010669.4340737,
+    "seen": 1790011424.2572572,
+    "ast_hash": "681126944eb97436114134fbed035248",
     "semantic_hash": ""
   },
   "src/Web/Areas/Administracao/Views/Banner/Index.cshtml": {
@@ -1788,9 +1788,9 @@
     "semantic_hash": "65ebc7759ea4e9e9d54072b112b8feb1"
   },
   "src/Web/Controllers/HomeController.cs": {
-    "mtime": 1790004479.810496,
-    "seen": 1790004713.6442375,
-    "ast_hash": "5bb7d186b75614c983b64ea38c58f1a7",
+    "mtime": 1790012668.6905527,
+    "seen": 1790012741.9655442,
+    "ast_hash": "5e8e3dc5c2bfc4a886550b560af446f2",
     "semantic_hash": ""
   },
   "src/Web/Controllers/LojasController.cs": {
@@ -1872,9 +1872,9 @@
     "semantic_hash": "715c9767466fd198e66bb90a9d6b0ad4"
   },
   "src/Web/Models/PortalVm.cs": {
-    "mtime": 1790000121.209883,
-    "seen": 1790000358.5086575,
-    "ast_hash": "94064bb3b6aee234ade6740d858b3a32",
+    "mtime": 1790012666.6038027,
+    "seen": 1790012741.9655685,
+    "ast_hash": "64a2ba4bc0227743ce15d791c399ac9e",
     "semantic_hash": ""
   },
   "src/Web/PVHSAUDE.Web.csproj": {
@@ -2046,9 +2046,9 @@
     "semantic_hash": "b30b093a1d44eda7297df468234a5da5"
   },
   "src/Web/Views/Home/Index.cshtml": {
-    "mtime": 1790004673.789565,
-    "seen": 1790004713.6443057,
-    "ast_hash": "773fea3b1072b52cb80897fc239b6521",
+    "mtime": 1790008149.5252821,
+    "seen": 1790008516.1683447,
+    "ast_hash": "f4ce161535cb8dde6aab006ed1a7d1f2",
     "semantic_hash": ""
   },
   "src/Web/Views/Home/LaboratorioExames.cshtml": {
@@ -2076,9 +2076,9 @@
     "semantic_hash": "1d65433d6321d156ea93bf169d9bccfe"
   },
   "src/Web/Views/Home/_Banners.cshtml": {
-    "mtime": 1790000223.1719,
-    "seen": 1790000358.5087116,
-    "ast_hash": "0f579c3ce3a8522f60d1fd463374dd05",
+    "mtime": 1790012670.760697,
+    "seen": 1790012741.9656258,
+    "ast_hash": "3d90b9e818ca1239bbf86e6dc5a459b3",
     "semantic_hash": ""
   },
   "src/Web/Views/Home/_EmpresaCard.cshtml": {
@@ -2184,9 +2184,9 @@
     "semantic_hash": "0640f735bfec6568fd9032d4bdec9cc7"
   },
   "src/Web/wwwroot/js/banner-form.js": {
-    "mtime": 1789999481.1515155,
-    "seen": 1790000358.50874,
-    "ast_hash": "ae977311edf2371954cf76eb24619c8b",
+    "mtime": 1790010669.4426994,
+    "seen": 1790011424.2574387,
+    "ast_hash": "0cf35ed2fe4e6949aca9f40f12e5a373",
     "semantic_hash": ""
   },
   "src/Web/wwwroot/js/beneficiario-form.js": {
@@ -2202,10 +2202,10 @@
     "semantic_hash": "23c097f5c9d76afc17ec175ed17c927d"
   },
   "src/Web/wwwroot/js/credenciado-form.js": {
-    "mtime": 1789992332.890637,
-    "seen": 1789998919.3534377,
-    "ast_hash": "d7cb7790124416b8cbe7d1808b16bf08",
-    "semantic_hash": "d7cb7790124416b8cbe7d1808b16bf08"
+    "mtime": 1790013851.1810606,
+    "seen": 1790013891.0100384,
+    "ast_hash": "88fd467bb9528965bc9db7a6f5018678",
+    "semantic_hash": ""
   },
   "src/Web/wwwroot/js/plano-form.js": {
     "mtime": 1789564174.1887655,
@@ -2214,9 +2214,9 @@
     "semantic_hash": "2992adc874aca21480349a28364caf98"
   },
   "src/Web/wwwroot/js/portal-carousel.js": {
-    "mtime": 1790000121.2154953,
-    "seen": 1790000358.5087473,
-    "ast_hash": "f1e4cd1d7cfcb3eb0878a96114cbe053",
+    "mtime": 1790011833.5711184,
+    "seen": 1790011884.9200428,
+    "ast_hash": "b779a62bf65926b2bb714a016123e815",
     "semantic_hash": ""
   },
   "src/Web/wwwroot/js/site.js": {
@@ -2316,9 +2316,9 @@
     "semantic_hash": ""
   },
   "tests/Usuario.FormTests/BannerFormatTests.cs": {
-    "mtime": 1789999668.6530433,
-    "seen": 1790000358.5087733,
-    "ast_hash": "3772d24556d3ab33b5053bcf7b0a014d",
+    "mtime": 1790008215.1423335,
+    "seen": 1790008516.1684165,
+    "ast_hash": "f72c44ff95498c88267a3de23927b8e3",
     "semantic_hash": ""
   },
   "tests/Usuario.FormTests/CatalogoTests.cs": {
@@ -2352,10 +2352,10 @@
     "semantic_hash": "91ee2730d2e95ee6b81ba57839c8db40"
   },
   "tests/Usuario.FormTests/Program.cs": {
-    "mtime": 1789998611.866574,
-    "seen": 1789998919.353469,
-    "ast_hash": "13397b2ea274d43032c2be02988b2d63",
-    "semantic_hash": "13397b2ea274d43032c2be02988b2d63"
+    "mtime": 1790013477.6308596,
+    "seen": 1790013573.7255516,
+    "ast_hash": "c2c26e0658b9c0d7a0465f93743d8c7a",
+    "semantic_hash": ""
   },
   "tests/Usuario.FormTests/Usuario.FormTests.csproj": {
     "mtime": 1788960468.0889902,
@@ -2622,15 +2622,69 @@
     "semantic_hash": ""
   },
   "src/Web/Areas/Administracao/Views/LogoPortal/Index.cshtml": {
-    "mtime": 1790004479.807943,
-    "seen": 1790004713.6442027,
-    "ast_hash": "158fe4e1ff45351f228d249784cbcee4",
+    "mtime": 1790010669.438073,
+    "seen": 1790011424.257302,
+    "ast_hash": "43d0c725ba5ed83a25b5c0fbcae27d19",
     "semantic_hash": ""
   },
   "src/Web/Services/LogoPortalStorage.cs": {
-    "mtime": 1790004479.8028004,
-    "seen": 1790004713.6442778,
-    "ast_hash": "bbe19bb07caee9cdd1d7924ae2d6bd25",
+    "mtime": 1790008186.234052,
+    "seen": 1790008516.168317,
+    "ast_hash": "54dc9067bb26eecce3c51f84be37876b",
+    "semantic_hash": ""
+  },
+  "src/Application/AppService/LogoPortalFormato.cs": {
+    "mtime": 1790008177.2830355,
+    "seen": 1790008516.1678813,
+    "ast_hash": "6d0bd25b46a2d268cfe8a38a39643409",
+    "semantic_hash": ""
+  },
+  "src/Web/wwwroot/js/logo-portal-form.js": {
+    "mtime": 1790008934.6738012,
+    "seen": 1790009101.4477,
+    "ast_hash": "4ee1933c73cec4a03c53e7eb37bfd6db",
+    "semantic_hash": ""
+  },
+  "tests/Usuario.FormTests/LogoPortalFormatTests.cs": {
+    "mtime": 1790008219.7944155,
+    "seen": 1790008516.168424,
+    "ast_hash": "3fb84f1823440ddf17c5ae548bcdf584",
+    "semantic_hash": ""
+  },
+  "tests/Usuario.FormTests/PortalHomeUxTests.cs": {
+    "mtime": 1790010485.5987701,
+    "seen": 1790010654.4019117,
+    "ast_hash": "3fee9823e0c382ee940c2462749959ff",
+    "semantic_hash": ""
+  },
+  "src/Web/Views/Home/_CredenciamentosCarousel.cshtml": {
+    "mtime": 1790012920.4412196,
+    "seen": 1790012998.7914038,
+    "ast_hash": "30d3a20cdb729530f5cedae4d72705bc",
+    "semantic_hash": ""
+  },
+  "tests/Usuario.FormTests/CredenciamentosCarouselTests.cs": {
+    "mtime": 1790012866.9798126,
+    "seen": 1790012998.791477,
+    "ast_hash": "4c7551360342af670d14e0bfb19dbc5d",
+    "semantic_hash": ""
+  },
+  "src/Api/wwwroot/uploads/credenciados/74466972936b4812a33981a1b06ba6d6-59895eae3d80466c917255c3f87cc63c.jpeg": {
+    "mtime": 1790010869.8291802,
+    "seen": 1790011424.2575517,
+    "ast_hash": "d22e6ba2ab1d85274bebb420cb4e944a",
+    "semantic_hash": ""
+  },
+  "src/Api/wwwroot/uploads/credenciados/bc65ff7a08f04f43908bcb2af758fece-9821f18c5ccf450a8512654fb46da00c.png": {
+    "mtime": 1790011650.877584,
+    "seen": 1790011884.920167,
+    "ast_hash": "e48c21476c45ffeaac5d690a75e9a27f",
+    "semantic_hash": ""
+  },
+  "tests/Usuario.FormTests/CepAutofillTests.cs": {
+    "mtime": 1790013818.5554068,
+    "seen": 1790013891.0100725,
+    "ast_hash": "67d9e65cef6fe8b5094023a8acc9b7c5",
     "semantic_hash": ""
   }
 }

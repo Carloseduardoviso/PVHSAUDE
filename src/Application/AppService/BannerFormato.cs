@@ -5,10 +5,10 @@ namespace PVHSAUDE.Application.AppService;
 public static class BannerFormato
 {
     public static string Mensagem(PosicaoBanner posicao) => posicao is PosicaoBanner.LateralDireita or PosicaoBanner.LateralEsquerda
-        ? "Use uma imagem em retrato na proporção 4:5, por exemplo 400 × 500 pixels (JPG, PNG ou WEBP)."
+        ? "Use uma imagem em retrato na proporção 4:5, por exemplo 800 × 1000 pixels (JPG, PNG ou WEBP)."
         : posicao == PosicaoBanner.Central
-            ? "Use uma imagem em paisagem na proporção 16:5, por exemplo 1600 × 500 pixels (JPG, PNG ou WEBP)."
-            : "Use uma imagem em paisagem na proporção 16:5, por exemplo 800 × 250 pixels (JPG, PNG ou WEBP).";
+            ? "Use uma imagem em paisagem na proporção 16:5, por exemplo 1920 × 600 pixels (JPG, PNG ou WEBP)."
+            : "Use uma imagem em paisagem na proporção 16:5, por exemplo 960 × 300 pixels (JPG, PNG ou WEBP).";
     public static bool Valido(byte[] bytes)
     {
         var (w, h) = Dimensoes(bytes);

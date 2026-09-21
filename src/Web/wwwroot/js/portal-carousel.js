@@ -7,10 +7,11 @@
 
     document.querySelectorAll(".banner-carousel, #rede-carousel").forEach(element => {
         const slides = element.querySelectorAll(".carousel-item");
-        if (slides.length < 2) return;
-        const carousel = new bootstrap.Carousel(element, {
-            interval: 5000, wrap: true, pause: false, touch: true
-        });
+        const alwaysControls = element.hasAttribute("data-always-controls");
+        if (slides.length < 2 && !alwaysControls) return;
+        const carousel = slides.length > 1 ? new bootstrap.Carousel(element, {
+            interval: 8000, wrap: true, pause: false, touch: true
+        }) : null;
         const controls = document.createElement("div");
         controls.className = "portal-carousel-controls";
         controls.setAttribute("role", "group");
@@ -22,7 +23,8 @@
             button.setAttribute("aria-label", label);
             button.setAttribute("aria-controls", element.id);
             button.textContent = symbol;
-            button.addEventListener("click", action);
+            if (carousel) button.addEventListener("click", action);
+            else button.disabled = true;
             return button;
         };
         controls.append(arrow("Slide anterior", "‹", () => carousel.prev()));
@@ -33,7 +35,7 @@
             dot.type = "button";
             dot.setAttribute("aria-label", "Ir para slide " + (index + 1));
             dot.setAttribute("aria-controls", element.id);
-            dot.addEventListener("click", () => carousel.to(index));
+            if (carousel) dot.addEventListener("click", () => carousel.to(index));
             indicators.append(dot);
             return dot;
         });
@@ -43,9 +45,11 @@
             else dot.removeAttribute("aria-current");
         });
         select(Array.from(slides).findIndex(slide => slide.classList.contains("active")));
-        element.addEventListener("slid.bs.carousel", event => select(event.to));
+        if (carousel) element.addEventListener("slid.bs.carousel", event => select(event.to));
         controls.append(indicators, arrow("Próximo slide", "›", () => carousel.next()));
         element.after(controls);
+
+        if (!carousel) return;
 
         const paused = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const region = element.closest("section") || element;

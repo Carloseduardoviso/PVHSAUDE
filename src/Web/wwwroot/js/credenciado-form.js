@@ -102,12 +102,11 @@
     const cidade = document.getElementById("Cidade");
     const uf = document.getElementById("Uf");
     const status = document.getElementById("cep-status");
-    if (!cep || !numero || !endereco || !cidade || !uf || !status) return;
+    if (!cep || !numero || !endereco || !status) return;
 
     let pending;
     let revision = 0;
-    // Existing addresses on edit forms are user data and must not be replaced by CEP lookup.
-    let addressWasEdited = Boolean(endereco.value.trim());
+    let addressWasEdited = false;
     let addressParts;
     const composeAddress = () => {
         if (!addressParts || addressWasEdited) return;
@@ -123,6 +122,7 @@
         pending?.abort();
         status.textContent = "";
         addressParts = null;
+        addressWasEdited = false;
     });
     cep.addEventListener("blur", async () => {
         const digits = cep.value.replace(/\D/g, "");
@@ -136,30 +136,34 @@
         const controller = new AbortController();
         pending = controller;
         const timeout = window.setTimeout(() => controller.abort(), 10000);
-        const initialCity = cidade.value;
-        const initialUf = uf.value;
+        const initialCity = cidade?.value;
+        const initialUf = uf?.value;
         const initialEndereco = endereco.value;
         status.textContent = "Consultando CEP...";
         try {
-            const response = await fetch("https://viacep.com.br/ws/" + digits + "/json/", { signal: controller.signal });
+            const response = await fetch("/Administracao/Cep/Consultar?cep=" + encodeURIComponent(digits), { signal: controller.signal });
+            if (response.status === 404) {
+                status.textContent = "CEP não encontrado. Confira o CEP.";
+                return;
+            }
             if (!response.ok) throw new Error("Consulta indisponível");
             const data = await response.json();
             if (current !== revision) return;
-            if (data.erro || !data.localidade || !data.uf) {
-                status.textContent = "CEP não encontrado. Confira o CEP ou preencha cidade e UF manualmente.";
+            if (!data.logradouro || !data.cidade || !data.uf) {
+                status.textContent = "CEP não encontrado. Confira o CEP.";
                 return;
             }
             // Keep manual edits made while the request was in progress.
-            if (cidade.value === initialCity) cidade.value = data.localidade;
-            if (uf.value === initialUf) uf.value = data.uf;
-            addressParts = data;
+            if (cidade && cidade.value === initialCity) cidade.value = data.localidade;
+            if (uf && uf.value === initialUf) uf.value = data.uf;
+            addressParts = { logradouro: data.logradouro, bairro: data.bairro, localidade: data.cidade, uf: data.uf };
             if (endereco.value === initialEndereco) composeAddress();
-            cidade.dispatchEvent(new Event("change", { bubbles: true }));
-            uf.dispatchEvent(new Event("change", { bubbles: true }));
+            cidade?.dispatchEvent(new Event("change", { bubbles: true }));
+            uf?.dispatchEvent(new Event("change", { bubbles: true }));
             status.textContent = "Consulta de CEP concluída.";
         } catch {
             if (current === revision)
-                status.textContent = "Não foi possível consultar o CEP. Preencha cidade e UF manualmente.";
+                status.textContent = "Não foi possível consultar o CEP. Preencha o endereço manualmente.";
         } finally {
             window.clearTimeout(timeout);
             if (current === revision) pending = null;

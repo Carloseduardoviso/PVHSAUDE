@@ -1,25 +1,46 @@
 @model Web.Models.PortalVm
 @{
-    var slots = new[]
+    var slotsSuperiores = new[]
     {
         (Model.BannersLateralEsquerda, "banner-carousel-lateral-esquerda", "Lateral esquerda", "banner-lateral-esquerda"),
         (Model.BannersCentral, "banner-carousel-central", "Destaques centrais", "banner-central"),
-        (Model.BannersLateralDireita, "banner-carousel-lateral-direita", "Lateral direita", "banner-lateral-direita"),
+        (Model.BannersLateralDireita, "banner-carousel-lateral-direita", "Lateral direita", "banner-lateral-direita")
+    };
+    var slotsInferiores = new[]
+    {
         (Model.BannersInferiorEsquerda, "banner-carousel-inferior-esquerda", "Destaques inferiores à esquerda", "banner-inferior-esquerda"),
         (Model.BannersInferiorDireita, "banner-carousel-inferior-direita", "Destaques inferiores à direita", "banner-inferior-direita")
     };
 }
-@if (slots.Any(x => x.Item1.Count > 0))
+@if (slotsSuperiores.Any(x => x.Item1.Count > 0))
 {
     <section class="portal-banner-layout mb-4" aria-label="Destaques">
-    @foreach (var (banners, carouselId, label, cssClass) in slots.Where(x => x.Item1.Count > 0))
+    @foreach (var (banners, carouselId, label, cssClass) in slotsSuperiores.Where(x => x.Item1.Count > 0))
     {
         <div class="@cssClass">
             <div id="@carouselId" class="carousel slide banner-carousel" aria-roledescription="carrossel" aria-label="@label"><div class="carousel-inner">
             @for (var i = 0; i < banners.Count; i++)
             {
                 var banner = banners[i];
-                <div class="carousel-item @(i == 0 ? "active" : "")" role="group" aria-label="@(i + 1) de @banners.Count"><h2 class="h6 text-center banner-titulo">@banner.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = banner.Id })" alt="@banner.Titulo" class="d-block w-100 banner-imagem" /></div>
+                <div class="carousel-item @(i == 0 ? "active" : "")" role="group" aria-label="@(i + 1) de @banners.Count"><h2 class="h6 visually-hidden banner-titulo">@banner.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = banner.Id })" alt="@banner.Titulo" class="d-block w-100 banner-imagem" /></div>
+            }
+            </div></div>
+        </div>
+    }
+    </section>
+}
+<partial name="_CredenciamentosCarousel" model="Model" />
+@if (slotsInferiores.Any(x => x.Item1.Count > 0))
+{
+    <section class="portal-banner-inferior-layout mb-4" aria-label="Destaques inferiores">
+    @foreach (var (banners, carouselId, label, cssClass) in slotsInferiores.Where(x => x.Item1.Count > 0))
+    {
+        <div class="@cssClass">
+            <div id="@carouselId" class="carousel slide banner-carousel" aria-roledescription="carrossel" aria-label="@label"><div class="carousel-inner">
+            @for (var i = 0; i < banners.Count; i++)
+            {
+                var banner = banners[i];
+                <div class="carousel-item @(i == 0 ? "active" : "")" role="group" aria-label="@(i + 1) de @banners.Count"><h2 class="h6 visually-hidden banner-titulo">@banner.Titulo</h2><img src="@Url.Action("BannerImagem", "Home", new { id = banner.Id })" alt="@banner.Titulo" class="d-block w-100 banner-imagem" /></div>
             }
             </div></div>
         </div>

@@ -6,7 +6,7 @@ using PVHSAUDE.Domain.Enuns;
 
 namespace Web.Controllers
 {
-    public class HomeController(CredenciadoApiClient credenciados, IHttpClientFactory clients, ILogger<HomeController> logger, Web.Services.LogoPortalStorage logos) : Controller
+    public class HomeController(CredenciadoApiClient credenciados, DescontoApiClient descontos, IHttpClientFactory clients, ILogger<HomeController> logger, Web.Services.LogoPortalStorage logos) : Controller
     {
         [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -25,7 +25,37 @@ namespace Web.Controllers
             }
             catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException || ex is OperationCanceledException && !cancellationToken.IsCancellationRequested)
             { logger.LogWarning(ex, "Não foi possível carregar os banners do portal."); }
+            await CarregarCredenciamentosAtivos(model, cancellationToken);
             return View(model);
+        }
+
+        private async Task CarregarCredenciamentosAtivos(PortalVm model, CancellationToken cancellationToken)
+        {
+            using var timeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            timeout.CancelAfter(TimeSpan.FromSeconds(5));
+            try
+            {
+                var empresasTask = credenciados.ListarAsync(timeout.Token);
+                var especialidadesTask = credenciados.EspecialidadesAsync(timeout.Token);
+                var procedimentosTask = credenciados.ProcedimentosAsync(timeout.Token);
+                var descontosTask = descontos.ListarAsync(timeout.Token);
+                await Task.WhenAll(empresasTask, especialidadesTask, procedimentosTask, descontosTask);
+
+                model.Empresas = (await empresasTask)
+                    .Where(x => x.StatusCredenciamento == StatusCredenciamento.Ativo)
+                    .ToList();
+                model.Especialidades = await especialidadesTask;
+                model.Procedimentos = await procedimentosTask;
+                model.Descontos = await descontosTask;
+            }
+            catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException || ex is OperationCanceledException && !cancellationToken.IsCancellationRequested)
+            {
+                logger.LogWarning(ex, "Não foi possível carregar os credenciamentos do portal.");
+                model.Empresas = [];
+                model.Especialidades = [];
+                model.Procedimentos = [];
+                model.Descontos = [];
+            }
         }
 
         [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]

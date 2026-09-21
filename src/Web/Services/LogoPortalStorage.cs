@@ -1,3 +1,5 @@
+using PVHSAUDE.Application.AppService;
+
 namespace Web.Services;
 
 public sealed class LogoPortalStorage(IWebHostEnvironment environment)
@@ -15,9 +17,21 @@ public sealed class LogoPortalStorage(IWebHostEnvironment environment)
         if (logo.Length is <= 0 or > 5_242_880) throw new InvalidOperationException("A logo deve ter até 5 MB.");
         var extensao = Path.GetExtension(logo.FileName);
         if (!Tipos.ContainsKey(extensao)) throw new InvalidOperationException("Envie uma logo JPG, PNG ou WEBP válida.");
+
+        using var ms = new MemoryStream();
+        await logo.CopyToAsync(ms, ct);
+        var bytes = ms.ToArray();
+
+        var (w, h) = BannerFormato.Dimensoes(bytes);
+        if (w <= 0 || h <= 0)
+            throw new InvalidOperationException("Não foi possível ler a imagem. Envie um JPG, PNG ou WEBP válido.");
+
+        if (!LogoPortalFormato.Valido(bytes))
+            throw new InvalidOperationException(LogoPortalFormato.Mensagem);
+
         Directory.CreateDirectory(Pasta);
         foreach (var anterior in Directory.EnumerateFiles(Pasta, "logo-portal.*")) File.Delete(anterior);
         await using var destino = File.Create(Path.Combine(Pasta, "logo-portal" + extensao.ToLowerInvariant()));
-        await logo.CopyToAsync(destino, ct);
+        await destino.WriteAsync(bytes, ct);
     }
 }

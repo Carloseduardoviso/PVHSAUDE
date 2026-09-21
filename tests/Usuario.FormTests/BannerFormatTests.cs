@@ -7,10 +7,16 @@ internal static class BannerFormatTests
     {
         var lateral = Png(400, 500);
         var central = Png(1600, 500);
+        var centralNovo = Png(1920, 600);
+        var inferiorNovo = Png(960, 300);
+        var lateralNovo = Png(800, 1000);
         Check(BannerFormato.Valido(lateral), "lateral aceita imagem em retrato 4:5");
         Check(BannerFormato.Valido(lateral, PosicaoBanner.LateralDireita), "lateral direita exige e aceita 4:5");
         Check(!BannerFormato.Valido(lateral, PosicaoBanner.Central), "central rejeita imagem de lateral");
         Check(BannerFormato.Valido(central, PosicaoBanner.InferiorEsquerda), "inferior esquerdo aceita paisagem 16:5");
+        Check(BannerFormato.Valido(centralNovo, PosicaoBanner.Central), "central aceita novo recomendado 1920x600");
+        Check(BannerFormato.Valido(inferiorNovo, PosicaoBanner.InferiorDireita), "inferior direito aceita novo recomendado 960x300");
+        Check(BannerFormato.Valido(lateralNovo, PosicaoBanner.LateralEsquerda), "lateral esquerdo aceita novo recomendado 800x1000");
     }
 
     private static byte[] Png(int width, int height)

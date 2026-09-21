@@ -71,8 +71,8 @@ body {
   .whatsapp-float svg { width: 2.1rem; height: 2.1rem; }
 }
 
-.portal-apresentacao { width: 100%; height: clamp(200px, 30vw, 320px); overflow: hidden; background: #fff; padding: 0; border: 1px solid #183c78; }
-.portal-logo { display: block; width: 100%; height: 100%; object-fit: fill; }
+.portal-apresentacao { width: 100vw; height: clamp(100px, calc(100vw / 6), 320px); margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); overflow: hidden; background: #fff; padding: 0; border: 1px solid #183c78; }
+.portal-logo { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
 .portal-brand { display: inline-flex; align-items: center; padding: 0; margin-left: -.35rem; flex-shrink: 0; }
 .portal-brand img { display: block; width: 164px; max-width: 45vw; height: auto; }
 
@@ -128,15 +128,34 @@ body {
   .portal-nav-actions .btn { font-size: .7rem; padding: .35rem .5rem; }
 }
 
-.banner-imagem { width: 100%; height: auto; aspect-ratio: 16 / 5; object-fit: contain; object-position: center; }
+.banner-imagem { width: 100%; height: auto; aspect-ratio: 16 / 5; object-fit: cover; object-position: center; }
 .banner-titulo { overflow-wrap: anywhere; }
-.portal-banner-layout { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(360px, 3fr) minmax(180px, 1fr); gap: 1.25rem; align-items: start; }
-.banner-central { grid-column: 2; }.banner-lateral-esquerda { grid-column: 1; grid-row: 1; }.banner-lateral-direita { grid-column: 3; grid-row: 1; }.banner-inferior-esquerda { grid-column: 1 / 3; }.banner-inferior-direita { grid-column: 3; }
-.portal-banner-layout .banner-imagem { aspect-ratio: 16 / 5; object-fit: contain; }.portal-banner-layout .banner-lateral-esquerda .banner-imagem, .portal-banner-layout .banner-lateral-direita .banner-imagem { aspect-ratio: 4 / 5; height: 100%; object-fit: cover; }.portal-banner-layout .banner-lateral-esquerda .carousel, .portal-banner-layout .banner-lateral-direita .carousel, .portal-banner-layout .banner-lateral-esquerda .carousel-inner, .portal-banner-layout .banner-lateral-direita .carousel-inner, .portal-banner-layout .banner-lateral-esquerda .carousel-item, .portal-banner-layout .banner-lateral-direita .carousel-item { height: 100%; }
-@media (max-width: 991.98px) { .portal-banner-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }.banner-central, .banner-lateral-esquerda, .banner-lateral-direita, .banner-inferior-esquerda, .banner-inferior-direita { grid-column: auto; grid-row: auto; }.banner-central { grid-column: 1 / -1; } }
+.portal-banner-layout { display: grid; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); grid-template-columns: minmax(180px, 1fr) minmax(360px, 3fr) minmax(180px, 1fr); gap: 1.25rem; align-items: start; }
+.portal-banner-inferior-layout { display: grid; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; align-items: start; }
+.portal-banner-layout:has(.banner-central:only-child) { grid-template-columns: minmax(0, 1fr); }
+.portal-banner-layout:has(.banner-central:only-child) .banner-central { grid-column: 1; }
+.banner-central { grid-column: 2; }.banner-lateral-esquerda { grid-column: 1; grid-row: 1; }.banner-lateral-direita { grid-column: 3; grid-row: 1; }
+.portal-banner-layout .banner-imagem { aspect-ratio: 16 / 5; object-fit: cover; }.portal-banner-layout .banner-lateral-esquerda .banner-imagem, .portal-banner-layout .banner-lateral-direita .banner-imagem { aspect-ratio: 4 / 5; height: 100%; object-fit: contain; background: #fff; }.portal-banner-layout .banner-lateral-esquerda .carousel, .portal-banner-layout .banner-lateral-direita .carousel, .portal-banner-layout .banner-lateral-esquerda .carousel-inner, .portal-banner-layout .banner-lateral-direita .carousel-inner, .portal-banner-layout .banner-lateral-esquerda .carousel-item, .portal-banner-layout .banner-lateral-direita .carousel-item { height: 100%; }
+@media (max-width: 991.98px) { .portal-banner-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }.banner-central, .banner-lateral-esquerda, .banner-lateral-direita, .banner-inferior-esquerda, .banner-inferior-direita { grid-column: auto; grid-row: auto; }.banner-central { order: -1; grid-column: 1 / -1; } }
 @media (max-width: 575.98px) { .portal-banner-layout { grid-template-columns: 1fr; }.banner-central { grid-column: auto; } }
+@media (max-width: 575.98px) { .portal-banner-inferior-layout { grid-template-columns: 1fr; } }
 .banner-carousel .carousel-control-prev-icon,
 .banner-carousel .carousel-control-next-icon { filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .8)); }
+
+.credenciamentos-section { width: min(60vw, 1440px); margin-inline: auto; }
+.credenciamentos-cabecalho { margin-bottom: 1.25rem; }
+.credenciamento-card { display: grid; grid-template-columns: minmax(280px, 42%) minmax(0, 58%); min-height: 300px; overflow: hidden; border: 1px solid #dce9e2; border-radius: 1rem; background: #fff; box-shadow: 0 .25rem .75rem rgba(21, 53, 122, .08); }
+.credenciamento-imagem { display: grid; place-items: center; min-height: 300px; background: #f4faf6; }
+.credenciamento-imagem img { width: 100%; height: 100%; object-fit: contain; }
+.credenciamento-imagem span { color: #145c49; font-weight: 700; }
+.credenciamento-conteudo { display: flex; flex-direction: column; justify-content: center; gap: 1.25rem; padding: 2rem; overflow-wrap: anywhere; }
+.credenciamento-detalhes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem 1.25rem; }
+.credenciamento-detalhe-completo { grid-column: 1 / -1; }
+.credenciamento-detalhes span, .credenciamento-servicos span { display: block; color: #527066; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+.credenciamento-detalhes strong, .credenciamento-servicos strong { display: block; color: #15357a; font-size: .95rem; font-weight: 600; }
+.credenciamento-servicos { display: grid; gap: .85rem; padding-top: 1.1rem; border-top: 1px solid #dce9e2; }
+@media (max-width: 991.98px) { .credenciamentos-section { width: min(100% - 2rem, 1440px); } }
+@media (max-width: 767.98px) { .credenciamentos-section { width: min(100% - 1.5rem, 1440px); }.credenciamento-card { grid-template-columns: 1fr; }.credenciamento-imagem { min-height: 220px; }.credenciamento-conteudo { min-height: 180px; padding: 1.5rem; }.credenciamento-detalhes { grid-template-columns: 1fr; }.credenciamento-detalhe-completo { grid-column: auto; } }
 
 .rede-carousel { border: 1px solid #dce9e2; border-radius: 1rem; overflow: hidden; background: #f4faf6; }
 .rede-card { display: grid; grid-template-columns: 42% 58%; min-height: 310px; }
@@ -189,6 +208,7 @@ body {
 .portal-carousel-controls { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: min(100%, 320px); margin: 1.25rem auto 0; }
 .portal-carousel-arrow { display: grid; place-items: center; flex: 0 0 36px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: #15357a; color: #fff; font-size: 1.4rem; line-height: 1; }
 .portal-carousel-arrow:hover { background: #21458e; }
+.portal-carousel-arrow:disabled { cursor: not-allowed; opacity: .45; }
 .portal-carousel-indicators { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 7px; padding: 7px 10px; border-radius: 999px; background: #15357a; }
 .portal-carousel-indicators button { width: 7px; height: 7px; flex-shrink: 0; padding: 0; border: 0; border-radius: 999px; background: #0bb899; }
 .portal-carousel-indicators button.active { width: 28px; background: #b5ff00; }

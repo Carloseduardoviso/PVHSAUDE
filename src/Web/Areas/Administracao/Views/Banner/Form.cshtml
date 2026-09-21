@@ -2,14 +2,80 @@
 @using PVHSAUDE.Domain.Enuns
 @{ var novo = Model.Id == Guid.Empty; ViewData["Title"] = novo ? "Cadastrar banner" : "Editar banner"; }
 <h1 class="h3 mb-4">@ViewData["Title"]</h1>
-<form asp-action="@(novo ? "Create" : "Edit")" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data" class="card card-body" style="max-width:800px">
-<input asp-for="Id" type="hidden" />
-<div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-<div class="mb-3"><label asp-for="Titulo" class="form-label"></label><input asp-for="Titulo" class="form-control" /><span asp-validation-for="Titulo" class="text-danger"></span></div>
-<div class="mb-3"><label asp-for="Posicao" class="form-label">Posição no portal</label><select asp-for="Posicao" class="form-select" id="posicao-banner"><option value="@PosicaoBanner.Central">Central</option><option value="@PosicaoBanner.LateralDireita">Lateral direita</option><option value="@PosicaoBanner.LateralEsquerda">Lateral esquerda</option><option value="@PosicaoBanner.InferiorDireita">Inferior direita</option><option value="@PosicaoBanner.InferiorEsquerda">Inferior esquerda</option></select><div class="form-text">Escolha a área do portal onde este banner será exibido.</div></div>
-<div class="mb-3"><label asp-for="Imagem" class="form-label"></label><input asp-for="Imagem" type="file" accept="image/jpeg,image/png,image/webp" class="form-control" aria-describedby="imagem-ajuda" data-novo="@novo.ToString().ToLowerInvariant()" /><div id="imagem-ajuda" class="form-text"></div><span asp-validation-for="Imagem" class="text-danger"></span></div>
-@if (!novo) { <img src="@Url.Action("BannerImagem", "Home", new { area = "", id = Model.Id })" alt="@Model.Titulo" class="img-fluid mb-3 rounded" style="max-height:250px;object-fit:contain" /> }
-<div class="form-check mb-4"><input asp-for="Ativo" class="form-check-input" /><label asp-for="Ativo" class="form-check-label">Ativo — exibir no portal</label></div>
-<div><button class="btn btn-success" type="submit">Salvar banner</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a></div>
-</form>
-@section Scripts { <partial name="_ValidationScriptsPartial" /><script src="~/js/banner-form.js" asp-append-version="true"></script> }
+<div class="row g-4 align-items-start">
+    <div class="col-lg-6 col-xl-5">
+        <form asp-action="@(novo ? "Create" : "Edit")" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data" class="card card-body shadow-sm">
+            <input asp-for="Id" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="mb-3">
+                <label asp-for="Titulo" class="form-label fw-semibold"></label>
+                <input asp-for="Titulo" class="form-control" id="banner-titulo-input" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Posicao" class="form-label fw-semibold">Posição no portal</label>
+                <select asp-for="Posicao" class="form-select" id="posicao-banner">
+                    <option value="@PosicaoBanner.Central">Central</option>
+                    <option value="@PosicaoBanner.LateralDireita">Lateral direita</option>
+                    <option value="@PosicaoBanner.LateralEsquerda">Lateral esquerda</option>
+                    <option value="@PosicaoBanner.InferiorDireita">Inferior direita</option>
+                    <option value="@PosicaoBanner.InferiorEsquerda">Inferior esquerda</option>
+                </select>
+                <div class="form-text">Escolha a área do portal onde este banner será exibido.</div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Imagem" class="form-label fw-semibold"></label>
+                <input asp-for="Imagem" type="file" accept="image/jpeg,image/png,image/webp" class="form-control" aria-describedby="imagem-ajuda" data-novo="@novo.ToString().ToLowerInvariant()" />
+                <div id="imagem-ajuda" class="form-text"></div>
+                <span asp-validation-for="Imagem" class="text-danger"></span>
+            </div>
+            <div class="form-check mb-4">
+                <input asp-for="Ativo" class="form-check-input" id="banner-ativo-input" />
+                <label asp-for="Ativo" class="form-check-label">Ativo — exibir no portal</label>
+            </div>
+            <div>
+                <button class="btn btn-success" type="submit">Salvar banner</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-lg-6 col-xl-7">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <span class="fw-semibold">Pré-visualização no portal</span>
+                <div>
+                    <span class="badge bg-primary me-1" id="banner-posicao-badge">Central (16:5)</span>
+                    <span class="badge @(Model.Ativo ? "bg-success" : "bg-secondary")" id="banner-ativo-badge">@(Model.Ativo ? "Ativo" : "Inativo")</span>
+                </div>
+            </div>
+            <div class="card-body bg-light-subtle d-flex flex-column justify-content-center align-items-center p-3 p-md-4">
+                <div class="w-100 p-2 bg-white rounded shadow-sm">
+                    <div class="text-muted small mb-2 d-flex justify-content-between">
+                        <span id="banner-preview-area-desc">Área central de destaques (formato paisagem)</span>
+                        <span id="banner-dimensoes-info" class="fw-bold text-dark"></span>
+                    </div>
+                    <div id="banner-preview-container" class="mx-auto" style="width: 100%; max-width: 100%; transition: max-width .3s ease;">
+                        <h2 class="h6 text-center banner-titulo mb-2" id="banner-preview-titulo">@(string.IsNullOrWhiteSpace(Model.Titulo) ? "Título do banner" : Model.Titulo)</h2>
+                        <div id="banner-preview-frame" style="width: 100%; aspect-ratio: 16 / 5; border-radius: 6px; overflow: hidden; background: #f0f2f5; display: flex; align-items: center; justify-content: center; border: 1px solid #dee2e6;">
+                            <img id="banner-preview-img"
+                                 src="@(!novo ? Url.Action("BannerImagem", "Home", new { area = "", id = Model.Id }) : "")"
+                                 alt="Pré-visualização do banner"
+                                 class="w-100 h-100 @(!novo ? "" : "d-none")"
+                                 style="object-fit: cover; object-position: center;" />
+                            <div id="banner-preview-placeholder" class="text-center text-muted p-3 @(!novo ? "d-none" : "")">
+                                <i class="bi bi-image d-block mb-1" style="font-size: 2rem;"></i>
+                                <span class="small">Selecione uma imagem para visualizar o banner como aparecerá no portal.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/banner-form.js" asp-append-version="true"></script>
+}

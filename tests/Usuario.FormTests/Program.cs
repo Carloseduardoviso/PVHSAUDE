@@ -16,6 +16,10 @@ if (args.Contains("--galeria")) { AutoMapperTests.RunGaleria(); return; }
 ClientScriptTests.Run();
 
 BannerFormatTests.Run();
+LogoPortalFormatTests.Run();
+PortalHomeUxTests.Run();
+CredenciamentosCarouselTests.Run();
+CepAutofillTests.Run();
 await BannerApiClientTests.Run();
 if (args.Contains("--banner")) return;
 AutoMapperTests.Run();

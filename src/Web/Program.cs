@@ -27,6 +27,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddScoped<Web.Services.UsuarioCookieEvents>();
 builder.Services.AddScoped<WhatsAppApiClient>();
 builder.Services.AddScoped<LogoPortalStorage>();
+builder.Services.AddHttpClient<CepConsultaClient>(client => client.Timeout = TimeSpan.FromSeconds(8));
 builder.Services.AddAuthorization();
 builder.Services.AddHttpClient<BannerApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));

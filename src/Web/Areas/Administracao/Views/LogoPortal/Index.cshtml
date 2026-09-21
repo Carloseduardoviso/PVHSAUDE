@@ -1,11 +1,52 @@
 @model bool
 @{ ViewData["Title"] = "Logo do portal"; }
 <h1 class="h3 mb-3">Logo do portal</h1>
-<p class="text-muted">Envie a imagem que deve substituir a logo exibida no topo da página inicial. JPG, PNG ou WEBP, até 5 MB.</p>
+<p class="text-muted">Envie a imagem que deve substituir a logo exibida no topo da página inicial. Tamanho recomendado: 1920 × 320 px (proporção 6:1). JPG, PNG ou WEBP, até 5 MB.</p>
 @if (TempData["Sucesso"] is string sucesso) { <div class="alert alert-success" role="status">@sucesso</div> }
-<form method="post" enctype="multipart/form-data" class="card card-body shadow-sm" style="max-width:760px">
-    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-    <div class="mb-3"><label for="logo" class="form-label">Arquivo da logo</label><input id="logo" name="logo" type="file" accept="image/jpeg,image/png,image/webp" class="form-control" required /></div>
-    <button class="btn btn-primary" type="submit">@(Model ? "Substituir logo" : "Salvar logo")</button>
-</form>
-@if (Model) { <div class="mt-4"><p class="mb-2">Logo atual</p><img src="@Url.Action("LogoPortal", "Home", new { area = "" })" alt="Logo atual do portal" class="img-fluid border rounded p-2" style="max-height:260px" /></div> }
+<div class="row g-4">
+    <div class="col-lg-5">
+        <form method="post" enctype="multipart/form-data" class="card card-body shadow-sm">
+            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+            <div class="mb-3">
+                <label for="logo" class="form-label fw-semibold">Arquivo da logo</label>
+                <input id="logo" name="logo" type="file" accept="image/jpeg,image/png,image/webp" class="form-control" aria-describedby="logo-ajuda" required />
+                <div id="logo-ajuda" class="form-text">Recomendação: 1920 × 320 pixels (proporção 6:1). Formatos aceitos: JPG, PNG ou WEBP de até 5 MB.</div>
+                <span class="text-danger d-block mt-1" id="logo-erro">@ViewData.ModelState["logo"]?.Errors.FirstOrDefault()?.ErrorMessage</span>
+            </div>
+            <button class="btn btn-primary" type="submit">@(Model ? "Substituir logo" : "Salvar logo")</button>
+        </form>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card shadow-sm h-100">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <span class="fw-semibold">Pré-visualização no portal</span>
+                <span class="badge @(Model ? "bg-primary" : "bg-secondary")" id="logo-status-badge">@(Model ? "Logo atual salva" : "Nenhuma logo salva")</span>
+            </div>
+            <div class="card-body bg-light-subtle d-flex flex-column justify-content-center p-3">
+                <div class="w-100 p-2 bg-white rounded shadow-sm">
+                    <div class="text-muted small mb-2 d-flex justify-content-between">
+                        <span>Topo da página inicial (apresentação do portal)</span>
+                        <span id="logo-dimensoes-info" class="fw-bold text-dark">@(Model ? "Proporção 6:1" : "")</span>
+                    </div>
+                    <div id="logo-preview-frame" style="width: 100%; aspect-ratio: 6 / 1; border: 1px solid #183c78; border-radius: 4px; overflow: hidden; background: #fff; display: flex; align-items: center; justify-content: center;">
+                        <img id="logo-preview-img"
+                             src="@(Model ? Url.Action("LogoPortal", "Home", new { area = "" }) : "")"
+                             alt="Pré-visualização da logo do portal"
+                             class="w-100 h-100 @(Model ? "" : "d-none")"
+                             style="object-fit: contain; object-position: center;" />
+                        <div id="logo-preview-placeholder" class="text-center text-muted p-3 @(Model ? "d-none" : "")">
+                            <i class="bi bi-image d-block mb-1" style="font-size: 1.8rem;"></i>
+                            <span class="small">Selecione uma imagem para visualizar como ficará no topo do portal.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/logo-portal-form.js" asp-append-version="true"></script>
+}
