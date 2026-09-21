@@ -15,7 +15,7 @@ namespace PVHSAUDE.Infra.Data.Migrations
                 table: "Banner",
                 type: "int",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: 2);
         }
 
         /// <inheritdoc />
