@@ -14,8 +14,11 @@ public class AutoMapperConfig : Profile
             .ForMember(x => x.Id, o => o.Ignore())
             .ForMember(x => x.ImagemUrl, o => o.Ignore())
             .ForMember(x => x.ImagemUrls, o => o.Ignore());
-        CreateMap<DependenteEntradaVm, DependenteVm>();
-        CreateMap<BeneficiarioEntradaVm, BeneficiarioVm>().ForMember(x => x.Id, o => o.Ignore());
+        CreateMap<DependenteEntradaVm, DependenteVm>()
+            .ForMember(x => x.Codigo, o => o.Ignore());
+        CreateMap<BeneficiarioEntradaVm, BeneficiarioVm>()
+            .ForMember(x => x.Id, o => o.Ignore())
+            .ForMember(x => x.Codigo, o => o.Ignore());
         CreateMap<Plano, PlanoRespostaVm>();
         CreateMap<Desconto, PlanoRespostaVm>();
         CreateMap<PlanoVm, Desconto>().ConvertUsing((vm, entity, _) =>

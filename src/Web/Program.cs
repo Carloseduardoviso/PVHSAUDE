@@ -27,7 +27,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddScoped<Web.Services.UsuarioCookieEvents>();
 builder.Services.AddScoped<WhatsAppApiClient>();
 builder.Services.AddScoped<LogoPortalStorage>();
-builder.Services.AddHttpClient<CepConsultaClient>(client => client.Timeout = TimeSpan.FromSeconds(8));
+builder.Services.AddHttpClient<CepConsultaClient>(client => client.Timeout = TimeSpan.FromSeconds(45));
 builder.Services.AddAuthorization();
 builder.Services.AddHttpClient<BannerApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
@@ -38,7 +38,10 @@ builder.Services.AddHttpClient<UsuarioApiClient>(client =>
 // API clients use the current HTTP context to forward authentication.
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<ApiAuthenticationHandler>();
-builder.Services.ConfigureHttpClientDefaults(http => http.AddHttpMessageHandler<ApiAuthenticationHandler>());
+builder.Services.AddTransient<ApiConnectionRetryHandler>();
+builder.Services.ConfigureHttpClientDefaults(http => http
+    .AddHttpMessageHandler<ApiAuthenticationHandler>()
+    .AddHttpMessageHandler<ApiConnectionRetryHandler>());
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient("default", client => client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 

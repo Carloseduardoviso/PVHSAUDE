@@ -110,8 +110,8 @@
     let addressParts;
     const composeAddress = () => {
         if (!addressParts || addressWasEdited) return;
-        const locality = cidade.value || addressParts.localidade;
-        const state = uf.value || addressParts.uf;
+        const locality = cidade?.value || addressParts.localidade;
+        const state = uf?.value || addressParts.uf;
         if (!addressParts.logradouro || !locality || !state) return;
         endereco.value = `${addressParts.logradouro}${numero.value.trim() ? ", " + numero.value.trim() : ""} - ${addressParts.bairro || ""} - ${locality}/${state}`;
     };
@@ -154,8 +154,8 @@
                 return;
             }
             // Keep manual edits made while the request was in progress.
-            if (cidade && cidade.value === initialCity) cidade.value = data.localidade;
-            if (uf && uf.value === initialUf) uf.value = data.uf;
+            if (cidade?.value === initialCity) cidade.value = data.localidade;
+            if (uf?.value === initialUf) uf.value = data.uf;
             addressParts = { logradouro: data.logradouro, bairro: data.bairro, localidade: data.cidade, uf: data.uf };
             if (endereco.value === initialEndereco) composeAddress();
             cidade?.dispatchEvent(new Event("change", { bubbles: true }));
