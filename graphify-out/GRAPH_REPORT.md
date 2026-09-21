@@ -1,17 +1,17 @@
 # Graph Report - PVHSAUDE  (2026-09-21)
 
 ## Corpus Check
-- 429 files · ~305,970 words
+- 429 files · ~308,287 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 16 file(s) not represented in the graph (top: (none) 8, .css 5, .example 1)
 
 ## Summary
-- 3178 nodes · 6311 edges · 269 communities (161 shown, 108 thin omitted)
+- 3179 nodes · 6311 edges · 270 communities (161 shown, 109 thin omitted)
 - Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 538 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7f135608`
+- Built from commit: `5477a403`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -64,8 +64,8 @@
 - PortalVm
 - Controller
 - PlanoVm
+- PVHSAUDE.Infra.Data.Migrations
 - BannerApiClient
-- BannersController
 - Transport
 - BeneficiariosController
 - EmpresaBeneficiadaService
@@ -85,7 +85,7 @@
 - ContatoVm
 - .Atualizar
 - .Atualizar
-- PlanoVm
+- BannersController
 - MetricsAuthMiddleware
 - CredenciadoImagem
 - IBeneficiarioService
@@ -94,12 +94,12 @@
 - Plano
 - BannerVm
 - .Edit
-- RepositoryBase
+- PlanoVm
 - IContatoService
 - TipoCredenciado
 - ProfileManager
 - AdicionaPosicaoBannerPortal
-- .Run
+- RepositoryBase
 - carteirinha.js
 - MenusValidosAttribute
 - ContatoEntradaVm
@@ -111,14 +111,14 @@
 - IImagemStorage
 - .Run
 - EntityRepository
-- BannerRequest
+- .Run
 - Account
 - ValidateTokenForgotPasswordMiddleware
 - Banners por posição no portal
 - CadastroBanners
 - CadastroContatos
 - IntencoesVenda
-- PVHSAUDE.Infra.Data.Migrations
+- ServiceBase
 - GaleriaImagensCredenciado
 - .AtualizarStatus
 - Banner
@@ -137,7 +137,7 @@
 - CadastroDatasBusca
 - AjusteDefaultDataCadastro
 - beneficiario-form.js
-- Role
+- ConfiguracaoWhatsAppUnica
 - MenusAdministrativos
 - TipoPessoa
 - DescontosECredenciadoDesconto
@@ -145,7 +145,7 @@
 - ImagemCredenciado
 - UsuarioAtivo
 - PermissoesMenusUsuarios
-- ConfiguracaoWhatsAppUnica
+- ConfiguracaoBeneficiarioDependente
 - PlanoTipoPessoa
 - ContatoNotificacaoSuspensa
 - IntencaoVendaNotificacaoSuspensa
@@ -157,20 +157,22 @@
 - infra_data_base
 - Especialidade
 - Procedimento
-- ServiceBase
+- .BuildModel
+- BannerRequest
 - Deploy do PVHSAUDE em VPS Docker
 - MoedaModelBinder.cs
 - CatalogosRelacionamentos
 - .Index
 - validade.test.cjs
+- Periodicidade
 - UsuarioCookieEvents
-- .BuildModel
+- Role
 - StatusPagamento
 - TestTimeProvider
 - StatusCarteirinha
 - .Run
 - Config/AutoMapperConfig.cs
-- ConfiguracaoBeneficiarioDependente
+- web_models
 - Beneficiario/_Form.cshtml
 - ErrorVm
 - Beneficiario/Index.cshtml
@@ -224,7 +226,6 @@
 - mapeamentos.md
 - health-checks.md
 - Migration
-- Periodicidade
 - StatusCredenciamento
 - microsoft_aspnetcore_mvc
 - pvhsaude_web_areas_administracao_controllers
@@ -257,7 +258,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (269 total, 108 thin omitted)
+## Communities (270 total, 109 thin omitted)
 
 ### Community 0 - "BeneficiarioVm"
 Cohesion: 0.05
@@ -451,13 +452,13 @@ Nodes (33): Controller, CancellationToken, Guid, HttpClient, HttpGet, HttpPost, 
 Cohesion: 0.06
 Nodes (47): CancellationToken, Guid, HttpPost, IActionResult, Task, ValidateAntiForgeryToken, DescontoController, CancellationToken (+39 more)
 
-### Community 48 - "BannerApiClient"
+### Community 48 - "PVHSAUDE.Infra.Data.Migrations"
+Cohesion: 0.13
+Nodes (8): Infra.Data.Base, PVHSAUDE.Infra.Data.Migrations, microsoft_entityframeworkcore, microsoft_entityframeworkcore_infrastructure, microsoft_entityframeworkcore_metadata, microsoft_entityframeworkcore_migrations, microsoft_entityframeworkcore_storage_valueconversion, system
+
+### Community 49 - "BannerApiClient"
 Cohesion: 0.13
 Nodes (17): Bytes, Tipo, CancellationToken, Guid, HttpClient, List, Task, BannerApiClient (+9 more)
-
-### Community 49 - "BannersController"
-Cohesion: 0.31
-Nodes (11): AllowAnonymous, Authorize, CancellationToken, Guid, HttpGet, HttpPost, HttpPut, IActionResult (+3 more)
 
 ### Community 50 - "Transport"
 Cohesion: 0.24
@@ -496,8 +497,8 @@ Cohesion: 0.12
 Nodes (15): DateTime, Guid, Contato, Cpf, Email, EnviadoEm, Id, Mensagem (+7 more)
 
 ### Community 59 - "BannerVm"
-Cohesion: 0.23
-Nodes (11): CancellationToken, Guid, List, Task, IBannerService, Guid, BannerVm, Ativo (+3 more)
+Cohesion: 0.18
+Nodes (17): CancellationToken, Guid, HttpGet, HttpPost, IActionResult, RequestSizeLimit, Task, ValidateAntiForgeryToken (+9 more)
 
 ### Community 60 - ".SalvarAsync"
 Cohesion: 0.27
@@ -535,9 +536,9 @@ Nodes (15): Authorize, CancellationToken, Guid, HttpGet, HttpPatch, HttpPost, Ht
 Cohesion: 0.31
 Nodes (9): Authorize, CancellationToken, Guid, HttpGet, HttpPost, HttpPut, IActionResult, Task (+1 more)
 
-### Community 69 - "PlanoVm"
-Cohesion: 0.17
-Nodes (12): DateTime, Guid, Periodicidade, TipoPessoa, PlanoVm, DataValidade, Descricao, Id (+4 more)
+### Community 69 - "BannersController"
+Cohesion: 0.31
+Nodes (11): AllowAnonymous, Authorize, CancellationToken, Guid, HttpGet, HttpPost, HttpPut, IActionResult (+3 more)
 
 ### Community 70 - "MetricsAuthMiddleware"
 Cohesion: 0.17
@@ -564,16 +565,16 @@ Cohesion: 0.16
 Nodes (13): DateTime, Guid, Periodicidade, TipoPessoa, Plano, DataValidade, Descricao, Id (+5 more)
 
 ### Community 76 - "BannerVm"
-Cohesion: 0.18
-Nodes (17): CancellationToken, Guid, HttpGet, HttpPost, IActionResult, RequestSizeLimit, Task, ValidateAntiForgeryToken (+9 more)
+Cohesion: 0.23
+Nodes (11): CancellationToken, Guid, List, Task, IBannerService, Guid, BannerVm, Ativo (+3 more)
 
 ### Community 77 - ".Edit"
 Cohesion: 0.11
 Nodes (27): ProblemDetails, CancellationToken, Guid, HttpGet, HttpPost, IActionResult, Task, ValidateAntiForgeryToken (+19 more)
 
-### Community 78 - "RepositoryBase"
-Cohesion: 0.27
-Nodes (6): LambdaExpression, MethodCallExpression, DbSet, Expression, Func, RepositoryBase
+### Community 78 - "PlanoVm"
+Cohesion: 0.17
+Nodes (12): DateTime, Guid, Periodicidade, TipoPessoa, PlanoVm, DataValidade, Descricao, Id (+4 more)
 
 ### Community 79 - "IContatoService"
 Cohesion: 0.42
@@ -591,9 +592,9 @@ Nodes (9): Claim, ClaimsPrincipal, Guid, IEnumerable, ProfileManager, Claims, Is
 Cohesion: 0.29
 Nodes (5): MigrationBuilder, DateTime, Guid, ModelBuilder, AdicionaPosicaoBannerPortal
 
-### Community 83 - ".Run"
-Cohesion: 0.28
-Nodes (6): AuthorizeAttribute, AuthorizationFilterContext, ClaimsPrincipal, Task, MenuPermissionsTests, IDesignTimeModel
+### Community 83 - "RepositoryBase"
+Cohesion: 0.27
+Nodes (6): LambdaExpression, MethodCallExpression, DbSet, Expression, Func, RepositoryBase
 
 ### Community 84 - "carteirinha.js"
 Cohesion: 0.26
@@ -639,9 +640,9 @@ Nodes (9): IViewComponentResult, Task, IntencaoAvisosViewComponent, Cancellation
 Cohesion: 0.09
 Nodes (22): IAsyncDisposable, IRepositoryTransaction, CancellationToken, Expression, Func, IDbContextTransaction, IQueryable, List (+14 more)
 
-### Community 95 - "BannerRequest"
-Cohesion: 0.33
-Nodes (6): IFormFile, BannerRequest, Ativo, Imagem, Posicao, Titulo
+### Community 95 - ".Run"
+Cohesion: 0.28
+Nodes (6): AuthorizeAttribute, AuthorizationFilterContext, ClaimsPrincipal, Task, MenuPermissionsTests, IDesignTimeModel
 
 ### Community 96 - "Account"
 Cohesion: 0.15
@@ -667,9 +668,9 @@ Nodes (7): DateTime, Guid, MigrationBuilder, DateTime, Guid, ModelBuilder, Cadas
 Cohesion: 0.22
 Nodes (7): DateTime, Guid, MigrationBuilder, DateTime, Guid, ModelBuilder, IntencoesVenda
 
-### Community 102 - "PVHSAUDE.Infra.Data.Migrations"
-Cohesion: 0.13
-Nodes (8): Infra.Data.Base, PVHSAUDE.Infra.Data.Migrations, microsoft_entityframeworkcore, microsoft_entityframeworkcore_infrastructure, microsoft_entityframeworkcore_metadata, microsoft_entityframeworkcore_migrations, microsoft_entityframeworkcore_storage_valueconversion, system
+### Community 102 - "ServiceBase"
+Cohesion: 0.25
+Nodes (5): PVHSAUDE.Domain.Services, IDisposable, Func, Task, ServiceBase
 
 ### Community 103 - "GaleriaImagensCredenciado"
 Cohesion: 0.22
@@ -743,9 +744,9 @@ Nodes (6): DateTime, MigrationBuilder, DateTime, Guid, ModelBuilder, AjusteDefau
 Cohesion: 0.35
 Nodes (10): add(), atualizarPlanoDependentes(), filtrar(), format(), mask(), mostrarValor(), proximoCodigoDependente(), update() (+2 more)
 
-### Community 121 - "Role"
-Cohesion: 0.50
-Nodes (4): Role, Administrador, Comum, Gestor
+### Community 121 - "ConfiguracaoWhatsAppUnica"
+Cohesion: 0.29
+Nodes (5): MigrationBuilder, DateTime, Guid, ModelBuilder, ConfiguracaoWhatsAppUnica
 
 ### Community 122 - "MenusAdministrativos"
 Cohesion: 0.33
@@ -771,9 +772,9 @@ Nodes (5): MigrationBuilder, DateTime, Guid, ModelBuilder, UsuarioAtivo
 Cohesion: 0.29
 Nodes (5): MigrationBuilder, DateTime, Guid, ModelBuilder, PermissoesMenusUsuarios
 
-### Community 129 - "ConfiguracaoWhatsAppUnica"
-Cohesion: 0.29
-Nodes (5): MigrationBuilder, DateTime, Guid, ModelBuilder, ConfiguracaoWhatsAppUnica
+### Community 129 - "ConfiguracaoBeneficiarioDependente"
+Cohesion: 0.33
+Nodes (4): MigrationBuilder, DateTime, ModelBuilder, ConfiguracaoBeneficiarioDependente
 
 ### Community 130 - "PlanoTipoPessoa"
 Cohesion: 0.29
@@ -815,9 +816,13 @@ Nodes (7): Guid, ICollection, Especialidade, Ativo, Credenciados, Id, Nome
 Cohesion: 0.22
 Nodes (7): Guid, ICollection, Procedimento, Ativo, Credenciados, Id, Nome
 
-### Community 142 - "ServiceBase"
-Cohesion: 0.25
-Nodes (5): PVHSAUDE.Domain.Services, IDisposable, Func, Task, ServiceBase
+### Community 141 - ".BuildModel"
+Cohesion: 0.33
+Nodes (5): ModelSnapshot, DateTime, Guid, ModelBuilder, ContextModelSnapshot
+
+### Community 142 - "BannerRequest"
+Cohesion: 0.33
+Nodes (6): IFormFile, BannerRequest, Ativo, Imagem, Posicao, Titulo
 
 ### Community 143 - "Deploy do PVHSAUDE em VPS Docker"
 Cohesion: 0.25
@@ -839,13 +844,17 @@ Nodes (9): WhatsAppController, CancellationToken, HttpGet, IActionResult, Respon
 Cohesion: 0.09
 Nodes (23): ref_node_assert, ref_node_fs, ref_node_path, ref_node_test, ref_node_vm, assert, create, edit (+15 more)
 
+### Community 148 - "Periodicidade"
+Cohesion: 0.33
+Nodes (5): Periodicidade, Anual, Mensal, Semestral, Trimestral
+
 ### Community 149 - "UsuarioCookieEvents"
 Cohesion: 0.33
 Nodes (5): CookieAuthenticationEvents, CookieValidatePrincipalContext, IHttpClientFactory, Task, UsuarioCookieEvents
 
-### Community 150 - ".BuildModel"
-Cohesion: 0.33
-Nodes (5): ModelSnapshot, DateTime, Guid, ModelBuilder, ContextModelSnapshot
+### Community 150 - "Role"
+Cohesion: 0.50
+Nodes (4): Role, Administrador, Comum, Gestor
 
 ### Community 151 - "StatusPagamento"
 Cohesion: 0.29
@@ -867,10 +876,6 @@ Nodes (19): Profile, List, AutoMapperConfig, EmpresaBeneficiadaProfile, Guid, Cr
 Cohesion: 0.33
 Nodes (4): automapper_internal, PVHSAUDE.Infra.Helper.Config, IMapperConfigurationExpression, AutoMapperConfig
 
-### Community 160 - "ConfiguracaoBeneficiarioDependente"
-Cohesion: 0.33
-Nodes (4): MigrationBuilder, DateTime, ModelBuilder, ConfiguracaoBeneficiarioDependente
-
 ### Community 162 - "Beneficiario/_Form.cshtml"
 Cohesion: 0.50
 Nodes (3): BeneficiarioVm, CredenciadoVm, PlanoVm
@@ -891,10 +896,6 @@ Nodes (7): ajuda, atualizarAjuda(), bannerInput, posicaoInput, regraAtual(), reg
 Cohesion: 0.22
 Nodes (6): Migration, MigrationBuilder, PlanoNotificacaoValidade, MigrationBuilder, ModelBuilder, CorrigirCodigosDependentes
 
-### Community 276 - "Periodicidade"
-Cohesion: 0.33
-Nodes (5): Periodicidade, Anual, Mensal, Semestral, Trimestral
-
 ### Community 277 - "StatusCredenciamento"
 Cohesion: 0.33
 Nodes (5): StatusCredenciamento, Ativo, Encerrado, Pendente, Suspenso
@@ -905,16 +906,16 @@ Nodes (22): Web.Models, PVHSAUDE.Web.Controllers, Web.Controllers, PVHSAUDE.Web.
 
 ## Knowledge Gaps
 - **756 isolated node(s):** `backup-sqlserver.sh script`, `Titulo`, `Posicao`, `Ativo`, `Imagem` (+751 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1459 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **108 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1460 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **109 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `PVHSAUDE.Domain.Enuns` connect `PVHSAUDE.Domain.Enuns` to `PosicaoBanner`, `PVHSAUDE.Domain.Entities`, `StatusCarteirinha`, `StatusIntencaoVenda`, `microsoft_aspnetcore_mvc`, `Periodicidade`, `StatusCredenciamento`, `PVHSAUDE.Application.ViewModels`, `StatusBeneficiario`, `StatusPagamento`, `MenusAdministrativos`, `Api/Program.cs`, `Beneficiario`?**
-  _High betweenness centrality (0.115) - this node is a cross-community bridge._
+  _High betweenness centrality (0.112) - this node is a cross-community bridge._
 - **Why does `PVHSAUDE.Application.ViewModels` connect `PVHSAUDE.Application.ViewModels` to `CatalogoEntradaVm`, `PVHSAUDE.Domain.Enuns`, `.Run`, `microsoft_aspnetcore_mvc`, `ContatoEntradaVm`, `Api/Program.cs`, `.SalvarAsync`, `IEntityTypeConfiguration`?**
-  _High betweenness centrality (0.080) - this node is a cross-community bridge._
+  _High betweenness centrality (0.086) - this node is a cross-community bridge._
 - **Why does `CredenciadoVm` connect `CredenciadoVm` to `BeneficiarioVm`, `PVHSAUDE.Domain.Enuns`, `PortalVm`, `TipoCredenciado`, `BannerApiClient`, `Transport`?**
   _High betweenness centrality (0.059) - this node is a cross-community bridge._
 - **What connects `backup-sqlserver.sh script`, `Titulo`, `Posicao` to the rest of the system?**

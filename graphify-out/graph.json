@@ -257,6 +257,25 @@
       "source_location": "L14"
     },
     {
+      "id": "src_domain_services_servicebase_pvhsaude_domain_services_servicebase",
+      "label": "ServiceBase",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 102,
+      "community_name": "ServiceBase",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Domain.Services",
+        "scope_chain": [
+          "s3"
+        ]
+      },
+      "norm_label": "servicebase",
+      "source_file": "src/Domain/Services/ServiceBase.cs",
+      "source_location": "L3"
+    },
+    {
       "id": "src_infra_infra_data_migrations_20260919002902_galeriaimagenscredenciado_designer_pvhsaude_infra_data_migrations_galeriaimagenscredenciado",
       "label": "GaleriaImagensCredenciado",
       "_callable": true,
@@ -687,23 +706,24 @@
       "source_location": "L14"
     },
     {
-      "id": "src_domain_enuns_role_pvhsaude_domain_enuns_role",
-      "label": "Role",
+      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer_pvhsaude_infra_data_migrations_configuracaowhatsappunica",
+      "label": "ConfiguracaoWhatsAppUnica",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 121,
-      "community_name": "Role",
+      "community_name": "ConfiguracaoWhatsAppUnica",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Domain.Enuns",
+        "is_partial": true,
+        "namespace": "PVHSAUDE.Infra.Data.Migrations",
         "scope_chain": [
-          "s75"
+          "s337"
         ]
       },
-      "norm_label": "role",
-      "source_file": "src/Domain/Enuns/Role.cs",
-      "source_location": "L7"
+      "norm_label": "configuracaowhatsappunica",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.Designer.cs",
+      "source_location": "L14"
     },
     {
       "id": "src_domain_enuns_menusadministrativos_pvhsaude_domain_enuns_menusadministrativos",
@@ -824,13 +844,13 @@
       "source_location": "L14"
     },
     {
-      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer_pvhsaude_infra_data_migrations_configuracaowhatsappunica",
-      "label": "ConfiguracaoWhatsAppUnica",
+      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_designer_pvhsaude_infra_data_migrations_configuracaobeneficiariodependente",
+      "label": "ConfiguracaoBeneficiarioDependente",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 129,
-      "community_name": "ConfiguracaoWhatsAppUnica",
+      "community_name": "ConfiguracaoBeneficiarioDependente",
       "file_type": "code",
       "metadata": {
         "is_partial": true,
@@ -839,8 +859,8 @@
           "s337"
         ]
       },
-      "norm_label": "configuracaowhatsappunica",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.Designer.cs",
+      "norm_label": "configuracaobeneficiariodependente",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.Designer.cs",
       "source_location": "L14"
     },
     {
@@ -1248,23 +1268,43 @@
       "source_location": "L3"
     },
     {
-      "id": "src_domain_services_servicebase_pvhsaude_domain_services_servicebase",
-      "label": "ServiceBase",
+      "id": "src_infra_infra_data_migrations_contextmodelsnapshot_pvhsaude_infra_data_migrations_contextmodelsnapshot",
+      "label": "ContextModelSnapshot",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 141,
+      "community_name": ".BuildModel",
+      "file_type": "code",
+      "metadata": {
+        "is_partial": true,
+        "namespace": "PVHSAUDE.Infra.Data.Migrations",
+        "scope_chain": [
+          "s288"
+        ]
+      },
+      "norm_label": "contextmodelsnapshot",
+      "source_file": "src/Infra/Infra.Data/Migrations/ContextModelSnapshot.cs",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerrequest",
+      "label": "BannerRequest",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 142,
-      "community_name": "ServiceBase",
+      "community_name": "BannerRequest",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Domain.Services",
+        "namespace": "PVHSAUDE.Api.Controllers",
         "scope_chain": [
-          "s3"
+          "s201"
         ]
       },
-      "norm_label": "servicebase",
-      "source_file": "src/Domain/Services/ServiceBase.cs",
-      "source_location": "L3"
+      "norm_label": "bannerrequest",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L38"
     },
     {
       "id": "src_web_modelbinders_moedamodelbinder_web_modelbinders_moedamodelbinder",
@@ -1363,6 +1403,25 @@
       "source_location": "L6"
     },
     {
+      "id": "src_domain_enuns_periodicidade_pvhsaude_domain_enuns_periodicidade",
+      "label": "Periodicidade",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "Periodicidade",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Domain.Enuns",
+        "scope_chain": [
+          "s3"
+        ]
+      },
+      "norm_label": "periodicidade",
+      "source_file": "src/Domain/Enuns/Periodicidade.cs",
+      "source_location": "L3"
+    },
+    {
       "id": "src_web_services_usuariocookieevents_web_services_usuariocookieevents",
       "label": "UsuarioCookieEvents",
       "_callable": true,
@@ -1401,24 +1460,23 @@
       "source_location": "L4"
     },
     {
-      "id": "src_infra_infra_data_migrations_contextmodelsnapshot_pvhsaude_infra_data_migrations_contextmodelsnapshot",
-      "label": "ContextModelSnapshot",
+      "id": "src_domain_enuns_role_pvhsaude_domain_enuns_role",
+      "label": "Role",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 150,
-      "community_name": ".BuildModel",
+      "community_name": "Role",
       "file_type": "code",
       "metadata": {
-        "is_partial": true,
-        "namespace": "PVHSAUDE.Infra.Data.Migrations",
+        "namespace": "PVHSAUDE.Domain.Enuns",
         "scope_chain": [
-          "s288"
+          "s75"
         ]
       },
-      "norm_label": "contextmodelsnapshot",
-      "source_file": "src/Infra/Infra.Data/Migrations/ContextModelSnapshot.cs",
-      "source_location": "L13"
+      "norm_label": "role",
+      "source_file": "src/Domain/Enuns/Role.cs",
+      "source_location": "L7"
     },
     {
       "id": "src_domain_enuns_statuspagamento_pvhsaude_domain_enuns_statuspagamento",
@@ -1654,26 +1712,6 @@
       "norm_label": "servicecontroller",
       "source_file": "src/Api/Controllers/ServiceController.cs",
       "source_location": "L5"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_designer_pvhsaude_infra_data_migrations_configuracaobeneficiariodependente",
-      "label": "ConfiguracaoBeneficiarioDependente",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 160,
-      "community_name": "ConfiguracaoBeneficiarioDependente",
-      "file_type": "code",
-      "metadata": {
-        "is_partial": true,
-        "namespace": "PVHSAUDE.Infra.Data.Migrations",
-        "scope_chain": [
-          "s337"
-        ]
-      },
-      "norm_label": "configuracaobeneficiariodependente",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.Designer.cs",
-      "source_location": "L14"
     },
     {
       "id": "src_web_models_errorvm_web_models_errorvm",
@@ -2297,25 +2335,6 @@
       "norm_label": "corrigircodigosdependentes",
       "source_file": "src/Infra/Infra.Data/Migrations/20260918214500_CorrigirCodigosDependentes.Designer.cs",
       "source_location": "L12"
-    },
-    {
-      "id": "src_domain_enuns_periodicidade_pvhsaude_domain_enuns_periodicidade",
-      "label": "Periodicidade",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 276,
-      "community_name": "Periodicidade",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Domain.Enuns",
-        "scope_chain": [
-          "s3"
-        ]
-      },
-      "norm_label": "periodicidade",
-      "source_file": "src/Domain/Enuns/Periodicidade.cs",
-      "source_location": "L3"
     },
     {
       "id": "src_domain_enuns_statuscredenciamento_pvhsaude_domain_enuns_statuscredenciamento",
@@ -3411,7 +3430,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "metadata": {
@@ -3430,7 +3449,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "bannerapiclienttests",
@@ -3443,7 +3462,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "metadata": {
@@ -3452,25 +3471,6 @@
       "norm_label": "bannertransport",
       "source_file": "tests/Usuario.FormTests/BannerApiClientTests.cs",
       "source_location": "L34"
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller",
-      "label": "BannersController",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": "bannerscontroller",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L8"
     },
     {
       "id": "src_api_controllers_configuracaowhatsappcontroller_pvhsaude_api_controllers_configuracaowhatsappcontroller",
@@ -3898,8 +3898,8 @@
       "source_location": "L2"
     },
     {
-      "id": "src_application_interface_ibannerservice_pvhsaude_application_interface_ibannerservice",
-      "label": "IBannerService",
+      "id": "src_web_areas_administracao_controllers_bannercontroller_pvhsaude_web_areas_administracao_controllers_bannercontroller",
+      "label": "BannerController",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -3907,17 +3907,17 @@
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Application.Interface",
+        "namespace": "PVHSAUDE.Web.Areas.Administracao.Controllers",
         "scope_chain": [
-          "s40"
+          "s116"
         ]
       },
-      "norm_label": "ibannerservice",
-      "source_file": "src/Application/Interface/IBannerService.cs",
-      "source_location": "L3"
+      "norm_label": "bannercontroller",
+      "source_file": "src/Web/Areas/Administracao/Controllers/BannerController.cs",
+      "source_location": "L6"
     },
     {
-      "id": "src_application_viewmodels_bannervm_pvhsaude_application_viewmodels_bannervm",
+      "id": "src_web_models_bannervm_web_models_bannervm",
       "label": "BannerVm",
       "_callable": true,
       "_callable_class": true,
@@ -3926,14 +3926,14 @@
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
+        "namespace": "Web.Models",
         "scope_chain": [
-          "s76"
+          "s115"
         ]
       },
       "norm_label": "bannervm",
-      "source_file": "src/Application/ViewModels/BannerVm.cs",
-      "source_location": "L4"
+      "source_file": "src/Web/Models/BannerVm.cs",
+      "source_location": "L5"
     },
     {
       "id": "src_application_interface_icatalogoservice_pvhsaude_application_interface_icatalogoservice",
@@ -4260,23 +4260,23 @@
       "source_location": "L7"
     },
     {
-      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm",
-      "label": "PlanoVm",
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller",
+      "label": "BannersController",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 69,
-      "community_name": "PlanoVm",
+      "community_name": "BannersController",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
+        "namespace": "PVHSAUDE.Api.Controllers",
         "scope_chain": [
-          "s78"
+          "s201"
         ]
       },
-      "norm_label": "planovm",
-      "source_file": "src/Application/ViewModels/PlanoVm.cs",
-      "source_location": "L6"
+      "norm_label": "bannerscontroller",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L8"
     },
     {
       "id": "src_web_wwwroot_lib_sweetalert2_sweetalert2_all_min_en",
@@ -4489,8 +4489,8 @@
       "source_location": "L5"
     },
     {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_pvhsaude_web_areas_administracao_controllers_bannercontroller",
-      "label": "BannerController",
+      "id": "src_application_interface_ibannerservice_pvhsaude_application_interface_ibannerservice",
+      "label": "IBannerService",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -4498,17 +4498,17 @@
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Web.Areas.Administracao.Controllers",
+        "namespace": "PVHSAUDE.Application.Interface",
         "scope_chain": [
-          "s116"
+          "s40"
         ]
       },
-      "norm_label": "bannercontroller",
-      "source_file": "src/Web/Areas/Administracao/Controllers/BannerController.cs",
-      "source_location": "L6"
+      "norm_label": "ibannerservice",
+      "source_file": "src/Application/Interface/IBannerService.cs",
+      "source_location": "L3"
     },
     {
-      "id": "src_web_models_bannervm_web_models_bannervm",
+      "id": "src_application_viewmodels_bannervm_pvhsaude_application_viewmodels_bannervm",
       "label": "BannerVm",
       "_callable": true,
       "_callable_class": true,
@@ -4517,14 +4517,14 @@
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "Web.Models",
+        "namespace": "PVHSAUDE.Application.ViewModels",
         "scope_chain": [
-          "s115"
+          "s76"
         ]
       },
       "norm_label": "bannervm",
-      "source_file": "src/Web/Models/BannerVm.cs",
-      "source_location": "L5"
+      "source_file": "src/Application/ViewModels/BannerVm.cs",
+      "source_location": "L4"
     },
     {
       "id": "src_web_areas_administracao_controllers_usuariocontroller_pvhsaude_web_areas_administracao_controllers_usuariocontroller",
@@ -4584,23 +4584,23 @@
       "source_location": "L7"
     },
     {
-      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase",
-      "label": "RepositoryBase",
+      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm",
+      "label": "PlanoVm",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 78,
-      "community_name": "RepositoryBase",
+      "community_name": "PlanoVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Infra.Data",
+        "namespace": "PVHSAUDE.Application.ViewModels",
         "scope_chain": [
-          "s183"
+          "s78"
         ]
       },
-      "norm_label": "repositorybase",
-      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
-      "source_location": "L9"
+      "norm_label": "planovm",
+      "source_file": "src/Application/ViewModels/PlanoVm.cs",
+      "source_location": "L6"
     },
     {
       "id": "src_application_interface_icontatoservice_pvhsaude_application_interface_icontatoservice",
@@ -4680,17 +4680,23 @@
       "source_location": "L14"
     },
     {
-      "id": "tests_usuario_formtests_menupermissionstests_menupermissionstests",
-      "label": "MenuPermissionsTests",
+      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase",
+      "label": "RepositoryBase",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 83,
-      "community_name": ".Run",
+      "community_name": "RepositoryBase",
       "file_type": "code",
-      "norm_label": "menupermissionstests",
-      "source_file": "tests/Usuario.FormTests/MenuPermissionsTests.cs",
-      "source_location": "L12"
+      "metadata": {
+        "namespace": "PVHSAUDE.Infra.Data",
+        "scope_chain": [
+          "s183"
+        ]
+      },
+      "norm_label": "repositorybase",
+      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
+      "source_location": "L9"
     },
     {
       "id": "src_application_viewmodels_menusvalidosattribute_pvhsaude_application_viewmodels_menusvalidosattribute",
@@ -5108,23 +5114,17 @@
       "source_location": "L57"
     },
     {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerrequest",
-      "label": "BannerRequest",
+      "id": "tests_usuario_formtests_menupermissionstests_menupermissionstests",
+      "label": "MenuPermissionsTests",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 95,
-      "community_name": "BannerRequest",
+      "community_name": ".Run",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": "bannerrequest",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L38"
+      "norm_label": "menupermissionstests",
+      "source_file": "tests/Usuario.FormTests/MenuPermissionsTests.cs",
+      "source_location": "L12"
     },
     {
       "id": "src_infra_infra_auth_account_pvhsaude_infra_auth_account",
@@ -6111,6 +6111,50 @@
       },
       "norm_label": ".up()",
       "source_file": "src/Infra/Infra.Data/Migrations/20260916012209_IntencoesVenda.cs",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_domain_services_servicebase_pvhsaude_domain_services_servicebase_dispose",
+      "label": ".Dispose()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 102,
+      "community_name": "ServiceBase",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Domain.Services",
+        "scope_chain": [
+          "s3"
+        ],
+        "unresolved_calls": [
+          {
+            "callee": "Dispose",
+            "receiver_type": "IDisposable",
+            "lang": "csharp",
+            "line": "L28"
+          }
+        ]
+      },
+      "norm_label": ".dispose()",
+      "source_file": "src/Domain/Services/ServiceBase.cs",
+      "source_location": "L24"
+    },
+    {
+      "id": "src_domain_services_servicebase_pvhsaude_domain_services_servicebase_executewithtransactionasync",
+      "label": ".ExecuteWithTransactionAsync()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 102,
+      "community_name": "ServiceBase",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Domain.Services",
+        "scope_chain": [
+          "s3"
+        ]
+      },
+      "norm_label": ".executewithtransactionasync()",
+      "source_file": "src/Domain/Services/ServiceBase.cs",
       "source_location": "L12"
     },
     {
@@ -7850,6 +7894,96 @@
       "source_location": "L110"
     },
     {
+      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer_pvhsaude_infra_data_migrations_configuracaowhatsappunica_buildtargetmodel",
+      "label": ".BuildTargetModel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 121,
+      "community_name": "ConfiguracaoWhatsAppUnica",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Infra.Data.Migrations",
+        "scope_chain": [
+          "s337"
+        ],
+        "unresolved_calls": [
+          {
+            "callee": "HasAnnotation",
+            "receiver_type": "ModelBuilder",
+            "lang": "csharp",
+            "line": "L22"
+          },
+          {
+            "callee": "UseIdentityColumns",
+            "receiver_type": "SqlServerModelBuilderExtensions",
+            "lang": "csharp",
+            "line": "L26"
+          },
+          {
+            "callee": "Entity",
+            "receiver_type": "ModelBuilder",
+            "lang": "csharp",
+            "line": "L28"
+          }
+        ]
+      },
+      "norm_label": ".buildtargetmodel()",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.Designer.cs",
+      "source_location": "L19"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_pvhsaude_infra_data_migrations_configuracaowhatsappunica_down",
+      "label": ".Down()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 121,
+      "community_name": "ConfiguracaoWhatsAppUnica",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Infra.Data.Migrations",
+        "scope_chain": [
+          "s75"
+        ],
+        "unresolved_calls": [
+          {
+            "callee": "DropTable",
+            "receiver_type": "MigrationBuilder",
+            "lang": "csharp",
+            "line": "L32"
+          }
+        ]
+      },
+      "norm_label": ".down()",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.cs",
+      "source_location": "L30"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_pvhsaude_infra_data_migrations_configuracaowhatsappunica_up",
+      "label": ".Up()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 121,
+      "community_name": "ConfiguracaoWhatsAppUnica",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Infra.Data.Migrations",
+        "scope_chain": [
+          "s75"
+        ],
+        "unresolved_calls": [
+          {
+            "callee": "CreateTable",
+            "receiver_type": "MigrationBuilder",
+            "lang": "csharp",
+            "line": "L13"
+          }
+        ]
+      },
+      "norm_label": ".up()",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.cs",
+      "source_location": "L11"
+    },
+    {
       "id": "src_domain_enuns_menusadministrativos_pvhsaude_domain_enuns_menusadministrativos_gravar",
       "label": ".Gravar()",
       "_callable": true,
@@ -8296,12 +8430,12 @@
       "source_location": "L11"
     },
     {
-      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer_pvhsaude_infra_data_migrations_configuracaowhatsappunica_buildtargetmodel",
+      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_designer_pvhsaude_infra_data_migrations_configuracaobeneficiariodependente_buildtargetmodel",
       "label": ".BuildTargetModel()",
       "_callable": true,
       "_origin": "ast",
       "community": 129,
-      "community_name": "ConfiguracaoWhatsAppUnica",
+      "community_name": "ConfiguracaoBeneficiarioDependente",
       "file_type": "code",
       "metadata": {
         "namespace": "PVHSAUDE.Infra.Data.Migrations",
@@ -8326,63 +8460,53 @@
             "receiver_type": "ModelBuilder",
             "lang": "csharp",
             "line": "L28"
+          },
+          {
+            "callee": "UseIdentityColumn",
+            "receiver_type": "SqlServerPropertyBuilderExtensions",
+            "lang": "csharp",
+            "line": "L34"
           }
         ]
       },
       "norm_label": ".buildtargetmodel()",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.Designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.Designer.cs",
       "source_location": "L19"
     },
     {
-      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_pvhsaude_infra_data_migrations_configuracaowhatsappunica_down",
+      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_pvhsaude_infra_data_migrations_configuracaobeneficiariodependente_down",
       "label": ".Down()",
       "_callable": true,
       "_origin": "ast",
       "community": 129,
-      "community_name": "ConfiguracaoWhatsAppUnica",
+      "community_name": "ConfiguracaoBeneficiarioDependente",
       "file_type": "code",
       "metadata": {
         "namespace": "PVHSAUDE.Infra.Data.Migrations",
         "scope_chain": [
           "s75"
-        ],
-        "unresolved_calls": [
-          {
-            "callee": "DropTable",
-            "receiver_type": "MigrationBuilder",
-            "lang": "csharp",
-            "line": "L32"
-          }
         ]
       },
       "norm_label": ".down()",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.cs",
-      "source_location": "L30"
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.cs",
+      "source_location": "L17"
     },
     {
-      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_pvhsaude_infra_data_migrations_configuracaowhatsappunica_up",
+      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_pvhsaude_infra_data_migrations_configuracaobeneficiariodependente_up",
       "label": ".Up()",
       "_callable": true,
       "_origin": "ast",
       "community": 129,
-      "community_name": "ConfiguracaoWhatsAppUnica",
+      "community_name": "ConfiguracaoBeneficiarioDependente",
       "file_type": "code",
       "metadata": {
         "namespace": "PVHSAUDE.Infra.Data.Migrations",
         "scope_chain": [
           "s75"
-        ],
-        "unresolved_calls": [
-          {
-            "callee": "CreateTable",
-            "receiver_type": "MigrationBuilder",
-            "lang": "csharp",
-            "line": "L13"
-          }
         ]
       },
       "norm_label": ".up()",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.cs",
       "source_location": "L11"
     },
     {
@@ -9886,48 +10010,42 @@
       "source_location": "L11"
     },
     {
-      "id": "src_domain_services_servicebase_pvhsaude_domain_services_servicebase_dispose",
-      "label": ".Dispose()",
+      "id": "src_infra_infra_data_migrations_contextmodelsnapshot_pvhsaude_infra_data_migrations_contextmodelsnapshot_buildmodel",
+      "label": ".BuildModel()",
       "_callable": true,
       "_origin": "ast",
-      "community": 142,
-      "community_name": "ServiceBase",
+      "community": 141,
+      "community_name": ".BuildModel",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Domain.Services",
+        "namespace": "PVHSAUDE.Infra.Data.Migrations",
         "scope_chain": [
-          "s3"
+          "s288"
         ],
         "unresolved_calls": [
           {
-            "callee": "Dispose",
-            "receiver_type": "IDisposable",
+            "callee": "HasAnnotation",
+            "receiver_type": "ModelBuilder",
             "lang": "csharp",
-            "line": "L28"
+            "line": "L19"
+          },
+          {
+            "callee": "UseIdentityColumns",
+            "receiver_type": "SqlServerModelBuilderExtensions",
+            "lang": "csharp",
+            "line": "L23"
+          },
+          {
+            "callee": "Entity",
+            "receiver_type": "ModelBuilder",
+            "lang": "csharp",
+            "line": "L25"
           }
         ]
       },
-      "norm_label": ".dispose()",
-      "source_file": "src/Domain/Services/ServiceBase.cs",
-      "source_location": "L24"
-    },
-    {
-      "id": "src_domain_services_servicebase_pvhsaude_domain_services_servicebase_executewithtransactionasync",
-      "label": ".ExecuteWithTransactionAsync()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 142,
-      "community_name": "ServiceBase",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Domain.Services",
-        "scope_chain": [
-          "s3"
-        ]
-      },
-      "norm_label": ".executewithtransactionasync()",
-      "source_file": "src/Domain/Services/ServiceBase.cs",
-      "source_location": "L12"
+      "norm_label": ".buildmodel()",
+      "source_file": "src/Infra/Infra.Data/Migrations/ContextModelSnapshot.cs",
+      "source_location": "L16"
     },
     {
       "id": "src_web_modelbinders_moedamodelbinder_web_modelbinders_moedamodelbinder_bindmodelasync",
@@ -10248,44 +10366,6 @@
       "source_location": "L29"
     },
     {
-      "id": "src_infra_infra_data_migrations_contextmodelsnapshot_pvhsaude_infra_data_migrations_contextmodelsnapshot_buildmodel",
-      "label": ".BuildModel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 150,
-      "community_name": ".BuildModel",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Infra.Data.Migrations",
-        "scope_chain": [
-          "s288"
-        ],
-        "unresolved_calls": [
-          {
-            "callee": "HasAnnotation",
-            "receiver_type": "ModelBuilder",
-            "lang": "csharp",
-            "line": "L19"
-          },
-          {
-            "callee": "UseIdentityColumns",
-            "receiver_type": "SqlServerModelBuilderExtensions",
-            "lang": "csharp",
-            "line": "L23"
-          },
-          {
-            "callee": "Entity",
-            "receiver_type": "ModelBuilder",
-            "lang": "csharp",
-            "line": "L25"
-          }
-        ]
-      },
-      "norm_label": ".buildmodel()",
-      "source_file": "src/Infra/Infra.Data/Migrations/ContextModelSnapshot.cs",
-      "source_location": "L16"
-    },
-    {
       "id": "tests_usuario_formtests_program_testtimeprovider_advance",
       "label": ".Advance()",
       "_callable": true,
@@ -10520,86 +10600,6 @@
       "norm_label": ".executar()",
       "source_file": "src/Api/Controllers/ServiceController.cs",
       "source_location": "L7"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_designer_pvhsaude_infra_data_migrations_configuracaobeneficiariodependente_buildtargetmodel",
-      "label": ".BuildTargetModel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 160,
-      "community_name": "ConfiguracaoBeneficiarioDependente",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Infra.Data.Migrations",
-        "scope_chain": [
-          "s337"
-        ],
-        "unresolved_calls": [
-          {
-            "callee": "HasAnnotation",
-            "receiver_type": "ModelBuilder",
-            "lang": "csharp",
-            "line": "L22"
-          },
-          {
-            "callee": "UseIdentityColumns",
-            "receiver_type": "SqlServerModelBuilderExtensions",
-            "lang": "csharp",
-            "line": "L26"
-          },
-          {
-            "callee": "Entity",
-            "receiver_type": "ModelBuilder",
-            "lang": "csharp",
-            "line": "L28"
-          },
-          {
-            "callee": "UseIdentityColumn",
-            "receiver_type": "SqlServerPropertyBuilderExtensions",
-            "lang": "csharp",
-            "line": "L34"
-          }
-        ]
-      },
-      "norm_label": ".buildtargetmodel()",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.Designer.cs",
-      "source_location": "L19"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_pvhsaude_infra_data_migrations_configuracaobeneficiariodependente_down",
-      "label": ".Down()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 160,
-      "community_name": "ConfiguracaoBeneficiarioDependente",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Infra.Data.Migrations",
-        "scope_chain": [
-          "s75"
-        ]
-      },
-      "norm_label": ".down()",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.cs",
-      "source_location": "L17"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_pvhsaude_infra_data_migrations_configuracaobeneficiariodependente_up",
-      "label": ".Up()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 160,
-      "community_name": "ConfiguracaoBeneficiarioDependente",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Infra.Data.Migrations",
-        "scope_chain": [
-          "s75"
-        ]
-      },
-      "norm_label": ".up()",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.cs",
-      "source_location": "L11"
     },
     {
       "id": "src_web_wwwroot_js_plano_form_moeda",
@@ -15398,7 +15398,7 @@
       "label": ".ImagemAsync()",
       "_callable": true,
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "metadata": {
@@ -15424,7 +15424,7 @@
       "label": ".ListarAsync()",
       "_callable": true,
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "metadata": {
@@ -15450,7 +15450,7 @@
       "label": ".ObterAsync()",
       "_callable": true,
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "metadata": {
@@ -15476,7 +15476,7 @@
       "label": ".SalvarAsync()",
       "_callable": true,
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "metadata": {
@@ -15514,7 +15514,7 @@
       "label": ".Check()",
       "_callable": true,
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "metadata": {
@@ -15536,7 +15536,7 @@
       "label": ".Run()",
       "_callable": true,
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "metadata": {
@@ -15558,7 +15558,7 @@
       "label": ".SendAsync()",
       "_callable": true,
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "metadata": {
@@ -15580,140 +15580,6 @@
       "norm_label": ".sendasync()",
       "source_file": "tests/Usuario.FormTests/BannerApiClientTests.cs",
       "source_location": "L39"
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_ativos",
-      "label": ".Ativos()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": ".ativos()",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L12"
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_criar",
-      "label": ".Criar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": ".criar()",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L21"
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_editar",
-      "label": ".Editar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": ".editar()",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L23"
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_imagem",
-      "label": ".Imagem()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": ".imagem()",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L14"
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_listar",
-      "label": ".Listar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": ".listar()",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L11"
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_obter",
-      "label": ".Obter()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": ".obter()",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_salvar",
-      "label": ".Salvar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ],
-        "unresolved_calls": [
-          {
-            "callee": "ToArray",
-            "receiver_type": "MemoryStream",
-            "lang": "csharp",
-            "line": "L32"
-          }
-        ]
-      },
-      "norm_label": ".salvar()",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L25"
     },
     {
       "id": "src_api_controllers_configuracaowhatsappcontroller_pvhsaude_api_controllers_configuracaowhatsappcontroller_obter",
@@ -16782,76 +16648,92 @@
       "source_location": "L2"
     },
     {
-      "id": "src_application_interface_ibannerservice_pvhsaude_application_interface_ibannerservice_imagemasync",
-      "label": ".ImagemAsync()",
+      "id": "src_web_areas_administracao_controllers_bannercontroller_pvhsaude_web_areas_administracao_controllers_bannercontroller_create",
+      "label": ".Create()",
       "_callable": true,
       "_origin": "ast",
       "community": 59,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Application.Interface",
+        "namespace": "PVHSAUDE.Web.Areas.Administracao.Controllers",
         "scope_chain": [
-          "s40"
+          "s116"
         ]
       },
-      "norm_label": ".imagemasync()",
-      "source_file": "src/Application/Interface/IBannerService.cs",
-      "source_location": "L7"
+      "norm_label": ".create()",
+      "source_file": "src/Web/Areas/Administracao/Controllers/BannerController.cs",
+      "source_location": "L15"
     },
     {
-      "id": "src_application_interface_ibannerservice_pvhsaude_application_interface_ibannerservice_listarasync",
-      "label": ".ListarAsync()",
+      "id": "src_web_areas_administracao_controllers_bannercontroller_pvhsaude_web_areas_administracao_controllers_bannercontroller_edit",
+      "label": ".Edit()",
       "_callable": true,
       "_origin": "ast",
       "community": 59,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Application.Interface",
+        "namespace": "PVHSAUDE.Web.Areas.Administracao.Controllers",
         "scope_chain": [
-          "s40"
+          "s116"
+        ],
+        "unresolved_calls": [
+          {
+            "callee": "FromResult",
+            "receiver_type": "Task",
+            "lang": "csharp",
+            "line": "L25"
+          }
         ]
       },
-      "norm_label": ".listarasync()",
-      "source_file": "src/Application/Interface/IBannerService.cs",
-      "source_location": "L5"
+      "norm_label": ".edit()",
+      "source_file": "src/Web/Areas/Administracao/Controllers/BannerController.cs",
+      "source_location": "L16"
     },
     {
-      "id": "src_application_interface_ibannerservice_pvhsaude_application_interface_ibannerservice_obterasync",
-      "label": ".ObterAsync()",
+      "id": "src_web_areas_administracao_controllers_bannercontroller_pvhsaude_web_areas_administracao_controllers_bannercontroller_index",
+      "label": ".Index()",
       "_callable": true,
       "_origin": "ast",
       "community": 59,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Application.Interface",
+        "namespace": "PVHSAUDE.Web.Areas.Administracao.Controllers",
         "scope_chain": [
-          "s40"
+          "s116"
         ]
       },
-      "norm_label": ".obterasync()",
-      "source_file": "src/Application/Interface/IBannerService.cs",
-      "source_location": "L6"
+      "norm_label": ".index()",
+      "source_file": "src/Web/Areas/Administracao/Controllers/BannerController.cs",
+      "source_location": "L9"
     },
     {
-      "id": "src_application_interface_ibannerservice_pvhsaude_application_interface_ibannerservice_salvarasync",
-      "label": ".SalvarAsync()",
+      "id": "src_web_areas_administracao_controllers_bannercontroller_pvhsaude_web_areas_administracao_controllers_bannercontroller_salvar",
+      "label": ".Salvar()",
       "_callable": true,
       "_origin": "ast",
       "community": 59,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Application.Interface",
+        "namespace": "PVHSAUDE.Web.Areas.Administracao.Controllers",
         "scope_chain": [
-          "s40"
+          "s116"
+        ],
+        "unresolved_calls": [
+          {
+            "callee": "AddModelError",
+            "receiver_type": "ModelState",
+            "lang": "csharp",
+            "line": "L28"
+          }
         ]
       },
-      "norm_label": ".salvarasync()",
-      "source_file": "src/Application/Interface/IBannerService.cs",
-      "source_location": "L8"
+      "norm_label": ".salvar()",
+      "source_file": "src/Web/Areas/Administracao/Controllers/BannerController.cs",
+      "source_location": "L26"
     },
     {
       "id": "src_application_interface_icatalogoservice_pvhsaude_application_interface_icatalogoservice_atualizarespecialidadeasync",
@@ -17860,6 +17742,140 @@
       "source_location": "L11"
     },
     {
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_ativos",
+      "label": ".Ativos()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "BannersController",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Api.Controllers",
+        "scope_chain": [
+          "s201"
+        ]
+      },
+      "norm_label": ".ativos()",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_criar",
+      "label": ".Criar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "BannersController",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Api.Controllers",
+        "scope_chain": [
+          "s201"
+        ]
+      },
+      "norm_label": ".criar()",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L21"
+    },
+    {
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_editar",
+      "label": ".Editar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "BannersController",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Api.Controllers",
+        "scope_chain": [
+          "s201"
+        ]
+      },
+      "norm_label": ".editar()",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L23"
+    },
+    {
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_imagem",
+      "label": ".Imagem()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "BannersController",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Api.Controllers",
+        "scope_chain": [
+          "s201"
+        ]
+      },
+      "norm_label": ".imagem()",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_listar",
+      "label": ".Listar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "BannersController",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Api.Controllers",
+        "scope_chain": [
+          "s201"
+        ]
+      },
+      "norm_label": ".listar()",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_obter",
+      "label": ".Obter()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "BannersController",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Api.Controllers",
+        "scope_chain": [
+          "s201"
+        ]
+      },
+      "norm_label": ".obter()",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerscontroller_salvar",
+      "label": ".Salvar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "BannersController",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Api.Controllers",
+        "scope_chain": [
+          "s201"
+        ],
+        "unresolved_calls": [
+          {
+            "callee": "ToArray",
+            "receiver_type": "MemoryStream",
+            "lang": "csharp",
+            "line": "L32"
+          }
+        ]
+      },
+      "norm_label": ".salvar()",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L25"
+    },
+    {
       "id": "src_web_wwwroot_lib_sweetalert2_sweetalert2_all_min_constructor",
       "label": "constructor()",
       "_callable": true,
@@ -18802,92 +18818,76 @@
       "source_location": "L35"
     },
     {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_pvhsaude_web_areas_administracao_controllers_bannercontroller_create",
-      "label": ".Create()",
+      "id": "src_application_interface_ibannerservice_pvhsaude_application_interface_ibannerservice_imagemasync",
+      "label": ".ImagemAsync()",
       "_callable": true,
       "_origin": "ast",
       "community": 76,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Web.Areas.Administracao.Controllers",
+        "namespace": "PVHSAUDE.Application.Interface",
         "scope_chain": [
-          "s116"
+          "s40"
         ]
       },
-      "norm_label": ".create()",
-      "source_file": "src/Web/Areas/Administracao/Controllers/BannerController.cs",
-      "source_location": "L15"
+      "norm_label": ".imagemasync()",
+      "source_file": "src/Application/Interface/IBannerService.cs",
+      "source_location": "L7"
     },
     {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_pvhsaude_web_areas_administracao_controllers_bannercontroller_edit",
-      "label": ".Edit()",
+      "id": "src_application_interface_ibannerservice_pvhsaude_application_interface_ibannerservice_listarasync",
+      "label": ".ListarAsync()",
       "_callable": true,
       "_origin": "ast",
       "community": 76,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Web.Areas.Administracao.Controllers",
+        "namespace": "PVHSAUDE.Application.Interface",
         "scope_chain": [
-          "s116"
-        ],
-        "unresolved_calls": [
-          {
-            "callee": "FromResult",
-            "receiver_type": "Task",
-            "lang": "csharp",
-            "line": "L25"
-          }
+          "s40"
         ]
       },
-      "norm_label": ".edit()",
-      "source_file": "src/Web/Areas/Administracao/Controllers/BannerController.cs",
-      "source_location": "L16"
+      "norm_label": ".listarasync()",
+      "source_file": "src/Application/Interface/IBannerService.cs",
+      "source_location": "L5"
     },
     {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_pvhsaude_web_areas_administracao_controllers_bannercontroller_index",
-      "label": ".Index()",
+      "id": "src_application_interface_ibannerservice_pvhsaude_application_interface_ibannerservice_obterasync",
+      "label": ".ObterAsync()",
       "_callable": true,
       "_origin": "ast",
       "community": 76,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Web.Areas.Administracao.Controllers",
+        "namespace": "PVHSAUDE.Application.Interface",
         "scope_chain": [
-          "s116"
+          "s40"
         ]
       },
-      "norm_label": ".index()",
-      "source_file": "src/Web/Areas/Administracao/Controllers/BannerController.cs",
-      "source_location": "L9"
+      "norm_label": ".obterasync()",
+      "source_file": "src/Application/Interface/IBannerService.cs",
+      "source_location": "L6"
     },
     {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_pvhsaude_web_areas_administracao_controllers_bannercontroller_salvar",
-      "label": ".Salvar()",
+      "id": "src_application_interface_ibannerservice_pvhsaude_application_interface_ibannerservice_salvarasync",
+      "label": ".SalvarAsync()",
       "_callable": true,
       "_origin": "ast",
       "community": 76,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Web.Areas.Administracao.Controllers",
+        "namespace": "PVHSAUDE.Application.Interface",
         "scope_chain": [
-          "s116"
-        ],
-        "unresolved_calls": [
-          {
-            "callee": "AddModelError",
-            "receiver_type": "ModelState",
-            "lang": "csharp",
-            "line": "L28"
-          }
+          "s40"
         ]
       },
-      "norm_label": ".salvar()",
-      "source_file": "src/Web/Areas/Administracao/Controllers/BannerController.cs",
-      "source_location": "L26"
+      "norm_label": ".salvarasync()",
+      "source_file": "src/Application/Interface/IBannerService.cs",
+      "source_location": "L8"
     },
     {
       "id": "src_web_areas_administracao_controllers_usuariocontroller_pvhsaude_web_areas_administracao_controllers_usuariocontroller_alterarstatus",
@@ -19280,104 +19280,6 @@
       "source_location": "L19"
     },
     {
-      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase_dispose",
-      "label": ".Dispose()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 78,
-      "community_name": "RepositoryBase",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Infra.Data",
-        "scope_chain": [
-          "s183"
-        ],
-        "unresolved_calls": [
-          {
-            "callee": "SuppressFinalize",
-            "receiver_type": "GC",
-            "lang": "csharp",
-            "line": "L118"
-          }
-        ]
-      },
-      "norm_label": ".dispose()",
-      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
-      "source_location": "L116"
-    },
-    {
-      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase_extractlambdaexpression",
-      "label": ".ExtractLambdaExpression()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 78,
-      "community_name": "RepositoryBase",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Infra.Data",
-        "scope_chain": [
-          "s183"
-        ]
-      },
-      "norm_label": ".extractlambdaexpression()",
-      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
-      "source_location": "L100"
-    },
-    {
-      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase_extractselectmemberpath",
-      "label": ".ExtractSelectMemberPath()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 78,
-      "community_name": "RepositoryBase",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Infra.Data",
-        "scope_chain": [
-          "s183"
-        ]
-      },
-      "norm_label": ".extractselectmemberpath()",
-      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
-      "source_location": "L83"
-    },
-    {
-      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase_getfullpropertypath",
-      "label": ".GetFullPropertyPath()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 78,
-      "community_name": "RepositoryBase",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Infra.Data",
-        "scope_chain": [
-          "s183"
-        ]
-      },
-      "norm_label": ".getfullpropertypath()",
-      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
-      "source_location": "L59"
-    },
-    {
-      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase_propertypath",
-      "label": ".PropertyPath()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 78,
-      "community_name": "RepositoryBase",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Infra.Data",
-        "scope_chain": [
-          "s183"
-        ]
-      },
-      "norm_label": ".propertypath()",
-      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
-      "source_location": "L54"
-    },
-    {
       "id": "src_application_interface_icontatoservice_pvhsaude_application_interface_icontatoservice_criarasync",
       "label": ".CriarAsync()",
       "_callable": true,
@@ -19594,94 +19496,102 @@
       "source_location": "L11"
     },
     {
-      "id": "tests_usuario_formtests_menupermissionstests_menupermissionstests_context",
-      "label": ".Context()",
+      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase_dispose",
+      "label": ".Dispose()",
       "_callable": true,
       "_origin": "ast",
       "community": 83,
-      "community_name": ".Run",
+      "community_name": "RepositoryBase",
       "file_type": "code",
       "metadata": {
+        "namespace": "PVHSAUDE.Infra.Data",
+        "scope_chain": [
+          "s183"
+        ],
         "unresolved_calls": [
           {
-            "callee": "Add",
-            "receiver_type": "List",
+            "callee": "SuppressFinalize",
+            "receiver_type": "GC",
             "lang": "csharp",
-            "line": "L146"
+            "line": "L118"
           }
         ]
       },
-      "norm_label": ".context()",
-      "source_file": "tests/Usuario.FormTests/MenuPermissionsTests.cs",
-      "source_location": "L132"
+      "norm_label": ".dispose()",
+      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
+      "source_location": "L116"
     },
     {
-      "id": "tests_usuario_formtests_menupermissionstests_menupermissionstests_run",
-      "label": ".Run()",
+      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase_extractlambdaexpression",
+      "label": ".ExtractLambdaExpression()",
       "_callable": true,
       "_origin": "ast",
       "community": 83,
-      "community_name": ".Run",
+      "community_name": "RepositoryBase",
       "file_type": "code",
       "metadata": {
-        "unresolved_calls": [
-          {
-            "callee": "AddClaim",
-            "receiver_type": "ClaimsIdentity",
-            "lang": "csharp",
-            "line": "L36"
-          },
-          {
-            "callee": "WriteLine",
-            "receiver_type": "Console",
-            "lang": "csharp",
-            "line": "L128"
-          }
+        "namespace": "PVHSAUDE.Infra.Data",
+        "scope_chain": [
+          "s183"
         ]
       },
-      "norm_label": ".run()",
-      "source_file": "tests/Usuario.FormTests/MenuPermissionsTests.cs",
-      "source_location": "L14"
+      "norm_label": ".extractlambdaexpression()",
+      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
+      "source_location": "L100"
     },
     {
-      "id": "tests_usuario_formtests_whatsapptests_whatsapptests_run",
-      "label": ".Run()",
+      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase_extractselectmemberpath",
+      "label": ".ExtractSelectMemberPath()",
       "_callable": true,
       "_origin": "ast",
       "community": 83,
-      "community_name": ".Run",
+      "community_name": "RepositoryBase",
       "file_type": "code",
       "metadata": {
-        "unresolved_calls": [
-          {
-            "callee": "WriteLine",
-            "receiver_type": "Console",
-            "lang": "csharp",
-            "line": "L18"
-          },
-          {
-            "callee": "TryValidateObject",
-            "receiver_type": "Validator",
-            "lang": "csharp",
-            "line": "L22"
-          },
-          {
-            "callee": "UnescapeDataString",
-            "receiver_type": "Uri",
-            "lang": "csharp",
-            "line": "L24"
-          },
-          {
-            "callee": "EscapeDataString",
-            "receiver_type": "Uri",
-            "lang": "csharp",
-            "line": "L42"
-          }
+        "namespace": "PVHSAUDE.Infra.Data",
+        "scope_chain": [
+          "s183"
         ]
       },
-      "norm_label": ".run()",
-      "source_file": "tests/Usuario.FormTests/WhatsAppTests.cs",
-      "source_location": "L16"
+      "norm_label": ".extractselectmemberpath()",
+      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
+      "source_location": "L83"
+    },
+    {
+      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase_getfullpropertypath",
+      "label": ".GetFullPropertyPath()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 83,
+      "community_name": "RepositoryBase",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Infra.Data",
+        "scope_chain": [
+          "s183"
+        ]
+      },
+      "norm_label": ".getfullpropertypath()",
+      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
+      "source_location": "L59"
+    },
+    {
+      "id": "src_infra_infra_data_repositorybase_pvhsaude_infra_data_repositorybase_propertypath",
+      "label": ".PropertyPath()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 83,
+      "community_name": "RepositoryBase",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Infra.Data",
+        "scope_chain": [
+          "s183"
+        ]
+      },
+      "norm_label": ".propertypath()",
+      "source_file": "src/Infra/Infra.Data/RepositoryBase.cs",
+      "source_location": "L54"
     },
     {
       "id": "src_web_wwwroot_js_carteirinha_adddependente",
@@ -20834,6 +20744,96 @@
       "norm_label": ".salvarasync()",
       "source_file": "tests/Usuario.FormTests/CatalogoTests.cs",
       "source_location": "L59"
+    },
+    {
+      "id": "tests_usuario_formtests_menupermissionstests_menupermissionstests_context",
+      "label": ".Context()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 95,
+      "community_name": ".Run",
+      "file_type": "code",
+      "metadata": {
+        "unresolved_calls": [
+          {
+            "callee": "Add",
+            "receiver_type": "List",
+            "lang": "csharp",
+            "line": "L146"
+          }
+        ]
+      },
+      "norm_label": ".context()",
+      "source_file": "tests/Usuario.FormTests/MenuPermissionsTests.cs",
+      "source_location": "L132"
+    },
+    {
+      "id": "tests_usuario_formtests_menupermissionstests_menupermissionstests_run",
+      "label": ".Run()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 95,
+      "community_name": ".Run",
+      "file_type": "code",
+      "metadata": {
+        "unresolved_calls": [
+          {
+            "callee": "AddClaim",
+            "receiver_type": "ClaimsIdentity",
+            "lang": "csharp",
+            "line": "L36"
+          },
+          {
+            "callee": "WriteLine",
+            "receiver_type": "Console",
+            "lang": "csharp",
+            "line": "L128"
+          }
+        ]
+      },
+      "norm_label": ".run()",
+      "source_file": "tests/Usuario.FormTests/MenuPermissionsTests.cs",
+      "source_location": "L14"
+    },
+    {
+      "id": "tests_usuario_formtests_whatsapptests_whatsapptests_run",
+      "label": ".Run()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 95,
+      "community_name": ".Run",
+      "file_type": "code",
+      "metadata": {
+        "unresolved_calls": [
+          {
+            "callee": "WriteLine",
+            "receiver_type": "Console",
+            "lang": "csharp",
+            "line": "L18"
+          },
+          {
+            "callee": "TryValidateObject",
+            "receiver_type": "Validator",
+            "lang": "csharp",
+            "line": "L22"
+          },
+          {
+            "callee": "UnescapeDataString",
+            "receiver_type": "Uri",
+            "lang": "csharp",
+            "line": "L24"
+          },
+          {
+            "callee": "EscapeDataString",
+            "receiver_type": "Uri",
+            "lang": "csharp",
+            "line": "L42"
+          }
+        ]
+      },
+      "norm_label": ".run()",
+      "source_file": "tests/Usuario.FormTests/WhatsAppTests.cs",
+      "source_location": "L16"
     },
     {
       "id": "src_infra_infra_ioc_modulo_pvhsaude_infra_ioc_modulo_addinfrastructure",
@@ -22855,740 +22855,64 @@
       "source_location": ""
     },
     {
-      "id": "csharp_namespace:48bcdafcaba69d83",
-      "label": "Infra.Data.Base",
+      "id": "csharp_namespace:9385cf60d7144904",
+      "label": "PVHSAUDE.Domain.Services",
       "_origin": "ast",
       "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "community_name": "ServiceBase",
       "file_type": "code",
       "metadata": {
         "kind": "csharp_namespace",
-        "namespace": "Infra.Data.Base"
+        "namespace": "PVHSAUDE.Domain.Services"
       },
-      "norm_label": "infra.data.base",
-      "source_file": "src/Infra/Infra.Data/Base/Context.cs",
-      "source_location": "L13",
+      "norm_label": "pvhsaude.domain.services",
+      "source_file": "src/Domain/Services/ServiceBase.cs",
+      "source_location": "L1",
       "type": "namespace"
     },
     {
-      "id": "csharp_namespace:9e8b522106802b8b",
-      "label": "PVHSAUDE.Infra.Data.Migrations",
+      "id": "idisposable",
+      "label": "IDisposable",
       "_origin": "ast",
       "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "community_name": "ServiceBase",
       "file_type": "code",
-      "metadata": {
-        "kind": "csharp_namespace",
-        "namespace": "PVHSAUDE.Infra.Data.Migrations"
-      },
-      "norm_label": "pvhsaude.infra.data.migrations",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908174441_CreateBeneficiarios.Designer.cs",
-      "source_location": "L12",
-      "type": "namespace"
+      "norm_label": "idisposable",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "src_infra_infra_data_migrations_20260908174441_createbeneficiarios",
-      "label": "20260908174441_CreateBeneficiarios.cs",
+      "id": "src_domain_services_servicebase",
+      "label": "ServiceBase.cs",
       "_origin": "ast",
       "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "community_name": "ServiceBase",
       "file_type": "code",
-      "norm_label": "20260908174441_createbeneficiarios.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908174441_CreateBeneficiarios.cs",
+      "norm_label": "servicebase.cs",
+      "source_file": "src/Domain/Services/ServiceBase.cs",
       "source_location": "L1"
     },
     {
-      "id": "src_infra_infra_data_migrations_20260908174441_createbeneficiarios_designer",
-      "label": "20260908174441_CreateBeneficiarios.Designer.cs",
+      "id": "src_domain_services_servicebase_cs_func",
+      "label": "Func",
       "_origin": "ast",
       "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "community_name": "ServiceBase",
       "file_type": "code",
-      "norm_label": "20260908174441_createbeneficiarios.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908174441_CreateBeneficiarios.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente",
-      "label": "20260908192720_ConfiguracaoBeneficiarioDependente.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908192720_configuracaobeneficiariodependente.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_designer",
-      "label": "20260908192720_ConfiguracaoBeneficiarioDependente.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908192720_configuracaobeneficiariodependente.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908195654_identificadoresguid",
-      "label": "20260908195654_IdentificadoresGuid.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908195654_identificadoresguid.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908195654_IdentificadoresGuid.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908195654_identificadoresguid_designer",
-      "label": "20260908195654_IdentificadoresGuid.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908195654_identificadoresguid.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908195654_IdentificadoresGuid.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908200527_cadastroplanos",
-      "label": "20260908200527_CadastroPlanos.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908200527_cadastroplanos.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908200527_CadastroPlanos.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908200527_cadastroplanos_designer",
-      "label": "20260908200527_CadastroPlanos.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908200527_cadastroplanos.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908200527_CadastroPlanos.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908201046_planovalidadeopcional",
-      "label": "20260908201046_PlanoValidadeOpcional.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908201046_planovalidadeopcional.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908201046_PlanoValidadeOpcional.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908201046_planovalidadeopcional_designer",
-      "label": "20260908201046_PlanoValidadeOpcional.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908201046_planovalidadeopcional.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908201046_PlanoValidadeOpcional.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908203056_cadastrocredenciados",
-      "label": "20260908203056_CadastroCredenciados.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908203056_cadastrocredenciados.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908203056_CadastroCredenciados.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908203056_cadastrocredenciados_designer",
-      "label": "20260908203056_CadastroCredenciados.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908203056_cadastrocredenciados.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908203056_CadastroCredenciados.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908205145_imagemcredenciado",
-      "label": "20260908205145_ImagemCredenciado.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908205145_imagemcredenciado.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908205145_ImagemCredenciado.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908205145_imagemcredenciado_designer",
-      "label": "20260908205145_ImagemCredenciado.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908205145_imagemcredenciado.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908205145_ImagemCredenciado.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908212245_especialidadesprocedimentos",
-      "label": "20260908212245_EspecialidadesProcedimentos.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908212245_especialidadesprocedimentos.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908212245_EspecialidadesProcedimentos.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908212245_especialidadesprocedimentos_designer",
-      "label": "20260908212245_EspecialidadesProcedimentos.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908212245_especialidadesprocedimentos.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908212245_EspecialidadesProcedimentos.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908212328_catalogosrelacionamentos",
-      "label": "20260908212328_CatalogosRelacionamentos.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908212328_catalogosrelacionamentos.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908212328_CatalogosRelacionamentos.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908212328_catalogosrelacionamentos_designer",
-      "label": "20260908212328_CatalogosRelacionamentos.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260908212328_catalogosrelacionamentos.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260908212328_CatalogosRelacionamentos.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909011106_planoempresacredenciada",
-      "label": "20260909011106_PlanoEmpresaCredenciada.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909011106_planoempresacredenciada.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909011106_PlanoEmpresaCredenciada.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909011106_planoempresacredenciada_designer",
-      "label": "20260909011106_PlanoEmpresaCredenciada.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909011106_planoempresacredenciada.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909011106_PlanoEmpresaCredenciada.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909012625_empresacomplano",
-      "label": "20260909012625_EmpresaComPlano.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909012625_empresacomplano.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909012625_EmpresaComPlano.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909012625_empresacomplano_designer",
-      "label": "20260909012625_EmpresaComPlano.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909012625_empresacomplano.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909012625_EmpresaComPlano.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909132533_cadastrousuarios",
-      "label": "20260909132533_CadastroUsuarios.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909132533_cadastrousuarios.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909132533_CadastroUsuarios.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909132533_cadastrousuarios_designer",
-      "label": "20260909132533_CadastroUsuarios.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909132533_cadastrousuarios.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909132533_CadastroUsuarios.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909134628_usuarioativo",
-      "label": "20260909134628_UsuarioAtivo.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909134628_usuarioativo.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909134628_UsuarioAtivo.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909134628_usuarioativo_designer",
-      "label": "20260909134628_UsuarioAtivo.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909134628_usuarioativo.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909134628_UsuarioAtivo.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909142913_cadastrobanners",
-      "label": "20260909142913_CadastroBanners.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909142913_cadastrobanners.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909142913_CadastroBanners.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909142913_cadastrobanners_designer",
-      "label": "20260909142913_CadastroBanners.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909142913_cadastrobanners.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909142913_CadastroBanners.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909153642_cadastrocontatos",
-      "label": "20260909153642_CadastroContatos.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909153642_cadastrocontatos.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909153642_CadastroContatos.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909153642_cadastrocontatos_designer",
-      "label": "20260909153642_CadastroContatos.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909153642_cadastrocontatos.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909153642_CadastroContatos.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909173606_permissoesmenususuarios",
-      "label": "20260909173606_PermissoesMenusUsuarios.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909173606_permissoesmenususuarios.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909173606_PermissoesMenusUsuarios.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260909173606_permissoesmenususuarios_designer",
-      "label": "20260909173606_PermissoesMenusUsuarios.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260909173606_permissoesmenususuarios.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260909173606_PermissoesMenusUsuarios.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica",
-      "label": "20260911212124_ConfiguracaoWhatsAppUnica.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260911212124_configuracaowhatsappunica.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer",
-      "label": "20260911212124_ConfiguracaoWhatsAppUnica.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260911212124_configuracaowhatsappunica.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260915212512_cadastroempresasbeneficiadas",
-      "label": "20260915212512_CadastroEmpresasBeneficiadas.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260915212512_cadastroempresasbeneficiadas.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260915212512_CadastroEmpresasBeneficiadas.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260915212512_cadastroempresasbeneficiadas_designer",
-      "label": "20260915212512_CadastroEmpresasBeneficiadas.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260915212512_cadastroempresasbeneficiadas.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260915212512_CadastroEmpresasBeneficiadas.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260915214115_planotipopessoa",
-      "label": "20260915214115_PlanoTipoPessoa.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260915214115_planotipopessoa.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260915214115_PlanoTipoPessoa.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260915214115_planotipopessoa_designer",
-      "label": "20260915214115_PlanoTipoPessoa.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260915214115_planotipopessoa.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260915214115_PlanoTipoPessoa.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260915220215_beneficiariotipopessoaempresabeneficiada",
-      "label": "20260915220215_BeneficiarioTipoPessoaEmpresaBeneficiada.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260915220215_beneficiariotipopessoaempresabeneficiada.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260915220215_BeneficiarioTipoPessoaEmpresaBeneficiada.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260915220215_beneficiariotipopessoaempresabeneficiada_designer",
-      "label": "20260915220215_BeneficiarioTipoPessoaEmpresaBeneficiada.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260915220215_beneficiariotipopessoaempresabeneficiada.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260915220215_BeneficiarioTipoPessoaEmpresaBeneficiada.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260916012209_intencoesvenda",
-      "label": "20260916012209_IntencoesVenda.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260916012209_intencoesvenda.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260916012209_IntencoesVenda.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260916012209_intencoesvenda_designer",
-      "label": "20260916012209_IntencoesVenda.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260916012209_intencoesvenda.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260916012209_IntencoesVenda.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260916100000_planonotificacaovalidade",
-      "label": "20260916100000_PlanoNotificacaoValidade.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260916100000_planonotificacaovalidade.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260916100000_PlanoNotificacaoValidade.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918204952_contatonotificacaosuspensa",
-      "label": "20260918204952_ContatoNotificacaoSuspensa.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918204952_contatonotificacaosuspensa.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918204952_ContatoNotificacaoSuspensa.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918204952_contatonotificacaosuspensa_designer",
-      "label": "20260918204952_ContatoNotificacaoSuspensa.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918204952_contatonotificacaosuspensa.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918204952_ContatoNotificacaoSuspensa.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918210748_intencaovendanotificacaosuspensa",
-      "label": "20260918210748_IntencaoVendaNotificacaoSuspensa.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918210748_intencaovendanotificacaosuspensa.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918210748_IntencaoVendaNotificacaoSuspensa.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918210748_intencaovendanotificacaosuspensa_designer",
-      "label": "20260918210748_IntencaoVendaNotificacaoSuspensa.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918210748_intencaovendanotificacaosuspensa.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918210748_IntencaoVendaNotificacaoSuspensa.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918212506_beneficiariocodigo",
-      "label": "20260918212506_BeneficiarioCodigo.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918212506_beneficiariocodigo.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918212506_BeneficiarioCodigo.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918212506_beneficiariocodigo_designer",
-      "label": "20260918212506_BeneficiarioCodigo.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918212506_beneficiariocodigo.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918212506_BeneficiarioCodigo.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918213332_dependentecodigo",
-      "label": "20260918213332_DependenteCodigo.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918213332_dependentecodigo.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918213332_DependenteCodigo.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918213332_dependentecodigo_designer",
-      "label": "20260918213332_DependenteCodigo.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918213332_dependentecodigo.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918213332_DependenteCodigo.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918214500_corrigircodigosdependentes",
-      "label": "20260918214500_CorrigirCodigosDependentes.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918214500_corrigircodigosdependentes.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918214500_CorrigirCodigosDependentes.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918214500_corrigircodigosdependentes_designer",
-      "label": "20260918214500_CorrigirCodigosDependentes.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918214500_corrigircodigosdependentes.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918214500_CorrigirCodigosDependentes.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918223854_descontosecredenciadodesconto",
-      "label": "20260918223854_DescontosECredenciadoDesconto.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918223854_descontosecredenciadodesconto.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918223854_DescontosECredenciadoDesconto.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260918223854_descontosecredenciadodesconto_designer",
-      "label": "20260918223854_DescontosECredenciadoDesconto.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260918223854_descontosecredenciadodesconto.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260918223854_DescontosECredenciadoDesconto.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260919002902_galeriaimagenscredenciado",
-      "label": "20260919002902_GaleriaImagensCredenciado.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260919002902_galeriaimagenscredenciado.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260919002902_GaleriaImagensCredenciado.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260919002902_galeriaimagenscredenciado_designer",
-      "label": "20260919002902_GaleriaImagensCredenciado.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260919002902_galeriaimagenscredenciado.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260919002902_GaleriaImagensCredenciado.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260919011925_cadastrodatasbusca",
-      "label": "20260919011925_CadastroDatasBusca.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260919011925_cadastrodatasbusca.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260919011925_CadastroDatasBusca.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260919011925_cadastrodatasbusca_designer",
-      "label": "20260919011925_CadastroDatasBusca.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260919011925_cadastrodatasbusca.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260919011925_CadastroDatasBusca.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260919012459_ajustedefaultdatacadastro",
-      "label": "20260919012459_AjusteDefaultDataCadastro.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260919012459_ajustedefaultdatacadastro.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260919012459_AjusteDefaultDataCadastro.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260919012459_ajustedefaultdatacadastro_designer",
-      "label": "20260919012459_AjusteDefaultDataCadastro.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260919012459_ajustedefaultdatacadastro.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260919012459_AjusteDefaultDataCadastro.Designer.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260921145033_adicionaposicaobannerportal",
-      "label": "20260921145033_AdicionaPosicaoBannerPortal.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260921145033_adicionaposicaobannerportal.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260921145033_AdicionaPosicaoBannerPortal.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260921145033_adicionaposicaobannerportal_designer",
-      "label": "20260921145033_AdicionaPosicaoBannerPortal.Designer.cs",
-      "_origin": "ast",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "file_type": "code",
-      "norm_label": "20260921145033_adicionaposicaobannerportal.designer.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/20260921145033_AdicionaPosicaoBannerPortal.Designer.cs",
-      "source_location": "L1"
+      "norm_label": "func",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "src_infra_infra_data_migrations_contextmodelsnapshot",
-      "label": "ContextModelSnapshot.cs",
+      "id": "src_domain_services_servicebase_cs_task",
+      "label": "Task",
       "_origin": "ast",
       "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "community_name": "ServiceBase",
       "file_type": "code",
-      "norm_label": "contextmodelsnapshot.cs",
-      "source_file": "src/Infra/Infra.Data/Migrations/ContextModelSnapshot.cs",
-      "source_location": "L1"
+      "norm_label": "task",
+      "source_file": "",
+      "source_location": ""
     },
     {
       "id": "src_infra_infra_data_migrations_20260919002902_galeriaimagenscredenciado_cs_datetime",
@@ -25322,55 +24646,48 @@
       "source_location": "L1"
     },
     {
-      "id": "src_domain_enuns_role_pvhsaude_domain_enuns_role_administrador",
-      "label": "Administrador",
+      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_cs_migrationbuilder",
+      "label": "MigrationBuilder",
       "_origin": "ast",
       "community": 121,
-      "community_name": "Role",
+      "community_name": "ConfiguracaoWhatsAppUnica",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Domain.Enuns",
-        "scope_chain": [
-          "s75"
-        ]
-      },
-      "norm_label": "administrador",
-      "source_file": "src/Domain/Enuns/Role.cs",
-      "source_location": "L11"
+      "norm_label": "migrationbuilder",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "src_domain_enuns_role_pvhsaude_domain_enuns_role_comum",
-      "label": "Comum",
+      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer_cs_datetime",
+      "label": "DateTime",
       "_origin": "ast",
       "community": 121,
-      "community_name": "Role",
+      "community_name": "ConfiguracaoWhatsAppUnica",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Domain.Enuns",
-        "scope_chain": [
-          "s75"
-        ]
-      },
-      "norm_label": "comum",
-      "source_file": "src/Domain/Enuns/Role.cs",
-      "source_location": "L9"
+      "norm_label": "datetime",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "src_domain_enuns_role_pvhsaude_domain_enuns_role_gestor",
-      "label": "Gestor",
+      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer_cs_guid",
+      "label": "Guid",
       "_origin": "ast",
       "community": 121,
-      "community_name": "Role",
+      "community_name": "ConfiguracaoWhatsAppUnica",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Domain.Enuns",
-        "scope_chain": [
-          "s75"
-        ]
-      },
-      "norm_label": "gestor",
-      "source_file": "src/Domain/Enuns/Role.cs",
-      "source_location": "L10"
+      "norm_label": "guid",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer_cs_modelbuilder",
+      "label": "ModelBuilder",
+      "_origin": "ast",
+      "community": 121,
+      "community_name": "ConfiguracaoWhatsAppUnica",
+      "file_type": "code",
+      "norm_label": "modelbuilder",
+      "source_file": "",
+      "source_location": ""
     },
     {
       "id": "ireadonlydictionary",
@@ -25660,44 +24977,33 @@
       "source_location": ""
     },
     {
-      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_cs_migrationbuilder",
+      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_cs_migrationbuilder",
       "label": "MigrationBuilder",
       "_origin": "ast",
       "community": 129,
-      "community_name": "ConfiguracaoWhatsAppUnica",
+      "community_name": "ConfiguracaoBeneficiarioDependente",
       "file_type": "code",
       "norm_label": "migrationbuilder",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer_cs_datetime",
+      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_designer_cs_datetime",
       "label": "DateTime",
       "_origin": "ast",
       "community": 129,
-      "community_name": "ConfiguracaoWhatsAppUnica",
+      "community_name": "ConfiguracaoBeneficiarioDependente",
       "file_type": "code",
       "norm_label": "datetime",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer_cs_guid",
-      "label": "Guid",
-      "_origin": "ast",
-      "community": 129,
-      "community_name": "ConfiguracaoWhatsAppUnica",
-      "file_type": "code",
-      "norm_label": "guid",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer_cs_modelbuilder",
+      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_designer_cs_modelbuilder",
       "label": "ModelBuilder",
       "_origin": "ast",
       "community": 129,
-      "community_name": "ConfiguracaoWhatsAppUnica",
+      "community_name": "ConfiguracaoBeneficiarioDependente",
       "file_type": "code",
       "norm_label": "modelbuilder",
       "source_file": "",
@@ -26829,64 +26135,127 @@
       "source_location": "L6"
     },
     {
-      "id": "csharp_namespace:9385cf60d7144904",
-      "label": "PVHSAUDE.Domain.Services",
+      "id": "modelsnapshot",
+      "label": "ModelSnapshot",
+      "_origin": "ast",
+      "community": 141,
+      "community_name": ".BuildModel",
+      "file_type": "code",
+      "norm_label": "modelsnapshot",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_infra_infra_data_migrations_contextmodelsnapshot_cs_datetime",
+      "label": "DateTime",
+      "_origin": "ast",
+      "community": 141,
+      "community_name": ".BuildModel",
+      "file_type": "code",
+      "norm_label": "datetime",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_infra_infra_data_migrations_contextmodelsnapshot_cs_guid",
+      "label": "Guid",
+      "_origin": "ast",
+      "community": 141,
+      "community_name": ".BuildModel",
+      "file_type": "code",
+      "norm_label": "guid",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_infra_infra_data_migrations_contextmodelsnapshot_cs_modelbuilder",
+      "label": "ModelBuilder",
+      "_origin": "ast",
+      "community": 141,
+      "community_name": ".BuildModel",
+      "file_type": "code",
+      "norm_label": "modelbuilder",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_api_controllers_bannerscontroller_cs_iformfile",
+      "label": "IFormFile",
       "_origin": "ast",
       "community": 142,
-      "community_name": "ServiceBase",
+      "community_name": "BannerRequest",
+      "file_type": "code",
+      "norm_label": "iformfile",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerrequest_ativo",
+      "label": "Ativo",
+      "_origin": "ast",
+      "community": 142,
+      "community_name": "BannerRequest",
       "file_type": "code",
       "metadata": {
-        "kind": "csharp_namespace",
-        "namespace": "PVHSAUDE.Domain.Services"
+        "namespace": "PVHSAUDE.Api.Controllers",
+        "scope_chain": [
+          "s201"
+        ]
       },
-      "norm_label": "pvhsaude.domain.services",
-      "source_file": "src/Domain/Services/ServiceBase.cs",
-      "source_location": "L1",
-      "type": "namespace"
+      "norm_label": "ativo",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L43"
     },
     {
-      "id": "idisposable",
-      "label": "IDisposable",
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerrequest_imagem",
+      "label": "Imagem",
       "_origin": "ast",
       "community": 142,
-      "community_name": "ServiceBase",
+      "community_name": "BannerRequest",
       "file_type": "code",
-      "norm_label": "idisposable",
-      "source_file": "",
-      "source_location": ""
+      "metadata": {
+        "namespace": "PVHSAUDE.Api.Controllers",
+        "scope_chain": [
+          "s201"
+        ]
+      },
+      "norm_label": "imagem",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L44"
     },
     {
-      "id": "src_domain_services_servicebase",
-      "label": "ServiceBase.cs",
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerrequest_posicao",
+      "label": "Posicao",
       "_origin": "ast",
       "community": 142,
-      "community_name": "ServiceBase",
+      "community_name": "BannerRequest",
       "file_type": "code",
-      "norm_label": "servicebase.cs",
-      "source_file": "src/Domain/Services/ServiceBase.cs",
-      "source_location": "L1"
+      "metadata": {
+        "namespace": "PVHSAUDE.Api.Controllers",
+        "scope_chain": [
+          "s201"
+        ]
+      },
+      "norm_label": "posicao",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L42"
     },
     {
-      "id": "src_domain_services_servicebase_cs_func",
-      "label": "Func",
+      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerrequest_titulo",
+      "label": "Titulo",
       "_origin": "ast",
       "community": 142,
-      "community_name": "ServiceBase",
+      "community_name": "BannerRequest",
       "file_type": "code",
-      "norm_label": "func",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_domain_services_servicebase_cs_task",
-      "label": "Task",
-      "_origin": "ast",
-      "community": 142,
-      "community_name": "ServiceBase",
-      "file_type": "code",
-      "norm_label": "task",
-      "source_file": "",
-      "source_location": ""
+      "metadata": {
+        "namespace": "PVHSAUDE.Api.Controllers",
+        "scope_chain": [
+          "s201"
+        ]
+      },
+      "norm_label": "titulo",
+      "source_file": "src/Api/Controllers/BannersController.cs",
+      "source_location": "L40"
     },
     {
       "id": "docs_superpowers_specs_2026_09_16_pvhsaude_vps_docker_design",
@@ -27397,6 +26766,85 @@
       "source_location": "L1"
     },
     {
+      "id": "src_domain_enuns_periodicidade",
+      "label": "Periodicidade.cs",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "Periodicidade",
+      "file_type": "code",
+      "norm_label": "periodicidade.cs",
+      "source_file": "src/Domain/Enuns/Periodicidade.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_domain_enuns_periodicidade_pvhsaude_domain_enuns_periodicidade_anual",
+      "label": "Anual",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "Periodicidade",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Domain.Enuns",
+        "scope_chain": [
+          "s3"
+        ]
+      },
+      "norm_label": "anual",
+      "source_file": "src/Domain/Enuns/Periodicidade.cs",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_domain_enuns_periodicidade_pvhsaude_domain_enuns_periodicidade_mensal",
+      "label": "Mensal",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "Periodicidade",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Domain.Enuns",
+        "scope_chain": [
+          "s3"
+        ]
+      },
+      "norm_label": "mensal",
+      "source_file": "src/Domain/Enuns/Periodicidade.cs",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_domain_enuns_periodicidade_pvhsaude_domain_enuns_periodicidade_semestral",
+      "label": "Semestral",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "Periodicidade",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Domain.Enuns",
+        "scope_chain": [
+          "s3"
+        ]
+      },
+      "norm_label": "semestral",
+      "source_file": "src/Domain/Enuns/Periodicidade.cs",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_domain_enuns_periodicidade_pvhsaude_domain_enuns_periodicidade_trimestral",
+      "label": "Trimestral",
+      "_origin": "ast",
+      "community": 148,
+      "community_name": "Periodicidade",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Domain.Enuns",
+        "scope_chain": [
+          "s3"
+        ]
+      },
+      "norm_label": "trimestral",
+      "source_file": "src/Domain/Enuns/Periodicidade.cs",
+      "source_location": "L6"
+    },
+    {
       "id": "cookieauthenticationevents",
       "label": "CookieAuthenticationEvents",
       "_origin": "ast",
@@ -27842,48 +27290,55 @@
       "source_location": "L12"
     },
     {
-      "id": "modelsnapshot",
-      "label": "ModelSnapshot",
+      "id": "src_domain_enuns_role_pvhsaude_domain_enuns_role_administrador",
+      "label": "Administrador",
       "_origin": "ast",
       "community": 150,
-      "community_name": ".BuildModel",
+      "community_name": "Role",
       "file_type": "code",
-      "norm_label": "modelsnapshot",
-      "source_file": "",
-      "source_location": ""
+      "metadata": {
+        "namespace": "PVHSAUDE.Domain.Enuns",
+        "scope_chain": [
+          "s75"
+        ]
+      },
+      "norm_label": "administrador",
+      "source_file": "src/Domain/Enuns/Role.cs",
+      "source_location": "L11"
     },
     {
-      "id": "src_infra_infra_data_migrations_contextmodelsnapshot_cs_datetime",
-      "label": "DateTime",
+      "id": "src_domain_enuns_role_pvhsaude_domain_enuns_role_comum",
+      "label": "Comum",
       "_origin": "ast",
       "community": 150,
-      "community_name": ".BuildModel",
+      "community_name": "Role",
       "file_type": "code",
-      "norm_label": "datetime",
-      "source_file": "",
-      "source_location": ""
+      "metadata": {
+        "namespace": "PVHSAUDE.Domain.Enuns",
+        "scope_chain": [
+          "s75"
+        ]
+      },
+      "norm_label": "comum",
+      "source_file": "src/Domain/Enuns/Role.cs",
+      "source_location": "L9"
     },
     {
-      "id": "src_infra_infra_data_migrations_contextmodelsnapshot_cs_guid",
-      "label": "Guid",
+      "id": "src_domain_enuns_role_pvhsaude_domain_enuns_role_gestor",
+      "label": "Gestor",
       "_origin": "ast",
       "community": 150,
-      "community_name": ".BuildModel",
+      "community_name": "Role",
       "file_type": "code",
-      "norm_label": "guid",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_infra_infra_data_migrations_contextmodelsnapshot_cs_modelbuilder",
-      "label": "ModelBuilder",
-      "_origin": "ast",
-      "community": 150,
-      "community_name": ".BuildModel",
-      "file_type": "code",
-      "norm_label": "modelbuilder",
-      "source_file": "",
-      "source_location": ""
+      "metadata": {
+        "namespace": "PVHSAUDE.Domain.Enuns",
+        "scope_chain": [
+          "s75"
+        ]
+      },
+      "norm_label": "gestor",
+      "source_file": "src/Domain/Enuns/Role.cs",
+      "source_location": "L10"
     },
     {
       "id": "src_domain_enuns_statuspagamento",
@@ -28450,39 +27905,6 @@
       "community_name": ".Executar",
       "file_type": "code",
       "norm_label": "task",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_cs_migrationbuilder",
-      "label": "MigrationBuilder",
-      "_origin": "ast",
-      "community": 160,
-      "community_name": "ConfiguracaoBeneficiarioDependente",
-      "file_type": "code",
-      "norm_label": "migrationbuilder",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_designer_cs_datetime",
-      "label": "DateTime",
-      "_origin": "ast",
-      "community": 160,
-      "community_name": "ConfiguracaoBeneficiarioDependente",
-      "file_type": "code",
-      "norm_label": "datetime",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_designer_cs_modelbuilder",
-      "label": "ModelBuilder",
-      "_origin": "ast",
-      "community": 160,
-      "community_name": "ConfiguracaoBeneficiarioDependente",
-      "file_type": "code",
-      "norm_label": "modelbuilder",
       "source_file": "",
       "source_location": ""
     },
@@ -34937,85 +34359,6 @@
       "source_location": ""
     },
     {
-      "id": "src_domain_enuns_periodicidade",
-      "label": "Periodicidade.cs",
-      "_origin": "ast",
-      "community": 276,
-      "community_name": "Periodicidade",
-      "file_type": "code",
-      "norm_label": "periodicidade.cs",
-      "source_file": "src/Domain/Enuns/Periodicidade.cs",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_domain_enuns_periodicidade_pvhsaude_domain_enuns_periodicidade_anual",
-      "label": "Anual",
-      "_origin": "ast",
-      "community": 276,
-      "community_name": "Periodicidade",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Domain.Enuns",
-        "scope_chain": [
-          "s3"
-        ]
-      },
-      "norm_label": "anual",
-      "source_file": "src/Domain/Enuns/Periodicidade.cs",
-      "source_location": "L8"
-    },
-    {
-      "id": "src_domain_enuns_periodicidade_pvhsaude_domain_enuns_periodicidade_mensal",
-      "label": "Mensal",
-      "_origin": "ast",
-      "community": 276,
-      "community_name": "Periodicidade",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Domain.Enuns",
-        "scope_chain": [
-          "s3"
-        ]
-      },
-      "norm_label": "mensal",
-      "source_file": "src/Domain/Enuns/Periodicidade.cs",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_domain_enuns_periodicidade_pvhsaude_domain_enuns_periodicidade_semestral",
-      "label": "Semestral",
-      "_origin": "ast",
-      "community": 276,
-      "community_name": "Periodicidade",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Domain.Enuns",
-        "scope_chain": [
-          "s3"
-        ]
-      },
-      "norm_label": "semestral",
-      "source_file": "src/Domain/Enuns/Periodicidade.cs",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_domain_enuns_periodicidade_pvhsaude_domain_enuns_periodicidade_trimestral",
-      "label": "Trimestral",
-      "_origin": "ast",
-      "community": 276,
-      "community_name": "Periodicidade",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Domain.Enuns",
-        "scope_chain": [
-          "s3"
-        ]
-      },
-      "norm_label": "trimestral",
-      "source_file": "src/Domain/Enuns/Periodicidade.cs",
-      "source_location": "L6"
-    },
-    {
       "id": "src_domain_enuns_statuscredenciamento",
       "label": "StatusCredenciamento.cs",
       "_origin": "ast",
@@ -41134,10 +40477,746 @@
       "source_location": ""
     },
     {
+      "id": "csharp_namespace:48bcdafcaba69d83",
+      "label": "Infra.Data.Base",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "metadata": {
+        "kind": "csharp_namespace",
+        "namespace": "Infra.Data.Base"
+      },
+      "norm_label": "infra.data.base",
+      "source_file": "src/Infra/Infra.Data/Base/Context.cs",
+      "source_location": "L13",
+      "type": "namespace"
+    },
+    {
+      "id": "csharp_namespace:9e8b522106802b8b",
+      "label": "PVHSAUDE.Infra.Data.Migrations",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "metadata": {
+        "kind": "csharp_namespace",
+        "namespace": "PVHSAUDE.Infra.Data.Migrations"
+      },
+      "norm_label": "pvhsaude.infra.data.migrations",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908174441_CreateBeneficiarios.Designer.cs",
+      "source_location": "L12",
+      "type": "namespace"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908174441_createbeneficiarios",
+      "label": "20260908174441_CreateBeneficiarios.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908174441_createbeneficiarios.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908174441_CreateBeneficiarios.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908174441_createbeneficiarios_designer",
+      "label": "20260908174441_CreateBeneficiarios.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908174441_createbeneficiarios.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908174441_CreateBeneficiarios.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente",
+      "label": "20260908192720_ConfiguracaoBeneficiarioDependente.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908192720_configuracaobeneficiariodependente.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908192720_configuracaobeneficiariodependente_designer",
+      "label": "20260908192720_ConfiguracaoBeneficiarioDependente.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908192720_configuracaobeneficiariodependente.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908192720_ConfiguracaoBeneficiarioDependente.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908195654_identificadoresguid",
+      "label": "20260908195654_IdentificadoresGuid.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908195654_identificadoresguid.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908195654_IdentificadoresGuid.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908195654_identificadoresguid_designer",
+      "label": "20260908195654_IdentificadoresGuid.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908195654_identificadoresguid.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908195654_IdentificadoresGuid.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908200527_cadastroplanos",
+      "label": "20260908200527_CadastroPlanos.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908200527_cadastroplanos.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908200527_CadastroPlanos.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908200527_cadastroplanos_designer",
+      "label": "20260908200527_CadastroPlanos.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908200527_cadastroplanos.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908200527_CadastroPlanos.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908201046_planovalidadeopcional",
+      "label": "20260908201046_PlanoValidadeOpcional.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908201046_planovalidadeopcional.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908201046_PlanoValidadeOpcional.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908201046_planovalidadeopcional_designer",
+      "label": "20260908201046_PlanoValidadeOpcional.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908201046_planovalidadeopcional.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908201046_PlanoValidadeOpcional.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908203056_cadastrocredenciados",
+      "label": "20260908203056_CadastroCredenciados.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908203056_cadastrocredenciados.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908203056_CadastroCredenciados.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908203056_cadastrocredenciados_designer",
+      "label": "20260908203056_CadastroCredenciados.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908203056_cadastrocredenciados.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908203056_CadastroCredenciados.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908205145_imagemcredenciado",
+      "label": "20260908205145_ImagemCredenciado.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908205145_imagemcredenciado.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908205145_ImagemCredenciado.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908205145_imagemcredenciado_designer",
+      "label": "20260908205145_ImagemCredenciado.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908205145_imagemcredenciado.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908205145_ImagemCredenciado.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908212245_especialidadesprocedimentos",
+      "label": "20260908212245_EspecialidadesProcedimentos.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908212245_especialidadesprocedimentos.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908212245_EspecialidadesProcedimentos.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908212245_especialidadesprocedimentos_designer",
+      "label": "20260908212245_EspecialidadesProcedimentos.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908212245_especialidadesprocedimentos.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908212245_EspecialidadesProcedimentos.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908212328_catalogosrelacionamentos",
+      "label": "20260908212328_CatalogosRelacionamentos.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908212328_catalogosrelacionamentos.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908212328_CatalogosRelacionamentos.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260908212328_catalogosrelacionamentos_designer",
+      "label": "20260908212328_CatalogosRelacionamentos.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260908212328_catalogosrelacionamentos.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260908212328_CatalogosRelacionamentos.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909011106_planoempresacredenciada",
+      "label": "20260909011106_PlanoEmpresaCredenciada.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909011106_planoempresacredenciada.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909011106_PlanoEmpresaCredenciada.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909011106_planoempresacredenciada_designer",
+      "label": "20260909011106_PlanoEmpresaCredenciada.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909011106_planoempresacredenciada.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909011106_PlanoEmpresaCredenciada.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909012625_empresacomplano",
+      "label": "20260909012625_EmpresaComPlano.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909012625_empresacomplano.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909012625_EmpresaComPlano.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909012625_empresacomplano_designer",
+      "label": "20260909012625_EmpresaComPlano.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909012625_empresacomplano.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909012625_EmpresaComPlano.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909132533_cadastrousuarios",
+      "label": "20260909132533_CadastroUsuarios.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909132533_cadastrousuarios.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909132533_CadastroUsuarios.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909132533_cadastrousuarios_designer",
+      "label": "20260909132533_CadastroUsuarios.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909132533_cadastrousuarios.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909132533_CadastroUsuarios.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909134628_usuarioativo",
+      "label": "20260909134628_UsuarioAtivo.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909134628_usuarioativo.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909134628_UsuarioAtivo.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909134628_usuarioativo_designer",
+      "label": "20260909134628_UsuarioAtivo.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909134628_usuarioativo.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909134628_UsuarioAtivo.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909142913_cadastrobanners",
+      "label": "20260909142913_CadastroBanners.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909142913_cadastrobanners.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909142913_CadastroBanners.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909142913_cadastrobanners_designer",
+      "label": "20260909142913_CadastroBanners.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909142913_cadastrobanners.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909142913_CadastroBanners.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909153642_cadastrocontatos",
+      "label": "20260909153642_CadastroContatos.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909153642_cadastrocontatos.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909153642_CadastroContatos.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909153642_cadastrocontatos_designer",
+      "label": "20260909153642_CadastroContatos.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909153642_cadastrocontatos.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909153642_CadastroContatos.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909173606_permissoesmenususuarios",
+      "label": "20260909173606_PermissoesMenusUsuarios.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909173606_permissoesmenususuarios.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909173606_PermissoesMenusUsuarios.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260909173606_permissoesmenususuarios_designer",
+      "label": "20260909173606_PermissoesMenusUsuarios.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260909173606_permissoesmenususuarios.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260909173606_PermissoesMenusUsuarios.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica",
+      "label": "20260911212124_ConfiguracaoWhatsAppUnica.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260911212124_configuracaowhatsappunica.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260911212124_configuracaowhatsappunica_designer",
+      "label": "20260911212124_ConfiguracaoWhatsAppUnica.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260911212124_configuracaowhatsappunica.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260911212124_ConfiguracaoWhatsAppUnica.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260915212512_cadastroempresasbeneficiadas",
+      "label": "20260915212512_CadastroEmpresasBeneficiadas.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260915212512_cadastroempresasbeneficiadas.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260915212512_CadastroEmpresasBeneficiadas.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260915212512_cadastroempresasbeneficiadas_designer",
+      "label": "20260915212512_CadastroEmpresasBeneficiadas.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260915212512_cadastroempresasbeneficiadas.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260915212512_CadastroEmpresasBeneficiadas.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260915214115_planotipopessoa",
+      "label": "20260915214115_PlanoTipoPessoa.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260915214115_planotipopessoa.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260915214115_PlanoTipoPessoa.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260915214115_planotipopessoa_designer",
+      "label": "20260915214115_PlanoTipoPessoa.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260915214115_planotipopessoa.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260915214115_PlanoTipoPessoa.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260915220215_beneficiariotipopessoaempresabeneficiada",
+      "label": "20260915220215_BeneficiarioTipoPessoaEmpresaBeneficiada.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260915220215_beneficiariotipopessoaempresabeneficiada.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260915220215_BeneficiarioTipoPessoaEmpresaBeneficiada.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260915220215_beneficiariotipopessoaempresabeneficiada_designer",
+      "label": "20260915220215_BeneficiarioTipoPessoaEmpresaBeneficiada.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260915220215_beneficiariotipopessoaempresabeneficiada.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260915220215_BeneficiarioTipoPessoaEmpresaBeneficiada.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260916012209_intencoesvenda",
+      "label": "20260916012209_IntencoesVenda.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260916012209_intencoesvenda.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260916012209_IntencoesVenda.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260916012209_intencoesvenda_designer",
+      "label": "20260916012209_IntencoesVenda.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260916012209_intencoesvenda.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260916012209_IntencoesVenda.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260916100000_planonotificacaovalidade",
+      "label": "20260916100000_PlanoNotificacaoValidade.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260916100000_planonotificacaovalidade.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260916100000_PlanoNotificacaoValidade.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918204952_contatonotificacaosuspensa",
+      "label": "20260918204952_ContatoNotificacaoSuspensa.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918204952_contatonotificacaosuspensa.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918204952_ContatoNotificacaoSuspensa.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918204952_contatonotificacaosuspensa_designer",
+      "label": "20260918204952_ContatoNotificacaoSuspensa.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918204952_contatonotificacaosuspensa.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918204952_ContatoNotificacaoSuspensa.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918210748_intencaovendanotificacaosuspensa",
+      "label": "20260918210748_IntencaoVendaNotificacaoSuspensa.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918210748_intencaovendanotificacaosuspensa.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918210748_IntencaoVendaNotificacaoSuspensa.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918210748_intencaovendanotificacaosuspensa_designer",
+      "label": "20260918210748_IntencaoVendaNotificacaoSuspensa.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918210748_intencaovendanotificacaosuspensa.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918210748_IntencaoVendaNotificacaoSuspensa.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918212506_beneficiariocodigo",
+      "label": "20260918212506_BeneficiarioCodigo.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918212506_beneficiariocodigo.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918212506_BeneficiarioCodigo.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918212506_beneficiariocodigo_designer",
+      "label": "20260918212506_BeneficiarioCodigo.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918212506_beneficiariocodigo.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918212506_BeneficiarioCodigo.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918213332_dependentecodigo",
+      "label": "20260918213332_DependenteCodigo.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918213332_dependentecodigo.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918213332_DependenteCodigo.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918213332_dependentecodigo_designer",
+      "label": "20260918213332_DependenteCodigo.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918213332_dependentecodigo.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918213332_DependenteCodigo.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918214500_corrigircodigosdependentes",
+      "label": "20260918214500_CorrigirCodigosDependentes.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918214500_corrigircodigosdependentes.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918214500_CorrigirCodigosDependentes.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918214500_corrigircodigosdependentes_designer",
+      "label": "20260918214500_CorrigirCodigosDependentes.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918214500_corrigircodigosdependentes.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918214500_CorrigirCodigosDependentes.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918223854_descontosecredenciadodesconto",
+      "label": "20260918223854_DescontosECredenciadoDesconto.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918223854_descontosecredenciadodesconto.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918223854_DescontosECredenciadoDesconto.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260918223854_descontosecredenciadodesconto_designer",
+      "label": "20260918223854_DescontosECredenciadoDesconto.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260918223854_descontosecredenciadodesconto.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260918223854_DescontosECredenciadoDesconto.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260919002902_galeriaimagenscredenciado",
+      "label": "20260919002902_GaleriaImagensCredenciado.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260919002902_galeriaimagenscredenciado.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260919002902_GaleriaImagensCredenciado.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260919002902_galeriaimagenscredenciado_designer",
+      "label": "20260919002902_GaleriaImagensCredenciado.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260919002902_galeriaimagenscredenciado.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260919002902_GaleriaImagensCredenciado.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260919011925_cadastrodatasbusca",
+      "label": "20260919011925_CadastroDatasBusca.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260919011925_cadastrodatasbusca.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260919011925_CadastroDatasBusca.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260919011925_cadastrodatasbusca_designer",
+      "label": "20260919011925_CadastroDatasBusca.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260919011925_cadastrodatasbusca.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260919011925_CadastroDatasBusca.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260919012459_ajustedefaultdatacadastro",
+      "label": "20260919012459_AjusteDefaultDataCadastro.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260919012459_ajustedefaultdatacadastro.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260919012459_AjusteDefaultDataCadastro.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260919012459_ajustedefaultdatacadastro_designer",
+      "label": "20260919012459_AjusteDefaultDataCadastro.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260919012459_ajustedefaultdatacadastro.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260919012459_AjusteDefaultDataCadastro.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260921145033_adicionaposicaobannerportal",
+      "label": "20260921145033_AdicionaPosicaoBannerPortal.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260921145033_adicionaposicaobannerportal.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260921145033_AdicionaPosicaoBannerPortal.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_20260921145033_adicionaposicaobannerportal_designer",
+      "label": "20260921145033_AdicionaPosicaoBannerPortal.Designer.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "20260921145033_adicionaposicaobannerportal.designer.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/20260921145033_AdicionaPosicaoBannerPortal.Designer.cs",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_infra_infra_data_migrations_contextmodelsnapshot",
+      "label": "ContextModelSnapshot.cs",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "file_type": "code",
+      "norm_label": "contextmodelsnapshot.cs",
+      "source_file": "src/Infra/Infra.Data/Migrations/ContextModelSnapshot.cs",
+      "source_location": "L1"
+    },
+    {
       "id": "bytes",
       "label": "Bytes",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "bytes",
@@ -41148,7 +41227,7 @@
       "id": "src_web_models_credenciadovm_web_models_credenciadovm_tipo",
       "label": "Tipo",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "metadata": {
@@ -41165,7 +41244,7 @@
       "id": "src_web_services_bannerapiclient_cs_cancellationtoken",
       "label": "CancellationToken",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "cancellationtoken",
@@ -41176,7 +41255,7 @@
       "id": "src_web_services_bannerapiclient_cs_guid",
       "label": "Guid",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "guid",
@@ -41187,7 +41266,7 @@
       "id": "src_web_services_bannerapiclient_cs_httpclient",
       "label": "HttpClient",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "httpclient",
@@ -41198,7 +41277,7 @@
       "id": "src_web_services_bannerapiclient_cs_list",
       "label": "List",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "list",
@@ -41209,7 +41288,7 @@
       "id": "src_web_services_bannerapiclient_cs_task",
       "label": "Task",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "task",
@@ -41220,7 +41299,7 @@
       "id": "tests_usuario_formtests_bannerapiclienttests_bannertransport_savedmethod",
       "label": "SavedMethod",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "savedmethod",
@@ -41231,7 +41310,7 @@
       "id": "tests_usuario_formtests_bannerapiclienttests_bannertransport_savedpath",
       "label": "SavedPath",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "savedpath",
@@ -41242,7 +41321,7 @@
       "id": "tests_usuario_formtests_bannerapiclienttests_cs_cancellationtoken",
       "label": "CancellationToken",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "cancellationtoken",
@@ -41253,7 +41332,7 @@
       "id": "tests_usuario_formtests_bannerapiclienttests_cs_httpmethod",
       "label": "HttpMethod",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "httpmethod",
@@ -41264,7 +41343,7 @@
       "id": "tests_usuario_formtests_bannerapiclienttests_cs_httprequestmessage",
       "label": "HttpRequestMessage",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "httprequestmessage",
@@ -41275,7 +41354,7 @@
       "id": "tests_usuario_formtests_bannerapiclienttests_cs_httpresponsemessage",
       "label": "HttpResponseMessage",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
       "file_type": "code",
       "norm_label": "httpresponsemessage",
@@ -41286,118 +41365,8 @@
       "id": "tests_usuario_formtests_bannerapiclienttests_cs_task",
       "label": "Task",
       "_origin": "ast",
-      "community": 48,
+      "community": 49,
       "community_name": "BannerApiClient",
-      "file_type": "code",
-      "norm_label": "task",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_cs_allowanonymous",
-      "label": "AllowAnonymous",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "norm_label": "allowanonymous",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_cs_authorize",
-      "label": "Authorize",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "norm_label": "authorize",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_cs_cancellationtoken",
-      "label": "CancellationToken",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "norm_label": "cancellationtoken",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_cs_guid",
-      "label": "Guid",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "norm_label": "guid",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_cs_httpget",
-      "label": "HttpGet",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "norm_label": "httpget",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_cs_httppost",
-      "label": "HttpPost",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "norm_label": "httppost",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_cs_httpput",
-      "label": "HttpPut",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "norm_label": "httpput",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_cs_iactionresult",
-      "label": "IActionResult",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "norm_label": "iactionresult",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_cs_requestsizelimit",
-      "label": "RequestSizeLimit",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
-      "file_type": "code",
-      "norm_label": "requestsizelimit",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_api_controllers_bannerscontroller_cs_task",
-      "label": "Task",
-      "_origin": "ast",
-      "community": 49,
-      "community_name": "BannersController",
       "file_type": "code",
       "norm_label": "task",
       "source_file": "",
@@ -43253,7 +43222,7 @@
       "source_location": ""
     },
     {
-      "id": "src_application_interface_ibannerservice_cs_cancellationtoken",
+      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_cancellationtoken",
       "label": "CancellationToken",
       "_origin": "ast",
       "community": 59,
@@ -43264,7 +43233,7 @@
       "source_location": ""
     },
     {
-      "id": "src_application_interface_ibannerservice_cs_guid",
+      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_guid",
       "label": "Guid",
       "_origin": "ast",
       "community": 59,
@@ -43275,18 +43244,51 @@
       "source_location": ""
     },
     {
-      "id": "src_application_interface_ibannerservice_cs_list",
-      "label": "List",
+      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_httpget",
+      "label": "HttpGet",
       "_origin": "ast",
       "community": 59,
       "community_name": "BannerVm",
       "file_type": "code",
-      "norm_label": "list",
+      "norm_label": "httpget",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_application_interface_ibannerservice_cs_task",
+      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_httppost",
+      "label": "HttpPost",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "BannerVm",
+      "file_type": "code",
+      "norm_label": "httppost",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_iactionresult",
+      "label": "IActionResult",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "BannerVm",
+      "file_type": "code",
+      "norm_label": "iactionresult",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_requestsizelimit",
+      "label": "RequestSizeLimit",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "BannerVm",
+      "file_type": "code",
+      "norm_label": "requestsizelimit",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_task",
       "label": "Task",
       "_origin": "ast",
       "community": 59,
@@ -43297,7 +43299,18 @@
       "source_location": ""
     },
     {
-      "id": "src_application_viewmodels_bannervm_cs_guid",
+      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_validateantiforgerytoken",
+      "label": "ValidateAntiForgeryToken",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "BannerVm",
+      "file_type": "code",
+      "norm_label": "validateantiforgerytoken",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_web_models_bannervm_cs_guid",
       "label": "Guid",
       "_origin": "ast",
       "community": 59,
@@ -43308,72 +43321,100 @@
       "source_location": ""
     },
     {
-      "id": "src_application_viewmodels_bannervm_pvhsaude_application_viewmodels_bannervm_ativo",
+      "id": "src_web_models_bannervm_cs_iformfile",
+      "label": "IFormFile",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "BannerVm",
+      "file_type": "code",
+      "norm_label": "iformfile",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_web_models_bannervm_web_models_bannervm_ativo",
       "label": "Ativo",
       "_origin": "ast",
       "community": 59,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
+        "namespace": "Web.Models",
         "scope_chain": [
-          "s76"
+          "s115"
         ]
       },
       "norm_label": "ativo",
-      "source_file": "src/Application/ViewModels/BannerVm.cs",
-      "source_location": "L9"
+      "source_file": "src/Web/Models/BannerVm.cs",
+      "source_location": "L10"
     },
     {
-      "id": "src_application_viewmodels_bannervm_pvhsaude_application_viewmodels_bannervm_id",
+      "id": "src_web_models_bannervm_web_models_bannervm_id",
       "label": "Id",
       "_origin": "ast",
       "community": 59,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
+        "namespace": "Web.Models",
         "scope_chain": [
-          "s76"
+          "s115"
         ]
       },
       "norm_label": "id",
-      "source_file": "src/Application/ViewModels/BannerVm.cs",
-      "source_location": "L6"
+      "source_file": "src/Web/Models/BannerVm.cs",
+      "source_location": "L7"
     },
     {
-      "id": "src_application_viewmodels_bannervm_pvhsaude_application_viewmodels_bannervm_posicao",
+      "id": "src_web_models_bannervm_web_models_bannervm_imagem",
+      "label": "Imagem",
+      "_origin": "ast",
+      "community": 59,
+      "community_name": "BannerVm",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "Web.Models",
+        "scope_chain": [
+          "s115"
+        ]
+      },
+      "norm_label": "imagem",
+      "source_file": "src/Web/Models/BannerVm.cs",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_web_models_bannervm_web_models_bannervm_posicao",
       "label": "Posicao",
       "_origin": "ast",
       "community": 59,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
+        "namespace": "Web.Models",
         "scope_chain": [
-          "s76"
+          "s115"
         ]
       },
       "norm_label": "posicao",
-      "source_file": "src/Application/ViewModels/BannerVm.cs",
-      "source_location": "L10"
+      "source_file": "src/Web/Models/BannerVm.cs",
+      "source_location": "L11"
     },
     {
-      "id": "src_application_viewmodels_bannervm_pvhsaude_application_viewmodels_bannervm_titulo",
+      "id": "src_web_models_bannervm_web_models_bannervm_titulo",
       "label": "Titulo",
       "_origin": "ast",
       "community": 59,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
+        "namespace": "Web.Models",
         "scope_chain": [
-          "s76"
+          "s115"
         ]
       },
       "norm_label": "titulo",
-      "source_file": "src/Application/ViewModels/BannerVm.cs",
-      "source_location": "L7"
+      "source_file": "src/Web/Models/BannerVm.cs",
+      "source_location": "L8"
     },
     {
       "id": "src_application_interface_icatalogoservice_cs_cancellationtoken",
@@ -44496,167 +44537,114 @@
       "source_location": ""
     },
     {
-      "id": "src_application_viewmodels_planovm_cs_datetime",
-      "label": "DateTime",
+      "id": "src_api_controllers_bannerscontroller_cs_allowanonymous",
+      "label": "AllowAnonymous",
       "_origin": "ast",
       "community": 69,
-      "community_name": "PlanoVm",
+      "community_name": "BannersController",
       "file_type": "code",
-      "norm_label": "datetime",
+      "norm_label": "allowanonymous",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_application_viewmodels_planovm_cs_guid",
+      "id": "src_api_controllers_bannerscontroller_cs_authorize",
+      "label": "Authorize",
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "BannersController",
+      "file_type": "code",
+      "norm_label": "authorize",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_api_controllers_bannerscontroller_cs_cancellationtoken",
+      "label": "CancellationToken",
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "BannersController",
+      "file_type": "code",
+      "norm_label": "cancellationtoken",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "src_api_controllers_bannerscontroller_cs_guid",
       "label": "Guid",
       "_origin": "ast",
       "community": 69,
-      "community_name": "PlanoVm",
+      "community_name": "BannersController",
       "file_type": "code",
       "norm_label": "guid",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_application_viewmodels_planovm_cs_periodicidade",
-      "label": "Periodicidade",
+      "id": "src_api_controllers_bannerscontroller_cs_httpget",
+      "label": "HttpGet",
       "_origin": "ast",
       "community": 69,
-      "community_name": "PlanoVm",
+      "community_name": "BannersController",
       "file_type": "code",
-      "norm_label": "periodicidade",
+      "norm_label": "httpget",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_application_viewmodels_planovm_cs_tipopessoa",
-      "label": "TipoPessoa",
+      "id": "src_api_controllers_bannerscontroller_cs_httppost",
+      "label": "HttpPost",
       "_origin": "ast",
       "community": 69,
-      "community_name": "PlanoVm",
+      "community_name": "BannersController",
       "file_type": "code",
-      "norm_label": "tipopessoa",
+      "norm_label": "httppost",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_datavalidade",
-      "label": "DataValidade",
+      "id": "src_api_controllers_bannerscontroller_cs_httpput",
+      "label": "HttpPut",
       "_origin": "ast",
       "community": 69,
-      "community_name": "PlanoVm",
+      "community_name": "BannersController",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "norm_label": "datavalidade",
-      "source_file": "src/Application/ViewModels/PlanoVm.cs",
-      "source_location": "L18"
+      "norm_label": "httpput",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_descricao",
-      "label": "Descricao",
+      "id": "src_api_controllers_bannerscontroller_cs_iactionresult",
+      "label": "IActionResult",
       "_origin": "ast",
       "community": 69,
-      "community_name": "PlanoVm",
+      "community_name": "BannersController",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "norm_label": "descricao",
-      "source_file": "src/Application/ViewModels/PlanoVm.cs",
-      "source_location": "L14"
+      "norm_label": "iactionresult",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_id",
-      "label": "Id",
+      "id": "src_api_controllers_bannerscontroller_cs_requestsizelimit",
+      "label": "RequestSizeLimit",
       "_origin": "ast",
       "community": 69,
-      "community_name": "PlanoVm",
+      "community_name": "BannersController",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "norm_label": "id",
-      "source_file": "src/Application/ViewModels/PlanoVm.cs",
-      "source_location": "L11"
+      "norm_label": "requestsizelimit",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_nome",
-      "label": "Nome",
+      "id": "src_api_controllers_bannerscontroller_cs_task",
+      "label": "Task",
       "_origin": "ast",
       "community": 69,
-      "community_name": "PlanoVm",
+      "community_name": "BannersController",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "norm_label": "nome",
-      "source_file": "src/Application/ViewModels/PlanoVm.cs",
-      "source_location": "L12"
-    },
-    {
-      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_periodicidade",
-      "label": "Periodicidade",
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "PlanoVm",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "norm_label": "periodicidade",
-      "source_file": "src/Application/ViewModels/PlanoVm.cs",
-      "source_location": "L17"
-    },
-    {
-      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_tipopessoa",
-      "label": "TipoPessoa",
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "PlanoVm",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "norm_label": "tipopessoa",
-      "source_file": "src/Application/ViewModels/PlanoVm.cs",
-      "source_location": "L8"
-    },
-    {
-      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_valor",
-      "label": "Valor",
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "PlanoVm",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Application.ViewModels",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "norm_label": "valor",
-      "source_file": "src/Application/ViewModels/PlanoVm.cs",
-      "source_location": "L15"
+      "norm_label": "task",
+      "source_file": "",
+      "source_location": ""
     },
     {
       "id": "src_web_wwwroot_lib_sweetalert2_sweetalert2_all_min",
@@ -45266,7 +45254,7 @@
       "source_location": "L10"
     },
     {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_cancellationtoken",
+      "id": "src_application_interface_ibannerservice_cs_cancellationtoken",
       "label": "CancellationToken",
       "_origin": "ast",
       "community": 76,
@@ -45277,7 +45265,7 @@
       "source_location": ""
     },
     {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_guid",
+      "id": "src_application_interface_ibannerservice_cs_guid",
       "label": "Guid",
       "_origin": "ast",
       "community": 76,
@@ -45288,51 +45276,18 @@
       "source_location": ""
     },
     {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_httpget",
-      "label": "HttpGet",
+      "id": "src_application_interface_ibannerservice_cs_list",
+      "label": "List",
       "_origin": "ast",
       "community": 76,
       "community_name": "BannerVm",
       "file_type": "code",
-      "norm_label": "httpget",
+      "norm_label": "list",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_httppost",
-      "label": "HttpPost",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "BannerVm",
-      "file_type": "code",
-      "norm_label": "httppost",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_iactionresult",
-      "label": "IActionResult",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "BannerVm",
-      "file_type": "code",
-      "norm_label": "iactionresult",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_requestsizelimit",
-      "label": "RequestSizeLimit",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "BannerVm",
-      "file_type": "code",
-      "norm_label": "requestsizelimit",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_task",
+      "id": "src_application_interface_ibannerservice_cs_task",
       "label": "Task",
       "_origin": "ast",
       "community": 76,
@@ -45343,18 +45298,7 @@
       "source_location": ""
     },
     {
-      "id": "src_web_areas_administracao_controllers_bannercontroller_cs_validateantiforgerytoken",
-      "label": "ValidateAntiForgeryToken",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "BannerVm",
-      "file_type": "code",
-      "norm_label": "validateantiforgerytoken",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_web_models_bannervm_cs_guid",
+      "id": "src_application_viewmodels_bannervm_cs_guid",
       "label": "Guid",
       "_origin": "ast",
       "community": 76,
@@ -45365,100 +45309,72 @@
       "source_location": ""
     },
     {
-      "id": "src_web_models_bannervm_cs_iformfile",
-      "label": "IFormFile",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "BannerVm",
-      "file_type": "code",
-      "norm_label": "iformfile",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "src_web_models_bannervm_web_models_bannervm_ativo",
+      "id": "src_application_viewmodels_bannervm_pvhsaude_application_viewmodels_bannervm_ativo",
       "label": "Ativo",
       "_origin": "ast",
       "community": 76,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "Web.Models",
+        "namespace": "PVHSAUDE.Application.ViewModels",
         "scope_chain": [
-          "s115"
+          "s76"
         ]
       },
       "norm_label": "ativo",
-      "source_file": "src/Web/Models/BannerVm.cs",
-      "source_location": "L10"
+      "source_file": "src/Application/ViewModels/BannerVm.cs",
+      "source_location": "L9"
     },
     {
-      "id": "src_web_models_bannervm_web_models_bannervm_id",
+      "id": "src_application_viewmodels_bannervm_pvhsaude_application_viewmodels_bannervm_id",
       "label": "Id",
       "_origin": "ast",
       "community": 76,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "Web.Models",
+        "namespace": "PVHSAUDE.Application.ViewModels",
         "scope_chain": [
-          "s115"
+          "s76"
         ]
       },
       "norm_label": "id",
-      "source_file": "src/Web/Models/BannerVm.cs",
-      "source_location": "L7"
+      "source_file": "src/Application/ViewModels/BannerVm.cs",
+      "source_location": "L6"
     },
     {
-      "id": "src_web_models_bannervm_web_models_bannervm_imagem",
-      "label": "Imagem",
-      "_origin": "ast",
-      "community": 76,
-      "community_name": "BannerVm",
-      "file_type": "code",
-      "metadata": {
-        "namespace": "Web.Models",
-        "scope_chain": [
-          "s115"
-        ]
-      },
-      "norm_label": "imagem",
-      "source_file": "src/Web/Models/BannerVm.cs",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_web_models_bannervm_web_models_bannervm_posicao",
+      "id": "src_application_viewmodels_bannervm_pvhsaude_application_viewmodels_bannervm_posicao",
       "label": "Posicao",
       "_origin": "ast",
       "community": 76,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "Web.Models",
+        "namespace": "PVHSAUDE.Application.ViewModels",
         "scope_chain": [
-          "s115"
+          "s76"
         ]
       },
       "norm_label": "posicao",
-      "source_file": "src/Web/Models/BannerVm.cs",
-      "source_location": "L11"
+      "source_file": "src/Application/ViewModels/BannerVm.cs",
+      "source_location": "L10"
     },
     {
-      "id": "src_web_models_bannervm_web_models_bannervm_titulo",
+      "id": "src_application_viewmodels_bannervm_pvhsaude_application_viewmodels_bannervm_titulo",
       "label": "Titulo",
       "_origin": "ast",
       "community": 76,
       "community_name": "BannerVm",
       "file_type": "code",
       "metadata": {
-        "namespace": "Web.Models",
+        "namespace": "PVHSAUDE.Application.ViewModels",
         "scope_chain": [
-          "s115"
+          "s76"
         ]
       },
       "norm_label": "titulo",
-      "source_file": "src/Web/Models/BannerVm.cs",
-      "source_location": "L8"
+      "source_file": "src/Application/ViewModels/BannerVm.cs",
+      "source_location": "L7"
     },
     {
       "id": "problemdetails",
@@ -45725,59 +45641,167 @@
       "source_location": ""
     },
     {
-      "id": "lambdaexpression",
-      "label": "LambdaExpression",
+      "id": "src_application_viewmodels_planovm_cs_datetime",
+      "label": "DateTime",
       "_origin": "ast",
       "community": 78,
-      "community_name": "RepositoryBase",
+      "community_name": "PlanoVm",
       "file_type": "code",
-      "norm_label": "lambdaexpression",
+      "norm_label": "datetime",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "methodcallexpression",
-      "label": "MethodCallExpression",
+      "id": "src_application_viewmodels_planovm_cs_guid",
+      "label": "Guid",
       "_origin": "ast",
       "community": 78,
-      "community_name": "RepositoryBase",
+      "community_name": "PlanoVm",
       "file_type": "code",
-      "norm_label": "methodcallexpression",
+      "norm_label": "guid",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_infra_infra_data_repositorybase_cs_dbset",
-      "label": "DbSet",
+      "id": "src_application_viewmodels_planovm_cs_periodicidade",
+      "label": "Periodicidade",
       "_origin": "ast",
       "community": 78,
-      "community_name": "RepositoryBase",
+      "community_name": "PlanoVm",
       "file_type": "code",
-      "norm_label": "dbset",
+      "norm_label": "periodicidade",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_infra_infra_data_repositorybase_cs_expression",
-      "label": "Expression",
+      "id": "src_application_viewmodels_planovm_cs_tipopessoa",
+      "label": "TipoPessoa",
       "_origin": "ast",
       "community": 78,
-      "community_name": "RepositoryBase",
+      "community_name": "PlanoVm",
       "file_type": "code",
-      "norm_label": "expression",
+      "norm_label": "tipopessoa",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_infra_infra_data_repositorybase_cs_func",
-      "label": "Func",
+      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_datavalidade",
+      "label": "DataValidade",
       "_origin": "ast",
       "community": 78,
-      "community_name": "RepositoryBase",
+      "community_name": "PlanoVm",
       "file_type": "code",
-      "norm_label": "func",
-      "source_file": "",
-      "source_location": ""
+      "metadata": {
+        "namespace": "PVHSAUDE.Application.ViewModels",
+        "scope_chain": [
+          "s78"
+        ]
+      },
+      "norm_label": "datavalidade",
+      "source_file": "src/Application/ViewModels/PlanoVm.cs",
+      "source_location": "L18"
+    },
+    {
+      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_descricao",
+      "label": "Descricao",
+      "_origin": "ast",
+      "community": 78,
+      "community_name": "PlanoVm",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Application.ViewModels",
+        "scope_chain": [
+          "s78"
+        ]
+      },
+      "norm_label": "descricao",
+      "source_file": "src/Application/ViewModels/PlanoVm.cs",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_id",
+      "label": "Id",
+      "_origin": "ast",
+      "community": 78,
+      "community_name": "PlanoVm",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Application.ViewModels",
+        "scope_chain": [
+          "s78"
+        ]
+      },
+      "norm_label": "id",
+      "source_file": "src/Application/ViewModels/PlanoVm.cs",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_nome",
+      "label": "Nome",
+      "_origin": "ast",
+      "community": 78,
+      "community_name": "PlanoVm",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Application.ViewModels",
+        "scope_chain": [
+          "s78"
+        ]
+      },
+      "norm_label": "nome",
+      "source_file": "src/Application/ViewModels/PlanoVm.cs",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_periodicidade",
+      "label": "Periodicidade",
+      "_origin": "ast",
+      "community": 78,
+      "community_name": "PlanoVm",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Application.ViewModels",
+        "scope_chain": [
+          "s78"
+        ]
+      },
+      "norm_label": "periodicidade",
+      "source_file": "src/Application/ViewModels/PlanoVm.cs",
+      "source_location": "L17"
+    },
+    {
+      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_tipopessoa",
+      "label": "TipoPessoa",
+      "_origin": "ast",
+      "community": 78,
+      "community_name": "PlanoVm",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Application.ViewModels",
+        "scope_chain": [
+          "s78"
+        ]
+      },
+      "norm_label": "tipopessoa",
+      "source_file": "src/Application/ViewModels/PlanoVm.cs",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_application_viewmodels_planovm_pvhsaude_application_viewmodels_planovm_valor",
+      "label": "Valor",
+      "_origin": "ast",
+      "community": 78,
+      "community_name": "PlanoVm",
+      "file_type": "code",
+      "metadata": {
+        "namespace": "PVHSAUDE.Application.ViewModels",
+        "scope_chain": [
+          "s78"
+        ]
+      },
+      "norm_label": "valor",
+      "source_file": "src/Application/ViewModels/PlanoVm.cs",
+      "source_location": "L15"
     },
     {
       "id": "src_application_interface_icontatoservice_cs_cancellationtoken",
@@ -46580,57 +46604,57 @@
       "source_location": ""
     },
     {
-      "id": "authorizeattribute",
-      "label": "AuthorizeAttribute",
+      "id": "lambdaexpression",
+      "label": "LambdaExpression",
       "_origin": "ast",
       "community": 83,
-      "community_name": ".Run",
+      "community_name": "RepositoryBase",
       "file_type": "code",
-      "norm_label": "authorizeattribute",
+      "norm_label": "lambdaexpression",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "tests_usuario_formtests_menupermissionstests_cs_authorizationfiltercontext",
-      "label": "AuthorizationFilterContext",
+      "id": "methodcallexpression",
+      "label": "MethodCallExpression",
       "_origin": "ast",
       "community": 83,
-      "community_name": ".Run",
+      "community_name": "RepositoryBase",
       "file_type": "code",
-      "norm_label": "authorizationfiltercontext",
+      "norm_label": "methodcallexpression",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "tests_usuario_formtests_menupermissionstests_cs_claimsprincipal",
-      "label": "ClaimsPrincipal",
+      "id": "src_infra_infra_data_repositorybase_cs_dbset",
+      "label": "DbSet",
       "_origin": "ast",
       "community": 83,
-      "community_name": ".Run",
+      "community_name": "RepositoryBase",
       "file_type": "code",
-      "norm_label": "claimsprincipal",
+      "norm_label": "dbset",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "tests_usuario_formtests_menupermissionstests_cs_task",
-      "label": "Task",
+      "id": "src_infra_infra_data_repositorybase_cs_expression",
+      "label": "Expression",
       "_origin": "ast",
       "community": 83,
-      "community_name": ".Run",
+      "community_name": "RepositoryBase",
       "file_type": "code",
-      "norm_label": "task",
+      "norm_label": "expression",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "tests_usuario_formtests_whatsapptests_cs_idesigntimemodel",
-      "label": "IDesignTimeModel",
+      "id": "src_infra_infra_data_repositorybase_cs_func",
+      "label": "Func",
       "_origin": "ast",
       "community": 83,
-      "community_name": ".Run",
+      "community_name": "RepositoryBase",
       "file_type": "code",
-      "norm_label": "idesigntimemodel",
+      "norm_label": "func",
       "source_file": "",
       "source_location": ""
     },
@@ -47811,83 +47835,59 @@
       "source_location": ""
     },
     {
-      "id": "src_api_controllers_bannerscontroller_cs_iformfile",
-      "label": "IFormFile",
+      "id": "authorizeattribute",
+      "label": "AuthorizeAttribute",
       "_origin": "ast",
       "community": 95,
-      "community_name": "BannerRequest",
+      "community_name": ".Run",
       "file_type": "code",
-      "norm_label": "iformfile",
+      "norm_label": "authorizeattribute",
       "source_file": "",
       "source_location": ""
     },
     {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerrequest_ativo",
-      "label": "Ativo",
+      "id": "tests_usuario_formtests_menupermissionstests_cs_authorizationfiltercontext",
+      "label": "AuthorizationFilterContext",
       "_origin": "ast",
       "community": 95,
-      "community_name": "BannerRequest",
+      "community_name": ".Run",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": "ativo",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L43"
+      "norm_label": "authorizationfiltercontext",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerrequest_imagem",
-      "label": "Imagem",
+      "id": "tests_usuario_formtests_menupermissionstests_cs_claimsprincipal",
+      "label": "ClaimsPrincipal",
       "_origin": "ast",
       "community": 95,
-      "community_name": "BannerRequest",
+      "community_name": ".Run",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": "imagem",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L44"
+      "norm_label": "claimsprincipal",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerrequest_posicao",
-      "label": "Posicao",
+      "id": "tests_usuario_formtests_menupermissionstests_cs_task",
+      "label": "Task",
       "_origin": "ast",
       "community": 95,
-      "community_name": "BannerRequest",
+      "community_name": ".Run",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": "posicao",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L42"
+      "norm_label": "task",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "src_api_controllers_bannerscontroller_pvhsaude_api_controllers_bannerrequest_titulo",
-      "label": "Titulo",
+      "id": "tests_usuario_formtests_whatsapptests_cs_idesigntimemodel",
+      "label": "IDesignTimeModel",
       "_origin": "ast",
       "community": 95,
-      "community_name": "BannerRequest",
+      "community_name": ".Run",
       "file_type": "code",
-      "metadata": {
-        "namespace": "PVHSAUDE.Api.Controllers",
-        "scope_chain": [
-          "s201"
-        ]
-      },
-      "norm_label": "titulo",
-      "source_file": "src/Api/Controllers/BannersController.cs",
-      "source_location": "L40"
+      "norm_label": "idesigntimemodel",
+      "source_file": "",
+      "source_location": ""
     },
     {
       "id": "src_infra_infra_auth_account_cs_access",
@@ -48282,78 +48282,6 @@
       "source_location": ""
     },
     {
-      "id": "microsoft_entityframeworkcore",
-      "label": "microsoft_entityframeworkcore",
-      "_origin": "semantic",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "microsoft_entityframeworkcore",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "microsoft_entityframeworkcore_infrastructure",
-      "label": "microsoft_entityframeworkcore_infrastructure",
-      "_origin": "semantic",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "microsoft_entityframeworkcore_infrastructure",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "microsoft_entityframeworkcore_metadata",
-      "label": "microsoft_entityframeworkcore_metadata",
-      "_origin": "semantic",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "microsoft_entityframeworkcore_metadata",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "microsoft_entityframeworkcore_migrations",
-      "label": "microsoft_entityframeworkcore_migrations",
-      "_origin": "semantic",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "microsoft_entityframeworkcore_migrations",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "microsoft_entityframeworkcore_storage_valueconversion",
-      "label": "microsoft_entityframeworkcore_storage_valueconversion",
-      "_origin": "semantic",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "microsoft_entityframeworkcore_storage_valueconversion",
-      "source_file": "",
-      "type": "external"
-    },
-    {
-      "id": "system",
-      "label": "system",
-      "_origin": "semantic",
-      "community": 102,
-      "community_name": "PVHSAUDE.Infra.Data.Migrations",
-      "external": true,
-      "file_type": "concept",
-      "norm_label": "system",
-      "source_file": "",
-      "type": "external"
-    },
-    {
       "id": "system_buffers_binary",
       "label": "system_buffers_binary",
       "_origin": "semantic",
@@ -48506,6 +48434,18 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "automapper_internal",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "web_models",
+      "label": "web_models",
+      "_origin": "semantic",
+      "community": 159,
+      "community_name": "web_models",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "web_models",
       "source_file": "",
       "type": "external"
     },
@@ -48986,6 +48926,78 @@
       "external": true,
       "file_type": "concept",
       "norm_label": "microsoft_entityframeworkcore_metadata_builders",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "microsoft_entityframeworkcore",
+      "label": "microsoft_entityframeworkcore",
+      "_origin": "semantic",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "microsoft_entityframeworkcore",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "microsoft_entityframeworkcore_infrastructure",
+      "label": "microsoft_entityframeworkcore_infrastructure",
+      "_origin": "semantic",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "microsoft_entityframeworkcore_infrastructure",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "microsoft_entityframeworkcore_metadata",
+      "label": "microsoft_entityframeworkcore_metadata",
+      "_origin": "semantic",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "microsoft_entityframeworkcore_metadata",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "microsoft_entityframeworkcore_migrations",
+      "label": "microsoft_entityframeworkcore_migrations",
+      "_origin": "semantic",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "microsoft_entityframeworkcore_migrations",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "microsoft_entityframeworkcore_storage_valueconversion",
+      "label": "microsoft_entityframeworkcore_storage_valueconversion",
+      "_origin": "semantic",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "microsoft_entityframeworkcore_storage_valueconversion",
+      "source_file": "",
+      "type": "external"
+    },
+    {
+      "id": "system",
+      "label": "system",
+      "_origin": "semantic",
+      "community": 48,
+      "community_name": "PVHSAUDE.Infra.Data.Migrations",
+      "external": true,
+      "file_type": "concept",
+      "norm_label": "system",
       "source_file": "",
       "type": "external"
     }
@@ -135256,5 +135268,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "7f135608ac9c3e80cf47bc8bb799b6755285db00"
+  "built_at_commit": "5477a403f2c9a39777f3b1f675dbf13d57380959"
 }
