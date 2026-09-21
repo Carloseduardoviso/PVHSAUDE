@@ -5,6 +5,7 @@
 <input asp-for="Id" type="hidden" />
 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
 <div class="mb-3"><label asp-for="Titulo" class="form-label"></label><input asp-for="Titulo" class="form-control" /><span asp-validation-for="Titulo" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Posicao" class="form-label"></label><select asp-for="Posicao" asp-items="Html.GetEnumSelectList<PVHSAUDE.Domain.Enuns.PosicaoBanner>()" class="form-select"></select><div class="form-text">Escolha a área do portal onde este banner será exibido.</div></div>
 <div class="mb-3"><label asp-for="Imagem" class="form-label"></label><input asp-for="Imagem" type="file" accept="image/jpeg,image/png,image/webp" class="form-control" aria-describedby="imagem-ajuda" /><div id="imagem-ajuda" class="form-text">JPG, PNG ou WEBP, até 5 MB. Obrigatório: formato paisagem na proporção 16:5. Tamanho recomendado: 1600 × 500 pixels. @(novo ? "" : "Deixe em branco para manter a imagem atual.")</div><span asp-validation-for="Imagem" class="text-danger"></span></div>
 @if (!novo) { <img src="@Url.Action("BannerImagem", "Home", new { area = "", id = Model.Id })" alt="@Model.Titulo" class="img-fluid mb-3 rounded" style="max-height:250px;object-fit:contain" /> }
 <div class="form-check mb-4"><input asp-for="Ativo" class="form-check-input" /><label asp-for="Ativo" class="form-check-label">Ativo — exibir no portal</label></div>

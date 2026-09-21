@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using PVHSAUDE.Domain.Enuns;
 namespace Web.Models;
 public class BannerVm
 {
@@ -9,5 +10,7 @@ public class BannerVm
     [Required(ErrorMessage = "Informe o título."), StringLength(200), Display(Name = "Título")]
     public string Titulo { get; set; } = "";
     public bool Ativo { get; set; } = true;
+    [Display(Name = "Posição no portal")]
+    public PosicaoBanner Posicao { get; set; } = PosicaoBanner.Central;
     public IFormFile? Imagem { get; set; }
 }

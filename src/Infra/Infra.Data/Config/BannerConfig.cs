@@ -10,5 +10,6 @@ public class BannerConfig : IEntityTypeConfiguration<Banner>
         b.Property(x => x.Titulo).HasMaxLength(200).IsRequired();
         b.Property(x => x.ContentType).HasMaxLength(30).IsRequired();
         b.Property(x => x.Imagem).IsRequired();
+        b.Property(x => x.Posicao).IsRequired();
     }
 }
