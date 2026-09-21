@@ -744,10 +744,10 @@
     "semantic_hash": "9b80da6db9af6de322da7a004e29e467"
   },
   "src/Domain/Enuns/MenusAdministrativos.cs": {
-    "mtime": 1789992332.8235705,
-    "seen": 1789998919.3531337,
-    "ast_hash": "744b4179a80ea6fbf083129951a8e8a6",
-    "semantic_hash": "744b4179a80ea6fbf083129951a8e8a6"
+    "mtime": 1790004479.811489,
+    "seen": 1790004713.6439536,
+    "ast_hash": "91e4388c60cea0506cc5ff8b722e0817",
+    "semantic_hash": ""
   },
   "src/Domain/Enuns/Periodicidade.cs": {
     "mtime": 1788883070.8619967,
@@ -1788,9 +1788,9 @@
     "semantic_hash": "65ebc7759ea4e9e9d54072b112b8feb1"
   },
   "src/Web/Controllers/HomeController.cs": {
-    "mtime": 1790000121.207854,
-    "seen": 1790000358.508634,
-    "ast_hash": "1c516adf5c89c8cc0a0cd15e0e77cabf",
+    "mtime": 1790004479.810496,
+    "seen": 1790004713.6442375,
+    "ast_hash": "5bb7d186b75614c983b64ea38c58f1a7",
     "semantic_hash": ""
   },
   "src/Web/Controllers/LojasController.cs": {
@@ -1884,10 +1884,10 @@
     "semantic_hash": "c481c189b2bb9b4b2901002880bee43b"
   },
   "src/Web/Program.cs": {
-    "mtime": 1789992332.8784187,
-    "seen": 1789998919.353365,
-    "ast_hash": "d94071565ab301c4a8f0fe52fcf0b5f3",
-    "semantic_hash": "d94071565ab301c4a8f0fe52fcf0b5f3"
+    "mtime": 1790004479.8094823,
+    "seen": 1790004713.6442623,
+    "ast_hash": "22f63cde0b9b241e61c4745ea96f30af",
+    "semantic_hash": ""
   },
   "src/Web/Properties/launchSettings.json": {
     "mtime": 1789992332.8794248,
@@ -2046,9 +2046,9 @@
     "semantic_hash": "b30b093a1d44eda7297df468234a5da5"
   },
   "src/Web/Views/Home/Index.cshtml": {
-    "mtime": 1790000121.210889,
-    "seen": 1790000358.508704,
-    "ast_hash": "07181bf12cfb0a668559361bf5908083",
+    "mtime": 1790004673.789565,
+    "seen": 1790004713.6443057,
+    "ast_hash": "773fea3b1072b52cb80897fc239b6521",
     "semantic_hash": ""
   },
   "src/Web/Views/Home/LaboratorioExames.cshtml": {
@@ -2613,6 +2613,24 @@
     "mtime": 1790002309.9795766,
     "seen": 1790002382.0461261,
     "ast_hash": "57bd7af953522b8e84f29d654f385346",
+    "semantic_hash": ""
+  },
+  "src/Web/Areas/Administracao/Controllers/LogoPortalController.cs": {
+    "mtime": 1790004479.8064263,
+    "seen": 1790004713.6441503,
+    "ast_hash": "6da93c7bd996fd5c9fa69b67dd451d88",
+    "semantic_hash": ""
+  },
+  "src/Web/Areas/Administracao/Views/LogoPortal/Index.cshtml": {
+    "mtime": 1790004479.807943,
+    "seen": 1790004713.6442027,
+    "ast_hash": "158fe4e1ff45351f228d249784cbcee4",
+    "semantic_hash": ""
+  },
+  "src/Web/Services/LogoPortalStorage.cs": {
+    "mtime": 1790004479.8028004,
+    "seen": 1790004713.6442778,
+    "ast_hash": "bbe19bb07caee9cdd1d7924ae2d6bd25",
     "semantic_hash": ""
   }
 }

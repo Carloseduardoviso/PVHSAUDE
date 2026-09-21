@@ -1,0 +1,11 @@
+@model bool
+@{ ViewData["Title"] = "Logo do portal"; }
+<h1 class="h3 mb-3">Logo do portal</h1>
+<p class="text-muted">Envie a imagem que deve substituir a logo exibida no topo da página inicial. JPG, PNG ou WEBP, até 5 MB.</p>
+@if (TempData["Sucesso"] is string sucesso) { <div class="alert alert-success" role="status">@sucesso</div> }
+<form method="post" enctype="multipart/form-data" class="card card-body shadow-sm" style="max-width:760px">
+    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <div class="mb-3"><label for="logo" class="form-label">Arquivo da logo</label><input id="logo" name="logo" type="file" accept="image/jpeg,image/png,image/webp" class="form-control" required /></div>
+    <button class="btn btn-primary" type="submit">@(Model ? "Substituir logo" : "Salvar logo")</button>
+</form>
+@if (Model) { <div class="mt-4"><p class="mb-2">Logo atual</p><img src="@Url.Action("LogoPortal", "Home", new { area = "" })" alt="Logo atual do portal" class="img-fluid border rounded p-2" style="max-height:260px" /></div> }

@@ -7,6 +7,7 @@ public static class MenusAdministrativos
     public static readonly IReadOnlyDictionary<string, string> Opcoes = new Dictionary<string, string>
     {
         ["Banner"] = "Banner",
+        ["LogoPortal"] = "Logo do portal",
         ["WhatsApp"] = "WhatsApp",
         ["Contato"] = "Mensagens",
         ["Beneficiario"] = "Beneficiários",

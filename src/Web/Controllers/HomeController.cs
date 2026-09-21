@@ -6,7 +6,7 @@ using PVHSAUDE.Domain.Enuns;
 
 namespace Web.Controllers
 {
-    public class HomeController(CredenciadoApiClient credenciados, IHttpClientFactory clients, ILogger<HomeController> logger) : Controller
+    public class HomeController(CredenciadoApiClient credenciados, IHttpClientFactory clients, ILogger<HomeController> logger, Web.Services.LogoPortalStorage logos) : Controller
     {
         [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -39,6 +39,13 @@ namespace Web.Controllers
                 return File(imagem.Value.Bytes, imagem.Value.Tipo);
             }
             catch (HttpRequestException) { return StatusCode(503); }
+        }
+
+        [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
+        public IActionResult LogoPortal()
+        {
+            var logo = logos.Obter();
+            return logo is null ? Redirect("~/images/pvh-saude-horizontal.jpeg") : PhysicalFile(logo.Value.Path, logo.Value.Tipo);
         }
 
         [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
