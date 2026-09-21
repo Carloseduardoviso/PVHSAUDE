@@ -2632,11 +2632,5 @@
     "seen": 1790004713.6442778,
     "ast_hash": "bbe19bb07caee9cdd1d7924ae2d6bd25",
     "semantic_hash": ""
-  },
-  "src/Web/wwwroot/uploads/logo-portal/logo-portal.jpeg": {
-    "mtime": 1790005035.971748,
-    "seen": 1790005164.6025515,
-    "ast_hash": "bd786d1256f362f1692d33660ba4abf2",
-    "semantic_hash": ""
   }
 }
