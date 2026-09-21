@@ -9,6 +9,9 @@
 # Local Git worktrees
 .worktrees/
 
+# Graphify: version the graph and reports, never its local AST cache.
+graphify-out/cache/
+
 # User-specific files
 *.rsuser
 *.suo
