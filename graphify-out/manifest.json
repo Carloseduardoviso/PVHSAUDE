@@ -1356,9 +1356,9 @@
     "semantic_hash": "3c14072e4ebedd23206fb15e7591868c"
   },
   "src/Infra/Infra.Data/Migrations/ContextModelSnapshot.cs": {
-    "mtime": 1790000686.04863,
-    "seen": 1790000729.3906815,
-    "ast_hash": "2669a84387e38f6e6bacbe68dee81ad5",
+    "mtime": 1790002233.2642503,
+    "seen": 1790002382.0461278,
+    "ast_hash": "0043e9fc6a519b102df727c89b602dc4",
     "semantic_hash": ""
   },
   "src/Infra/Infra.Data/PVHSAUDE.Infra.Data.csproj": {
@@ -2591,18 +2591,6 @@
     "ast_hash": "f7a0554ebea14be5393e58110db32c60",
     "semantic_hash": ""
   },
-  "src/Infra/Infra.Data/Migrations/20260921131819_PosicaoBanner.Designer.cs": {
-    "mtime": 1790000686.0476334,
-    "seen": 1790000729.3906777,
-    "ast_hash": "e15218a54edfee9b119a72204c14a534",
-    "semantic_hash": ""
-  },
-  "src/Infra/Infra.Data/Migrations/20260921131819_PosicaoBanner.cs": {
-    "mtime": 1790000686.046623,
-    "seen": 1790000729.39068,
-    "ast_hash": "f6d48e04da92cfd265743728bf55ae41",
-    "semantic_hash": ""
-  },
   "docs/superpowers/plans/2026-09-21-banner-positions.md": {
     "mtime": 1790000121.1979625,
     "seen": 1790000358.5088208,
@@ -2613,6 +2601,18 @@
     "mtime": 1790000121.198485,
     "seen": 1790000358.5088239,
     "ast_hash": "30935cc0bfc9a584b3f450e981ae8da2",
+    "semantic_hash": ""
+  },
+  "src/Infra/Infra.Data/Migrations/20260921145033_AdicionaPosicaoBannerPortal.Designer.cs": {
+    "mtime": 1790002233.2642503,
+    "seen": 1790002382.0461235,
+    "ast_hash": "30986cd3b795fa7a1a2aa88356ec74bb",
+    "semantic_hash": ""
+  },
+  "src/Infra/Infra.Data/Migrations/20260921145033_AdicionaPosicaoBannerPortal.cs": {
+    "mtime": 1790002309.9795766,
+    "seen": 1790002382.0461261,
+    "ast_hash": "57bd7af953522b8e84f29d654f385346",
     "semantic_hash": ""
   }
 }
