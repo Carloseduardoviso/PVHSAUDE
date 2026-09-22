@@ -19,6 +19,8 @@ builder.Services.AddSingleton(new EmpresaBeneficiadaApiClient(api));
 builder.Services.AddSingleton(new BeneficiarioApiClient(api));
 builder.Services.AddSingleton(new ContatoApiClient(api));
 builder.Services.AddSingleton(new IntencaoVendaApiClient(api));
+// HomeController exige a estante de logo do portal desde a funcionalidade de logo.
+builder.Services.AddScoped<LogoPortalStorage>();
 builder.Services.AddHttpClient();
 await using var app = builder.Build();
 app.MapAreaControllerRoute("admin", "Administracao", "Administracao/{controller=Dashboard}/{action=Index}/{id?}");
@@ -32,6 +34,16 @@ var sobreNosHtml = WebUtility.HtmlDecode(await sobreNosResponse.Content.ReadAsSt
 if (!Regex.IsMatch(sobreNosHtml, "<a[^>]*aria-current=\"page\"[^>]*>.*?Sobre Nós</a>", RegexOptions.Singleline))
     throw new Exception("A navegação deve identificar visual e semanticamente a página atual.");
 Console.WriteLine("PASS: navegação identifica a página atual.");
+foreach (var (pagina, titulo) in new[] { ("/Home/PoliticaPrivacidade", "Política de Privacidade"), ("/Home/TermosDeUso", "Termos de Uso"), ("/Home/Privacy", "Política de Privacidade") })
+{
+    using var legalResponse = await client.GetAsync(pagina);
+    if (!legalResponse.IsSuccessStatusCode) throw new Exception($"{pagina} failed: {(int)legalResponse.StatusCode}");
+    var legalHtml = WebUtility.HtmlDecode(await legalResponse.Content.ReadAsStringAsync());
+    if (!legalHtml.Contains(titulo)) throw new Exception($"{pagina} deve exibir o título {titulo}.");
+    if (!legalHtml.Contains("/Home/TermosDeUso") || !legalHtml.Contains("/Home/PoliticaPrivacidade"))
+        throw new Exception($"{pagina} deve exibir o rodapé com os links legais.");
+}
+Console.WriteLine("PASS: páginas legais respondem com o rodapé completo.");
 var detalhesResponse = await client.GetAsync($"/Administracao/Beneficiario/Details/{ApiTransport.BeneficiarioId}");
 if (!detalhesResponse.IsSuccessStatusCode) throw new Exception($"Details failed: {(int)detalhesResponse.StatusCode} {await detalhesResponse.Content.ReadAsStringAsync()}");
 var pessoaFisicaDetalhes = WebUtility.HtmlDecode(await detalhesResponse.Content.ReadAsStringAsync());

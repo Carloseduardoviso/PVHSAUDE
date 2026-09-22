@@ -140,10 +140,12 @@ namespace Web.Controllers
 
         public IActionResult SobreNos() => View();
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        public IActionResult PoliticaPrivacidade() => View();
+
+        public IActionResult TermosDeUso() => View();
+
+        // Mantém funcionando o endereço antigo /Home/Privacy.
+        public IActionResult Privacy() => View(nameof(PoliticaPrivacidade));
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

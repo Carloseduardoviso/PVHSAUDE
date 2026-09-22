@@ -1788,9 +1788,9 @@
     "semantic_hash": "65ebc7759ea4e9e9d54072b112b8feb1"
   },
   "src/Web/Controllers/HomeController.cs": {
-    "mtime": 1790012668.6905527,
-    "seen": 1790012741.9655442,
-    "ast_hash": "5e8e3dc5c2bfc4a886550b560af446f2",
+    "mtime": 1790084665.4167018,
+    "seen": 1790085111.5966098,
+    "ast_hash": "c65392eb1015d2b3be2c2e76622da893",
     "semantic_hash": ""
   },
   "src/Web/Controllers/LojasController.cs": {
@@ -2063,12 +2063,6 @@
     "ast_hash": "c5f06914e257591b74a2886fb84c20a4",
     "semantic_hash": "c5f06914e257591b74a2886fb84c20a4"
   },
-  "src/Web/Views/Home/Privacy.cshtml": {
-    "mtime": 1788873387.8940744,
-    "seen": 1789998919.3534102,
-    "ast_hash": "6ac68e2b0d9ab26bd02a905a365a2bcc",
-    "semantic_hash": "6ac68e2b0d9ab26bd02a905a365a2bcc"
-  },
   "src/Web/Views/Home/SobreNos.cshtml": {
     "mtime": 1790081256.4755156,
     "seen": 1790081323.084011,
@@ -2112,9 +2106,9 @@
     "semantic_hash": "3248ffafa668c4ee0c82bbc15c18cee9"
   },
   "src/Web/Views/Shared/_Layout.cshtml": {
-    "mtime": 1790000121.2124023,
-    "seen": 1790000358.5087206,
-    "ast_hash": "b016c4e7d65c196f93c80d362ad3df7e",
+    "mtime": 1790084665.418311,
+    "seen": 1790085111.5967119,
+    "ast_hash": "8420cf43b96c4a799a2ea0bd29a764fe",
     "semantic_hash": ""
   },
   "src/Web/Views/Shared/_MenuIndisponivel.cshtml": {
@@ -2256,9 +2250,9 @@
     "semantic_hash": "7b13a7b497807de966bf97e27fd99242"
   },
   "tests/Beneficiario.FormTests/Program.cs": {
-    "mtime": 1790000121.2170718,
-    "seen": 1790000358.508758,
-    "ast_hash": "e65f551c828b32f6a99ecbb2df894446",
+    "mtime": 1790085050.7369485,
+    "seen": 1790085111.5967538,
+    "ast_hash": "1010277eb38b4431caa4b1b97c4e8b0b",
     "semantic_hash": ""
   },
   "tests/Desconto.FormTests/currency-mask.test.cjs": {
@@ -2352,9 +2346,9 @@
     "semantic_hash": ""
   },
   "tests/Usuario.FormTests/Program.cs": {
-    "mtime": 1790077170.734682,
-    "seen": 1790078235.0099778,
-    "ast_hash": "e1fb3ce7f7153a01057e489b3fab74b7",
+    "mtime": 1790084665.4220743,
+    "seen": 1790085111.596791,
+    "ast_hash": "42ba8b0c02d2353c023c8656e1e8718f",
     "semantic_hash": ""
   },
   "tests/Usuario.FormTests/Usuario.FormTests.csproj": {
@@ -2727,6 +2721,24 @@
     "mtime": 1790080146.666829,
     "seen": 1790081323.08417,
     "ast_hash": "82937bc2431e77c4d5cb9b983c004553",
+    "semantic_hash": ""
+  },
+  "src/Web/Views/Home/PoliticaPrivacidade.cshtml": {
+    "mtime": 1790084574.7038646,
+    "seen": 1790085111.596694,
+    "ast_hash": "a949de12b0e3f122beee7dc273a38d71",
+    "semantic_hash": ""
+  },
+  "src/Web/Views/Home/TermosDeUso.cshtml": {
+    "mtime": 1790084454.888135,
+    "seen": 1790085111.5966976,
+    "ast_hash": "d4a23f300c9b79379256be4cd02cbd0e",
+    "semantic_hash": ""
+  },
+  "tests/Usuario.FormTests/PortalLegalTests.cs": {
+    "mtime": 1790084574.7038646,
+    "seen": 1790085111.5967894,
+    "ast_hash": "10b17b80b38424c908b6623a110c61f0",
     "semantic_hash": ""
   }
 }

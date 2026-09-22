@@ -91,8 +91,12 @@
     @if (!isLoginPage)
     {
     <footer class="footer portal-footer">
-        <div class="container">
-            &copy; 2026 - PVH Saúde - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container portal-footer-inner">
+            <p class="portal-footer-copy">&copy; 2026 - PVH Saúde</p>
+            <nav class="portal-footer-links" aria-label="Links institucionais">
+                <a asp-area="" asp-controller="Home" asp-action="PoliticaPrivacidade">Política de Privacidade</a>
+                <a asp-area="" asp-controller="Home" asp-action="TermosDeUso">Termos de Uso</a>
+            </nav>
         </div>
     </footer>
     <a class="whatsapp-float" asp-area="" asp-controller="WhatsApp" asp-action="Index" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp">

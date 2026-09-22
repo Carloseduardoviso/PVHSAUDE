@@ -1,17 +1,17 @@
 # Graph Report - PVHSAUDE  (2026-09-22)
 
 ## Corpus Check
-- 442 files · ~469,157 words
+- 444 files · ~472,126 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 17 file(s) not represented in the graph (top: (none) 8, .css 5, .example 1)
 
 ## Summary
-- 3286 nodes · 6454 edges · 294 communities (179 shown, 115 thin omitted)
-- Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 549 edges (avg confidence: 0.83)
+- 3293 nodes · 6462 edges · 289 communities (172 shown, 117 thin omitted)
+- Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 549 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0b939910`
+- Built from commit: `8706fbcc`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -21,16 +21,16 @@
 - Review Focus
 - ContatoVm
 - LogoPortalStorage
-- ServiceController
+- .Salvar
 - CredenciadoImagem
 - sweetalert2.all.min.js
 - Development
 - IRepositoryBase
 - PVHSAUDE.Api.csproj
-- BeneficiariosController
+- .Run
 - PVHSAUDE.Domain.Enuns
 - UsuarioVm
-- IUnitOfWork
+- .Login
 - Credenciado
 - .Consultar
 - BeneficiarioEntradaVm
@@ -43,68 +43,68 @@
 - Beneficiario
 - Development
 - .Atualizar
-- .SalvarAsync
+- BannerVm
 - BeneficiarioService
 - EmpresaBeneficiadaEspecialidade
 - CredenciadoVm
-- ServiceException
+- CatalogoService
 - CredenciadoEntradaVm
 - UsuarioEdicaoVm
 - IntencaoVenda
 - PVHSAUDE.Domain.Entities
 - IntencaoVendaService
-- .Index
+- ConfiguracaoWhatsAppVm
 - EmpresaBeneficiadaEntradaVm
 - EmpresaBeneficiadaVm
 - .Run
 - Context
-- EmpresaBeneficiadaApiClient
+- BannerVm
 - UsuarioService
 - GrauParentesco
 - PortalVm
 - Controller
 - PlanoVm
 - Banner
-- BannerVm
+- BannerApiClient
 - Transport
-- .ObterAsync
+- BeneficiarioRespostaVm
 - EmpresaBeneficiadaService
-- .Run
+- .ObterUsuario
 - IntencaoVendaVm
 - AppJwtService
 - WeatherForecast
 - IntencaoVendaEntradaVm
 - Contato
-- .Edit
+- Usuario.FormTests/Program.cs
 - CredenciadoApiClient
-- .Put
+- .Atualizar
 - PlanoValidadeOpcional
 - .Atualizar
 - .UploadImagem
-- CredenciadoEspecialidade
-- .Run
-- DescontoService
+- BannerRequest
+- ServiceException
+- PlanoEntradaVm
 - Dependente
-- BannerVm
+- BannersController
 - MetricsAuthMiddleware
 - .AtualizarStatus
 - PosicaoBanner
-- IEmpresaBeneficiadaService
+- RateLimiterConfig.cs
 - .Run
 - Plano
 - ImagemCredenciado
 - .Edit
-- .Put
+- TipoBeneficiario
 - HttpMessageHandler
 - TipoCredenciado
 - ProfileManager
 - AdicionaPosicaoBannerPortal
-- UsuarioDatabaseTests.cs
+- PVHSAUDE.Application.AppService
 - carteirinha.js
 - NotFound
-- .Atualizar
-- Health checks de deploy
 - .Executar
+- Health checks de deploy
+- .BuildTargetModel
 - Desconto
 - CredenciadoService
 - .Index
@@ -118,23 +118,19 @@
 - CadastroBanners
 - EspecialidadesProcedimentos
 - IntencoesVenda
-- FakeRepository
+- PortalLegalTests
 - GaleriaImagensCredenciado
 - .AtualizarStatus
 - PlanoVm
-- WhatsAppApiClient
 - IUsuarioService
-- Especialidade
+- CredenciadoEspecialidade
 - CadastroPlanos
-- system_net_http_json
-- .Get
-- UsuarioCookieEvents
+- ContatoAvisosTests.cs
 - RepositoryBase
 - EmpresaComPlano
 - BeneficiarioTipoPessoaEmpresaBeneficiada
 - CadastroEmpresasBeneficiadas
 - CadastroDatasBusca
-- ConfiguracaoWhatsAppVm
 - AjusteDefaultDataCadastro
 - beneficiario-form.js
 - ConfiguracaoWhatsAppUnica
@@ -152,15 +148,14 @@
 - StatusIntencaoVenda
 - DependenteCodigo
 - IntencaoVendaApiClient
-- Usuario.FormTests/Program.cs
-- .SendAsync
+- ContaController.cs
 - infra_data_base
 - .SendAsync
-- Procedimento
+- CredenciadoProcedimento
 - .BuildModel
 - CreateBeneficiarios
 - Deploy do PVHSAUDE em VPS Docker
-- system_text_regularexpressions
+- MoedaModelBinder.cs
 - CatalogosRelacionamentos
 - ICredenciadoService
 - validade.test.cjs
@@ -178,7 +173,6 @@
 - .PlanosPorEmpresa
 - Usuario
 - Beneficiario/_Form.cshtml
-- EmpresaBeneficiadaCatalogoVm.cs
 - Beneficiario/Index.cshtml
 - Usuários da administração
 - Beneficiario/Details.cshtml
@@ -235,7 +229,7 @@
 - health-checks.md
 - PVHSAUDE.Infra.Data.Migrations
 - IBeneficiarioService
-- PlanoEntradaVm
+- PlanoService
 - BannerFormatTests
 - StatusCredenciamento
 - Account
@@ -282,15 +276,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (294 total, 115 thin omitted)
+## Communities (289 total, 117 thin omitted)
 
 ### Community 0 - "BeneficiarioVm"
-Cohesion: 0.06
-Nodes (47): CancellationToken, DateTime, Guid, HttpGet, HttpPost, IActionResult, Task, ValidateAntiForgeryToken (+39 more)
+Cohesion: 0.05
+Nodes (53): CancellationToken, DateTime, Guid, HttpGet, HttpPost, IActionResult, Task, ValidateAntiForgeryToken (+45 more)
 
 ### Community 1 - "ContatoVm"
 Cohesion: 0.06
-Nodes (43): CancellationToken, Guid, HttpGet, HttpPost, IActionResult, Task, ValidateAntiForgeryToken, ContatoController (+35 more)
+Nodes (44): CancellationToken, Guid, HttpGet, HttpPost, IActionResult, Task, ValidateAntiForgeryToken, ContatoController (+36 more)
 
 ### Community 2 - "Review Focus"
 Cohesion: 0.25
@@ -304,9 +298,9 @@ Nodes (37): AllowAnonymous, Authorize, CancellationToken, Guid, HttpDelete, Http
 Cohesion: 0.22
 Nodes (7): Dictionary, Path, LogoPortalController, IWebHostEnvironment, Tipo, LogoPortalStorage, Pasta
 
-### Community 5 - "ServiceController"
-Cohesion: 0.12
-Nodes (17): ControllerBase, AllowAnonymous, Authorize, CancellationToken, HttpGet, HttpPut, IActionResult, Task (+9 more)
+### Community 5 - ".Salvar"
+Cohesion: 0.07
+Nodes (26): ControllerBase, Api.Controllers, AllowAnonymous, Authorize, CancellationToken, HttpGet, HttpPut, IActionResult (+18 more)
 
 ### Community 6 - "CredenciadoImagem"
 Cohesion: 0.18
@@ -328,9 +322,9 @@ Nodes (5): Guid, Task, IRepositoryBase, Guid, Task
 Cohesion: 0.05
 Nodes (42): Microsoft.AspNetCore.Authentication.Cookies (2.3.13), Microsoft.AspNetCore.Authentication.JwtBearer (10.0.11), Microsoft.AspNetCore.Http.Abstractions (2.3.13), Microsoft.AspNetCore.OpenApi (10.0.11), Microsoft.EntityFrameworkCore.Tools (10.0.0), Newtonsoft.Json (13.0.5-beta1), Swashbuckle.AspNetCore (10.2.3), System.IdentityModel.Tokens.Jwt (8.22.0) (+34 more)
 
-### Community 11 - "BeneficiariosController"
-Cohesion: 0.32
-Nodes (9): CancellationToken, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult, Task (+1 more)
+### Community 11 - ".Run"
+Cohesion: 0.30
+Nodes (10): CancellationToken, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult, Task (+2 more)
 
 ### Community 12 - "PVHSAUDE.Domain.Enuns"
 Cohesion: 0.06
@@ -340,49 +334,49 @@ Nodes (16): PVHSAUDE.Domain.Validation, PVHSAUDE.Domain.Enuns, List<Web.Models.I
 Cohesion: 0.13
 Nodes (19): HashSet, recordsTotal, Expression, Func, Guid, IEnumerable, List, Task (+11 more)
 
-### Community 14 - "IUnitOfWork"
-Cohesion: 0.12
-Nodes (17): Exception, IAsyncDisposable, IRepositoryTransaction, IUnitOfWork, RegistroDuplicadoException, CancellationToken, Expression, Func (+9 more)
+### Community 14 - ".Login"
+Cohesion: 0.11
+Nodes (17): EnableRateLimiting, AllowAnonymous, Authorize, CancellationToken, HttpGet, HttpPost, IActionResult, Task (+9 more)
 
 ### Community 15 - "Credenciado"
 Cohesion: 0.07
 Nodes (26): DateTime, Guid, ICollection, StatusCredenciamento, Credenciado, Cep, Cidade, Cnpj (+18 more)
 
 ### Community 16 - ".Consultar"
-Cohesion: 0.14
+Cohesion: 0.15
 Nodes (12): RespostaViaCep, CancellationToken, HttpGet, IActionResult, Task, CepController, CancellationToken, HttpClient (+4 more)
 
 ### Community 17 - "BeneficiarioEntradaVm"
-Cohesion: 0.09
-Nodes (29): DateTime, GrauParentesco, Guid, IReadOnlyCollection, List, TipoPessoa, BeneficiarioEntradaVm, Cpf (+21 more)
+Cohesion: 0.12
+Nodes (16): List, BeneficiarioEntradaVm, Cpf, CredenciadoId, DataInicio, DataNascimento, DataValidade, Dependentes (+8 more)
 
 ### Community 18 - "BeneficiarioVm"
 Cohesion: 0.07
 Nodes (29): DateTime, GrauParentesco, Guid, List, TipoPessoa, BeneficiarioVm, Codigo, Cpf (+21 more)
 
 ### Community 19 - "HomeController"
-Cohesion: 0.20
-Nodes (11): CancellationToken, Guid, IActionResult, IHttpClientFactory, ILogger, List, ResponseCache, Task (+3 more)
+Cohesion: 0.21
+Nodes (9): CancellationToken, Guid, IActionResult, IHttpClientFactory, ILogger, List, ResponseCache, Task (+1 more)
 
 ### Community 20 - ".AddApplicationServices"
-Cohesion: 0.09
-Nodes (22): CancellationToken, IMapper, IPasswordHasher, Task, AuthService, CancellationToken, IMapper, List (+14 more)
+Cohesion: 0.10
+Nodes (20): IMapper, IPasswordHasher, AuthService, CancellationToken, IMapper, List, Task, PortalService (+12 more)
 
 ### Community 21 - "EmpresaBeneficiada"
 Cohesion: 0.08
 Nodes (25): DateTime, Guid, ICollection, StatusCredenciamento, EmpresaBeneficiada, Cep, Cidade, Cnpj (+17 more)
 
 ### Community 22 - "CredenciadoVm"
-Cohesion: 0.06
-Nodes (34): DateTime, Guid, IFormFile, List, StatusCredenciamento, CredenciadoVm, Cep, Cidade (+26 more)
+Cohesion: 0.07
+Nodes (46): CancellationToken, DateTime, Guid, HttpGet, HttpPost, IActionResult, Task, ValidateAntiForgeryToken (+38 more)
 
 ### Community 23 - "PVHSAUDE.Application.ViewModels"
-Cohesion: 0.10
-Nodes (15): automapper, PVHSAUDE.Api.Controllers, PVHSAUDE.Application.AppService, PVHSAUDE.Application.ViewModels, PVHSAUDE.Domain.Interfaces.Repository, PVHSAUDE.Application.Interface, microsoft_aspnetcore_authorization, microsoft_aspnetcore_mvc (+7 more)
+Cohesion: 0.07
+Nodes (21): PVHSAUDE.Api.Controllers, PVHSAUDE.Api.Configs, PVHSAUDE.Web.Controllers, PVHSAUDE.Application.ViewModels, PVHSAUDE.Infra.Helper.Settings, PVHSAUDE.Application.Interface, PVHSAUDE.Api.Middleware, global_web_models (+13 more)
 
 ### Community 24 - "Beneficiario"
-Cohesion: 0.07
-Nodes (29): DateTime, Dependente, Guid, ICollection, TipoPessoa, Beneficiario, Codigo, Cpf (+21 more)
+Cohesion: 0.09
+Nodes (24): DateTime, Dependente, Guid, ICollection, TipoPessoa, Beneficiario, Codigo, Cpf (+16 more)
 
 ### Community 25 - "Development"
 Cohesion: 0.07
@@ -392,9 +386,9 @@ Nodes (31): applicationUrl, commandName, dotnetRunMessages, environmentVariables
 Cohesion: 0.30
 Nodes (10): Authorize, CancellationToken, Guid, HttpGet, HttpPatch, HttpPost, HttpPut, IActionResult (+2 more)
 
-### Community 27 - ".SalvarAsync"
-Cohesion: 0.35
-Nodes (6): CancellationToken, Guid, IMapper, List, Task, BannerService
+### Community 27 - "BannerVm"
+Cohesion: 0.14
+Nodes (18): CancellationToken, Guid, IMapper, List, Task, BannerService, CancellationToken, Guid (+10 more)
 
 ### Community 28 - "BeneficiarioService"
 Cohesion: 0.26
@@ -408,9 +402,9 @@ Nodes (14): Guid, EmpresaBeneficiadaEspecialidade, EmpresaBeneficiada, EmpresaBe
 Cohesion: 0.08
 Nodes (24): Guid, List, StatusCredenciamento, CredenciadoVm, Cep, Cidade, Cnpj, DescontoId (+16 more)
 
-### Community 31 - "ServiceException"
-Cohesion: 0.16
-Nodes (18): CancellationToken, Guid, IMapper, List, Task, CatalogoService, ServiceException, Error (+10 more)
+### Community 31 - "CatalogoService"
+Cohesion: 0.06
+Nodes (47): Authorize, CancellationToken, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+39 more)
 
 ### Community 32 - "CredenciadoEntradaVm"
 Cohesion: 0.09
@@ -425,36 +419,36 @@ Cohesion: 0.10
 Nodes (20): DateTime, Guid, IntencaoVenda, Cpf, CriadoEm, Dependentes, Email, Endereco (+12 more)
 
 ### Community 35 - "PVHSAUDE.Domain.Entities"
-Cohesion: 0.15
-Nodes (3): PVHSAUDE.Domain.Entities, Infra.Data.Config, microsoft_entityframeworkcore_metadata_builders
+Cohesion: 0.12
+Nodes (6): PVHSAUDE.Domain.Entities, Infra.Data.Config, microsoft_data_sqlclient, microsoft_entityframeworkcore_metadata_builders, microsoft_entityframeworkcore_storage, system_data
 
 ### Community 36 - "IntencaoVendaService"
-Cohesion: 0.15
-Nodes (15): CancellationToken, Guid, IMapper, List, StatusIntencaoVenda, Task, IntencaoVendaService, CancellationToken (+7 more)
+Cohesion: 0.19
+Nodes (12): CancellationToken, Guid, IMapper, List, StatusIntencaoVenda, Task, IntencaoVendaService, CancellationToken (+4 more)
 
-### Community 37 - ".Index"
-Cohesion: 0.29
-Nodes (6): CancellationToken, HttpGet, HttpPost, IActionResult, Task, ValidateAntiForgeryToken
+### Community 37 - "ConfiguracaoWhatsAppVm"
+Cohesion: 0.15
+Nodes (13): ConfiguracaoWhatsAppVm, Mensagem, Nome, Telefone, CancellationToken, HttpGet, HttpPost, IActionResult (+5 more)
 
 ### Community 38 - "EmpresaBeneficiadaEntradaVm"
-Cohesion: 0.10
-Nodes (22): DateTime, Guid, List, StatusCredenciamento, EmpresaBeneficiadaEntradaVm, Cep, Cidade, Cnpj (+14 more)
+Cohesion: 0.09
+Nodes (28): CancellationToken, Guid, List, Stream, Task, IEmpresaBeneficiadaService, DateTime, Guid (+20 more)
 
 ### Community 39 - "EmpresaBeneficiadaVm"
 Cohesion: 0.09
 Nodes (22): Guid, List, StatusCredenciamento, EmpresaBeneficiadaVm, Cep, Cidade, Cnpj, Email (+14 more)
 
 ### Community 40 - ".Run"
-Cohesion: 0.27
-Nodes (8): AuthorizeAttribute, IHttpClientFactory, HttpClient, HttpMessageHandler, IDesignTimeModel, Factory, Transport, WhatsAppTests
+Cohesion: 0.14
+Nodes (15): AuthorizeAttribute, IHttpClientFactory, WhatsAppController, IHttpClientFactory, WhatsAppApiClient, CancellationToken, HttpClient, HttpMessageHandler (+7 more)
 
 ### Community 41 - "Context"
-Cohesion: 0.11
-Nodes (18): DbContext, DbSet, IDbContextTransaction, ModelBuilder, Task, Context, Beneficiarios, Contatos (+10 more)
+Cohesion: 0.12
+Nodes (17): DbContext, DbSet, IDbContextTransaction, Task, Context, Beneficiarios, Contatos, CredenciadoEspecialidades (+9 more)
 
-### Community 42 - "EmpresaBeneficiadaApiClient"
-Cohesion: 0.23
-Nodes (11): Guid, CatalogoItemVm, CancellationToken, Guid, HttpClient, HttpResponseMessage, IFormFile, IReadOnlyCollection (+3 more)
+### Community 42 - "BannerVm"
+Cohesion: 0.18
+Nodes (17): CancellationToken, Guid, HttpGet, HttpPost, IActionResult, RequestSizeLimit, Task, ValidateAntiForgeryToken (+9 more)
 
 ### Community 43 - "UsuarioService"
 Cohesion: 0.33
@@ -469,44 +463,44 @@ Cohesion: 0.08
 Nodes (24): Periodicidade, Anual, Mensal, Semestral, Trimestral, EmpresaCardVm, Guid, IReadOnlyCollection (+16 more)
 
 ### Community 46 - "Controller"
-Cohesion: 0.07
-Nodes (33): Controller, global_web_models, global_web_services, CancellationToken, Guid, HttpClient, HttpGet, HttpPost (+25 more)
+Cohesion: 0.08
+Nodes (33): Controller, CancellationToken, Guid, HttpClient, HttpGet, HttpPost, IActionResult, IHttpClientFactory (+25 more)
 
 ### Community 47 - "PlanoVm"
 Cohesion: 0.06
-Nodes (47): CancellationToken, Guid, HttpPost, IActionResult, Task, ValidateAntiForgeryToken, DescontoController, CancellationToken (+39 more)
+Nodes (46): CancellationToken, Guid, HttpPost, IActionResult, Task, ValidateAntiForgeryToken, DescontoController, CancellationToken (+38 more)
 
 ### Community 48 - "Banner"
-Cohesion: 0.10
-Nodes (22): DateTime, Guid, Banner, Ativo, ContentType, CriadoEm, Id, Imagem (+14 more)
+Cohesion: 0.06
+Nodes (36): IAsyncDisposable, DateTime, Guid, Banner, Ativo, ContentType, CriadoEm, Id (+28 more)
 
-### Community 49 - "BannerVm"
-Cohesion: 0.08
-Nodes (32): Bytes, CancellationToken, Guid, HttpGet, HttpPost, IActionResult, RequestSizeLimit, Task (+24 more)
+### Community 49 - "BannerApiClient"
+Cohesion: 0.13
+Nodes (17): Bytes, Tipo, CancellationToken, Guid, HttpClient, List, Task, BannerApiClient (+9 more)
 
 ### Community 50 - "Transport"
 Cohesion: 0.24
 Nodes (8): HttpStatusCode, CancellationToken, Guid, HttpRequestMessage, HttpResponseMessage, Task, Transport, Empresa
 
-### Community 51 - ".ObterAsync"
-Cohesion: 0.36
-Nodes (6): CancellationToken, Expression, Func, List, Task, IEntityRepository
+### Community 51 - "BeneficiarioRespostaVm"
+Cohesion: 0.21
+Nodes (13): DateTime, GrauParentesco, Guid, IReadOnlyCollection, TipoPessoa, BeneficiarioRespostaVm, DependenteEntradaVm, Cpf (+5 more)
 
 ### Community 52 - "EmpresaBeneficiadaService"
-Cohesion: 0.26
-Nodes (10): CancellationToken, Guid, IMapper, List, Stream, Task, EmpresaBeneficiadaService, EmpresaBeneficiada (+2 more)
+Cohesion: 0.13
+Nodes (20): CancellationToken, Guid, IMapper, List, Stream, Task, EmpresaBeneficiadaService, Guid (+12 more)
 
-### Community 53 - ".Run"
-Cohesion: 0.29
-Nodes (7): CancellationToken, Func, Guid, Stream, Task, DatabaseTests, Storage
+### Community 53 - ".ObterUsuario"
+Cohesion: 0.18
+Nodes (10): CancellationToken, Guid, IOptions, IServiceCollection, Task, AuthServiceConfig, JwtSetting, Audience (+2 more)
 
 ### Community 54 - "IntencaoVendaVm"
 Cohesion: 0.11
 Nodes (19): DateTime, Guid, IntencaoVendaEntradaVm, IntencaoVendaVm, Cpf, CriadoEm, Dependentes, Email (+11 more)
 
 ### Community 55 - "AppJwtService"
-Cohesion: 0.16
-Nodes (8): JwtSecurityTokenHandler, ClaimsPrincipal, AppJwtService, IAppJwtService, JwtSetting, Audience, Issuer, SecretKey
+Cohesion: 0.23
+Nodes (4): JwtSecurityTokenHandler, ClaimsPrincipal, AppJwtService, IAppJwtService
 
 ### Community 56 - "WeatherForecast"
 Cohesion: 0.25
@@ -520,17 +514,17 @@ Nodes (19): DateTime, Guid, IntencaoVendaEntradaVm, Cpf, Dependentes, Email, End
 Cohesion: 0.12
 Nodes (15): DateTime, Guid, Contato, Cpf, Email, EnviadoEm, Id, Mensagem (+7 more)
 
-### Community 59 - ".Edit"
-Cohesion: 0.38
-Nodes (9): CancellationToken, DateTime, Guid, HttpGet, HttpPost, IActionResult, Task, ValidateAntiForgeryToken (+1 more)
+### Community 59 - "Usuario.FormTests/Program.cs"
+Cohesion: 0.25
+Nodes (4): microsoft_aspnetcore_dataprotection, system_net_http_json, system_text_regularexpressions, ClientScriptTests
 
 ### Community 60 - "CredenciadoApiClient"
 Cohesion: 0.28
 Nodes (9): CancellationToken, Guid, HttpClient, HttpResponseMessage, IFormFile, IReadOnlyCollection, List, Task (+1 more)
 
-### Community 61 - ".Put"
-Cohesion: 0.27
-Nodes (10): Authorize, CancellationToken, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+2 more)
+### Community 61 - ".Atualizar"
+Cohesion: 0.25
+Nodes (5): ClaimsIdentity, ClaimsPrincipal, IEnumerable, AcessoMenu, AuthorizationFilterContext
 
 ### Community 62 - "PlanoValidadeOpcional"
 Cohesion: 0.25
@@ -544,25 +538,25 @@ Nodes (11): Authorize, CancellationToken, Guid, HttpGet, HttpPost, HttpPut, IAct
 Cohesion: 0.26
 Nodes (11): Authorize, CancellationToken, Guid, HttpGet, HttpPost, HttpPut, IActionResult, IFormFile (+3 more)
 
-### Community 65 - "CredenciadoEspecialidade"
-Cohesion: 0.16
-Nodes (14): Guid, CredenciadoEspecialidade, Credenciado, CredenciadoId, Especialidade, EspecialidadeId, Guid, CredenciadoProcedimento (+6 more)
+### Community 65 - "BannerRequest"
+Cohesion: 0.33
+Nodes (6): IFormFile, BannerRequest, Ativo, Imagem, Posicao, Titulo
 
-### Community 66 - ".Run"
-Cohesion: 0.16
-Nodes (13): CancellationToken, Guid, IMapper, List, Task, ContatoService, ApiDatabaseTests, CancellationToken (+5 more)
+### Community 66 - "ServiceException"
+Cohesion: 0.14
+Nodes (18): Exception, CancellationToken, Guid, IMapper, List, Task, ContatoService, ServiceException (+10 more)
 
-### Community 67 - "DescontoService"
-Cohesion: 0.21
-Nodes (11): CancellationToken, Guid, IMapper, List, Task, DescontoService, CancellationToken, Guid (+3 more)
+### Community 67 - "PlanoEntradaVm"
+Cohesion: 0.13
+Nodes (23): CancellationToken, Guid, IMapper, List, Task, DescontoService, CancellationToken, Guid (+15 more)
 
 ### Community 68 - "Dependente"
 Cohesion: 0.16
 Nodes (12): DateTime, GrauParentesco, Guid, Dependente, Beneficiario, BeneficiarioId, Codigo, Cpf (+4 more)
 
-### Community 69 - "BannerVm"
-Cohesion: 0.07
-Nodes (40): ClaimsIdentity, IAllowAnonymous, IAuthorizationFilter, IAuthorizeData, AuthorizationFilterContext, MenuApiFilter, AllowAnonymous, Authorize (+32 more)
+### Community 69 - "BannersController"
+Cohesion: 0.31
+Nodes (11): AllowAnonymous, Authorize, CancellationToken, Guid, HttpGet, HttpPost, HttpPut, IActionResult (+3 more)
 
 ### Community 70 - "MetricsAuthMiddleware"
 Cohesion: 0.17
@@ -576,9 +570,9 @@ Nodes (11): AllowAnonymous, Authorize, CancellationToken, Guid, HttpGet, HttpPat
 Cohesion: 0.20
 Nodes (8): Task 2: Validação de formato por posição e cadastro administrativo, BannerFormato, PosicaoBanner, Central, InferiorDireita, InferiorEsquerda, LateralDireita, LateralEsquerda
 
-### Community 73 - "IEmpresaBeneficiadaService"
-Cohesion: 0.36
-Nodes (6): CancellationToken, Guid, List, Stream, Task, IEmpresaBeneficiadaService
+### Community 73 - "RateLimiterConfig.cs"
+Cohesion: 0.40
+Nodes (3): IServiceCollection, RateLimiterConfig, system_threading_ratelimiting
 
 ### Community 74 - ".Run"
 Cohesion: 0.29
@@ -593,16 +587,16 @@ Cohesion: 0.29
 Nodes (5): MigrationBuilder, DateTime, Guid, ModelBuilder, ImagemCredenciado
 
 ### Community 77 - ".Edit"
-Cohesion: 0.07
-Nodes (42): EnableRateLimiting, ProblemDetails, AllowAnonymous, Authorize, CancellationToken, HttpGet, HttpPost, IActionResult (+34 more)
+Cohesion: 0.11
+Nodes (27): ProblemDetails, CancellationToken, Guid, HttpGet, HttpPost, IActionResult, Task, ValidateAntiForgeryToken (+19 more)
 
-### Community 78 - ".Put"
-Cohesion: 0.27
-Nodes (10): Authorize, CancellationToken, Guid, HttpDelete, HttpGet, HttpPost, HttpPut, IActionResult (+2 more)
+### Community 78 - "TipoBeneficiario"
+Cohesion: 0.50
+Nodes (3): TipoBeneficiario, Dependente, Titular
 
 ### Community 79 - "HttpMessageHandler"
-Cohesion: 0.24
-Nodes (8): HttpMessageHandler, ApiConnectionRetryTests, CancellationToken, HttpRequestMessage, HttpResponseMessage, Task, UnavailableThenAvailableHandler, Attempts
+Cohesion: 0.18
+Nodes (9): HttpMessageHandler, system_net_sockets, ApiConnectionRetryTests, CancellationToken, HttpRequestMessage, HttpResponseMessage, Task, UnavailableThenAvailableHandler (+1 more)
 
 ### Community 80 - "TipoCredenciado"
 Cohesion: 0.15
@@ -616,9 +610,9 @@ Nodes (9): Claim, ClaimsPrincipal, Guid, IEnumerable, ProfileManager, Claims, Is
 Cohesion: 0.29
 Nodes (5): MigrationBuilder, DateTime, Guid, ModelBuilder, AdicionaPosicaoBannerPortal
 
-### Community 83 - "UsuarioDatabaseTests.cs"
-Cohesion: 0.07
-Nodes (26): automapper_extensions_expressionmapping, PVHSAUDE.Api.Configs, Infra.Auth, PVHSAUDE.Infra.Auth, PVHSAUDE.Infra.Helper.Settings, PVHSAUDE.Application.AutoMapper, PVHSAUDE.Infra.Auth.Interface, PVHSAUDE.Infra.Ioc (+18 more)
+### Community 83 - "PVHSAUDE.Application.AppService"
+Cohesion: 0.11
+Nodes (17): automapper, automapper_extensions_expressionmapping, Infra.Auth, PVHSAUDE.Application.AppService, PVHSAUDE.Infra.Auth, PVHSAUDE.Application.AutoMapper, PVHSAUDE.Infra.Auth.Interface, PVHSAUDE.Domain.Interfaces.Repository (+9 more)
 
 ### Community 84 - "carteirinha.js"
 Cohesion: 0.26
@@ -628,33 +622,33 @@ Nodes (10): addDependente(), atualizarResumoValores(), calcularTotal(), formatar
 Cohesion: 0.34
 Nodes (9): NotFound, CancellationToken, DateTime, Guid, HttpPost, IActionResult, Task, ValidateAntiForgeryToken (+1 more)
 
-### Community 86 - ".Atualizar"
-Cohesion: 0.31
-Nodes (9): Authorize, CancellationToken, Guid, HttpGet, HttpPost, HttpPut, IActionResult, Task (+1 more)
+### Community 86 - ".Executar"
+Cohesion: 0.22
+Nodes (13): Authorize, CancellationToken, Guid, HttpGet, HttpPost, HttpPut, IActionResult, Task (+5 more)
 
 ### Community 87 - "Health checks de deploy"
 Cohesion: 0.20
 Nodes (9): File Structure, Global Constraints, Health checks de deploy, PVHSAUDE VPS Docker Implementation Plan, Self-review, Task 1: Preparar Web e API para proxy e saúde, Task 2: Criar Dockerfiles e variáveis de produção, Task 3: Orquestrar Caddy, Web, API e SQL Server (+1 more)
 
-### Community 88 - ".Executar"
-Cohesion: 0.22
-Nodes (8): Func, IActionResult, Task, ServiceError, Conflict, Invalid, Unauthorized, Validation
+### Community 88 - ".BuildTargetModel"
+Cohesion: 0.50
+Nodes (3): DateTime, Guid, ModelBuilder
 
 ### Community 89 - "Desconto"
 Cohesion: 0.19
 Nodes (12): DateTime, Guid, Periodicidade, TipoPessoa, Desconto, DataValidade, Descricao, Id (+4 more)
 
 ### Community 90 - "CredenciadoService"
-Cohesion: 0.37
-Nodes (7): CancellationToken, Guid, IMapper, List, Stream, Task, CredenciadoService
+Cohesion: 0.26
+Nodes (10): CancellationToken, Guid, IMapper, List, Stream, Task, CredenciadoService, Credenciado (+2 more)
 
 ### Community 91 - ".Index"
 Cohesion: 0.25
 Nodes (7): CancellationToken, HttpGet, HttpPost, IActionResult, IFormFile, Task, ValidateAntiForgeryToken
 
 ### Community 92 - "IImagemStorage"
-Cohesion: 0.14
-Nodes (11): CancellationToken, Guid, IWebHostEnvironment, Stream, Task, ImagemStorage, CancellationToken, Guid (+3 more)
+Cohesion: 0.10
+Nodes (17): CancellationToken, Guid, IWebHostEnvironment, Stream, Task, ImagemStorage, CancellationToken, Guid (+9 more)
 
 ### Community 93 - ".Run"
 Cohesion: 0.21
@@ -692,10 +686,6 @@ Nodes (6): Guid, MigrationBuilder, DateTime, Guid, ModelBuilder, EspecialidadesP
 Cohesion: 0.22
 Nodes (7): DateTime, Guid, MigrationBuilder, DateTime, Guid, ModelBuilder, IntencoesVenda
 
-### Community 102 - "FakeRepository"
-Cohesion: 0.23
-Nodes (8): CatalogoTests, CancellationToken, Expression, Func, List, Task, FakeRepository, FakeUnitOfWork
-
 ### Community 103 - "GaleriaImagensCredenciado"
 Cohesion: 0.40
 Nodes (4): DateTime, Guid, MigrationBuilder, GaleriaImagensCredenciado
@@ -708,33 +698,21 @@ Nodes (8): CancellationToken, Guid, HttpGet, HttpPost, IActionResult, Task, Vali
 Cohesion: 0.17
 Nodes (12): DateTime, Guid, Periodicidade, TipoPessoa, PlanoVm, DataValidade, Descricao, Id (+4 more)
 
-### Community 106 - "WhatsAppApiClient"
-Cohesion: 0.32
-Nodes (6): WhatsAppController, WhatsAppController, CancellationToken, IHttpClientFactory, Task, WhatsAppApiClient
-
 ### Community 107 - "IUsuarioService"
-Cohesion: 0.20
-Nodes (11): CancellationToken, Guid, IOptions, IServiceCollection, Task, AuthServiceConfig, CancellationToken, Guid (+3 more)
+Cohesion: 0.41
+Nodes (5): CancellationToken, Guid, List, Task, IUsuarioService
 
-### Community 108 - "Especialidade"
-Cohesion: 0.22
-Nodes (7): Guid, ICollection, Especialidade, Ativo, Credenciados, Id, Nome
+### Community 108 - "CredenciadoEspecialidade"
+Cohesion: 0.13
+Nodes (12): Guid, CredenciadoEspecialidade, Credenciado, CredenciadoId, EspecialidadeId, Guid, ICollection, Especialidade (+4 more)
 
 ### Community 109 - "CadastroPlanos"
 Cohesion: 0.25
 Nodes (6): Guid, MigrationBuilder, DateTime, Guid, ModelBuilder, CadastroPlanos
 
-### Community 110 - "system_net_http_json"
-Cohesion: 0.39
-Nodes (5): microsoft_aspnetcore_http, microsoft_aspnetcore_mvc_rendering, microsoft_aspnetcore_mvc_viewcomponents, system_net_http_json, system_security_claims
-
-### Community 111 - ".Get"
-Cohesion: 0.29
-Nodes (5): Api.Controllers, WeatherForecastController, HttpGet, IEnumerable, WeatherForecast
-
-### Community 112 - "UsuarioCookieEvents"
-Cohesion: 0.33
-Nodes (5): CookieAuthenticationEvents, CookieValidatePrincipalContext, IHttpClientFactory, Task, UsuarioCookieEvents
+### Community 110 - "ContatoAvisosTests.cs"
+Cohesion: 0.48
+Nodes (4): microsoft_aspnetcore_http, microsoft_aspnetcore_mvc_rendering, microsoft_aspnetcore_mvc_viewcomponents, system_security_claims
 
 ### Community 113 - "RepositoryBase"
 Cohesion: 0.27
@@ -755,10 +733,6 @@ Nodes (6): Guid, MigrationBuilder, DateTime, Guid, ModelBuilder, CadastroEmpresa
 ### Community 117 - "CadastroDatasBusca"
 Cohesion: 0.25
 Nodes (6): DateTime, MigrationBuilder, DateTime, Guid, ModelBuilder, CadastroDatasBusca
-
-### Community 118 - "ConfiguracaoWhatsAppVm"
-Cohesion: 0.40
-Nodes (4): ConfiguracaoWhatsAppVm, Mensagem, Nome, Telefone
 
 ### Community 119 - "AjusteDefaultDataCadastro"
 Cohesion: 0.28
@@ -820,21 +794,17 @@ Nodes (5): MigrationBuilder, DateTime, Guid, ModelBuilder, DependenteCodigo
 Cohesion: 0.36
 Nodes (6): CancellationToken, Guid, HttpClient, List, Task, IntencaoVendaApiClient
 
-### Community 136 - "Usuario.FormTests/Program.cs"
-Cohesion: 0.21
-Nodes (6): PVHSAUDE.Web.Controllers, microsoft_aspnetcore_authentication, microsoft_aspnetcore_authentication_cookies, microsoft_aspnetcore_dataprotection, microsoft_aspnetcore_httpoverrides, system_net_http_headers
-
-### Community 137 - ".SendAsync"
-Cohesion: 0.40
-Nodes (4): CancellationToken, HttpRequestMessage, HttpResponseMessage, Task
+### Community 136 - "ContaController.cs"
+Cohesion: 0.16
+Nodes (9): CookieAuthenticationEvents, CookieValidatePrincipalContext, microsoft_aspnetcore_authentication, microsoft_aspnetcore_authentication_cookies, microsoft_aspnetcore_httpoverrides, IHttpClientFactory, Task, UsuarioCookieEvents (+1 more)
 
 ### Community 139 - ".SendAsync"
-Cohesion: 0.12
-Nodes (14): DelegatingHandler, CancellationToken, HttpRequestMessage, HttpResponseMessage, IHttpContextAccessor, Task, ApiAuthenticationHandler, CancellationToken (+6 more)
+Cohesion: 0.13
+Nodes (13): DelegatingHandler, CancellationToken, HttpRequestMessage, HttpResponseMessage, IHttpContextAccessor, Task, ApiAuthenticationHandler, CancellationToken (+5 more)
 
-### Community 140 - "Procedimento"
-Cohesion: 0.22
-Nodes (7): Guid, ICollection, Procedimento, Ativo, Credenciados, Id, Nome
+### Community 140 - "CredenciadoProcedimento"
+Cohesion: 0.13
+Nodes (12): Guid, CredenciadoProcedimento, Credenciado, CredenciadoId, ProcedimentoId, Guid, ICollection, Procedimento (+4 more)
 
 ### Community 141 - ".BuildModel"
 Cohesion: 0.33
@@ -848,9 +818,9 @@ Nodes (5): DateTime, MigrationBuilder, DateTime, ModelBuilder, CreateBeneficiari
 Cohesion: 0.25
 Nodes (7): Alterações no repositório, Banco de dados, Deploy do PVHSAUDE em VPS Docker, DNS e segurança, Objetivo, Topologia aprovada, Verificação de aceite
 
-### Community 144 - "system_text_regularexpressions"
-Cohesion: 0.15
-Nodes (9): Web.ModelBinders, IModelBinder, microsoft_aspnetcore_mvc_modelbinding, ModelBindingContext, Task, MoedaModelBinder, system_globalization, system_text_regularexpressions (+1 more)
+### Community 144 - "MoedaModelBinder.cs"
+Cohesion: 0.22
+Nodes (7): Web.ModelBinders, IModelBinder, microsoft_aspnetcore_mvc_modelbinding, ModelBindingContext, Task, MoedaModelBinder, system_globalization
 
 ### Community 145 - "CatalogosRelacionamentos"
 Cohesion: 0.25
@@ -869,8 +839,8 @@ Cohesion: 0.22
 Nodes (7): StatusBeneficiario, Ativo, Cancelado, EmRenovacao, Inadimplente, Inativo, Pendente
 
 ### Community 149 - "IdentificadoresGuid"
-Cohesion: 0.25
-Nodes (6): Guid, MigrationBuilder, DateTime, Guid, ModelBuilder, IdentificadoresGuid
+Cohesion: 0.50
+Nodes (3): Guid, MigrationBuilder, IdentificadoresGuid
 
 ### Community 151 - "StatusPagamento"
 Cohesion: 0.29
@@ -885,8 +855,8 @@ Cohesion: 0.33
 Nodes (5): StatusCarteirinha, Ativa, Bloqueada, Cancelada, Expirada
 
 ### Community 155 - ".Run"
-Cohesion: 0.10
-Nodes (22): Profile, List, AutoMapperConfig, EmpresaBeneficiadaProfile, Guid, CredenciadoEspecialidadeVm, CredenciadoProcedimentoVm, EspecialidadeVm (+14 more)
+Cohesion: 0.12
+Nodes (19): Profile, List, AutoMapperConfig, EmpresaBeneficiadaProfile, Guid, CredenciadoEspecialidadeVm, CredenciadoProcedimentoVm, EspecialidadeVm (+11 more)
 
 ### Community 156 - "ConfiguracaoBeneficiarioDependente"
 Cohesion: 0.33
@@ -907,10 +877,6 @@ Nodes (19): IX_Usuario_EmailNormalizado, Usuario, IServiceProvider, IPasswordHas
 ### Community 162 - "Beneficiario/_Form.cshtml"
 Cohesion: 0.50
 Nodes (3): BeneficiarioVm, CredenciadoVm, PlanoVm
-
-### Community 163 - "EmpresaBeneficiadaCatalogoVm.cs"
-Cohesion: 0.67
-Nodes (3): Guid, EmpresaBeneficiadaEspecialidadeVm, EmpresaBeneficiadaProcedimentoVm
 
 ### Community 165 - "Usuários da administração"
 Cohesion: 0.40
@@ -940,9 +906,9 @@ Nodes (8): Infra.Data.Base, PVHSAUDE.Infra.Data.Migrations, microsoft_entityfram
 Cohesion: 0.42
 Nodes (5): CancellationToken, Guid, List, Task, IBeneficiarioService
 
-### Community 275 - "PlanoEntradaVm"
-Cohesion: 0.13
-Nodes (23): CancellationToken, Guid, IMapper, List, Task, PlanoService, CancellationToken, Guid (+15 more)
+### Community 275 - "PlanoService"
+Cohesion: 0.17
+Nodes (14): CancellationToken, Guid, IMapper, List, Task, PlanoService, CancellationToken, Guid (+6 more)
 
 ### Community 277 - "StatusCredenciamento"
 Cohesion: 0.33
@@ -989,36 +955,36 @@ Cohesion: 0.15
 Nodes (5): Web.Models, PVHSAUDE.Web.ViewComponents, Web.Services, PVHSAUDE.Web.Areas.Administracao.Controllers, system_net
 
 ### Community 309 - ".Context"
-Cohesion: 0.40
-Nodes (4): AuthorizationFilterContext, ClaimsPrincipal, Task, MenuPermissionsTests
+Cohesion: 0.18
+Nodes (10): IAllowAnonymous, IAuthorizationFilter, IAuthorizeData, AuthorizationFilterContext, MenuApiFilter, MenuAdministrativoFilter, AuthorizationFilterContext, ClaimsPrincipal (+2 more)
 
 ### Community 310 - "CadastroContatos"
 Cohesion: 0.22
 Nodes (7): DateTime, Guid, MigrationBuilder, DateTime, Guid, ModelBuilder, CadastroContatos
 
 ### Community 311 - "IEntityTypeConfiguration"
-Cohesion: 0.40
-Nodes (5): IEntityTypeConfiguration, Desconto, DependenteConfig, EntityTypeBuilder, DescontoConfig
+Cohesion: 0.21
+Nodes (8): IEntityTypeConfiguration, Desconto, ModelBuilder, EntityTypeBuilder, BeneficiarioConfig, DependenteConfig, EntityTypeBuilder, DescontoConfig
 
 ## Knowledge Gaps
 - **794 isolated node(s):** `backup-sqlserver.sh script`, `Titulo`, `Posicao`, `Ativo`, `Imagem` (+789 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1520 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **115 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1522 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **117 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `PVHSAUDE.Domain.Enuns` connect `PVHSAUDE.Domain.Enuns` to `PVHSAUDE.Domain.Entities`, `StatusIntencaoVenda`, `StatusCarteirinha`, `PosicaoBanner`, `Usuario.FormTests/Program.cs`, `PortalVm`, `Controller`, `HomeController.cs`, `Web.Services`, `UsuarioDatabaseTests.cs`, `StatusBeneficiario`, `StatusCredenciamento`, `IntencaoVendaVm`, `PVHSAUDE.Application.ViewModels`, `StatusPagamento`, `Beneficiario`, `MenusAdministrativos`?**
-  _High betweenness centrality (0.114) - this node is a cross-community bridge._
-- **Why does `PVHSAUDE.Application.ViewModels` connect `PVHSAUDE.Application.ViewModels` to `ContatoVm`, `EmpresaBeneficiadaCatalogoVm.cs`, `BannerVm`, `Usuario.FormTests/Program.cs`, `PVHSAUDE.Domain.Enuns`, `Web.Services`, `UsuarioDatabaseTests.cs`, `.Run`, `ServiceException`?**
-  _High betweenness centrality (0.082) - this node is a cross-community bridge._
-- **Why does `Context` connect `Context` to `Usuario`, `CredenciadoEspecialidade`, `IntencaoVenda`, `IntencaoVendaService`, `ServiceController`, `CredenciadoImagem`, `Dependente`, `.Run`, `IUnitOfWork`, `Banner`, `RepositoryBase`, `UsuarioDatabaseTests.cs`, `IEntityTypeConfiguration`, `Beneficiario`, `Contato`, `.Run`, `Account`?**
-  _High betweenness centrality (0.052) - this node is a cross-community bridge._
+- **Why does `PVHSAUDE.Domain.Enuns` connect `PVHSAUDE.Domain.Enuns` to `PVHSAUDE.Domain.Entities`, `StatusIntencaoVenda`, `StatusCarteirinha`, `PosicaoBanner`, `PortalVm`, `TipoBeneficiario`, `HomeController.cs`, `Web.Services`, `PVHSAUDE.Application.AppService`, `StatusBeneficiario`, `StatusCredenciamento`, `IntencaoVendaVm`, `PVHSAUDE.Application.ViewModels`, `StatusPagamento`, `MenusAdministrativos`, `Usuario.FormTests/Program.cs`?**
+  _High betweenness centrality (0.110) - this node is a cross-community bridge._
+- **Why does `PVHSAUDE.Application.ViewModels` connect `PVHSAUDE.Application.ViewModels` to `ContatoVm`, `PVHSAUDE.Domain.Entities`, `BannerVm`, `ContaController.cs`, `Usuario.FormTests/Program.cs`, `PVHSAUDE.Domain.Enuns`, `Web.Services`, `PVHSAUDE.Application.AppService`, `EmpresaBeneficiadaService`, `.Run`?**
+  _High betweenness centrality (0.079) - this node is a cross-community bridge._
+- **Why does `Context` connect `Context` to `Usuario`, `IntencaoVenda`, `PVHSAUDE.Domain.Entities`, `Contato`, `.Salvar`, `CredenciadoImagem`, `Dependente`, `.Run`, `CredenciadoEspecialidade`, `CredenciadoProcedimento`, `Banner`, `RepositoryBase`, `PlanoService`, `IEntityTypeConfiguration`, `Beneficiario`, `CredenciadoService`, `Account`, `CatalogoService`?**
+  _High betweenness centrality (0.051) - this node is a cross-community bridge._
 - **What connects `backup-sqlserver.sh script`, `Titulo`, `Posicao` to the rest of the system?**
   _794 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `BeneficiarioVm` be split into smaller, more focused modules?**
-  _Cohesion score 0.06398730830248546 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.054987212276214836 - nodes in this community are weakly interconnected._
 - **Should `ContatoVm` be split into smaller, more focused modules?**
-  _Cohesion score 0.05827067669172932 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.056866303690260134 - nodes in this community are weakly interconnected._
 - **Should `ContatoVm` be split into smaller, more focused modules?**
   _Cohesion score 0.0726950354609929 - nodes in this community are weakly interconnected._

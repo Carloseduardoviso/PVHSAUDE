@@ -19,6 +19,7 @@ await ApiConnectionRetryTests.Run();
 BannerFormatTests.Run();
 LogoPortalFormatTests.Run();
 PortalHomeUxTests.Run();
+PortalLegalTests.Run();
 CredenciamentosCarouselTests.Run();
 CepAutofillTests.Run();
 await BannerApiClientTests.Run();
