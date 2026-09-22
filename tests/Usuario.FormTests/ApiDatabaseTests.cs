@@ -34,14 +34,28 @@ internal static class ApiDatabaseTests
         var especialidade = await catalogos.CriarEspecialidadeAsync(new CatalogoEntradaVm(" Especialidade "), ct);
         var procedimento = await catalogos.CriarProcedimentoAsync(new CatalogoEntradaVm(" Procedimento "), ct);
         Check((await catalogos.EspecialidadesAsync(ct)).Single().Nome == "Especialidade", "catálogo usa VM e entidade.");
+        var storage = new Storage();
         var empresaService = new CredenciadoService(empresasRepo, planosRepo, new EntityRepository<CredenciadoEspecialidade>(db),
-            new EntityRepository<CredenciadoProcedimento>(db), work, mapper, new Storage());
+            new EntityRepository<CredenciadoProcedimento>(db), work, mapper, storage, new EntityRepository<CredenciadoImagem>(db));
         var empresas = new CredenciadosController(empresaService);
         var entrada = new CredenciadoEntradaVm { PlanoId = plano.Id, RazaoSocial = "Empresa", NomeFantasia = "Clínica",
             Cnpj = "12.345.678/0001-90", Tipo = TipoCredenciado.Clinica, StatusCredenciamento = StatusCredenciamento.Ativo,
             EspecialidadeIds = [especialidade.Id], ProcedimentoIds = [procedimento.Id] };
         var empresa = (CredenciadoRespostaVm)((CreatedAtActionResult)await empresas.Criar(entrada, ct)).Value!;
         Check(empresa.Cnpj == "12345678000190" && empresa.EspecialidadeIds.Single() == especialidade.Id, "credenciado retorna vínculos após gravar.");
+        var entidadeCredenciada = await empresasRepo.ObterAsync(x => x.Id == empresa.Id, ct, x => x.Imagens) ?? throw new Exception("Credenciado não encontrado.");
+        var urlAntiga = $"/uploads/credenciados/{empresa.Id:N}-antiga.png";
+        var urlNova = $"/uploads/credenciados/{empresa.Id:N}-nova.png";
+        entidadeCredenciada.AdicionarImagem(urlAntiga, DateTime.UtcNow.AddMinutes(-1));
+        entidadeCredenciada.AdicionarImagem(urlNova, DateTime.UtcNow);
+        entidadeCredenciada.DefinirImagem(urlNova);
+        await work.SalvarAsync(ct);
+        await empresaService.RemoverImagemAsync(empresa.Id, urlNova, ct);
+        db.ChangeTracker.Clear();
+        var aposRemocao = await empresaService.ObterAsync(empresa.Id, ct);
+        Check(aposRemocao.ImagemUrl == urlAntiga && aposRemocao.ImagemUrls!.SequenceEqual([urlAntiga]) && storage.Excluida == urlNova,
+            "remover uma imagem preserva a galeria e promove a anterior.");
+        Check(!await db.CredenciadoImagens.AnyAsync(x => x.Url == urlNova), "imagem removida sai do banco.");
         Check(await empresas.Atualizar(empresa.Id, entrada, ct) is NoContentResult, "atualização mantém vínculos sem conflito de rastreamento.");
         entrada.EspecialidadeIds = [];
         Check(await empresas.Atualizar(empresa.Id, entrada, ct) is NoContentResult && !await db.CredenciadoEspecialidades.AnyAsync(),
@@ -83,7 +97,9 @@ internal static class ApiDatabaseTests
 
     private sealed class Storage : IImagemStorage
     {
+        public string? Excluida;
         public Task<string> SalvarCredenciadoAsync(Guid id, string extensao, Stream conteudo, CancellationToken ct) =>
             throw new NotSupportedException("Este teste não grava arquivos.");
+        public Task ExcluirCredenciadoAsync(string url, CancellationToken ct) { Excluida = url; return Task.CompletedTask; }
     }
 }

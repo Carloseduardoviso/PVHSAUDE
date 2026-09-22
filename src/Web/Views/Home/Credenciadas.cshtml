@@ -1,5 +1,5 @@
 @model Web.Models.PortalVm
-@{ ViewData["Title"] = "Clínicas Credenciadas"; }
+@{ ViewData["Title"] ??= "Clínicas Credenciadas"; }
 <section aria-labelledby="credenciadas-titulo">
     <div class="mb-4">
         <h1 id="credenciadas-titulo">@ViewData["Title"]</h1>

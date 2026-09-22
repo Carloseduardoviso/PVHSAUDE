@@ -19,4 +19,7 @@ public class CredenciadosController(ICredenciadoService service) : ServiceContro
         await using var stream = imagem.OpenReadStream();
         return Ok(new { ImagemUrl = await service.UploadImagemAsync(id, imagem.FileName, imagem.Length, stream, ct) });
     });
+    [Authorize, HttpDelete("{id:guid}/imagens")]
+    public Task<IActionResult> RemoverImagem(Guid id, [FromQuery] string url, CancellationToken ct) => Executar(async () =>
+    { await service.RemoverImagemAsync(id, url, ct); return NoContent(); });
 }

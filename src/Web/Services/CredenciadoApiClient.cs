@@ -52,6 +52,12 @@ public class CredenciadoApiClient(HttpClient client)
         await Verificar(response, ct);
     }
 
+    public async Task RemoverImagemAsync(Guid id, string url, CancellationToken ct)
+    {
+        using var response = await client.DeleteAsync($"api/credenciados/{id}/imagens?url={Uri.EscapeDataString(url)}", ct);
+        await Verificar(response, ct);
+    }
+
     private static async Task Verificar(HttpResponseMessage response, CancellationToken ct)
     {
         if (response.IsSuccessStatusCode) return;

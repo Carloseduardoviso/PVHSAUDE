@@ -152,6 +152,21 @@ using (var imagemResponse = await client.GetAsync("/uploads/credenciados/teste.p
         throw new Exception("A Web deve servir imagens salvas na API pela URL pública.");
 }
 Console.WriteLine("PASS: imagem da API é servida pela URL pública da Web.");
+var edicaoCredenciado = await client.GetStringAsync($"/Administracao/Credenciado/Edit/{ApiTransport.CredenciadoId}");
+if (!edicaoCredenciado.Contains("form=\"remover-imagem-0\"") || !edicaoCredenciado.Contains("form=\"remover-imagem-1\""))
+    throw new Exception("Cada imagem salva deve ter seu próprio botão Remover na edição.");
+var tokenRemocao = WebUtility.HtmlDecode(Regex.Match(edicaoCredenciado, "name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\"").Groups[1].Value);
+using (var remocao = await client.PostAsync("/Administracao/Credenciado/RemoverImagem", new FormUrlEncodedContent(new Dictionary<string, string>
+{
+    ["__RequestVerificationToken"] = tokenRemocao,
+    ["id"] = ApiTransport.CredenciadoId.ToString(),
+    ["url"] = ApiTransport.ImagemCredenciadoNova
+})))
+{
+    if (remocao.StatusCode != HttpStatusCode.Redirect || transport.RemovedImageUrl != ApiTransport.ImagemCredenciadoNova)
+        throw new Exception("A remoção da imagem salva não chegou à API.");
+}
+Console.WriteLine("PASS: edição remove individualmente uma imagem salva.");
 await app.StopAsync();
 
 sealed class ApiTransport : HttpMessageHandler
@@ -159,9 +174,12 @@ sealed class ApiTransport : HttpMessageHandler
     public static readonly Guid PlanoId = Guid.NewGuid();
     public static readonly Guid EmpresaId = Guid.NewGuid();
     public static readonly Guid BeneficiarioId = Guid.NewGuid();
+    public static readonly Guid CredenciadoId = Guid.NewGuid();
+    public static readonly string ImagemCredenciadoNova = $"/uploads/credenciados/{CredenciadoId:N}-nova.png";
     public static readonly byte[] ImagemTeste = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/ZfoAAAAASUVORK5CYII=");
     public BeneficiarioVm? Saved;
     public CredenciadoVm? Empresa;
+    public string? RemovedImageUrl;
     public string? LastDescontoAction;
     public string? LastDescontoName;
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
@@ -180,6 +198,20 @@ sealed class ApiTransport : HttpMessageHandler
                 Codigo = $"RO001/{DateTime.UtcNow:yyyy}",
                 Dependentes = []
             }) };
+        if (request.Method == HttpMethod.Get && request.RequestUri.AbsolutePath == $"/api/credenciados/{CredenciadoId}")
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new CredenciadoVm
+            {
+                Id = CredenciadoId, RazaoSocial = "Credenciado Teste", NomeFantasia = "Credenciado Teste", Cnpj = "12345678000190",
+                PlanoId = PlanoId, Tipo = PVHSAUDE.Domain.Enuns.TipoCredenciado.Clinica,
+                StatusCredenciamento = PVHSAUDE.Domain.Enuns.StatusCredenciamento.Ativo,
+                ImagemUrl = ImagemCredenciadoNova,
+                ImagemUrls = [$"/uploads/credenciados/{CredenciadoId:N}-antiga.png", ImagemCredenciadoNova]
+            }) };
+        if (request.Method == HttpMethod.Delete && request.RequestUri.AbsolutePath == $"/api/credenciados/{CredenciadoId}/imagens")
+        {
+            RemovedImageUrl = Uri.UnescapeDataString(request.RequestUri.Query[5..]);
+            return new(HttpStatusCode.NoContent);
+        }
         if (request.Method == HttpMethod.Get && request.RequestUri.AbsolutePath == "/uploads/credenciados/teste.png")
         {
             var content = new ByteArrayContent(ImagemTeste);

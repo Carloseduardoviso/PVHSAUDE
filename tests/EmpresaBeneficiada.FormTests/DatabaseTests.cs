@@ -85,5 +85,6 @@ internal static class DatabaseTests
         public Guid Id;
         public Task<string> SalvarCredenciadoAsync(Guid id, string extensao, Stream conteudo, CancellationToken ct)
         { Id = id; return Task.FromResult($"/uploads/credenciados/{id}{extensao}"); }
+        public Task ExcluirCredenciadoAsync(string url, CancellationToken ct) => Task.CompletedTask;
     }
 }

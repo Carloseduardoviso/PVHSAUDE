@@ -1,6 +1,29 @@
 @model CredenciadoVm
 <div asp-validation-summary="All" class="text-danger mb-3" role="alert"></div>
-<div class="mb-3 text-center"><div id="imagem-preview-container" class="mb-3" @((Model.ImagemUrls?.Any() == true || !string.IsNullOrWhiteSpace(Model.ImagemUrl)) ? "" : "hidden")><div id="imagem-salva-list" class="d-flex flex-wrap justify-content-center gap-2 mb-2">@foreach (var url in (Model.ImagemUrls?.Any() == true ? Model.ImagemUrls : (!string.IsNullOrWhiteSpace(Model.ImagemUrl) ? [Model.ImagemUrl] : []))) { <img src="@url" alt="Imagem salva da empresa" style="width:96px;height:72px;object-fit:cover;border-radius:6px;border:2px solid #6c757d;padding:2px" /> }</div><div id="imagem-preview-list" class="d-flex flex-wrap justify-content-center gap-2"></div></div><label for="Imagens" class="form-label">Imagens da empresa</label><input id="Imagens" name="Imagens" type="file" accept="image/jpeg,image/png,image/webp" multiple="multiple" class="form-control" /><div id="imagens-selecionadas" class="form-text">Selecione várias imagens JPG, PNG ou WEBP, até 5 MB cada.</div><span asp-validation-for="Imagens" class="text-danger"></span></div>
+@{
+    var imagensSalvas = Model.ImagemUrls?.Any() == true ? Model.ImagemUrls : (!string.IsNullOrWhiteSpace(Model.ImagemUrl) ? new List<string> { Model.ImagemUrl } : new List<string>());
+}
+<div class="mb-3 text-center">
+    <div id="imagem-preview-container" class="mb-3" @(imagensSalvas.Count > 0 ? "" : "hidden")>
+        <div id="imagem-salva-list" class="d-flex flex-wrap justify-content-center gap-2 mb-2">
+            @for (var indice = 0; indice < imagensSalvas.Count; indice++)
+            {
+                <div class="d-flex flex-column align-items-center gap-1">
+                    <img src="@imagensSalvas[indice]" alt="Imagem salva da empresa" style="width:96px;height:72px;object-fit:cover;border-radius:6px;border:2px solid #6c757d;padding:2px" />
+                    @if (Model.Id != Guid.Empty)
+                    {
+                        <button type="submit" form="remover-imagem-@indice" class="btn btn-sm btn-outline-danger" aria-label="Remover imagem @(indice + 1)">Remover</button>
+                    }
+                </div>
+            }
+        </div>
+        <div id="imagem-preview-list" class="d-flex flex-wrap justify-content-center gap-2"></div>
+    </div>
+    <label for="Imagens" class="form-label">Imagens da empresa</label>
+    <input id="Imagens" name="Imagens" type="file" accept="image/jpeg,image/png,image/webp" multiple="multiple" class="form-control" />
+    <div id="imagens-selecionadas" class="form-text">Selecione várias imagens JPG, PNG ou WEBP, até 5 MB cada.</div>
+    <span asp-validation-for="Imagens" class="text-danger"></span>
+</div>
 <div class="row g-3">
     @if (Model.PlanoId.HasValue)
     {

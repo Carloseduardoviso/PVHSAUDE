@@ -35,6 +35,15 @@ public class CredenciadoController(CredenciadoApiClient credenciados, DescontoAp
     [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(CredenciadoVm model, CancellationToken ct) { if (model.Id == Guid.Empty) return BadRequest(); await Catalogos(ct); if (!ModelState.IsValid) return View(model); try { await credenciados.SalvarAsync(model, ct); await EnviarImagem(model, ct); } catch (HttpRequestException ex) { ModelState.AddModelError("", ex.Message); return View(model); } TempData["Success"] = "Credenciamento atualizado com sucesso."; return RedirectToAction(nameof(Index)); }
 
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> RemoverImagem(Guid id, string url, CancellationToken ct)
+    {
+        if (id == Guid.Empty || string.IsNullOrWhiteSpace(url)) return BadRequest();
+        try { await credenciados.RemoverImagemAsync(id, url, ct); TempData["Success"] = "Imagem removida com sucesso."; }
+        catch (HttpRequestException ex) { TempData["Error"] = ex.StatusCode == System.Net.HttpStatusCode.NotFound ? "Imagem não encontrada." : "Não foi possível remover a imagem."; }
+        return RedirectToAction(nameof(Edit), new { id });
+    }
+
     private async Task EnviarImagem(CredenciadoVm model, CancellationToken ct)
     {
         if (model.Imagens.Count == 0 && model.Imagem is not null) model.Imagens = [model.Imagem];

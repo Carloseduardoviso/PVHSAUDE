@@ -7,7 +7,8 @@ namespace PVHSAUDE.Application.AppService;
 
 public class CredenciadoService(IEntityRepository<Credenciado> repository, IEntityRepository<Plano> planos,
     IEntityRepository<CredenciadoEspecialidade> especialidades, IEntityRepository<CredenciadoProcedimento> procedimentos,
-    IUnitOfWork work, IMapper mapper, IImagemStorage storage, IEntityRepository<Desconto>? descontos = null) : ICredenciadoService
+    IUnitOfWork work, IMapper mapper, IImagemStorage storage, IEntityRepository<CredenciadoImagem> imagens,
+    IEntityRepository<Desconto>? descontos = null) : ICredenciadoService
 {
     public async Task<List<CredenciadoRespostaVm>> ListarAsync(CancellationToken ct) =>
         mapper.Map<List<CredenciadoRespostaVm>>((await repository.ListarAsync(null, ct, x => x.Especialidades, x => x.Procedimentos, x => x.Imagens)).OrderBy(x => x.NomeFantasia));
@@ -72,5 +73,23 @@ public class CredenciadoService(IEntityRepository<Credenciado> repository, IEnti
         entity.AdicionarImagem(url);
         await work.SalvarAsync(ct);
         return url;
+    }
+    public async Task RemoverImagemAsync(Guid id, string url, CancellationToken ct)
+    {
+        var entity = await Encontrar(id, ct);
+        var caminho = Uri.TryCreate(url, UriKind.Absolute, out var uri) ? uri.AbsolutePath : url;
+        var vinculadas = entity.Imagens.Where(x => x.Url == caminho).ToList();
+        if (vinculadas.Count == 0 && entity.ImagemUrl != caminho)
+            throw new ServiceException(ServiceError.NotFound);
+
+        foreach (var imagem in vinculadas)
+        {
+            imagens.Remover(imagem);
+            entity.Imagens.Remove(imagem);
+        }
+        if (entity.ImagemUrl == caminho)
+            entity.DefinirImagem(entity.Imagens.OrderByDescending(x => x.CriadoEm).ThenByDescending(x => x.Id).FirstOrDefault()?.Url);
+        await work.SalvarAsync(ct);
+        await storage.ExcluirCredenciadoAsync(caminho, ct);
     }
 }

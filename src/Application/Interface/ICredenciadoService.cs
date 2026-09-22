@@ -7,4 +7,5 @@ public interface ICredenciadoService
     Task<CredenciadoRespostaVm> CriarAsync(CredenciadoEntradaVm vm, CancellationToken ct);
     Task AtualizarAsync(Guid id, CredenciadoEntradaVm vm, CancellationToken ct);
     Task<string> UploadImagemAsync(Guid id, string nome, long tamanho, Stream conteudo, CancellationToken ct);
+    Task RemoverImagemAsync(Guid id, string url, CancellationToken ct);
 }
