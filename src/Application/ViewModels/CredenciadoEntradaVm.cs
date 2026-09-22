@@ -4,7 +4,6 @@ namespace PVHSAUDE.Application.ViewModels;
 
 public class CredenciadoEntradaVm
 {
-    [PVHSAUDE.Domain.Validation.GuidNaoVazio(ErrorMessage = "Selecione o desconto da empresa.")]
     public Guid? DescontoId { get; set; }
     public Guid? PlanoId { get; set; }
     [Required(ErrorMessage = "Informe razão social."), StringLength(150), Display(Name = "Razão social")]

@@ -69,6 +69,13 @@ public static class MenuPermissionsTests
                     throw new Exception($"Permissão WhatsApp na Web incorreta: {role}/{method}/{permitido}");
             }
         }
+        var usuarioAutenticado = new ClaimsPrincipal(new ClaimsIdentity([], "tests"));
+        var consultaCep = Context("Cep", "Consultar", "GET", usuarioAutenticado);
+        consultaCep.RouteData.Values["area"] = "Administracao";
+        new Web.Services.MenuAdministrativoFilter().OnAuthorization(consultaCep);
+        if (consultaCep.Result is not null)
+            throw new Exception("Consulta de CEP foi blocked by menu authorization.");
+
         foreach (var (action, menu) in new[]
         {
             ("Especialidades", "Especialidades"),

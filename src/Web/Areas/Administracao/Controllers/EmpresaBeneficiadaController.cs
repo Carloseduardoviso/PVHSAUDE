@@ -26,9 +26,9 @@ public class EmpresaBeneficiadaController(EmpresaBeneficiadaApiClient empresas, 
         }
     }
 
-    private async Task Catalogos(CancellationToken ct)
+    private async Task Catalogos(CancellationToken ct, Guid? planoSelecionado = null)
     {
-        ViewBag.Planos = (await planos.ListarAsync(ct)).Where(x => x.TipoPessoa == PVHSAUDE.Domain.Enuns.TipoPessoa.Juridica).Select(x => new SelectListItem(
+        ViewBag.Planos = (await planos.ListarAsync(ct)).Where(x => x.TipoPessoa == PVHSAUDE.Domain.Enuns.TipoPessoa.Juridica || x.Id == planoSelecionado).Select(x => new SelectListItem(
             x.Nome + " — " + x.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")), x.Id.ToString())).ToList();
         ViewBag.Especialidades = await empresas.EspecialidadesAsync(ct);
         ViewBag.Procedimentos = await empresas.ProcedimentosAsync(ct);
@@ -49,7 +49,7 @@ public class EmpresaBeneficiadaController(EmpresaBeneficiadaApiClient empresas, 
     {
         var model = await empresas.ObterAsync(id, ct);
         if (model is null) return NotFound();
-        await Catalogos(ct);
+        await Catalogos(ct, model.PlanoId);
         return View(model);
     }
 
@@ -58,7 +58,7 @@ public class EmpresaBeneficiadaController(EmpresaBeneficiadaApiClient empresas, 
     {
         var model = await empresas.ObterAsync(id, ct);
         if (model is null) return NotFound();
-        await Catalogos(ct);
+        await Catalogos(ct, model.PlanoId);
         return View(model);
     }
 

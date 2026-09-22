@@ -5,7 +5,7 @@ using Web.Services;
 namespace PVHSAUDE.Web.Areas.Administracao.Controllers;
 
 [Area("Administracao")]
-public class CredenciadoController(CredenciadoApiClient credenciados, DescontoApiClient descontos) : Controller
+public class CredenciadoController(CredenciadoApiClient credenciados, DescontoApiClient descontos, PlanoApiClient planos) : Controller
 {
     public async Task<IActionResult> Index(string? nomeFantasia, DateTime? dataCadastro, CancellationToken ct)
     {
@@ -23,6 +23,7 @@ public class CredenciadoController(CredenciadoApiClient credenciados, DescontoAp
     private async Task Catalogos(CancellationToken ct)
     {
         ViewBag.Descontos = (await descontos.ListarAsync(ct)).Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(x.Nome + " - " + x.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")), x.Id.ToString())).ToList();
+        ViewBag.Planos = (await planos.ListarAsync(ct)).Select(x => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem(x.Nome + " - " + x.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")), x.Id.ToString())).ToList();
         ViewBag.Especialidades = await credenciados.EspecialidadesAsync(ct);
         ViewBag.Procedimentos = await credenciados.ProcedimentosAsync(ct);
     }

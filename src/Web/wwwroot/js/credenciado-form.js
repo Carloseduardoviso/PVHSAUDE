@@ -135,7 +135,7 @@
         }
         const controller = new AbortController();
         pending = controller;
-        const timeout = window.setTimeout(() => controller.abort(), 10000);
+        const timeout = window.setTimeout(() => controller.abort(), 50000);
         const initialCity = cidade?.value;
         const initialUf = uf?.value;
         const initialEndereco = endereco.value;
@@ -154,8 +154,8 @@
                 return;
             }
             // Keep manual edits made while the request was in progress.
-            if (cidade?.value === initialCity) cidade.value = data.localidade;
-            if (uf?.value === initialUf) uf.value = data.uf;
+            if (cidade && cidade.value === initialCity) cidade.value = data.cidade;
+            if (uf && uf.value === initialUf) uf.value = data.uf;
             addressParts = { logradouro: data.logradouro, bairro: data.bairro, localidade: data.cidade, uf: data.uf };
             if (endereco.value === initialEndereco) composeAddress();
             cidade?.dispatchEvent(new Event("change", { bubbles: true }));
