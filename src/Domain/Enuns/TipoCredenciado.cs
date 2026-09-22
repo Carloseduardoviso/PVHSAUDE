@@ -14,6 +14,7 @@ namespace PVHSAUDE.Domain.Enuns
         [Display(Name = "Natação")] Natacao = 9,
         [Display(Name = "Ótica")] Otica = 10,
         [Display(Name = "Roupa Esportiva")] RoupaEsportiva = 11,
-        [Display(Name = "Clínica terapêutica credenciada")] ClinicaTerapeuticaCredenciada = 12
+        [Display(Name = "Clínica terapêutica credenciada")] ClinicaTerapeuticaCredenciada = 12,
+        [Display(Name = "Empresa beneficiada")] EmpresaBeneficiada = 13
     }
 }

@@ -26,7 +26,8 @@ internal static class DatabaseTests
         var mapper = config.CreateMapper();
         var storage = new Storage();
         var service = new EmpresaBeneficiadaService(new EntityRepository<EmpresaBeneficiada>(db), new EntityRepository<Plano>(db),
-            new EntityRepository<EmpresaBeneficiadaEspecialidade>(db), new EntityRepository<EmpresaBeneficiadaProcedimento>(db), new UnitOfWork(db), mapper, storage);
+            new EntityRepository<EmpresaBeneficiadaEspecialidade>(db), new EntityRepository<EmpresaBeneficiadaProcedimento>(db), new UnitOfWork(db), mapper, storage,
+            new EntityRepository<Beneficiario>(db));
         try
         {
             await db.Database.MigrateAsync();
@@ -41,11 +42,12 @@ internal static class DatabaseTests
             var vm = new EmpresaBeneficiadaEntradaVm
             {
                 RazaoSocial = " Empresa teste ", NomeFantasia = " Beneficiada teste ", Cnpj = "12.345.678/0001-90",
-                PlanoId = plano.Id, Tipo = TipoCredenciado.Outro, StatusCredenciamento = (StatusCredenciamento)1,
+                PlanoId = plano.Id, StatusCredenciamento = (StatusCredenciamento)1,
                 EspecialidadeIds = [especialidade.Id, especialidade.Id], ProcedimentoIds = [procedimento.Id]
             };
             var created = await service.CriarAsync(vm, default);
-            Check(created.Id != Guid.Empty && created.Cnpj == "12345678000190" && created.NomeFantasia == "Beneficiada teste", "Criação normaliza dados e retorna ID");
+            Check(created.Id != Guid.Empty && created.Cnpj == "12345678000190" && created.NomeFantasia == "Beneficiada teste" &&
+                created.Tipo == TipoCredenciado.EmpresaBeneficiada, "Criação define tipo de empresa sem exigir menu");
             db.ChangeTracker.Clear();
             var read = await service.ObterAsync(created.Id, default);
             Check(read.PlanoId == plano.Id && read.EspecialidadeIds.SequenceEqual([especialidade.Id]) && read.ProcedimentoIds.SequenceEqual([procedimento.Id]), "Plano e catálogos persistem sem duplicatas");
@@ -69,6 +71,22 @@ internal static class DatabaseTests
             await service.UploadImagemAsync(created.Id, "limite.png", 5_242_880, Stream.Null, default);
             await Reject(() => service.UploadImagemAsync(created.Id, "grande.png", 5_242_881, Stream.Null, default), "Imagem acima de 5 MB é rejeitada");
             await Reject(() => service.ObterAsync(clinica.Id, default), "ID de clínica não pode abrir empresa beneficiada");
+            var vinculado = new Beneficiario("Beneficiário vinculado", "12345678901", new DateTime(1990, 1, 1),
+                plano.Id, DateTime.Today, DateTime.Today.AddYears(1));
+            vinculado.DefinirPessoa(TipoPessoa.Juridica, created.Id);
+            db.Add(vinculado);
+            await db.SaveChangesAsync();
+            await Reject(() => service.ExcluirAsync(created.Id, default), "Empresa com beneficiário vinculado não pode ser excluída");
+            db.Remove(vinculado);
+            await db.SaveChangesAsync();
+            vm.EspecialidadeIds = [especialidade.Id];
+            vm.ProcedimentoIds = [procedimento.Id];
+            await service.AtualizarAsync(created.Id, vm, default);
+            await service.ExcluirAsync(created.Id, default);
+            Check(!await db.Set<EmpresaBeneficiada>().AnyAsync(x => x.Id == created.Id) &&
+                !await db.Set<EmpresaBeneficiadaEspecialidade>().AnyAsync(x => x.EmpresaBeneficiadaId == created.Id) &&
+                !await db.Set<EmpresaBeneficiadaProcedimento>().AnyAsync(x => x.EmpresaBeneficiadaId == created.Id) &&
+                storage.Excluida == $"/uploads/credenciados/{created.Id}.png", "Exclusão remove empresa, vínculos e imagem");
         }
         finally { await db.Database.EnsureDeletedAsync(); }
     }
@@ -83,8 +101,9 @@ internal static class DatabaseTests
     private sealed class Storage : IImagemStorage
     {
         public Guid Id;
+        public string? Excluida;
         public Task<string> SalvarCredenciadoAsync(Guid id, string extensao, Stream conteudo, CancellationToken ct)
         { Id = id; return Task.FromResult($"/uploads/credenciados/{id}{extensao}"); }
-        public Task ExcluirCredenciadoAsync(string url, CancellationToken ct) => Task.CompletedTask;
+        public Task ExcluirCredenciadoAsync(string url, CancellationToken ct) { Excluida = url; return Task.CompletedTask; }
     }
 }

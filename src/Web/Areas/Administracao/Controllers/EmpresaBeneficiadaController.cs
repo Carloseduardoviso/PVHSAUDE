@@ -76,9 +76,30 @@ public class EmpresaBeneficiadaController(EmpresaBeneficiadaApiClient empresas, 
         return await Salvar(model, false, ct);
     }
 
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> Excluir(Guid id, CancellationToken ct)
+    {
+        if (id == Guid.Empty) return BadRequest();
+        try { await empresas.ExcluirAsync(id, ct); TempData["Success"] = "Empresa beneficiada excluída com sucesso."; }
+        catch (HttpRequestException ex)
+        {
+            TempData["Error"] = ex.StatusCode switch
+            {
+                System.Net.HttpStatusCode.Conflict => "Esta empresa possui beneficiários vinculados e não pode ser excluída.",
+                System.Net.HttpStatusCode.NotFound => "Empresa beneficiada não encontrada.",
+                _ => "Não foi possível excluir a empresa beneficiada. Tente novamente."
+            };
+        }
+        return RedirectToAction(nameof(Index));
+    }
+
     private async Task<IActionResult> Salvar(CredenciadoVm model, bool novo, CancellationToken ct)
     {
         await Catalogos(ct);
+        model.Tipo = PVHSAUDE.Domain.Enuns.TipoCredenciado.EmpresaBeneficiada;
+        ModelState.Remove(nameof(model.Tipo));
+        if (!model.PlanoId.HasValue || model.PlanoId == Guid.Empty)
+            ModelState.AddModelError(nameof(model.PlanoId), "Selecione o plano da empresa.");
         if (model.Imagem is { } imagem && (imagem.Length == 0 || imagem.Length > 5_242_880 ||
             !new[] { ".jpg", ".jpeg", ".png", ".webp" }.Contains(Path.GetExtension(imagem.FileName).ToLowerInvariant())))
             ModelState.AddModelError(nameof(model.Imagem), "Envie uma imagem JPG, PNG ou WEBP de até 5 MB.");

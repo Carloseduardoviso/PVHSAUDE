@@ -41,6 +41,12 @@ public class EmpresaBeneficiadaApiClient(HttpClient client)
                 ?? throw new HttpRequestException("A API não retornou a empresa cadastrada.");
     }
 
+    public async Task ExcluirAsync(Guid id, CancellationToken ct)
+    {
+        using var response = await client.DeleteAsync($"api/empresas-beneficiadas/{id}", ct);
+        await Verificar(response, ct);
+    }
+
     public async Task UploadImagemAsync(Guid id, IFormFile imagem, CancellationToken ct)
     {
         using var content = new MultipartFormDataContent();

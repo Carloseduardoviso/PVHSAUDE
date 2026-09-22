@@ -7,7 +7,7 @@ namespace PVHSAUDE.Application.AppService;
 
 public class EmpresaBeneficiadaService(IEntityRepository<EmpresaBeneficiada> repository, IEntityRepository<Plano> planos,
     IEntityRepository<EmpresaBeneficiadaEspecialidade> especialidades, IEntityRepository<EmpresaBeneficiadaProcedimento> procedimentos,
-    IUnitOfWork work, IMapper mapper, IImagemStorage storage) : IEmpresaBeneficiadaService
+    IUnitOfWork work, IMapper mapper, IImagemStorage storage, IEntityRepository<Beneficiario> beneficiarios) : IEmpresaBeneficiadaService
 {
     public async Task<List<EmpresaBeneficiadaRespostaVm>> ListarAsync(CancellationToken ct) =>
         mapper.Map<List<EmpresaBeneficiadaRespostaVm>>((await repository.ListarAsync(null, ct, x => x.Especialidades, x => x.Procedimentos)).OrderBy(x => x.NomeFantasia));
@@ -25,6 +25,7 @@ public class EmpresaBeneficiadaService(IEntityRepository<EmpresaBeneficiada> rep
     }
     public async Task<EmpresaBeneficiadaRespostaVm> CriarAsync(EmpresaBeneficiadaEntradaVm vm, CancellationToken ct)
     {
+        vm.Tipo = PVHSAUDE.Domain.Enuns.TipoCredenciado.EmpresaBeneficiada;
         await Validar(null, vm, ct);
         var entity = mapper.Map<EmpresaBeneficiada>(mapper.Map<EmpresaBeneficiadaVm>(vm));
         repository.Adicionar(entity);
@@ -35,10 +36,24 @@ public class EmpresaBeneficiadaService(IEntityRepository<EmpresaBeneficiada> rep
     public async Task AtualizarAsync(Guid id, EmpresaBeneficiadaEntradaVm vm, CancellationToken ct)
     {
         var entity = await Encontrar(id, ct);
+        vm.Tipo = PVHSAUDE.Domain.Enuns.TipoCredenciado.EmpresaBeneficiada;
         await Validar(id, vm, ct);
         mapper.Map(mapper.Map<EmpresaBeneficiadaVm>(vm), entity);
         Sincronizar(entity, vm);
         await work.SalvarAsync(ct);
+    }
+    public async Task ExcluirAsync(Guid id, CancellationToken ct)
+    {
+        var entity = await Encontrar(id, ct);
+        if (await beneficiarios.ExisteAsync(x => x.EmpresaBeneficiadaId == id, ct))
+            throw new ServiceException(ServiceError.Conflict, "Esta empresa possui beneficiários vinculados e não pode ser excluída.");
+
+        foreach (var especialidade in entity.Especialidades) especialidades.Remover(especialidade);
+        foreach (var procedimento in entity.Procedimentos) procedimentos.Remover(procedimento);
+        repository.Remover(entity);
+        await work.SalvarAsync(ct);
+        if (!string.IsNullOrWhiteSpace(entity.ImagemUrl))
+            await storage.ExcluirCredenciadoAsync(entity.ImagemUrl, ct);
     }
     private void Sincronizar(EmpresaBeneficiada entity, EmpresaBeneficiadaEntradaVm vm)
     {

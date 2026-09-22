@@ -13,6 +13,8 @@ public class EmpresaBeneficiadaController(IEmpresaBeneficiadaService service) : 
     { var p = await service.CriarAsync(vm, ct); return CreatedAtAction(nameof(Obter), new { id = p.Id }, p); });
     [Authorize, HttpPut("{id:guid}")] public Task<IActionResult> Atualizar(Guid id, EmpresaBeneficiadaEntradaVm vm, CancellationToken ct) => Executar(async () =>
     { await service.AtualizarAsync(id, vm, ct); return NoContent(); });
+    [Authorize, HttpDelete("{id:guid}")] public Task<IActionResult> Excluir(Guid id, CancellationToken ct) => Executar(async () =>
+    { await service.ExcluirAsync(id, ct); return NoContent(); });
     // O arquivo continua limitado a 5 MB no serviço; a requisição inclui os cabeçalhos multipart.
     [Authorize, HttpPost("{id:guid}/imagem"), RequestSizeLimit(6_291_456)]
     public Task<IActionResult> UploadImagem(Guid id, IFormFile imagem, CancellationToken ct) => Executar(async () =>

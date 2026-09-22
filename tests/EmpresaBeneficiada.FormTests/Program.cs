@@ -18,6 +18,8 @@ var transport = new Transport();
 var api = new HttpClient(transport) { BaseAddress = new Uri("http://test-api/") };
 builder.Services.AddSingleton(new EmpresaBeneficiadaApiClient(api));
 builder.Services.AddSingleton(new PlanoApiClient(api));
+builder.Services.AddSingleton(new ContatoApiClient(api));
+builder.Services.AddSingleton(new IntencaoVendaApiClient(api));
 await using var app = builder.Build();
 app.Use(async (ctx, next) =>
 {
@@ -29,7 +31,7 @@ app.Urls.Add("http://127.0.0.1:0");
 await app.StartAsync();
 using var client = new HttpClient(new HttpClientHandler { AllowAutoRedirect = false }) { BaseAddress = new Uri(app.Urls.Single()) };
 
-foreach (var scenario in new[] { "valid", "cnpj", "plano", "conflict", "image", "image-failure", "edit" })
+foreach (var scenario in args.Contains("--excluir") ? Array.Empty<string>() : new[] { "valid", "cnpj", "plano", "conflict", "image", "image-failure", "edit" })
 {
     var edit = scenario == "edit";
     var path = edit ? $"/Administracao/EmpresaBeneficiada/Edit/{Transport.Id}" : "/Administracao/EmpresaBeneficiada/Create";
@@ -44,7 +46,7 @@ foreach (var scenario in new[] { "valid", "cnpj", "plano", "conflict", "image", 
         ["RazaoSocial"] = "Empresa Teste", ["NomeFantasia"] = "Beneficiada Teste",
         ["Cnpj"] = scenario == "cnpj" ? "123" : "12.345.678/0001-90",
         ["PlanoId"] = scenario == "plano" ? "" : Transport.PlanoId.ToString(),
-        ["Tipo"] = "7", ["StatusCredenciamento"] = "1",
+        ["StatusCredenciamento"] = "1",
         ["EspecialidadeIds"] = Transport.EspecialidadeId.ToString(),
         ["ProcedimentoIds"] = Transport.ProcedimentoId.ToString()
     }) form.Add(new StringContent(value), key);
@@ -69,7 +71,8 @@ foreach (var scenario in new[] { "valid", "cnpj", "plano", "conflict", "image", 
     else
     {
         Check(response.StatusCode == HttpStatusCode.Redirect, $"Cadastro/edição: {scenario}; HTTP {(int)response.StatusCode}");
-        Check(transport.Saved?.PlanoId == Transport.PlanoId && transport.Saved.EspecialidadeIds.Contains(Transport.EspecialidadeId)
+        Check(transport.Saved?.PlanoId == Transport.PlanoId && transport.Saved.Tipo == PVHSAUDE.Domain.Enuns.TipoCredenciado.EmpresaBeneficiada &&
+            transport.Saved.EspecialidadeIds.Contains(Transport.EspecialidadeId)
             && transport.Saved.ProcedimentoIds.Contains(Transport.ProcedimentoId), "Plano e catálogos enviados");
         Check(transport.Edited == edit, "Criação ignora ID enviado pelo navegador; edição mantém ID na rota");
         Check(transport.Uploads == (scenario.StartsWith("image") ? 1 : 0), "Imagem enviada uma única vez com ID retornado pela API");
@@ -83,6 +86,13 @@ foreach (var scenario in new[] { "valid", "cnpj", "plano", "conflict", "image", 
 }
 foreach (var action in new[] { "Index", $"Details/{Transport.Id}", $"Edit/{Transport.Id}" })
     Check((await client.GetStringAsync("/Administracao/EmpresaBeneficiada/" + action)).Contains("Beneficiada Teste"), "Listagem, detalhes e edição exibem a empresa");
+var listHtml = await client.GetStringAsync("/Administracao/EmpresaBeneficiada/Index");
+Check(listHtml.Contains("Excluir") && listHtml.Contains("Editar"), "Listagem mantém edição e oferece exclusão");
+var deleteToken = WebUtility.HtmlDecode(Regex.Match(listHtml, "name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\"").Groups[1].Value);
+using (var deleteResponse = await client.PostAsync($"/Administracao/EmpresaBeneficiada/Excluir/{Transport.Id}",
+    new FormUrlEncodedContent(new Dictionary<string, string> { ["__RequestVerificationToken"] = deleteToken })))
+    Check(deleteResponse.StatusCode == HttpStatusCode.Redirect && transport.Deleted, "Excluir envia DELETE à API e redireciona");
+if (args.Contains("--excluir")) { await app.StopAsync(); return; }
 using (var missing = await client.GetAsync($"/Administracao/EmpresaBeneficiada/Edit/{Guid.NewGuid()}"))
     Check(missing.StatusCode == HttpStatusCode.NotFound, "Empresa inexistente retorna 404");
 using (var noToken = await client.PostAsync("/Administracao/EmpresaBeneficiada/Create", new FormUrlEncodedContent([])))
@@ -97,8 +107,8 @@ sealed class Transport : HttpMessageHandler
     public PVHSAUDE.Application.ViewModels.EmpresaBeneficiadaEntradaVm? Saved;
     public bool Edited;
     public int Uploads;
-    public bool Conflict, FailImage;
-    private static CredenciadoVm Empresa => new() { Id = Id, RazaoSocial = "Empresa Teste", NomeFantasia = "Beneficiada Teste", Cnpj = "12345678000190", PlanoId = PlanoId, Tipo = PVHSAUDE.Domain.Enuns.TipoCredenciado.Outro };
+    public bool Conflict, FailImage, Deleted;
+    private static CredenciadoVm Empresa => new() { Id = Id, RazaoSocial = "Empresa Teste", NomeFantasia = "Beneficiada Teste", Cnpj = "12345678000190", PlanoId = PlanoId, Tipo = PVHSAUDE.Domain.Enuns.TipoCredenciado.EmpresaBeneficiada };
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
     {
         var path = request.RequestUri!.AbsolutePath;
@@ -115,6 +125,11 @@ sealed class Transport : HttpMessageHandler
         {
             Uploads++;
             return new(FailImage ? HttpStatusCode.InternalServerError : HttpStatusCode.OK);
+        }
+        if (request.Method == HttpMethod.Delete && path == $"/api/empresas-beneficiadas/{Id}")
+        {
+            Deleted = true;
+            return new(HttpStatusCode.NoContent);
         }
         if (request.Method == HttpMethod.Post && path == "/api/empresas-beneficiadas" || request.Method == HttpMethod.Put && path == $"/api/empresas-beneficiadas/{Id}")
         {

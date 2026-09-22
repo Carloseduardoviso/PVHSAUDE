@@ -2,6 +2,8 @@
 <div asp-validation-summary="All" class="text-danger mb-3" role="alert"></div>
 @{
     var imagensSalvas = Model.ImagemUrls?.Any() == true ? Model.ImagemUrls : (!string.IsNullOrWhiteSpace(Model.ImagemUrl) ? new List<string> { Model.ImagemUrl } : new List<string>());
+    var tipos = Html.GetEnumSelectList<PVHSAUDE.Domain.Enuns.TipoCredenciado>()
+        .Where(x => x.Value != ((int)PVHSAUDE.Domain.Enuns.TipoCredenciado.EmpresaBeneficiada).ToString());
 }
 <div class="mb-3 text-center">
     <div id="imagem-preview-container" class="mb-3" @(imagensSalvas.Count > 0 ? "" : "hidden")>
@@ -40,7 +42,7 @@
     <div class="col-md-3"><label for="Numero" class="form-label">Número</label><input id="Numero" name="Numero" class="form-control" maxlength="20" autocomplete="address-line2" /></div>
     <div class="col-md-9"><label asp-for="Endereco" class="form-label"></label><input asp-for="Endereco" class="form-control" maxlength="250" autocomplete="street-address" /></div>
     <div class="col-12"><label asp-for="Observacoes" class="form-label"></label><textarea asp-for="Observacoes" class="form-control" rows="3"></textarea><span asp-validation-for="Observacoes" class="text-danger"></span></div>
-    <div class="col-md-6"><label asp-for="Tipo" class="form-label"></label><select asp-for="Tipo" asp-items="Html.GetEnumSelectList<PVHSAUDE.Domain.Enuns.TipoCredenciado>()" class="form-select"><option value="">Selecione o menu</option></select><span asp-validation-for="Tipo" class="text-danger"></span></div>
+    <div class="col-md-6"><label asp-for="Tipo" class="form-label"></label><select asp-for="Tipo" asp-items="tipos" class="form-select"><option value="">Selecione o menu</option></select><span asp-validation-for="Tipo" class="text-danger"></span></div>
     <div class="col-md-6"><label asp-for="StatusCredenciamento" class="form-label"></label><select asp-for="StatusCredenciamento" asp-items="Html.GetEnumSelectList<PVHSAUDE.Domain.Enuns.StatusCredenciamento>()" class="form-select"></select><span asp-validation-for="StatusCredenciamento" class="text-danger"></span></div>
     <div class="col-12"><label class="form-label">Especialidades</label><div class="catalogo-opcoes">@foreach (var item in (IEnumerable<CatalogoItemVm>)ViewBag.Especialidades) { <label class="catalogo-opcao"><input type="checkbox" name="EspecialidadeIds" value="@item.Id" checked="@Model.EspecialidadeIds.Contains(item.Id)" /> <span>@item.Nome</span></label> }</div></div>
     <div class="col-12"><label class="form-label">Procedimentos</label><div class="catalogo-opcoes">@foreach (var item in (IEnumerable<CatalogoItemVm>)ViewBag.Procedimentos) { <label class="catalogo-opcao"><input type="checkbox" name="ProcedimentoIds" value="@item.Id" checked="@Model.ProcedimentoIds.Contains(item.Id)" /> <span>@item.Nome</span></label> }</div></div>

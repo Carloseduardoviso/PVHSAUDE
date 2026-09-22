@@ -36,6 +36,23 @@ public class CredenciadoController(CredenciadoApiClient credenciados, DescontoAp
     public async Task<IActionResult> Edit(CredenciadoVm model, CancellationToken ct) { if (model.Id == Guid.Empty) return BadRequest(); await Catalogos(ct); if (!ModelState.IsValid) return View(model); try { await credenciados.SalvarAsync(model, ct); await EnviarImagem(model, ct); } catch (HttpRequestException ex) { ModelState.AddModelError("", ex.Message); return View(model); } TempData["Success"] = "Credenciamento atualizado com sucesso."; return RedirectToAction(nameof(Index)); }
 
     [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> Excluir(Guid id, CancellationToken ct)
+    {
+        if (id == Guid.Empty) return BadRequest();
+        try { await credenciados.ExcluirAsync(id, ct); TempData["Success"] = "Credenciamento excluído com sucesso."; }
+        catch (HttpRequestException ex)
+        {
+            TempData["Error"] = ex.StatusCode switch
+            {
+                System.Net.HttpStatusCode.Conflict => "Este credenciamento possui beneficiários vinculados e não pode ser excluído.",
+                System.Net.HttpStatusCode.NotFound => "Credenciamento não encontrado.",
+                _ => "Não foi possível excluir o credenciamento. Tente novamente."
+            };
+        }
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> RemoverImagem(Guid id, string url, CancellationToken ct)
     {
         if (id == Guid.Empty || string.IsNullOrWhiteSpace(url)) return BadRequest();

@@ -36,7 +36,7 @@ internal static class ApiDatabaseTests
         Check((await catalogos.EspecialidadesAsync(ct)).Single().Nome == "Especialidade", "catálogo usa VM e entidade.");
         var storage = new Storage();
         var empresaService = new CredenciadoService(empresasRepo, planosRepo, new EntityRepository<CredenciadoEspecialidade>(db),
-            new EntityRepository<CredenciadoProcedimento>(db), work, mapper, storage, new EntityRepository<CredenciadoImagem>(db));
+            new EntityRepository<CredenciadoProcedimento>(db), work, mapper, storage, new EntityRepository<CredenciadoImagem>(db), beneficiariosRepo);
         var empresas = new CredenciadosController(empresaService);
         var entrada = new CredenciadoEntradaVm { PlanoId = plano.Id, RazaoSocial = "Empresa", NomeFantasia = "Clínica",
             Cnpj = "12.345.678/0001-90", Tipo = TipoCredenciado.Clinica, StatusCredenciamento = StatusCredenciamento.Ativo,
@@ -84,8 +84,15 @@ internal static class ApiDatabaseTests
             "lista vazia remove dependentes.");
         Check(await controller.Inativar(beneficiario.Id, ct) is NoContentResult &&
             (await service.ObterAsync(beneficiario.Id, ct)).Status == StatusBeneficiario.Inativo, "inativação preserva cadastro.");
+        Check(await empresas.Excluir(empresa.Id, ct) is ConflictObjectResult && await empresasRepo.ExisteAsync(x => x.Id == empresa.Id, ct),
+            "credenciamento com beneficiário vinculado não pode ser excluído.");
         Check(await controller.Excluir(beneficiario.Id, ct) is NoContentResult &&
             await controller.Obter(beneficiario.Id, ct) is NotFoundResult, "exclusão retorna 204 e consulta posterior retorna 404.");
+        Check(await empresas.Excluir(empresa.Id, ct) is NoContentResult &&
+            !await empresasRepo.ExisteAsync(x => x.Id == empresa.Id, ct) &&
+            !await db.CredenciadoProcedimentos.AnyAsync(x => x.CredenciadoId == empresa.Id) &&
+            !await db.CredenciadoImagens.AnyAsync(x => x.CredenciadoId == empresa.Id) && storage.Excluida == urlAntiga,
+            "exclusão de credenciamento remove vínculos e imagem.");
 
         var contatos = new ContatoService(new EntityRepository<Contato>(db), work, mapper);
         await contatos.CriarAsync(new ContatoEntradaVm { Nome = "Teste", Email = "teste@example.com" }, ct);

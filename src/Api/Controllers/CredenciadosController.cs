@@ -13,6 +13,8 @@ public class CredenciadosController(ICredenciadoService service) : ServiceContro
     { var p = await service.CriarAsync(vm, ct); return CreatedAtAction(nameof(Obter), new { id = p.Id }, p); });
     [Authorize, HttpPut("{id:guid}")] public Task<IActionResult> Atualizar(Guid id, CredenciadoEntradaVm vm, CancellationToken ct) => Executar(async () =>
     { await service.AtualizarAsync(id, vm, ct); return NoContent(); });
+    [Authorize, HttpDelete("{id:guid}")] public Task<IActionResult> Excluir(Guid id, CancellationToken ct) => Executar(async () =>
+    { await service.ExcluirAsync(id, ct); return NoContent(); });
     [Authorize, HttpPost("{id:guid}/imagem"), RequestSizeLimit(5_242_880)]
     public Task<IActionResult> UploadImagem(Guid id, IFormFile imagem, CancellationToken ct) => Executar(async () =>
     {

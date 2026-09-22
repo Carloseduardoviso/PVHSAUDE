@@ -6,5 +6,6 @@ public interface IEmpresaBeneficiadaService
     Task<EmpresaBeneficiadaRespostaVm> ObterAsync(Guid id, CancellationToken ct);
     Task<EmpresaBeneficiadaRespostaVm> CriarAsync(EmpresaBeneficiadaEntradaVm vm, CancellationToken ct);
     Task AtualizarAsync(Guid id, EmpresaBeneficiadaEntradaVm vm, CancellationToken ct);
+    Task ExcluirAsync(Guid id, CancellationToken ct);
     Task<string> UploadImagemAsync(Guid id, string nome, long tamanho, Stream conteudo, CancellationToken ct);
 }

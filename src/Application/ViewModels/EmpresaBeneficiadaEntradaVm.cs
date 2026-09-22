@@ -28,7 +28,7 @@ public class EmpresaBeneficiadaEntradaVm
     public string? Uf { get; set; }
     [StringLength(1000), Display(Name = "Observações")]
     public string? Observacoes { get; set; }
-    [Required(ErrorMessage = "Selecione o tipo de estabelecimento."), EnumDataType(typeof(TipoCredenciado)), Display(Name = "Tipo de estabelecimento")]
+    [EnumDataType(typeof(TipoCredenciado)), Display(Name = "Tipo de estabelecimento")]
     public TipoCredenciado? Tipo { get; set; }
     public List<Guid> EspecialidadeIds { get; set; } = [];
     public List<Guid> ProcedimentoIds { get; set; } = [];

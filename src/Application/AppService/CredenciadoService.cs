@@ -8,7 +8,7 @@ namespace PVHSAUDE.Application.AppService;
 public class CredenciadoService(IEntityRepository<Credenciado> repository, IEntityRepository<Plano> planos,
     IEntityRepository<CredenciadoEspecialidade> especialidades, IEntityRepository<CredenciadoProcedimento> procedimentos,
     IUnitOfWork work, IMapper mapper, IImagemStorage storage, IEntityRepository<CredenciadoImagem> imagens,
-    IEntityRepository<Desconto>? descontos = null) : ICredenciadoService
+    IEntityRepository<Beneficiario> beneficiarios, IEntityRepository<Desconto>? descontos = null) : ICredenciadoService
 {
     public async Task<List<CredenciadoRespostaVm>> ListarAsync(CancellationToken ct) =>
         mapper.Map<List<CredenciadoRespostaVm>>((await repository.ListarAsync(null, ct, x => x.Especialidades, x => x.Procedimentos, x => x.Imagens)).OrderBy(x => x.NomeFantasia));
@@ -18,6 +18,8 @@ public class CredenciadoService(IEntityRepository<Credenciado> repository, IEnti
         mapper.Map<CredenciadoRespostaVm>(await Encontrar(id, ct));
     private async Task Validar(Guid? id, CredenciadoEntradaVm vm, CancellationToken ct)
     {
+        if (vm.Tipo == PVHSAUDE.Domain.Enuns.TipoCredenciado.EmpresaBeneficiada)
+            throw new ServiceException(ServiceError.Invalid, "Selecione um menu de credenciamento válido.");
         if (vm.DescontoId is Guid descontoId && descontos is not null && !await descontos.ExisteAsync(x => x.Id == descontoId && x.Ativo, ct))
             throw new ServiceException(ServiceError.Invalid, "Selecione um desconto cadastrado.");
         if (vm.DescontoId is null && !await planos.ExisteAsync(x => x.Id == vm.PlanoId, ct))
@@ -42,6 +44,21 @@ public class CredenciadoService(IEntityRepository<Credenciado> repository, IEnti
         mapper.Map(mapper.Map<CredenciadoVm>(vm), entity);
         Sincronizar(entity, vm);
         await work.SalvarAsync(ct);
+    }
+    public async Task ExcluirAsync(Guid id, CancellationToken ct)
+    {
+        var entity = await Encontrar(id, ct);
+        if (await beneficiarios.ExisteAsync(x => x.CredenciadoId == id, ct))
+            throw new ServiceException(ServiceError.Conflict, "Este credenciamento possui beneficiários vinculados e não pode ser excluído.");
+
+        var urls = entity.Imagens.Select(x => x.Url).Append(entity.ImagemUrl)
+            .Where(x => !string.IsNullOrWhiteSpace(x)).Distinct().ToList();
+        foreach (var especialidade in entity.Especialidades) especialidades.Remover(especialidade);
+        foreach (var procedimento in entity.Procedimentos) procedimentos.Remover(procedimento);
+        foreach (var imagem in entity.Imagens) imagens.Remover(imagem);
+        repository.Remover(entity);
+        await work.SalvarAsync(ct);
+        foreach (var url in urls) await storage.ExcluirCredenciadoAsync(url!, ct);
     }
     private void Sincronizar(Credenciado entity, CredenciadoEntradaVm vm)
     {
