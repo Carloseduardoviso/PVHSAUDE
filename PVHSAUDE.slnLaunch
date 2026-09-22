@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "PVH Saúde - API + Web",
+    "Projects": [
+      {
+        "Path": "src\\Api\\PVHSAUDE.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\Web\\PVHSAUDE.Web.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

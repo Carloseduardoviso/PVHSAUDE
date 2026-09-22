@@ -73,7 +73,7 @@ if (!app.Environment.IsProduction())
 }
 
 app.UseForwardedHeaders();
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment()) app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseMetricsAuthMiddleware();
