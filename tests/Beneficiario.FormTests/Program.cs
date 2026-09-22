@@ -9,6 +9,7 @@ using PVHSAUDE.Web.Areas.Administracao.Controllers;
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { ApplicationName = typeof(BeneficiarioController).Assembly.FullName });
 builder.Logging.ClearProviders();
 builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
+builder.Services.AddScoped<LogoPortalStorage>();
 builder.Services.AddControllersWithViews().AddApplicationPart(typeof(BeneficiarioController).Assembly);
 var transport = new ApiTransport();
 var api = new HttpClient(transport) { BaseAddress = new Uri("http://test-api/") };
@@ -20,6 +21,8 @@ builder.Services.AddSingleton(new BeneficiarioApiClient(api));
 builder.Services.AddSingleton(new ContatoApiClient(api));
 builder.Services.AddSingleton(new IntencaoVendaApiClient(api));
 builder.Services.AddHttpClient();
+builder.Services.AddHttpClient("default", client => client.BaseAddress = new Uri("http://test-api/"))
+    .ConfigurePrimaryHttpMessageHandler(() => transport);
 await using var app = builder.Build();
 app.MapAreaControllerRoute("admin", "Administracao", "Administracao/{controller=Dashboard}/{action=Index}/{id?}");
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
@@ -124,6 +127,31 @@ foreach (var invalid in new[] { false, true })
         throw new Exception("Company form must display validation errors.");
     Console.WriteLine($"PASS: company form, invalid CNPJ: {invalid}.");
 }
+var descontoHtml = await client.GetStringAsync("/Administracao/Desconto");
+if (!descontoHtml.Contains("Novo desconto") || descontoHtml.Contains("Periodicidade") || descontoHtml.Contains("Tipo de pessoa"))
+    throw new Exception("O cadastro de desconto deve usar a lista simples de nomes.");
+var descontoToken = WebUtility.HtmlDecode(Regex.Match(descontoHtml, "name=\"__RequestVerificationToken\"[^>]*value=\"([^\"]+)\"").Groups[1].Value);
+if (descontoToken.Length == 0) throw new Exception("O cadastro de desconto deve gerar antiforgery token.");
+foreach (var (rota, nome, acao) in new[]
+{
+    ("/Administracao/Desconto", "Desconto novo", "POST"),
+    ("/Administracao/Desconto/Editar", "Desconto editado", "PUT"),
+    ("/Administracao/Desconto/Excluir", "", "DELETE")
+})
+{
+    var campos = new Dictionary<string, string> { ["__RequestVerificationToken"] = descontoToken, ["nome"] = nome, ["id"] = ApiTransport.PlanoId.ToString() };
+    using var resposta = await client.PostAsync(rota, new FormUrlEncodedContent(campos));
+    if (resposta.StatusCode != HttpStatusCode.Redirect || transport.LastDescontoAction != acao || (acao != "DELETE" && transport.LastDescontoName != nome))
+        throw new Exception($"Fluxo administrativo de desconto falhou em {acao}.");
+}
+Console.WriteLine("PASS: cadastro, edição e exclusão de desconto usam a lista simples.");
+using (var imagemResponse = await client.GetAsync("/uploads/credenciados/teste.png"))
+{
+    if (imagemResponse.StatusCode != HttpStatusCode.OK || imagemResponse.Content.Headers.ContentType?.MediaType != "image/png" ||
+        !(await imagemResponse.Content.ReadAsByteArrayAsync()).SequenceEqual(ApiTransport.ImagemTeste))
+        throw new Exception("A Web deve servir imagens salvas na API pela URL pública.");
+}
+Console.WriteLine("PASS: imagem da API é servida pela URL pública da Web.");
 await app.StopAsync();
 
 sealed class ApiTransport : HttpMessageHandler
@@ -131,8 +159,11 @@ sealed class ApiTransport : HttpMessageHandler
     public static readonly Guid PlanoId = Guid.NewGuid();
     public static readonly Guid EmpresaId = Guid.NewGuid();
     public static readonly Guid BeneficiarioId = Guid.NewGuid();
+    public static readonly byte[] ImagemTeste = Convert.FromBase64String("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/ZfoAAAAASUVORK5CYII=");
     public BeneficiarioVm? Saved;
     public CredenciadoVm? Empresa;
+    public string? LastDescontoAction;
+    public string? LastDescontoName;
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
     {
         if (request.Method == HttpMethod.Get && request.RequestUri!.AbsolutePath == $"/api/beneficiarios/{BeneficiarioId}")
@@ -149,6 +180,12 @@ sealed class ApiTransport : HttpMessageHandler
                 Codigo = $"RO001/{DateTime.UtcNow:yyyy}",
                 Dependentes = []
             }) };
+        if (request.Method == HttpMethod.Get && request.RequestUri.AbsolutePath == "/uploads/credenciados/teste.png")
+        {
+            var content = new ByteArrayContent(ImagemTeste);
+            content.Headers.ContentType = new("image/png");
+            return new(HttpStatusCode.OK) { Content = content };
+        }
         if (request.Method == HttpMethod.Get && request.RequestUri.AbsolutePath == "/api/beneficiarios")
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(Array.Empty<BeneficiarioVm>()) };
         if (request.Method == HttpMethod.Get && request.RequestUri!.AbsolutePath == "/api/empresas-beneficiadas")
@@ -159,8 +196,14 @@ sealed class ApiTransport : HttpMessageHandler
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(Array.Empty<object>()) };
         if (request.RequestUri!.AbsolutePath == "/api/planos")
             return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new PlanoVm { Id = PlanoId, Nome = "Plano teste", Valor = 99.90m } }) };
-        if (request.RequestUri.AbsolutePath == "/api/descontos")
-            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new PlanoVm { Id = PlanoId, Nome = "Desconto teste", Valor = 10m } }) };
+        if (request.Method == HttpMethod.Get && request.RequestUri.AbsolutePath == "/api/descontos")
+            return new(HttpStatusCode.OK) { Content = JsonContent.Create(new[] { new CatalogoItemVm(PlanoId, "Desconto teste") }) };
+        if (request.RequestUri.AbsolutePath.StartsWith("/api/descontos", StringComparison.Ordinal) && request.Method is { } method && (method == HttpMethod.Post || method == HttpMethod.Put || method == HttpMethod.Delete))
+        {
+            LastDescontoAction = method.Method;
+            LastDescontoName = method == HttpMethod.Delete ? null : (await request.Content!.ReadFromJsonAsync<System.Text.Json.JsonElement>(ct)).GetProperty("nome").GetString();
+            return new(method == HttpMethod.Post ? HttpStatusCode.Created : HttpStatusCode.NoContent);
+        }
         if (request.Method == HttpMethod.Post && request.RequestUri.AbsolutePath == "/api/beneficiarios")
         {
             Saved = await request.Content!.ReadFromJsonAsync<BeneficiarioVm>(ct);

@@ -12,7 +12,7 @@ public static class MenusAdministrativos
         ["Contato"] = "Mensagens",
         ["Beneficiario"] = "Beneficiários",
         ["Plano"] = "Planos",
-        ["Desconto"] = "Descontos",
+        ["Desconto"] = "Desconto/Tabela",
         ["Credenciado"] = "Credenciamentos",
         ["EmpresaBeneficiada"] = "Empresas Beneficiadas",
         ["Especialidades"] = "Especialidades",

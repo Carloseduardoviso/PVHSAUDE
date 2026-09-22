@@ -1,7 +1,6 @@
 @model Web.Models.PortalVm
 @if (Model.Empresas.Count > 0)
 {
-    var culturaBrasileira = System.Globalization.CultureInfo.GetCultureInfo("pt-BR");
     <section class="credenciamentos-section mb-4" aria-labelledby="credenciamentos-titulo">
         <div class="credenciamentos-cabecalho">
             <div>
@@ -29,7 +28,7 @@
                             <div class="credenciamento-conteudo">
                                 <p class="text-success small fw-semibold mb-2">@credenciado.Tipo</p>
                                 <div class="credenciamento-detalhes">
-                                    @if (desconto is not null) { <div><span>Desconto</span><strong>@desconto.Nome — @desconto.Valor.ToString("C", culturaBrasileira)</strong></div> }
+                                    @if (desconto is not null) { <div><span>Desconto</span><strong>@desconto.Nome</strong></div> }
                                     @if (!string.IsNullOrWhiteSpace(credenciado.NomeFantasia)) { <div><span>Nome fantasia</span><strong>@credenciado.NomeFantasia</strong></div> }
                                     @if (!string.IsNullOrWhiteSpace(credenciado.Cnpj)) { <div><span>CNPJ</span><strong>@credenciado.Cnpj</strong></div> }
                                     @if (!string.IsNullOrWhiteSpace(credenciado.WhatsApp)) { <div><span>WhatsApp</span><strong>@credenciado.WhatsApp</strong></div> }

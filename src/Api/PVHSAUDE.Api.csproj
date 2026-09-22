@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Infra\Infra.Ioc\PVHSAUDE.Infra.Ioc.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\credenciados\" />
+  </ItemGroup>
+
 </Project>

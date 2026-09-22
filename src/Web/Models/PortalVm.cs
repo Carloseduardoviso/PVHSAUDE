@@ -11,7 +11,7 @@ public class PortalVm
     public List<CredenciadoVm> Empresas { get; set; } = [];
     public IReadOnlyCollection<CatalogoItemVm> Especialidades { get; set; } = [];
     public IReadOnlyCollection<CatalogoItemVm> Procedimentos { get; set; } = [];
-    public IReadOnlyCollection<PlanoVm> Descontos { get; set; } = [];
+    public IReadOnlyCollection<CatalogoItemVm> Descontos { get; set; } = [];
     public string? ErroCatalogos { get; set; }
     public string? ErroPlanos { get; set; }
     public List<EmpresaPlanoPortal> Planos { get; set; } = [];

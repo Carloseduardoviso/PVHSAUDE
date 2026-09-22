@@ -20,13 +20,7 @@ public class AutoMapperConfig : Profile
             .ForMember(x => x.Id, o => o.Ignore())
             .ForMember(x => x.Codigo, o => o.Ignore());
         CreateMap<Plano, PlanoRespostaVm>();
-        CreateMap<Desconto, PlanoRespostaVm>();
-        CreateMap<PlanoVm, Desconto>().ConvertUsing((vm, entity, _) =>
-        {
-            entity ??= new Desconto(vm.Nome, vm.Descricao, vm.Valor, vm.Periodicidade, vm.DataValidade, vm.TipoPessoa);
-            entity.Atualizar(vm.Nome, vm.Descricao, vm.Valor, vm.Periodicidade, vm.DataValidade, vm.TipoPessoa);
-            return entity;
-        });
+        CreateMap<Desconto, DescontoRespostaVm>();
         CreateMap<Dependente, DependenteRespostaVm>();
         CreateMap<Beneficiario, BeneficiarioRespostaVm>();
         CreateMap<Especialidade, EspecialidadeRespostaVm>();

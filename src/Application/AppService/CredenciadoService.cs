@@ -17,7 +17,7 @@ public class CredenciadoService(IEntityRepository<Credenciado> repository, IEnti
         mapper.Map<CredenciadoRespostaVm>(await Encontrar(id, ct));
     private async Task Validar(Guid? id, CredenciadoEntradaVm vm, CancellationToken ct)
     {
-        if (vm.DescontoId is Guid descontoId && descontos is not null && !await descontos.ExisteAsync(x => x.Id == descontoId, ct))
+        if (vm.DescontoId is Guid descontoId && descontos is not null && !await descontos.ExisteAsync(x => x.Id == descontoId && x.Ativo, ct))
             throw new ServiceException(ServiceError.Invalid, "Selecione um desconto cadastrado.");
         if (vm.DescontoId is null && !await planos.ExisteAsync(x => x.Id == vm.PlanoId, ct))
             throw new ServiceException(ServiceError.Invalid, "Selecione um desconto cadastrado.");
