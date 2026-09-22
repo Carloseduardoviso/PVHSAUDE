@@ -2070,10 +2070,10 @@
     "semantic_hash": "6ac68e2b0d9ab26bd02a905a365a2bcc"
   },
   "src/Web/Views/Home/SobreNos.cshtml": {
-    "mtime": 1789047474.9099774,
-    "seen": 1789998919.3534117,
-    "ast_hash": "1d65433d6321d156ea93bf169d9bccfe",
-    "semantic_hash": "1d65433d6321d156ea93bf169d9bccfe"
+    "mtime": 1790081256.4755156,
+    "seen": 1790081323.084011,
+    "ast_hash": "56e44d00f42b558bd6352fc89ec8e4de",
+    "semantic_hash": ""
   },
   "src/Web/Views/Home/_Banners.cshtml": {
     "mtime": 1790012670.760697,
@@ -2652,9 +2652,9 @@
     "semantic_hash": ""
   },
   "tests/Usuario.FormTests/PortalHomeUxTests.cs": {
-    "mtime": 1790010485.5987701,
-    "seen": 1790010654.4019117,
-    "ast_hash": "3fee9823e0c382ee940c2462749959ff",
+    "mtime": 1790081320.9386406,
+    "seen": 1790081323.0840983,
+    "ast_hash": "5dbb3af91574f71d5fd0cd288e46b5a8",
     "semantic_hash": ""
   },
   "src/Web/Views/Home/_CredenciamentosCarousel.cshtml": {
@@ -2715,6 +2715,18 @@
     "mtime": 1790078561.0527174,
     "seen": 1790078605.974662,
     "ast_hash": "56bcf90e9f0314b7f0bdd128ae4eb34f",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-09-22-sobre-nos.md": {
+    "mtime": 1790078702.7025175,
+    "seen": 1790081323.084141,
+    "ast_hash": "97870c266c89c7a41532eeaa712c9ff7",
+    "semantic_hash": ""
+  },
+  "src/Web/wwwroot/images/sobre-nos-cuidado-familiar.png": {
+    "mtime": 1790080146.666829,
+    "seen": 1790081323.08417,
+    "ast_hash": "82937bc2431e77c4d5cb9b983c004553",
     "semantic_hash": ""
   }
 }

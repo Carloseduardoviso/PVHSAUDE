@@ -277,3 +277,37 @@ body {
   .portal-nav-actions { width: 100%; flex-wrap: wrap; }
   .portal-nav-actions .btn { flex: 1 1 11rem; font-size: .78rem; }
 }
+
+.sobre-nos { width: min(100% - 2rem, 1120px); margin: 0 auto 4rem; color: #15357a; }
+.sobre-nos h1, .sobre-nos h2, .sobre-nos h3 { color: #15357a; }
+.sobre-nos h1 { font-size: clamp(2.1rem, 4vw, 3.6rem); line-height: 1.08; }
+.sobre-nos h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); }
+.sobre-nos p { line-height: 1.7; }
+.sobre-nos-sobrancelha { margin-bottom: .45rem; color: #145c49; font-size: .82rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.sobre-nos-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr); align-items: center; gap: clamp(1.5rem, 4vw, 4rem); padding: clamp(1.5rem, 4vw, 3.5rem); border-radius: 1.5rem; background: linear-gradient(135deg, #edf7f3, #f8fbff); }
+.sobre-nos-hero-conteudo { max-width: 37rem; }
+.sobre-nos-hero img { width: 100%; aspect-ratio: 4 / 3; border-radius: 1rem; object-fit: cover; box-shadow: 0 1rem 2.5rem rgba(21, 53, 122, .18); }
+.sobre-nos-historia, .sobre-nos-fechamento { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: clamp(1.5rem, 4vw, 4rem); padding: clamp(2.5rem, 6vw, 5rem) 0; }
+.sobre-nos-texto p + p { margin-top: 1rem; }
+.sobre-nos-beneficios { padding: clamp(2.5rem, 5vw, 4rem); border-radius: 1.5rem; background: #15357a; color: #fff; }
+.sobre-nos-beneficios h2, .sobre-nos-beneficios h3, .sobre-nos-beneficios .sobre-nos-sobrancelha { color: #fff; }
+.sobre-nos-beneficios .sobre-nos-sobrancelha { color: #c9f45b; }
+.sobre-nos-beneficios-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: 2rem; }
+.sobre-nos-beneficio { min-width: 0; padding: 1.35rem; border: 1px solid rgba(255, 255, 255, .18); border-radius: 1rem; background: rgba(255, 255, 255, .08); }
+.sobre-nos-beneficio svg { width: 2rem; height: 2rem; margin-bottom: 1rem; fill: none; stroke: #c9f45b; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; }
+.sobre-nos-beneficio h3 { font-size: 1.1rem; }
+.sobre-nos-beneficio p { margin-bottom: 0; font-size: .96rem; }
+.sobre-nos-fechamento { align-items: center; border-bottom: 1px solid #d7e3f0; }
+.sobre-nos-fechamento > p { max-width: 42rem; margin: 0; font-size: 1.1rem; }
+
+@media (max-width: 991.98px) {
+  .sobre-nos-beneficios-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 767.98px) { .sobre-nos-hero { grid-template-columns: 1fr; } }
+
+@media (max-width: 575.98px) {
+  .sobre-nos { width: min(100% - 1.25rem, 1120px); margin-bottom: 2.5rem; }
+  .sobre-nos-hero, .sobre-nos-beneficios { padding: 1.25rem; border-radius: 1rem; }
+  .sobre-nos-historia, .sobre-nos-fechamento, .sobre-nos-beneficios-grid { grid-template-columns: 1fr; }
+}

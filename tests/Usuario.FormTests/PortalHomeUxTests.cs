@@ -18,6 +18,9 @@ internal static class PortalHomeUxTests
         Check(sobreNos.Contains("Nossa história") && sobreNos.Contains("Grupo Kaheli"), "sobre nós explica a origem da rede");
         Check(sobreNos.Contains("Terapias essenciais") && sobreNos.Contains("Saúde em rede") && sobreNos.Contains("Economia no dia a dia"), "sobre nós apresenta os benefícios principais");
         Check(sobreNos.Contains("descontos de até 40%") && sobreNos.Contains("Sua saúde começa aqui."), "sobre nós apresenta economia e chamada final");
+        Check(css.Contains(".sobre-nos-hero { display: grid;") && css.Contains("grid-template-columns: minmax(0, 1fr) minmax(320px, .9fr);"), "sobre nós organiza hero em duas colunas");
+        Check(css.Contains(".sobre-nos-hero img") && css.Contains("object-fit: cover;"), "sobre nós enquadra a imagem institucional");
+        Check(css.Contains("@media (max-width: 767.98px) { .sobre-nos-hero { grid-template-columns: 1fr;"), "sobre nós empilha hero no celular");
     }
 
     private static void Check(bool condition, string message)
