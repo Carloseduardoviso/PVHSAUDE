@@ -1,0 +1,158 @@
+@{ ViewData["Title"] = "Política de Privacidade"; }
+
+<article class="legal-page" aria-labelledby="privacidade-titulo">
+    <header class="legal-hero">
+        <p class="legal-eyebrow">PVH Saúde +</p>
+        <h1 id="privacidade-titulo">Política de Privacidade</h1>
+        <p class="legal-meta">Última atualização: 22 de setembro de 2026</p>
+        <p>Esta Política explica de forma transparente como o portal PVH Saúde + coleta, utiliza, guarda e protege seus dados pessoais. Ela vale para as páginas públicas do portal, para a solicitação de carteirinha, para o formulário de contato e para a área administrativa, em conformidade com a Lei Geral de Proteção de Dados — Lei nº 13.709/2018 (LGPD).</p>
+    </header>
+
+    <section aria-labelledby="controlador-titulo">
+        <h2 id="controlador-titulo">1. Quem é o responsável pelos seus dados</h2>
+        <p>O controlador dos seus dados pessoais é a <strong>PVH Saúde +</strong>, iniciativa do Grupo Kaheli, com atuação em Porto Velho/RO, identificada no portal pelo CNPJ 68.895.181/0001-03 (chave Pix usada na solicitação de carteirinha).</p>
+        <p>Para qualquer assunto sobre privacidade, use a <a asp-area="" asp-controller="Contato" asp-action="Index">página de contato</a> do portal ou o botão de WhatsApp disponível no canto da tela.</p>
+    </section>
+
+    <section aria-labelledby="dados-titulo">
+        <h2 id="dados-titulo">2. Quais dados pessoais coletamos</h2>
+
+        <h3>Solicitação de carteirinha</h3>
+        <ul>
+            <li>Nome completo, e-mail, telefone/WhatsApp, CPF e data de nascimento;</li>
+            <li>Plano escolhido e valores exibidos no resumo da solicitação;</li>
+            <li>Endereço: CEP, rua, bairro, número, complemento, cidade e estado (UF);</li>
+            <li>Dados dos dependentes (até 5): nome, CPF, data de nascimento e parentesco;</li>
+            <li>Forma de pagamento escolhida (Pix) e a confirmação de que você tem 18 anos ou mais;</li>
+            <li>Sua preferência em receber comunicações digitais da PVH Saúde (opcional).</li>
+        </ul>
+
+        <h3>Formulário de contato</h3>
+        <ul>
+            <li>Nome, sobrenome, e-mail, telefone, CPF, motivo do contato e a mensagem enviada.</li>
+        </ul>
+
+        <h3>Cadastro de beneficiários (área da equipe autorizada)</h3>
+        <ul>
+            <li>Dados do titular e dos dependentes: nome, CPF, data de nascimento, telefone, e-mail e endereço;</li>
+            <li>Informações do plano: código, data de adesão, início e validade, status e empresa beneficiada, quando a adesão for por meio de empresa.</li>
+        </ul>
+
+        <h3>Área administrativa</h3>
+        <ul>
+            <li>Nome completo, e-mail, senha guardada em forma de hash, perfil de acesso (papel) e menus liberados.</li>
+        </ul>
+
+        <h3>Informações técnicas</h3>
+        <ul>
+            <li>Endereço IP, data/hora e a página solicitada, registrados automaticamente para segurança e diagnóstico do portal;</li>
+            <li>Cookie de sessão da área administrativa, descrito na seção 5.</li>
+        </ul>
+
+        <p>Não coletamos dados de cartão de crédito ou débito, dados biométricos nem informações de saúde dos visitantes.</p>
+    </section>
+
+    <section aria-labelledby="finalidades-titulo">
+        <h2 id="finalidades-titulo">3. Para que usamos seus dados e com que base legal</h2>
+        <ul>
+            <li><strong>Analisar e responder sua solicitação de carteirinha</strong> e registrar a intenção de compra — execução de contrato e medidas pré-contratuais (art. 7º, V, da LGPD);</li>
+            <li><strong>Cadastrar titular e dependentes, emitir a carteirinha, controlar a validade e processar o pagamento via Pix</strong> — execução de contrato (art. 7º, V) e cumprimento de obrigações legais e regulatórias (art. 7º, II);</li>
+            <li><strong>Responder às mensagens</strong> enviadas pelo formulário de contato ou pelo WhatsApp — legítimo interesse (art. 7º, IX);</li>
+            <li><strong>Enviar novidades da PVH Saúde por canais digitais</strong> — seu consentimento (art. 7º, I), dado de forma livre e opcional no cadastro e revogável a qualquer momento;</li>
+            <li><strong>Manter a área administrativa segura</strong>, controlar acessos por perfil e prevenir usos indevidos — legítimo interesse (art. 7º, IX);</li>
+            <li><strong>Cumprir ordens judiciais, administrativas e normas fiscais</strong> — obrigação legal (art. 7º, II).</li>
+        </ul>
+        <p>Quando a base legal for o seu consentimento, você pode revogá-lo a qualquer hora, sem que isso impeça o uso anterior legítimo dos dados.</p>
+    </section>
+
+    <section aria-labelledby="compartilhamento-titulo">
+        <h2 id="compartilhamento-titulo">4. Com quem compartilhamos seus dados</h2>
+        <ul>
+            <li><strong>Estabelecimentos credenciados</strong> (clínicas, laboratórios, centros de exames, odontologia, academias, esportes, óticas e lojas): apenas as informações necessárias para você usar os descontos e ser atendido;</li>
+            <li><strong>Serviço de pagamento via Pix</strong>: para identificar e confirmar o recebimento do valor da carteirinha;</li>
+            <li><strong>Empresas de tecnologia e infraestrutura</strong> que mantêm o portal e a API em operação, sempre com obrigação contratual de confidencialidade e segurança;</li>
+            <li><strong>Autoridades públicas</strong>: somente quando houver exigência legal ou ordem judicial.</li>
+        </ul>
+        <p><strong>Nunca vendemos seus dados pessoais</strong> nem os usamos para publicidade de terceiros.</p>
+    </section>
+
+    <section aria-labelledby="cookies-titulo">
+        <h2 id="cookies-titulo">5. Cookies e tecnologias semelhantes</h2>
+        <ul>
+            <li><strong>Cookie essencial de sessão</strong>: o portal usa apenas o cookie <code>PVHSAUDE.Administracao</code>, criado quando você entra na área administrativa. Ele é <code>HttpOnly</code> e <code>Secure</code>, expira em 6 horas sem renovação automática e é encerrado ao sair. Ele serve para manter você autenticado;</li>
+            <li>O portal <strong>não usa cookies de publicidade nem de análise de terceiros</strong> e não rastreia sua navegação para segmentação;</li>
+            <li>Você pode bloquear ou excluir cookies nas configurações do navegador. A exclusão do cookie essencial apenas encerra a sessão da área administrativa, sem afetar as páginas públicas.</li>
+        </ul>
+    </section>
+
+    <section aria-labelledby="terceiros-titulo">
+        <h2 id="terceiros-titulo">6. Serviços externos e transferência de dados</h2>
+        <ul>
+            <li>Ao preencher o CEP no formulário da carteirinha, enviamos somente os 8 dígitos do CEP ao serviço público <strong>ViaCEP</strong> (viacep.com.br) para completar automaticamente rua, bairro, cidade e estado;</li>
+            <li>O portal é servido com HTTPS em todas as páginas e se comunica com a API própria do sistema para carregar planos, rede credenciada, banners e solicitações;</li>
+            <li>Ao clicar no botão de WhatsApp, você é direcionado ao aplicativo, regido pela política da própria plataforma;</li>
+            <li>Banners e links de parceiros podem levar a sites de terceiros, regidos pelas políticas deles.</li>
+        </ul>
+    </section>
+
+    <section aria-labelledby="retencao-titulo">
+        <h2 id="retencao-titulo">7. Por quanto tempo guardamos seus dados</h2>
+        <ul>
+            <li><strong>Solicitação de carteirinha e intenção de venda</strong>: enquanto a solicitação estiver em aberto ou em atendimento, e depois pelo período exigido por obrigações legais e consumeristas;</li>
+            <li><strong>Cadastro de beneficiários e dependentes</strong>: enquanto o benefício estiver vigente e pelo prazo necessário à comprovação da relação;</li>
+            <li><strong>Mensagens de contato</strong>: enquanto durar o atendimento e a comprovação do que foi tratado;</li>
+            <li><strong>Conta administrativa</strong>: enquanto estiver ativa e após a inativação apenas pelo tempo exigido para auditoria e segurança;</li>
+            <li><strong>Preferência de comunicações</strong>: até que você revogue o consentimento.</li>
+        </ul>
+        <p>Encerrado o prazo, os dados são eliminados ou anonimizados, salvo obrigação legal de conservação.</p>
+    </section>
+
+    <section aria-labelledby="seguranca-titulo">
+        <h2 id="seguranca-titulo">8. Como protegemos seus dados</h2>
+        <ul>
+            <li>Conexão obrigatória com HTTPS e HSTS em todo o portal;</li>
+            <li>Senhas armazenadas em forma de hash, nunca em texto puro;</li>
+            <li>Cookie de sessão com <code>HttpOnly</code> e <code>Secure</code>, expiração de 6 horas e encerramento no logout;</li>
+            <li>Acesso à área administrativa restrito a usuários cadastrados, com papel e permissões de menu individuais;</li>
+            <li>Token de verificação (antiforgery) em todos os formulários, para impedir envios não autorizados;</li>
+            <li>Registro de eventos de acesso e acesso condicional à equipe autorizada.</li>
+        </ul>
+        <p>Nenhum sistema é 100% livre de riscos, mas seguimos as melhores práticas disponíveis para reduzir qualquer incidente.</p>
+    </section>
+
+    <section aria-labelledby="direitos-titulo">
+        <h2 id="direitos-titulo">9. Seus direitos como titular dos dados</h2>
+        <p>Nos termos do art. 18 da LGPD, você pode solicitar:</p>
+        <ul>
+            <li>Confirmação da existência de tratamento dos seus dados;</li>
+            <li>Acesso aos dados e às informações sobre o tratamento;</li>
+            <li>Correção de dados incompletos, inexatos ou desatualizados;</li>
+            <li>Anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade;</li>
+            <li>Portabilidade dos dados a outro fornecedor de serviço, observados os limites legais;</li>
+            <li>Eliminação dos dados tratados com base no seu consentimento, salvo quando a manutenção for exigida por lei;</li>
+            <li>Informação sobre entidades públicas e privadas com as quais houve compartilhamento;</li>
+            <li>Informação sobre a possibilidade de não fornecer consentimento e as consequências da recusa;</li>
+            <li>Revogação do consentimento a qualquer momento.</li>
+        </ul>
+        <p>Respondemos às solicitações com prioridade e, quando não for possível resposta imediata, em prazo razoável, observado o art. 19 da LGPD (até 15 dias para informações simplificadas).</p>
+    </section>
+
+    <section aria-labelledby="menores-titulo">
+        <h2 id="menores-titulo">10. Dados de crianças e adolescentes</h2>
+        <p>Os dados de dependentes menores de idade são informados exclusivamente por responsável maior de 18 anos e usados apenas para emitir a carteirinha, viabilizar o uso dos benefícios e cumprir obrigações legais. Não coletamos dados de crianças para publicidade e não vendemos esses dados.</p>
+    </section>
+
+    <section aria-labelledby="alteracoes-privacidade-titulo">
+        <h2 id="alteracoes-privacidade-titulo">11. Alterações desta política</h2>
+        <p>Esta Política pode ser atualizada para refletir mudanças no portal, nos serviços ou na legislação. A data da última atualização consta no topo desta página e a versão vigente é sempre a publicada aqui. Recomendamos consultá-la periodicamente.</p>
+    </section>
+
+    <section aria-labelledby="contato-privacidade-titulo">
+        <h2 id="contato-privacidade-titulo">12. Como entrar em contato</h2>
+        <p>Dúvidas, solicitações ou reclamações sobre seus dados podem ser enviadas pelo <a asp-area="" asp-controller="Contato" asp-action="Index">formulário de contato</a> do portal, com o motivo “Solicitação”, ou pelo WhatsApp do atendimento. Também é possível solicitar o exercício de qualquer direito previsto nesta Política pelos mesmos canais.</p>
+    </section>
+
+    <footer class="legal-veja-tambem">
+        <p>Veja também: <a asp-area="" asp-controller="Home" asp-action="TermosDeUso">Termos de Uso</a></p>
+    </footer>
+</article>
