@@ -100,6 +100,15 @@ namespace Web.Controllers
                 logger.LogWarning(ex, "Não foi possível carregar a rede credenciada no portal.");
                 model.ErroCatalogos = "Não foi possível carregar todas as informações da rede. Tente novamente em instantes.";
             }
+            if (model.Empresas.Count > 0)
+            {
+                using var descontosTimeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                descontosTimeout.CancelAfter(TimeSpan.FromSeconds(5));
+                try { model.Descontos = await descontos.ListarAsync(descontosTimeout.Token); }
+                catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException ||
+                                           ex is OperationCanceledException && !cancellationToken.IsCancellationRequested)
+                { logger.LogWarning(ex, "Não foi possível carregar os descontos da rede no portal."); }
+            }
             using var planosTimeout = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             planosTimeout.CancelAfter(TimeSpan.FromSeconds(5));
             try

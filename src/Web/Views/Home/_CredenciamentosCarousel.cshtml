@@ -30,7 +30,8 @@
                                 <div class="credenciamento-detalhes">
                                     @if (desconto is not null) { <div><span>Desconto</span><strong>@desconto.Nome</strong></div> }
                                     @if (!string.IsNullOrWhiteSpace(credenciado.NomeFantasia)) { <div><span>Nome fantasia</span><strong>@credenciado.NomeFantasia</strong></div> }
-                                    @if (!string.IsNullOrWhiteSpace(credenciado.Cnpj)) { <div><span>CNPJ</span><strong>@credenciado.Cnpj</strong></div> }
+                                    @if (!string.IsNullOrWhiteSpace(credenciado.Cnpj)) { <div><span>CNPJ</span><strong>@Web.Models.CnpjFormatador.Formatar(credenciado.Cnpj)</strong></div> }
+                                    @if (!string.IsNullOrWhiteSpace(credenciado.Telefone)) { <div><span>Telefone</span><strong>@credenciado.Telefone</strong></div> }
                                     @if (!string.IsNullOrWhiteSpace(credenciado.WhatsApp)) { <div><span>WhatsApp</span><strong>@credenciado.WhatsApp</strong></div> }
                                     @if (!string.IsNullOrWhiteSpace(endereco)) { <div class="credenciamento-detalhe-completo"><span>Endereço</span><strong>@endereco</strong></div> }
                                 </div>

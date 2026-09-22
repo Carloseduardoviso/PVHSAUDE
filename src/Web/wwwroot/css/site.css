@@ -83,7 +83,7 @@ body {
 .portal-navbar .nav-icon { width: 1.2em; height: 1.2em; flex: 0 0 auto; }
 .portal-navbar .nav-link { color: #fff; font-size: .95rem; font-weight: 500; padding: .65rem .7rem; overflow-wrap: anywhere; display: inline-flex; align-items: center; gap: .4rem; }
 .portal-navbar .dropdown-item { display: inline-flex; align-items: center; gap: .4rem; width: 100%; }
-.portal-navbar .nav-link:hover, .portal-navbar .nav-link:focus { color: #c9f45b; }
+.portal-navbar .nav-link:hover, .portal-navbar .nav-link:focus { color: #fff; }
 .portal-navbar .navbar-collapse { display: flex !important; flex: 1 1 auto; flex-basis: auto; flex-wrap: wrap; min-width: 0; justify-content: flex-end; }
 .portal-admin-button { border: 1px solid #c9f45b; border-radius: 999px; color: #fff; font-weight: 600; padding: .55rem 1.1rem; }
 .portal-admin-button:hover, .portal-admin-button:focus { background: #c9f45b; border-color: #c9f45b; color: #15357a; }
@@ -106,7 +106,7 @@ body {
   .portal-navbar .dropdown-item:hover,
   .portal-navbar .dropdown-item:focus,
   .portal-navbar .dropdown-item.active,
-  .portal-navbar .dropdown-item:active { color: #c9f45b; background: transparent; }
+  .portal-navbar .dropdown-item:active { color: #fff; background: transparent; }
 }
 
 @media (max-width: 767.98px) {
@@ -187,6 +187,8 @@ body {
 .rede-lista .carousel-control-next-icon { width: 1rem; height: 1rem; background-size: 100% 100%; }
 .rede-lista .rede-texto { padding: 1.5rem; align-self: start; }
 .rede-lista .rede-texto h3 { font-size: 1.5rem; }
+.rede-lista .credenciamento-detalhes { grid-template-columns: 1fr; }
+.rede-lista .credenciamento-servicos { margin-top: 1.1rem; }
 .rede-texto { padding: 3rem 4rem 3rem 2.5rem; align-self: center; overflow-wrap: anywhere; }
 .rede-carousel .carousel-control-prev, .rede-carousel .carousel-control-next { width: 3rem; }
 .rede-carousel .carousel-control-prev-icon, .rede-carousel .carousel-control-next-icon { background-color: #145c49; border-radius: 50%; background-size: 60%; width: 2.3rem; height: 2.3rem; }
@@ -245,8 +247,9 @@ body {
   transition: color .15s ease, background-color .15s ease;
 }
 .portal-navbar .nav-link:hover,
-.portal-navbar .nav-link:focus-visible { background: rgba(255, 255, 255, .12); color: #e3ff9d; }
-.portal-navbar .nav-link.is-active { background: #fff; color: #15357a; font-weight: 750; box-shadow: 0 .15rem .45rem rgba(0, 0, 0, .16); }
+.portal-navbar .nav-link:focus-visible { background: transparent; color: #fff; }
+.portal-navbar .navbar-nav .nav-link.show { color: #fff; }
+.portal-navbar .nav-link.is-active { background: transparent; color: #fff; box-shadow: none; }
 .portal-navbar .nav-link:focus-visible,
 .portal-navbar .dropdown-item:focus-visible,
 .portal-nav-actions .btn:focus-visible { outline: 3px solid #c9f45b; outline-offset: 2px; }
@@ -254,7 +257,9 @@ body {
 .portal-navbar .dropdown-menu { position: absolute; top: 100%; left: 0; z-index: 1060; margin-top: .45rem; padding: .45rem; border: 0; border-radius: .75rem; box-shadow: 0 .75rem 1.75rem rgba(10, 27, 66, .24); }
 .portal-navbar .dropdown-item { min-height: 2.6rem; padding: .55rem .7rem; border-radius: .45rem; color: #19345f; font-weight: 600; }
 .portal-navbar .dropdown-item:hover,
-.portal-navbar .dropdown-item:focus { color: #102b64; background: #edf4ff; }
+.portal-navbar .dropdown-item:focus,
+.portal-navbar .dropdown-item.active,
+.portal-navbar .dropdown-item:active { color: #19345f; background: transparent; }
 .portal-nav-actions .btn { min-height: 2.75rem; display: inline-flex; align-items: center; justify-content: center; }
 
 @media (min-width: 1400px) {
