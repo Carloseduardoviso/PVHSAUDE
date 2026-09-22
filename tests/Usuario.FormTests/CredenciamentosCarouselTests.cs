@@ -8,6 +8,7 @@ internal static class CredenciamentosCarouselTests
         var carousel = Path.Combine(root, "Views", "Home", "_CredenciamentosCarousel.cshtml");
         var carouselView = File.Exists(carousel) ? File.ReadAllText(carousel) : string.Empty;
         var script = File.ReadAllText(Path.Combine(root, "wwwroot", "js", "portal-carousel.js"));
+        var stylesheet = File.ReadAllText(Path.Combine(root, "wwwroot", "css", "site.css"));
         var portalVm = File.ReadAllText(Path.Combine(root, "Models", "PortalVm.cs"));
 
         Check(controller.Contains("CarregarCredenciamentosAtivos"), "início carrega credenciamentos ativos");
@@ -22,6 +23,7 @@ internal static class CredenciamentosCarouselTests
         Check(carouselView.Contains("Especialidades") && carouselView.Contains("Procedimentos"), "carrossel exibe os serviços cadastrados");
         Check(!carouselView.Contains("Não informado") && !carouselView.Contains("Não informadas") && !carouselView.Contains("Não informados"), "carrossel oculta campos sem dados cadastrados");
         Check(portalVm.Contains("Descontos"), "portal disponibiliza os descontos para o carrossel");
+        Check(stylesheet.Contains(".credenciamento-imagem { display: grid; place-items: center; height: clamp(300px, 42vw, 560px); min-height: 0;") && stylesheet.Contains("align-self: start;"), "carrossel limita a altura de todas as imagens");
         Check(controller.Contains("EspecialidadesAsync") && controller.Contains("ProcedimentosAsync") && controller.Contains("descontos.ListarAsync"), "início carrega os catálogos necessários ao carrossel");
     }
 
