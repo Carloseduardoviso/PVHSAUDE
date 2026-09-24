@@ -26,7 +26,7 @@
                                 else { <span aria-hidden="true">PVH Saúde</span> }
                             </div>
                             <div class="credenciamento-conteudo">
-                                <p class="text-success small fw-semibold mb-2">@credenciado.Tipo</p>
+                                <p class="text-success small fw-semibold mb-2">@Html.DisplayFor(_ => credenciado.Tipo)</p>
                                 <div class="credenciamento-detalhes">
                                     @if (desconto is not null) { <div><span>Desconto</span><strong>@desconto.Nome</strong></div> }
                                     @if (!string.IsNullOrWhiteSpace(credenciado.NomeFantasia)) { <div><span>Nome fantasia</span><strong>@credenciado.NomeFantasia</strong></div> }
