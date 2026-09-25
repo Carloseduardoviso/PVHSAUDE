@@ -7,12 +7,12 @@ namespace PVHSAUDE.Api.Services;
 
 public interface IEmailSender
 {
-    Task EnviarAsync(string destinatario, string assunto, string mensagem, CancellationToken cancellationToken);
+    Task EnviarAsync(string destinatario, string assunto, string mensagem, string mensagemHtml, CancellationToken cancellationToken);
 }
 
 public sealed class EmailSender(IOptions<EmailOptions> options) : IEmailSender
 {
-    public async Task EnviarAsync(string destinatario, string assunto, string mensagem, CancellationToken cancellationToken)
+    public async Task EnviarAsync(string destinatario, string assunto, string mensagem, string mensagemHtml, CancellationToken cancellationToken)
     {
         var config = options.Value;
         if (!config.Enabled || string.IsNullOrWhiteSpace(config.EmailSenha))
@@ -22,10 +22,11 @@ public sealed class EmailSender(IOptions<EmailOptions> options) : IEmailSender
         email.From.Add(MailboxAddress.Parse(config.EmailRemetente));
         email.To.Add(MailboxAddress.Parse(destinatario));
         email.Subject = assunto;
-        email.Body = new TextPart("plain")
+        email.Body = new BodyBuilder
         {
-            Text = mensagem
-        };
+            TextBody = mensagem,
+            HtmlBody = mensagemHtml
+        }.ToMessageBody();
 
         var ssl = config.EmailSeguro
             ? config.EmailPorta == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls
