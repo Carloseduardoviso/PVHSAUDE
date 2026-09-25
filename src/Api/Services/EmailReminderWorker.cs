@@ -20,7 +20,8 @@ public sealed class EmailReminderWorker(
             return;
         }
 
-        using var timer = new PeriodicTimer(TimeSpan.FromHours(6));
+        logger.LogInformation("Lembretes por e-mail ativos. Verificação inicial e recorrente a cada minuto.");
+        using var timer = new PeriodicTimer(TimeSpan.FromMinutes(1));
         do
         {
             try { await EnviarLembretesAsync(stoppingToken); }
@@ -37,20 +38,28 @@ public sealed class EmailReminderWorker(
         var dias = options.Value.DiasAntesValidade.Distinct().Where(x => x >= 0 && x <= 365).ToArray();
         if (dias.Length == 0) return;
 
-        var beneficiarios = await db.Beneficiarios
+        var beneficiariosNaJanela = await db.Beneficiarios
             .AsNoTracking()
             .Include(x => x.Dependentes)
-            .Where(x => (x.Status == StatusBeneficiario.Ativo || x.Status == StatusBeneficiario.EmRenovacao)
-                && x.DataValidade >= hoje && x.DataValidade < hoje.AddDays(dias.Max() + 1))
+            .Where(x => x.DataValidade >= hoje && x.DataValidade < hoje.AddDays(dias.Max() + 1))
             .ToListAsync(ct);
 
-        foreach (var titular in beneficiarios)
+        var beneficiariosElegiveis = beneficiariosNaJanela
+            .Where(x => x.Status == StatusBeneficiario.Ativo || x.Status == StatusBeneficiario.EmRenovacao)
+            .ToArray();
+        logger.LogInformation(
+            "Verificação de lembretes: hoje={Hoje}, naJanela={NaJanela}, elegiveis={Elegiveis}, offsets={Offsets}.",
+            hoje, beneficiariosNaJanela.Count, beneficiariosElegiveis.Length, string.Join(",", dias));
+
+        foreach (var titular in beneficiariosElegiveis)
         {
             var faltam = (titular.DataValidade.Date - hoje).Days;
             if (!dias.Contains(faltam)) continue;
             if (!string.IsNullOrWhiteSpace(titular.Email))
                 await EnviarUmaVezAsync(db, titular.Id, titular.DataValidade, faltam, titular.Email,
                     titular.Nome, ct);
+            else
+                logger.LogWarning("Beneficiario {BeneficiarioId} elegivel para lembrete, mas sem e-mail cadastrado.", titular.Id);
 
             foreach (var dependente in titular.Dependentes.Where(x => !string.IsNullOrWhiteSpace(x.Email)))
                 await EnviarUmaVezAsync(db, dependente.Id, titular.DataValidade, faltam, dependente.Email!,
@@ -63,7 +72,12 @@ public sealed class EmailReminderWorker(
     {
         var registro = await db.Set<EmailLembrete>().SingleOrDefaultAsync(x =>
             x.PessoaId == pessoaId && x.DataValidade == validade.Date && x.DiasAntes == diasAntes, ct);
-        if (registro?.Enviado == true) return;
+        if (registro?.Enviado == true)
+        {
+            logger.LogInformation("Lembrete ignorado: pessoa {PessoaId}, validade {Validade}, marco {DiasAntes} dia(s) já enviado anteriormente.",
+                pessoaId, validade.Date, diasAntes);
+            return;
+        }
         if (registro is null)
         {
             registro = new EmailLembrete(pessoaId, validade, diasAntes, destinatario);
@@ -77,6 +91,7 @@ public sealed class EmailReminderWorker(
         await emailSender.EnviarAsync(destinatario, assunto, corpo, ct);
         registro.MarcarEnviado(DateTime.UtcNow);
         await db.SaveChangesAsync(ct);
-        logger.LogInformation("Lembrete de validade enviado para {Destinatario}.", destinatario);
+        logger.LogInformation("Lembrete de validade enviado para pessoa {PessoaId}, validade {Validade}, marco {DiasAntes} dia(s).",
+            pessoaId, validade.Date, diasAntes);
     }
 }

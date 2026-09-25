@@ -1,6 +1,7 @@
-using System.Net;
-using System.Net.Mail;
 using Microsoft.Extensions.Options;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
 
 namespace PVHSAUDE.Api.Services;
 
@@ -17,19 +18,23 @@ public sealed class EmailSender(IOptions<EmailOptions> options) : IEmailSender
         if (!config.Enabled || string.IsNullOrWhiteSpace(config.EmailSenha))
             throw new InvalidOperationException("O envio de e-mail não está habilitado ou não possui credencial configurada.");
 
-        using var email = new MailMessage(config.EmailRemetente, destinatario, assunto, mensagem)
+        var email = new MimeMessage();
+        email.From.Add(MailboxAddress.Parse(config.EmailRemetente));
+        email.To.Add(MailboxAddress.Parse(destinatario));
+        email.Subject = assunto;
+        email.Body = new TextPart("plain")
         {
-            IsBodyHtml = false,
-            BodyEncoding = System.Text.Encoding.UTF8,
-            SubjectEncoding = System.Text.Encoding.UTF8
+            Text = mensagem
         };
-        using var smtp = new SmtpClient(config.EmailHost, config.EmailPorta)
-        {
-            EnableSsl = true,
-            UseDefaultCredentials = false,
-            Credentials = new NetworkCredential(config.EmailRemetente, config.EmailSenha),
-            DeliveryMethod = SmtpDeliveryMethod.Network
-        };
-        await smtp.SendMailAsync(email, cancellationToken);
+
+        var ssl = config.EmailSeguro
+            ? config.EmailPorta == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls
+            : SecureSocketOptions.None;
+
+        using var smtp = new SmtpClient();
+        await smtp.ConnectAsync(config.EmailHost, config.EmailPorta, ssl, cancellationToken);
+        await smtp.AuthenticateAsync(config.EmailRemetente, config.EmailSenha, cancellationToken);
+        await smtp.SendAsync(email, cancellationToken);
+        await smtp.DisconnectAsync(true, cancellationToken);
     }
 }
