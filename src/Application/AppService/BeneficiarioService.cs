@@ -116,7 +116,7 @@ public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEn
             vm.Nome = vm.Nome.Trim();
             vm.Cpf = Digitos(vm.Cpf);
             var dependente = item.Id == Guid.Empty
-                ? new Dependente(entity.Id, vm.Nome, vm.Cpf, vm.DataNascimento!.Value, vm.GrauParentesco!.Value)
+                ? new Dependente(entity.Id, vm.Nome, vm.Cpf, vm.DataNascimento!.Value, vm.GrauParentesco!.Value, vm.Email)
                 : entity.Dependentes.Single(x => x.Id == item.Id);
             if (item.Id == Guid.Empty || string.Equals(dependente.Codigo, entity.Codigo, StringComparison.OrdinalIgnoreCase))
                 dependente.DefinirCodigo(gerarCodigo());
@@ -128,7 +128,8 @@ public class BeneficiarioService(IEntityRepository<Beneficiario> repository, IEn
     {
         var vm = mapper.Map<BeneficiarioVm>(entrada);
         vm.Nome = vm.Nome.Trim();
-        vm.Cpf = Digitos(vm.Cpf);
+            vm.Cpf = Digitos(vm.Cpf);
+            vm.Email = vm.Email?.Trim();
         vm.Telefone = vm.Telefone?.Trim();
         vm.Email = vm.Email?.Trim();
         vm.Endereco = vm.Endereco?.Trim();

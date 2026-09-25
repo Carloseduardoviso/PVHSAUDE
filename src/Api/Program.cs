@@ -49,6 +49,9 @@ builder.Services.AddAuthenticationConfig();
 builder.Services.AddInfrastructure();
 builder.Services.AddApplicationServices();
 builder.Services.AddScoped<IImagemStorage, ImagemStorage>();
+builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection(EmailOptions.Section));
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
+builder.Services.AddHostedService<EmailReminderWorker>();
 
 builder.Services.AddConfigRatesLimiter();
 builder.Services.AddHttpContextAccessor();

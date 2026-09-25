@@ -59,7 +59,7 @@ public class AutoMapperConfig : Profile
             if (entity is null) throw new InvalidOperationException("Crie o dependente com o beneficiário vinculado antes de mapear.");
             if (!vm.DataNascimento.HasValue || !vm.GrauParentesco.HasValue)
                 throw new ArgumentException("Informe nascimento e parentesco do dependente.");
-            entity.Atualizar(vm.Nome, vm.Cpf, vm.DataNascimento.Value, vm.GrauParentesco.Value);
+            entity.Atualizar(vm.Nome, vm.Cpf, vm.DataNascimento.Value, vm.GrauParentesco.Value, vm.Email);
             return entity;
         });
 

@@ -34,6 +34,7 @@ public class DependenteVm
     public string Codigo { get; set; } = string.Empty;
     [Required, StringLength(150)] public string Nome { get; set; } = string.Empty;
     [Required, RegularExpression(@"(?:\d{11}|\d{3}\.\d{3}\.\d{3}-\d{2})", ErrorMessage = "Informe um CPF completo.")] public string Cpf { get; set; } = string.Empty;
+    [EmailAddress, StringLength(254)] public string? Email { get; set; }
     [Required(ErrorMessage = "Informe a data de nascimento."), DataNascimento, DataType(DataType.Date)] public DateTime? DataNascimento { get; set; }
     [Required(ErrorMessage = "Selecione o parentesco."), EnumDataType(typeof(GrauParentesco), ErrorMessage = "Selecione um parentesco válido.")] public GrauParentesco? GrauParentesco { get; set; }
 }

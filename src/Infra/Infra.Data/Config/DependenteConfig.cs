@@ -16,6 +16,7 @@ namespace Infra.Data.Config
             builder.Property(x => x.BeneficiarioId).IsRequired();
             builder.Property(x => x.Nome).IsRequired();
             builder.Property(x => x.Cpf).IsRequired();
+            builder.Property(x => x.Email).HasMaxLength(254).IsRequired(false);
             builder.Property(x => x.DataNascimento).IsRequired();
             builder.Property(x => x.GrauParentesco).HasConversion(x => GrauParentescoStorage.ParaTexto(x), x => GrauParentescoStorage.ParaEnum(x)).HasColumnType("nvarchar(max)").IsRequired();
 

@@ -76,6 +76,10 @@ public class DependenteViewModel
     [Required, RegularExpression(@"(?:\d{11}|\d{3}\.\d{3}\.\d{3}-\d{2})", ErrorMessage = "Informe um CPF completo.")]
     public string Cpf { get; set; } = string.Empty;
 
+    [EmailAddress, StringLength(254, ErrorMessage = "O e-mail deve ter no máximo 254 caracteres.")]
+    [Display(Name = "E-mail do dependente")]
+    public string? Email { get; set; }
+
     [Required(ErrorMessage = "Informe a data de nascimento.")]
     [DataNascimento, DataType(DataType.Date)]
     public DateTime? DataNascimento { get; set; }

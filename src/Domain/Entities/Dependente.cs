@@ -10,28 +10,31 @@ namespace PVHSAUDE.Domain.Entities
         public Beneficiario Beneficiario { get; private set; } = null!;
         public string Nome { get; private set; } = string.Empty;
         public string Cpf { get; private set; } = string.Empty;
+        public string? Email { get; private set; }
         public DateTime DataNascimento { get; private set; }
         public GrauParentesco GrauParentesco { get; private set; }
 
         private Dependente() { }
 
-        public void Atualizar(string nome, string cpf, DateTime dataNascimento, GrauParentesco grauParentesco)
+        public void Atualizar(string nome, string cpf, DateTime dataNascimento, GrauParentesco grauParentesco, string? email = null)
         {
             Nome = nome;
             Cpf = cpf;
             DataNascimento = dataNascimento;
             GrauParentesco = grauParentesco;
+            Email = email?.Trim();
         }
 
         public void DefinirCodigo(string codigo) => Codigo = codigo;
 
-        public Dependente(Guid beneficiarioId, string nome, string cpf, DateTime dataNascimento, GrauParentesco grauParentesco)
+        public Dependente(Guid beneficiarioId, string nome, string cpf, DateTime dataNascimento, GrauParentesco grauParentesco, string? email = null)
         {
             BeneficiarioId = beneficiarioId;
             Nome = nome;
             Cpf = cpf;
             DataNascimento = dataNascimento;
             GrauParentesco = grauParentesco;
+            Email = email?.Trim();
         }
     }
 }

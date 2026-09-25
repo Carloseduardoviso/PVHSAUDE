@@ -23,7 +23,7 @@ public class BeneficiarioEntradaVm
     public StatusBeneficiario Status { get; set; } = StatusBeneficiario.Pendente;
 }
 
-public record DependenteRespostaVm(Guid Id, string Codigo, string Nome, string Cpf, DateTime DataNascimento, GrauParentesco GrauParentesco);
+public record DependenteRespostaVm(Guid Id, string Codigo, string Nome, string Cpf, DateTime DataNascimento, GrauParentesco GrauParentesco, string? Email);
 
 public record BeneficiarioRespostaVm(Guid Id, string Codigo, string Nome, string Cpf, DateTime DataNascimento,
     string? Telefone, string? Email, string? Endereco, Guid PlanoId, DateTime DataInicio,
@@ -34,6 +34,7 @@ public class DependenteEntradaVm
     public Guid Id { get; set; }
     [Required, StringLength(150)] public string Nome { get; set; } = string.Empty;
     [Required, RegularExpression(@"(?:\d{11}|\d{3}\.\d{3}\.\d{3}-\d{2})")] public string Cpf { get; set; } = string.Empty;
+    [EmailAddress, StringLength(254)] public string? Email { get; set; }
     [Required(ErrorMessage = "Informe a data de nascimento."), DataNascimento] public DateTime? DataNascimento { get; set; }
     [Required(ErrorMessage = "Selecione o parentesco."), EnumDataType(typeof(GrauParentesco), ErrorMessage = "Selecione um parentesco válido.")] public GrauParentesco? GrauParentesco { get; set; }
 }
