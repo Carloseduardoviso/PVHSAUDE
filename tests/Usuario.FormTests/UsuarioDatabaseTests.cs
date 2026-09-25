@@ -56,7 +56,7 @@ public static class UsuarioDatabaseTests
             Check(await controller.Editar(user.Id, new UsuarioEdicaoVm { NomeCompleto = "Alterado", Email = "ADMIN@example.com", Role = Role.Gestor }, default) is ConflictObjectResult, "Edição rejeita e-mail duplicado.");
             Check(await controller.Editar(user.Id, new UsuarioEdicaoVm { NomeCompleto = "Alterado", Email = "novo@example.com", Role = Role.Gestor, Senha = "nova-senha-teste" }, default) is NoContentResult && hasher.VerifyHashedPassword(user, user.SenhaHash, "nova-senha-teste") != PasswordVerificationResult.Failed, "Edição altera senha.");
             var jwt = new AppJwtService(Options.Create(new JwtSetting { SecretKey = new string('x', 64), Issuer = "tests", Audience = "tests" }));
-            var auth = new AuthController(new AuthService(usuarios, work, mapper, hasher, jwt));
+            var auth = new AuthController(new AuthService(usuarios, new EntityRepository<Beneficiario>(db), work, mapper, hasher, jwt));
             var login = new LoginVm { Email = user.Email, Senha = "nova-senha-teste" };
             Check(await auth.Login(login, default) is OkObjectResult, "Usuário ativo entra.");
             Check(await controller.Inativar(user.Id, default) is NoContentResult && await auth.Login(login, default) is UnauthorizedResult, "Inativação bloqueia login.");

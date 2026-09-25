@@ -11,4 +11,6 @@ public class Usuario
     public Role Role { get; set; }
     public bool Ativo { get; set; } = true;
     public string MenusPermitidos { get; set; } = "";
+    public string? CpfSolicitado { get; set; }
+    public Guid? BeneficiarioId { get; set; }
 }

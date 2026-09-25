@@ -701,6 +701,13 @@ namespace PVHSAUDE.Infra.Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
+                    b.Property<Guid?>("BeneficiarioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CpfSolicitado")
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(254)
@@ -733,6 +740,10 @@ namespace PVHSAUDE.Infra.Data.Migrations
 
                     b.HasIndex("EmailNormalizado")
                         .IsUnique();
+
+                    b.HasIndex("BeneficiarioId", "CpfSolicitado")
+                        .IsUnique()
+                        .HasFilter("[BeneficiarioId] IS NOT NULL AND [CpfSolicitado] IS NOT NULL");
 
                     b.ToTable("Usuario", (string)null);
 
@@ -879,6 +890,14 @@ namespace PVHSAUDE.Infra.Data.Migrations
                     b.Navigation("EmpresaBeneficiada");
 
                     b.Navigation("Procedimento");
+                });
+
+            modelBuilder.Entity("PVHSAUDE.Domain.Entities.Usuario", b =>
+                {
+                    b.HasOne("PVHSAUDE.Domain.Entities.Beneficiario", null)
+                        .WithMany()
+                        .HasForeignKey("BeneficiarioId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("PVHSAUDE.Domain.Entities.Beneficiario", b =>

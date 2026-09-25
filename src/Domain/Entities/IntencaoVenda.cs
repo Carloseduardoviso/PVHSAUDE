@@ -27,7 +27,7 @@ public class IntencaoVenda
     {
         Nome = nome.Trim(); Email = email.Trim(); Telefone = telefone.Trim(); Cpf = cpf.Trim(); PlanoId = planoId;
         PlanoNome = planoNome.Trim(); ValorPlano = valorPlano; QuantidadeDependentes = quantidadeDependentes;
-        ValorTotal = valorPlano + quantidadeDependentes * 11.50m; Endereco = endereco.Trim(); Dependentes = dependentes.Trim();
+        ValorTotal = valorPlano + quantidadeDependentes * Dependente.Valor; Endereco = endereco.Trim(); Dependentes = dependentes.Trim();
     }
 
     public void AtualizarStatus(StatusIntencaoVenda status) => Status = status;

@@ -1,0 +1,22 @@
+@model PVHSAUDE.Web.Areas.Beneficiario.Models.LoginCpfBeneficiarioContaVm
+@{ ViewData["Title"] = "Área do Beneficiário"; }
+<section class="login-page" aria-labelledby="beneficiario-login-title">
+    <div class="login-card">
+        <div class="login-brand"><img src="~/images/pvh-saude-horizontal.jpeg" asp-append-version="true" alt="PVH Saúde" /></div>
+        <div class="login-heading">
+            <span class="login-eyebrow">ÁREA DO BENEFICIÁRIO</span>
+            <h1 id="beneficiario-login-title">Entre na sua área</h1>
+            <p>Use o CPF cadastrado na PVH Saúde, como titular ou dependente, para consultar seus dados e sua carteirinha.</p>
+        </div>
+        <form asp-action="Login" method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="login-form">
+            @if (TempData["CadastroConcluido"] is string cadastroConcluido) { <div class="alert alert-success" role="status">@cadastroConcluido</div> }
+            @if (ViewData["SemCadastro"] is true) { <div class="alert alert-warning" role="alert">Não encontramos uma conta para este CPF. <a asp-action="Cadastro">Crie sua conta</a>.</div> }
+            <div asp-validation-summary="ModelOnly" class="login-validation" role="alert"></div>
+            <div class="login-field"><label asp-for="Cpf"></label><input asp-for="Cpf" inputmode="numeric" autocomplete="username" placeholder="000.000.000-00" maxlength="14" data-cpf-mask /><span asp-validation-for="Cpf"></span></div>
+            <div class="login-field"><label asp-for="Senha"></label><div class="login-password-wrap"><input asp-for="Senha" autocomplete="current-password" placeholder="Digite sua senha" /><button type="button" class="login-password-toggle" data-password-toggle aria-controls="Senha" aria-label="Mostrar senha" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button></div><span asp-validation-for="Senha"></span></div>
+            <button class="login-submit" type="submit">Entrar <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="login-footer-note">Ainda não tem acesso? <a asp-action="Cadastro">Crie sua conta</a>. Seu CPF precisa constar no cadastro de beneficiários ou dependentes.</p>
+    </div>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /><script src="~/js/beneficiario-conta.js" asp-append-version="true"></script> }

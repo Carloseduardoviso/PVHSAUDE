@@ -1,0 +1,32 @@
+@model PVHSAUDE.Application.ViewModels.AreaBeneficiarioVm
+@{ ViewData["Title"] = "Carteirinha"; }
+<div class="beneficiario-area">
+    <h1>Minha carteirinha</h1>
+    <partial name="_Navegacao" />
+
+    <article class="beneficiario-digital-card" aria-label="Carteirinha digital PVH Saúde de @Model.Nome">
+        <svg class="carteirinha-ondas" viewBox="0 0 660 480" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path d="M0 280 C135 265 248 332 382 290 C485 258 562 216 660 190 L660 480 H0 Z" fill="#0d67a7" />
+            <path d="M0 291 C136 280 252 345 389 304 C495 271 565 232 660 211 L660 480 H0 Z" fill="#0c2c60" />
+            <path d="M275 480 C383 443 424 350 492 290 C553 238 601 219 660 211 L660 480 Z" fill="#4c8f30" />
+            <path d="M303 480 C400 452 447 365 511 307 C568 258 607 242 660 234 L660 480 Z" fill="#07573e" />
+        </svg>
+        <img class="carteirinha-logo" src="~/images/pvh-saude-horizontal.jpeg" asp-append-version="true" alt="PVH Saúde Mais — descontos e benefícios" />
+
+        <div class="carteirinha-identificacao">
+            <div class="carteirinha-pessoa">
+                <span class="carteirinha-rotulo">@(Model.EhDependente ? "DEPENDENTE" : "TITULAR"):</span>
+                <strong class="carteirinha-nome">@Model.Nome</strong>
+            </div>
+            <div class="carteirinha-dado"><span class="carteirinha-rotulo">DATA DE NASCIMENTO:</span><strong>@Model.DataNascimento.ToString("dd/MM/yyyy")</strong></div>
+            <div class="carteirinha-dado"><span class="carteirinha-rotulo">VALIDADE:</span><strong>@Model.DataValidade.ToString("dd/MM/yyyy")</strong></div>
+            <div class="carteirinha-referencia"><span>Nº @Model.Codigo</span><span>@Model.PlanoNome</span></div>
+        </div>
+
+        <div class="carteirinha-beneficios" aria-label="Benefícios da PVH Saúde">
+            <strong>+ SAÚDE<br />+ ECONOMIA<br />+ QUALIDADE DE VIDA</strong>
+            <span>CONSULTAS, EXAMES E TERAPIAS</span>
+        </div>
+    </article>
+    <p class="carteirinha-situacao">Situação da carteirinha: <strong>@Model.Status</strong></p>
+</div>

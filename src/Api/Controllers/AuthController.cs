@@ -12,4 +12,6 @@ public class AuthController(IAuthService service) : ServiceController
     public IActionResult Sessao() => Ok(User.FindAll(AcessoMenu.Claim).Select(x => x.Value).ToArray());
     [HttpPost("login"), AllowAnonymous, EnableRateLimiting("login")]
     public Task<IActionResult> Login(LoginVm vm, CancellationToken ct) => Executar(async () => Ok(await service.LoginAsync(vm, ct)));
+    [HttpPost("beneficiario"), AllowAnonymous, EnableRateLimiting("login")]
+    public Task<IActionResult> LoginBeneficiario(LoginCpfBeneficiarioVm vm, CancellationToken ct) => Executar(async () => Ok(await service.LoginCpfAsync(vm, ct)));
 }

@@ -15,5 +15,8 @@ public class UsuarioConfig : IEntityTypeConfiguration<Usuario>
         builder.Property(x => x.EmailNormalizado).HasMaxLength(254).IsRequired();
         builder.HasIndex(x => x.EmailNormalizado).IsUnique();
         builder.Property(x => x.SenhaHash).HasMaxLength(512).IsRequired();
+        builder.Property(x => x.CpfSolicitado).HasMaxLength(11);
+        builder.HasOne<Beneficiario>().WithMany().HasForeignKey(x => x.BeneficiarioId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasIndex(x => new { x.BeneficiarioId, x.CpfSolicitado }).IsUnique().HasFilter("[BeneficiarioId] IS NOT NULL AND [CpfSolicitado] IS NOT NULL");
     }
 }

@@ -1,6 +1,7 @@
 @{
     var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
     var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+    var isBeneficiarioArea = string.Equals(ViewContext.RouteData.Values["area"]?.ToString(), "Beneficiario", StringComparison.OrdinalIgnoreCase);
     var isLoginPage = string.Equals(currentController, "Conta", StringComparison.OrdinalIgnoreCase)
         && string.Equals(currentAction, "Login", StringComparison.OrdinalIgnoreCase);
     bool IsCurrent(string controller, string action) => string.Equals(currentController, controller, StringComparison.OrdinalIgnoreCase)
@@ -18,15 +19,18 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/area-beneficiario.css" asp-append-version="true" />
 </head>
 <body class="portal-body@(isLoginPage ? " login-body" : "")">
     @if (!isLoginPage)
     {
     <header>
-        <nav class="navbar portal-navbar" aria-label="Navegação principal">
+        <nav class="navbar portal-navbar@(isBeneficiarioArea ? " portal-navbar-beneficiario" : "")" aria-label="Navegação principal">
             <div class="container-fluid portal-navbar-inner">
                 <a class="navbar-brand portal-brand" asp-area="" asp-controller="Home" asp-action="Index" aria-label="PVH Saúde — início"><img src="~/images/pvh-saude-horizontal-transparent.png" asp-append-version="true" alt="PVH Saúde — descontos e benefícios" width="1692" height="929" /></a>
                 <div id="navbarSupportedContent" class="navbar-collapse justify-content-between">
+                    @if (!isBeneficiarioArea)
+                    {
                     <ul class="navbar-nav portal-nav-links">
                         <li class="nav-item">
                             <a class="nav-link@(IsCurrent("Home", "Index") ? " is-active" : "")" asp-area="" asp-controller="Home" asp-action="Index" aria-current="@(IsCurrent("Home", "Index") ? "page" : null)"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>Início</a>
@@ -73,9 +77,22 @@
                             <a class="nav-link@(IsCurrent("Home", "SobreNos") ? " is-active" : "")" asp-area="" asp-controller="Home" asp-action="SobreNos" aria-current="@(IsCurrent("Home", "SobreNos") ? "page" : null)"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8" /><path d="M12 11v5m0-8h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>Sobre Nós</a>
                         </li>
                     </ul>
+                    }
                     <div class="portal-nav-actions d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2">
                         <a asp-area="" asp-controller="Carteirinha" asp-action="Index" class="btn portal-carteirinha-button">Peça sua carteirinha</a>
-                        <a asp-area="Administracao" asp-controller="Dashboard" asp-action="Index" class="btn portal-admin-button">Área administrativa</a>
+                        <a asp-area="Beneficiario" asp-controller="@(User.IsInRole("Beneficiario") ? "MinhaArea" : "BeneficiarioConta")" asp-action="@(User.IsInRole("Beneficiario") ? "Index" : "Login")" class="btn portal-beneficiario-button">@(User.IsInRole("Beneficiario") ? "Minha área" : "Área do Beneficiário")</a>
+                        @if (!isBeneficiarioArea && !User.IsInRole("Beneficiario")) { <a asp-area="Administracao" asp-controller="Dashboard" asp-action="Index" class="btn portal-admin-button">Área administrativa</a> }
+                        @if (User.Identity?.IsAuthenticated == true && (!isBeneficiarioArea || User.IsInRole("Beneficiario")))
+                        {
+                            if (isBeneficiarioArea)
+                            {
+                                <form asp-area="Beneficiario" asp-controller="BeneficiarioConta" asp-action="Sair" method="post"><button type="submit" class="btn portal-sair-button">Sair</button></form>
+                            }
+                            else
+                            {
+                                <form asp-area="" asp-controller="Conta" asp-action="Sair" method="post"><button type="submit" class="btn portal-sair-button">Sair</button></form>
+                            }
+                        }
                     </div>
                 </div>
             </div>

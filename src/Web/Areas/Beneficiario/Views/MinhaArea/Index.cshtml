@@ -1,0 +1,20 @@
+@model PVHSAUDE.Application.ViewModels.AreaBeneficiarioVm
+@{ ViewData["Title"] = "Minha área"; }
+<div class="beneficiario-area">
+    <h1>Olá, @Model.Nome</h1>
+    <p>Consulte seus dados e benefícios em um só lugar.</p>
+    <partial name="_Navegacao" />
+    <div class="beneficiario-grid">
+        @if (Model.EhDependente)
+        {
+            <article class="beneficiario-card"><h2>Minha carteirinha</h2><strong>@Model.Codigo</strong><p>Válida até @Model.DataValidade.ToString("dd/MM/yyyy") · @Model.Status</p><a asp-action="Carteirinha">Ver carteirinha</a></article>
+            <article class="beneficiario-card"><h2>Plano vinculado</h2><strong>@Model.PlanoNome</strong><p>Valor do dependente: @(Model.ValorDependente?.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")))</p><a asp-action="Plano">Ver vínculo</a></article>
+        }
+        else
+        {
+            <article class="beneficiario-card"><h2>Meu plano</h2><strong>@Model.PlanoNome</strong><p>@Model.PlanoPeriodicidade · @(Model.PlanoValor?.ToString("C", new System.Globalization.CultureInfo("pt-BR")) ?? "Valor indisponível")</p><a asp-action="Plano">Ver plano</a></article>
+            <article class="beneficiario-card"><h2>Carteirinha</h2><strong>@Model.Codigo</strong><p>Válida até @Model.DataValidade.ToString("dd/MM/yyyy") · @Model.Status</p><a asp-action="Carteirinha">Ver carteirinha</a></article>
+            <article class="beneficiario-card"><h2>Dependentes</h2><strong>@Model.Dependentes.Count</strong><p>Vinculados ao seu cadastro</p><a asp-action="Dependentes">Ver dependentes</a></article>
+        }
+    </div>
+</div>

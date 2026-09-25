@@ -16,7 +16,7 @@
                 <li><span>3</span>Adicionais</li>
                 <li><span>4</span>Pagamento</li>
             </ol>
-            <form id="carteirinha-form">
+            <form id="carteirinha-form" data-valor-dependente="@PVHSAUDE.Domain.Entities.Dependente.Valor.ToString(System.Globalization.CultureInfo.InvariantCulture)">
                 @Html.AntiForgeryToken()
                 <section data-step="0" aria-labelledby="cadastro-title">
                     <h2 id="cadastro-title" tabindex="-1">Vamos começar pelo seu cadastro</h2>
@@ -93,7 +93,7 @@
                 <span class="carteirinha-card-footer">Consulta, exames e terapia</span>
             </div>
             <h2 id="summary-title">Sua solicitação</h2>
-            <dl><div><dt>Carteirinha</dt><dd>PVH Saúde</dd></div><div><dt>Plano</dt><dd id="summary-plano">A escolher</dd></div><div><dt>Valor do plano</dt><dd id="summary-plano-valor">R$ 0,00</dd></div><div><dt>Dependentes</dt><dd id="summary-dependentes">Nenhum</dd></div><div><dt>Valor por dependente</dt><dd>R$ 11,50</dd></div><div><dt>Total dos dependentes</dt><dd id="summary-dependentes-total">R$ 0,00</dd></div><div><dt>Total da carteirinha</dt><dd id="summary-total-carteirinha">R$ 0,00</dd></div><div><dt>Pagamento</dt><dd id="summary-payment">A escolher</dd></div></dl>
+            <dl><div><dt>Carteirinha</dt><dd>PVH Saúde</dd></div><div><dt>Plano</dt><dd id="summary-plano">A escolher</dd></div><div><dt>Valor do plano</dt><dd id="summary-plano-valor">R$ 0,00</dd></div><div><dt>Dependentes</dt><dd id="summary-dependentes">Nenhum</dd></div><div><dt>Valor por dependente</dt><dd>@PVHSAUDE.Domain.Entities.Dependente.Valor.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))</dd></div><div><dt>Total dos dependentes</dt><dd id="summary-dependentes-total">R$ 0,00</dd></div><div><dt>Total da carteirinha</dt><dd id="summary-total-carteirinha">R$ 0,00</dd></div><div><dt>Pagamento</dt><dd id="summary-payment">A escolher</dd></div></dl>
             <p class="carteirinha-summary-note">Os valores do plano e dos adicionais serão informados antes da contratação.</p>
             <div class="carteirinha-help"><strong>Precisa de ajuda?</strong><p>Nossa equipe pode orientar você.</p><a asp-area="" asp-controller="WhatsApp" asp-action="Index" target="_blank" rel="noopener noreferrer">Fale com a PVH Saúde ↗</a></div>
         </aside>

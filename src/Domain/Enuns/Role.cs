@@ -8,6 +8,7 @@ namespace PVHSAUDE.Domain.Enuns
     {
         Comum = 0,
         Gestor = 1,
-        Administrador = 2
+        Administrador = 2,
+        Beneficiario = 3
     }
 }

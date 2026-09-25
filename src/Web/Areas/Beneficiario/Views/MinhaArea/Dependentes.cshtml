@@ -1,0 +1,28 @@
+@model PVHSAUDE.Application.ViewModels.AreaBeneficiarioVm
+@{ ViewData["Title"] = "Dependentes"; }
+<div class="beneficiario-area">
+    <h1>Meus dependentes</h1>
+    <partial name="_Navegacao" />
+    @if (Model.Dependentes.Count == 0)
+    {
+        <p class="beneficiario-card">Nenhum dependente vinculado ao seu cadastro.</p>
+    }
+    else
+    {
+        <div class="beneficiario-grid">
+            @foreach (var dependente in Model.Dependentes)
+            {
+                <article class="beneficiario-card">
+                    <h2>@dependente.Nome</h2>
+                    <dl>
+                        <dt>Código</dt><dd>@dependente.Codigo</dd>
+                        <dt>CPF</dt><dd>@dependente.Cpf</dd>
+                        <dt>Nascimento</dt><dd>@dependente.DataNascimento.ToString("dd/MM/yyyy")</dd>
+                        <dt>Parentesco</dt><dd>@Html.DisplayFor(_ => dependente.GrauParentesco)</dd>
+                        <dt>Validade da carteirinha</dt><dd>@dependente.DataValidade.ToString("dd/MM/yyyy")</dd>
+                    </dl>
+                </article>
+            }
+        </div>
+    }
+</div>

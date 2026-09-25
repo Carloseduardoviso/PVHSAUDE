@@ -3,6 +3,7 @@ namespace PVHSAUDE.Domain.Entities
 {
     public class Dependente
     {
+        public const decimal Valor = 11.90m;
         public Guid Id { get; private set; } = Guid.NewGuid();
         public string Codigo { get; private set; } = string.Empty;
         public Guid BeneficiarioId { get; private set; }

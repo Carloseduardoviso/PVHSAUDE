@@ -1,0 +1,23 @@
+@model PVHSAUDE.Application.ViewModels.AreaBeneficiarioVm
+@{ ViewData["Title"] = "Meus dados"; }
+<div class="beneficiario-area">
+    <h1>Meus dados</h1>
+    <partial name="_Navegacao" />
+    <dl class="beneficiario-details">
+        <div><dt>Nome</dt><dd>@Model.Nome</dd></div>
+        <div><dt>CPF</dt><dd>@Model.Cpf</dd></div>
+        <div><dt>Carteirinha</dt><dd>@Model.Codigo</dd></div>
+        <div><dt>Data de nascimento</dt><dd>@Model.DataNascimento.ToString("dd/MM/yyyy")</dd></div>
+        @if (Model.EhDependente)
+        {
+            <div><dt>Grau de parentesco</dt><dd>@Html.DisplayFor(x => x.GrauParentesco)</dd></div>
+        }
+        else
+        {
+            <div><dt>Telefone</dt><dd>@(Model.Telefone ?? "Não informado")</dd></div>
+            <div><dt>E-mail</dt><dd>@(Model.Email ?? "Não informado")</dd></div>
+            <div><dt>Endereço</dt><dd>@(Model.Endereco ?? "Não informado")</dd></div>
+        }
+    </dl>
+    <p>Para corrigir seus dados, entre em contato com a equipe da PVH Saúde.</p>
+</div>

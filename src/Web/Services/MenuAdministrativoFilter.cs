@@ -12,7 +12,7 @@ public class MenuAdministrativoFilter : IAuthorizationFilter
         var controller = context.RouteData.Values["controller"]?.ToString();
 
         // Home is the authenticated landing page. User management retains its Administrator authorization.
-        if (controller is "Dashboard" or "Usuario" or "Cep") return;
+        if (controller is "Dashboard" or "Usuario" or "AcessoBeneficiario" or "Cep") return;
 
         var action = context.RouteData.Values["action"]?.ToString();
         var menu = controller == "Catalogo" ? action switch

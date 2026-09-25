@@ -1,0 +1,31 @@
+@model PVHSAUDE.Application.ViewModels.AreaBeneficiarioVm
+@{ ViewData["Title"] = Model.EhDependente ? "Plano vinculado" : "Meu plano"; }
+<div class="beneficiario-area">
+    <h1>@ViewData["Title"]</h1>
+    <partial name="_Navegacao" />
+    <dl class="beneficiario-details">
+        <div><dt>Plano</dt><dd>@Model.PlanoNome</dd></div>
+        @if (Model.EhDependente)
+        {
+            <div><dt>Vínculo</dt><dd>Dependente do titular</dd></div>
+            <div><dt>Grau de parentesco</dt><dd>@Html.DisplayFor(x => x.GrauParentesco)</dd></div>
+            <div><dt>Valor do dependente</dt><dd>@(Model.ValorDependente?.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")))</dd></div>
+        }
+        else
+        {
+            <div><dt>Valor atual do plano</dt><dd>@(Model.PlanoValor?.ToString("C", new System.Globalization.CultureInfo("pt-BR")) ?? "Não informado")</dd></div>
+        }
+        <div><dt>Periodicidade</dt><dd>@Model.PlanoPeriodicidade</dd></div>
+        <div><dt>Início do benefício</dt><dd>@Model.DataInicio.ToString("dd/MM/yyyy")</dd></div>
+        <div><dt>Validade do benefício</dt><dd>@Model.DataValidade.ToString("dd/MM/yyyy")</dd></div>
+        <div><dt>Situação</dt><dd>@Model.Status</dd></div>
+    </dl>
+    @if (Model.EhDependente)
+    {
+        <p>O valor exibido é o valor atual por dependente.</p>
+    }
+    else
+    {
+        <p>O valor exibido é o valor atual do plano cadastrado. Informações sobre cobranças estarão na página de pagamentos quando forem registradas no sistema.</p>
+    }
+</div>

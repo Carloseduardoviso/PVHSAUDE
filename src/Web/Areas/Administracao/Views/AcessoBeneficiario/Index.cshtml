@@ -1,0 +1,42 @@
+@model Web.Models.AcessosBeneficiarioVm
+@{ ViewData["Title"] = "Acessos dos beneficiários"; }
+<h1 class="h3 mb-3">Solicitações de acesso dos beneficiários</h1>
+<div class="card mb-4"><div class="card-body">
+    <h2 class="h5">Emitir acesso para titular ou dependente</h2>
+    <p>Informe o CPF já cadastrado. A senha gerada aparece uma vez nesta tela; entregue-a ao titular ou dependente após confirmar a identidade. Emitir novamente substitui a senha anterior.</p>
+    <form asp-action="Emitir" method="post" class="d-flex flex-wrap gap-2 align-items-end">
+        <div><label for="cpf-acesso" class="form-label">CPF do titular ou dependente</label><input id="cpf-acesso" name="cpf" class="form-control" inputmode="numeric" required maxlength="14" /></div>
+        <button class="btn btn-primary" type="submit">Emitir senha de acesso</button>
+    </form>
+</div></div>
+@if (TempData["AcessoEmitido"] is string acessoEmitido) { <div class="alert alert-success" role="status"><strong>Acesso emitido:</strong> @acessoEmitido</div> }
+<p class="text-muted">Confirme a identidade da pessoa antes de vincular a conta ao cadastro. O sistema só permite vincular CPFs iguais.</p>
+@if (ViewData["Erro"] is string erro) { <div class="alert alert-danger">@erro</div> }
+@if (TempData["Error"] is string error) { <div class="alert alert-danger">@error</div> }
+@if (TempData["Success"] is string success) { <div class="alert alert-success">@success</div> }
+@if (Model.Pendentes.Count == 0) { <div class="alert alert-info">Nenhuma solicitação pendente.</div> }
+else
+{
+    <div class="row g-3">
+    @foreach (var pedido in Model.Pendentes)
+    {
+        var correspondentes = Model.Beneficiarios.Where(x => new string(x.Cpf.Where(char.IsDigit).ToArray()) == pedido.CpfSolicitado).ToList();
+        <div class="col-12 col-lg-6"><article class="card h-100"><div class="card-body">
+            <h2 class="h5">@pedido.Nome</h2>
+            <p class="mb-1">E-mail: @pedido.Email</p><p>CPF solicitado: @pedido.CpfSolicitado</p>
+            @if (correspondentes.Count == 0) { <div class="alert alert-warning mb-0">Nenhum beneficiário com este CPF. Cadastre ou confira o beneficiário antes de liberar o acesso.</div> }
+            else
+            {
+                <form asp-action="Aprovar" method="post">
+                    <input type="hidden" name="usuarioId" value="@pedido.UsuarioId" />
+                    <label for="beneficiario-@pedido.UsuarioId" class="form-label">Vincular ao beneficiário</label>
+                    <select id="beneficiario-@pedido.UsuarioId" name="beneficiarioId" class="form-select mb-3" required>
+                        @foreach (var titular in correspondentes) { <option value="@titular.BeneficiarioId">@titular.Nome · @titular.Codigo</option> }
+                    </select>
+                    <button type="submit" class="btn btn-success">Conferi os dados e aprovar</button>
+                </form>
+            }
+        </div></article></div>
+    }
+    </div>
+}

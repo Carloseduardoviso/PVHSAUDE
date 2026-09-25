@@ -6,9 +6,12 @@ public class ApiAuthenticationHandler(IHttpContextAccessor accessor) : Delegatin
 {
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
     {
-        if (request.Headers.Authorization is null && accessor.HttpContext is { } context && context.User.Identity?.IsAuthenticated == true)
+        if (request.Headers.Authorization is null && accessor.HttpContext is { } context)
         {
-            var token = await context.GetTokenAsync("access_token");
+            var scheme = context.Request.Path.StartsWithSegments("/Beneficiario")
+                ? BeneficiarioAuthentication.Scheme
+                : Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme;
+            var token = await context.GetTokenAsync(scheme, "access_token");
             if (!string.IsNullOrEmpty(token))
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }

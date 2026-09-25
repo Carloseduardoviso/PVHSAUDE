@@ -23,6 +23,16 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.ExpireTimeSpan = TimeSpan.FromHours(6);
     options.SlidingExpiration = false;
     options.EventsType = typeof(Web.Services.UsuarioCookieEvents);
+}).AddCookie(BeneficiarioAuthentication.Scheme, options =>
+{
+    options.LoginPath = "/Beneficiario/BeneficiarioConta/Login";
+    options.AccessDeniedPath = "/Beneficiario/BeneficiarioConta/Login";
+    options.Cookie.Name = "PVHSAUDE.Beneficiario";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.ExpireTimeSpan = TimeSpan.FromHours(6);
+    options.SlidingExpiration = false;
+    options.EventsType = typeof(UsuarioCookieEvents);
 });
 builder.Services.AddScoped<Web.Services.UsuarioCookieEvents>();
 builder.Services.AddScoped<WhatsAppApiClient>();
@@ -60,6 +70,8 @@ builder.Services.AddHttpClient<EmpresaBeneficiadaApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 builder.Services.AddHttpClient<IntencaoVendaApiClient>(client =>
     client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
+builder.Services.AddHttpClient<AcessoBeneficiarioApiClient>(client =>
+    client.BaseAddress = new Uri(builder.Configuration["Api:BaseUrl"] ?? "https://localhost:44319/"));
 
 var app = builder.Build();
 
@@ -81,15 +93,25 @@ app.UseAuthorization();
 app.MapStaticAssets();
 
 app.MapAreaControllerRoute(
+    name: "beneficiario",
+    areaName: "Beneficiario",
+    pattern: "Beneficiario/{controller=MinhaArea}/{action=Index}/{id?}");
+
+app.MapAreaControllerRoute(
     name: "administracao",
     areaName: "Administracao",
     pattern: "Administracao/{controller=Dashboard}/{action=Index}/{id?}")
-    .RequireAuthorization();
+    .RequireAuthorization(new Microsoft.AspNetCore.Authorization.AuthorizeAttribute { Roles = "Administrador,Gestor,Comum" });
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+
+app.MapGet("/MinhaArea/{action?}", (string? action) =>
+    Results.Redirect("/Beneficiario/MinhaArea/" + (string.IsNullOrWhiteSpace(action) ? "Index" : action)));
+app.MapGet("/BeneficiarioConta/{action?}", (string? action) =>
+    Results.Redirect("/Beneficiario/BeneficiarioConta/" + (string.IsNullOrWhiteSpace(action) ? "Login" : action)));
 
 
 app.MapGet("/health", () => Results.Ok()).AllowAnonymous();

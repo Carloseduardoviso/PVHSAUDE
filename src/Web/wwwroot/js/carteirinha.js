@@ -13,7 +13,7 @@
     const dependentesList = document.getElementById('dependentes-carteirinha-lista');
     const dependentesTemplate = document.getElementById('dependente-carteirinha-template');
     const dependentesAdd = document.getElementById('adicionar-dependente-carteirinha');
-    const valorPorDependente = 11.50;
+    const valorPorDependente = Number(form.dataset.valorDependente);
     let intencaoCriada = false;
     const field = name => form.elements.namedItem(name);
     const digits = value => value.replace(/\D/g, '');

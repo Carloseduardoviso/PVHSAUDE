@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PVHSAUDE.Application.ViewModels;
 using Web.Services;
+using PVHSAUDE.Domain.Enuns;
 namespace PVHSAUDE.Web.Controllers;
 
 public class ContaController(UsuarioApiClient usuarios) : Controller
@@ -20,7 +21,7 @@ public class ContaController(UsuarioApiClient usuarios) : Controller
         try
         {
             var login = await usuarios.LoginAsync(model, ct);
-            if (login is null) { ModelState.AddModelError("", "E-mail ou senha inválidos."); return View(model); }
+            if (login is null || login.Usuario.Role == Role.Beneficiario) { ModelState.AddModelError("", "E-mail ou senha inválidos."); return View(model); }
             var claims = new[] {
                 new Claim(ClaimTypes.NameIdentifier, login.Usuario.UsuarioId.ToString()),
                 new Claim(ClaimTypes.Name, login.Usuario.NomeCompleto!),
@@ -42,8 +43,11 @@ public class ContaController(UsuarioApiClient usuarios) : Controller
     [Authorize, HttpPost, ValidateAntiForgeryToken]
     public async Task<IActionResult> Sair()
     {
+        var eraBeneficiario = User.IsInRole("Beneficiario");
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        return RedirectToAction(nameof(Login));
+        return eraBeneficiario
+            ? RedirectToAction("Login", "BeneficiarioConta", new { area = "Beneficiario" })
+            : RedirectToAction(nameof(Login));
     }
     [AllowAnonymous]
     public IActionResult AcessoNegado() => View();

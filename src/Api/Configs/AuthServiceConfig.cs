@@ -40,6 +40,7 @@ namespace PVHSAUDE.Api.Configs
                             ? await ObterUsuario(service, guid, context.HttpContext.RequestAborted)
                             : null;
                         if (usuario is null || !usuario.Ativo ||
+                            usuario.Role == PVHSAUDE.Domain.Enuns.Role.Beneficiario && usuario.BeneficiarioId is null ||
                             context.Principal?.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value != usuario.Role.ToString())
                             context.Fail("Usuário indisponível ou permissão alterada.");
                         else if (context.Principal?.Identity is System.Security.Claims.ClaimsIdentity identity)

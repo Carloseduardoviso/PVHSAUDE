@@ -1,0 +1,21 @@
+@model PVHSAUDE.Web.Areas.Beneficiario.Models.CadastroBeneficiarioContaVm
+@{ ViewData["Title"] = "Cadastro do beneficiário"; }
+<section class="login-page" aria-labelledby="beneficiario-cadastro-title">
+    <div class="login-card">
+        <div class="login-heading">
+            <span class="login-eyebrow">ÁREA DO BENEFICIÁRIO</span>
+            <h1 id="beneficiario-cadastro-title">Crie sua conta</h1>
+            <p>Use o CPF da carteirinha já cadastrada na PVH Saúde. Titulares e dependentes podem criar seu próprio acesso.</p>
+        </div>
+        <form asp-action="Cadastro" method="post" class="login-form">
+            <div asp-validation-summary="ModelOnly" class="login-validation" role="alert"></div>
+            <div class="login-field"><label asp-for="Cpf"></label><input asp-for="Cpf" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" maxlength="14" data-cpf-mask /><span asp-validation-for="Cpf"></span></div>
+            <div class="login-field"><label asp-for="Senha"></label><div class="login-password-wrap"><input asp-for="Senha" autocomplete="new-password" /><button type="button" class="login-password-toggle" data-password-toggle aria-controls="Senha" aria-label="Mostrar senha" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button></div><span asp-validation-for="Senha"></span></div>
+            <div class="login-field"><label asp-for="ConfirmarSenha"></label><div class="login-password-wrap"><input asp-for="ConfirmarSenha" autocomplete="new-password" /><button type="button" class="login-password-toggle" data-password-toggle aria-controls="ConfirmarSenha" aria-label="Mostrar senha" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button></div><span asp-validation-for="ConfirmarSenha"></span></div>
+            <button class="login-submit" type="submit">Criar conta <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="login-footer-note">Ainda não possui carteirinha? <a asp-area="" asp-controller="Carteirinha" asp-action="Index">Peça sua carteirinha</a> antes de criar a conta.</p>
+        <p class="login-footer-note">Já tem acesso? <a asp-action="Login">Entrar</a>.</p>
+    </div>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /><script src="~/js/beneficiario-conta.js" asp-append-version="true"></script> }

@@ -1,0 +1,9 @@
+@model PVHSAUDE.Application.ViewModels.AreaBeneficiarioVm
+<nav class="beneficiario-tabs" aria-label="Navegação da área do beneficiário">
+    <a asp-controller="MinhaArea" asp-action="Index">Resumo</a>
+    <a asp-controller="MinhaArea" asp-action="Dados">Meus dados</a>
+    <a asp-controller="MinhaArea" asp-action="Plano">@(Model.EhDependente ? "Plano vinculado" : "Meu plano")</a>
+    <a asp-controller="MinhaArea" asp-action="Pagamentos">Pagamentos</a>
+    @if (!Model.EhDependente) { <a asp-controller="MinhaArea" asp-action="Dependentes">Dependentes</a> }
+    <a asp-controller="MinhaArea" asp-action="Carteirinha">Carteirinha</a>
+</nav>

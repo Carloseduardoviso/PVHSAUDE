@@ -4,6 +4,10 @@ html {
 
 .portal-carteirinha-button { background: #2563eb; color: #fff; border-radius: 999px; font-weight: 700; padding: .65rem 1.1rem; }
 .portal-carteirinha-button:hover, .portal-carteirinha-button:focus { background: #1d4ed8; color: #fff; }
+.portal-beneficiario-button { background: #fff; color: #15357a; border-radius: 999px; font-weight: 700; padding: .65rem 1.1rem; }
+.portal-beneficiario-button:hover, .portal-beneficiario-button:focus { background: #e9f3ff; color: #15357a; }
+.portal-sair-button { color: #fff; border: 1px solid #fff; border-radius: 999px; }
+.portal-sair-button:hover, .portal-sair-button:focus { color: #15357a; background: #fff; }
 
 @media (min-width: 768px) {
   html {
@@ -94,7 +98,7 @@ body {
   .portal-nav-links { flex: 1 1 auto; flex-wrap: wrap; min-width: 0; }
   .portal-navbar .navbar-nav .nav-link { font-size: .875rem; padding-inline: .45rem; }
   .portal-nav-actions { margin-left: 1rem; }
-  .portal-admin-button, .portal-carteirinha-button { font-size: .875rem; padding-inline: .8rem; }
+  .portal-admin-button, .portal-carteirinha-button, .portal-beneficiario-button { font-size: .875rem; padding-inline: .8rem; }
 }
 @media (max-width: 1399.98px) {
   .portal-navbar .navbar-collapse { padding: .5rem 0; }
@@ -265,7 +269,7 @@ body {
 @media (min-width: 1400px) {
   .portal-brand img { width: 136px; }
   .portal-navbar .navbar-nav .nav-link { font-size: .84rem; padding-inline: .5rem; }
-  .portal-admin-button, .portal-carteirinha-button { font-size: .82rem; padding-inline: .75rem; }
+  .portal-admin-button, .portal-carteirinha-button, .portal-beneficiario-button { font-size: .82rem; padding-inline: .75rem; }
 }
 
 @media (max-width: 1399.98px) {
@@ -285,6 +289,8 @@ body {
   .portal-navbar .nav-link { min-height: 2.5rem; font-size: .82rem; padding: .45rem .5rem; }
   .portal-nav-actions { width: 100%; flex-wrap: wrap; }
   .portal-nav-actions .btn { flex: 1 1 11rem; font-size: .78rem; }
+  .portal-nav-actions form { flex: 1 1 11rem; }
+  .portal-nav-actions form .btn { width: 100%; }
 }
 
 .sobre-nos { width: min(100% - 2rem, 1120px); margin: 0 auto 4rem; color: #15357a; }
